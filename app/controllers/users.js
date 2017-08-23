@@ -48,7 +48,7 @@ exports.signout = function (req, res) {
  * Session
  */
 exports.session = function (req, res) {
-    return res.send({status: 'success', message: 'User login successfully.'})
+    return res.send({status: 'success', message: 'User login successfully.'});
     // res.redirect('/');
 };
 
@@ -70,7 +70,7 @@ exports.create = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            return res.send({status: 'success', message: 'User signup successfully.'})
+            return res.send({status: 'success', message: 'User signup successfully.'});
             // res.redirect('/');
         });
     }).catch(function (err) {
@@ -131,7 +131,7 @@ function authenticateSocialUser(profile, done) {
     if (profile.name) {
         searchQuery = {
             twitterKey: profile.id
-        }
+        };
     }
 
     db.User.find({where: searchQuery}).then(function (user) {
@@ -145,7 +145,7 @@ function authenticateSocialUser(profile, done) {
                     provider: 'twitter',
                     twitterKey: profile.id,
                     email: profile.id + "@twitter.com"
-                }
+                };
             } else {
                 userObj = {
                     name: profile.given_name || '',
@@ -157,7 +157,7 @@ function authenticateSocialUser(profile, done) {
             }
             db.User.create(userObj).then(function (u) {
                 done(null, u);
-            })
+            });
         } else {
             done(null, user);
         }
@@ -185,7 +185,7 @@ exports.facebookUser = function (req, res, next) {
     }
 
     passport.authenticate('facebook-token', {scope: ['email', 'user_about_me', 'phone']}, sendResponse)(req, res, next);
-}
+};
 
 exports.twitterSocialUser = function (req, res) {
     var requestTokenUrl = 'https://api.twitter.com/oauth/request_token';
@@ -270,7 +270,7 @@ exports.twitterSocialUser = function (req, res) {
         // Part 2 of 2: Second request after Authorize app is clicked.
         exchangeOauthToken();
     }
-}
+};
 
 exports.googleSocailUser = function (req, res) {
     var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
@@ -316,4 +316,4 @@ exports.googleSocailUser = function (req, res) {
 
     // Step 1. Exchange authorization code for access token.
     request.post(accessTokenUrl, {json: true, form: params}, getAccessToken);
-}
+};

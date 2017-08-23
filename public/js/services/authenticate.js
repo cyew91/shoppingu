@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('mean.auth').factory("SocialAuth", ['$http', function ($http) {
     return {
@@ -7,7 +8,7 @@ angular.module('mean.auth').factory("SocialAuth", ['$http', function ($http) {
                     return res;
                 });
         }
-    }
+    };
 }]);
 angular.module('mean.auth').service("SignOut", ['$resource', function($resource) {
     return $resource('/signout');

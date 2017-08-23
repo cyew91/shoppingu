@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Sat Oct 05 2013 22:00:14 GMT+0700 (ICT)
+'use strict';
 
 module.exports = function(config) {
     config.set({

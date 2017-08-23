@@ -1,3 +1,5 @@
+'use strict';
+
 /*1453279404,,JIT Construction: v2136283,en_US*/
 
 /**

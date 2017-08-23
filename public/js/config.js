@@ -1,3 +1,5 @@
+'use strict';
+
 //Setting up route
 angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider) {
 
@@ -42,7 +44,7 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         })
         .state('404',{
             templateUrl: 'views/404.html'
-        })
+        });
 }
 ]);
 

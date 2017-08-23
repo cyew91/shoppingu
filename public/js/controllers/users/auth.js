@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('mean.auth').controller('socialAuth', ['$scope', 'Global','$state', '$fblogin', 'SocialAuth','$window','$auth', function ($scope, Global, $state, $fblogin, SocialAuth, $window, $auth) {
     $scope.global = Global;
 
@@ -24,7 +26,7 @@ angular.module('mean.auth').controller('socialAuth', ['$scope', 'Global','$state
             });
         }).catch(function () {
             $window.location.reload();
-        })
+        });
     };
     $scope.twitterAuth = function(){
         $auth.authenticate('twitter').then(function(response) {

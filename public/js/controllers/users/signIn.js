@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'Global', '$state', 'LogIn', function ($scope, $window, Global, $state, LogIn) {
     $scope.global = Global;
 

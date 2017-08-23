@@ -4,8 +4,11 @@
 }
 
 .content {
-    margin-top:21px;
-    width:100%;
+    margin-top:20px;
+}
+
+.container{
+  width:95%;
 }
 
 footer {
