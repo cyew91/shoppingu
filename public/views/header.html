@@ -3,23 +3,34 @@
         <li>
             <a class="brand" ui-sref="home">Shoppingu</a>
         </li>
-        <li><a ui-sref="SignUp">Shopper</a>
+        <li>
+            <a ui-sref="SignUp">Shopper</a>
         </li>
-        <li><a ui-sref="SignUp">Traveller</a>
+        <li>
+            <a ui-sref="SignUp">Traveller</a>
+        </li>
+        <li class="dropdown">
+            <a ui-sref="SignUp" class="dropdown-toggle">Category</a>
+            <ul class="dropdown-menu">
+                <li ng-model="Categories" ng-repeat="a in category">
+                    <a ng-href="{{a}}" >{{a}}</a>
+                </li>
+            </ul>
         </li>
         <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
             <a ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
     </ul>
     <ul class="nav pull-right" data-ng-hide="global.authenticated">
-        <li><a ui-sref="SignUp">Signup</a>
+        <li>
+            <a ui-sref="SignUp">Signup</a>
         </li>
         <li class="divider-vertical"></li>
-        <li><a ui-sref="SignIn">Signin</a>
+        <li>
+            <a ui-sref="SignIn">Signin</a>
         </li>
         <li class="divider-vertical"></li>
-        <li><a ui-sref="Login">Log In</a>
-        </li>
+        
     </ul>
     <ul class="nav pull-right" data-ng-show="global.authenticated">
         <li class="dropdown">
@@ -32,4 +43,7 @@
             </ul>
         </li>
     </ul>
+  
+    
+            
 </div>
