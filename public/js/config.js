@@ -22,6 +22,10 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             url : '/signup',
             templateUrl: 'views/users/signup.html'
         })
+        .state('Faq', {
+            url : '/faq',
+            templateUrl: 'views/faq.html'
+        })
         .state('articles',{
             url : '/article',
             controller : 'ArticlesController',

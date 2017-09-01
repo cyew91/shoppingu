@@ -13,7 +13,7 @@
             <a ui-sref="SignUp" class="dropdown-toggle">Category</a>
             <ul class="dropdown-menu">
                 <li ng-model="Categories" ng-repeat="a in category">
-                    <a ng-href="{{a}}" >{{a}}</a>
+                    <a ng-href="{{a}}">{{a}}</a>
                 </li>
             </ul>
         </li>
@@ -22,15 +22,18 @@
         </li>
     </ul>
     <ul class="nav pull-right" data-ng-hide="global.authenticated">
+        <li class="divider-vertical">
+            <a ui-sref="Faq">FAQ</a>
+        </li>
         <li>
-            <a ui-sref="SignUp">Signup</a>
+            <a ui-sref="SignUp">Sign Up</a>
         </li>
         <li class="divider-vertical"></li>
         <li>
-            <a ui-sref="SignIn">Signin</a>
+            <a ui-sref="SignIn">Login</a>
         </li>
         <li class="divider-vertical"></li>
-        
+
     </ul>
     <ul class="nav pull-right" data-ng-show="global.authenticated">
         <li class="dropdown">
@@ -38,12 +41,12 @@
 				{{global.user.name}} <b class="caret"></b>
 			</a>
             <ul class="dropdown-menu">
-                <li><a ng-click="SignOut()">Signout</a>
+                <li><a ng-click="SignOut()">Log Out</a>
                 </li>
             </ul>
         </li>
     </ul>
-  
-    
-            
+
+
+
 </div>
