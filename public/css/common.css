@@ -4,11 +4,77 @@
 }
 
 .content {
-	margin-top: 50px;
+
 }
 
 .container {
-	width: 95%;
+	width: 100%;
+	max-width: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.product-img{
+	width: 100%;
+	padding: 5px;
+	border-radius: 9px;
+}
+
+.product-img-div{
+	border: 1px solid #606975;
+	border-radius: 7px;
+}
+
+.product-desc-div{
+	text-align: center;
+	margin-bottom: 0px !important;
+}
+
+.btn{
+	display: inline-block;
+	position: relative;
+	height: 44px;
+	margin-top: 8px;
+	margin-right: 12px;
+	margin-bottom: 8px;
+	padding: 0 22px;
+	transform: translateZ(0);
+	transition: all .4s;
+	border: 1px solid transparent;
+	border-radius: 22px;
+	background-color: transparent;
+	background-image: none;
+	color: #606975;
+	font-family: "Maven Pro", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	letter-spacing: .07em;
+	line-height: 42px;
+	white-space: nowrap;
+	cursor: pointer;
+	vertical-align: middle;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+}
+
+.btn-outline-primary{
+	border-color: #0da9ef;
+	background-color: transparent;
+	color: #0da9ef;
+}
+
+.btn-sm{
+	height: 36px;
+	padding: 0 18px;
+	border-radius: 18px;
+	font-size: 12px;
+	line-height: 34px;
+}
+
+.product-category-title{
+	margin-left: 15px;
 }
 
 footer {
@@ -61,12 +127,6 @@ footer p {
 
 #footer li {
 	margin-bottom: 1rem;
-}
-
-.container {
-	padding-left: 60px;
-	padding-right: 60px;
-	width: 1000px;
 }
 
 .copyright {
