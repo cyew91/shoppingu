@@ -52,6 +52,16 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             controller  : 'FooController',
             templateUrl : 'views/foo.html'
         })
+        .state('userprofile',{
+            url : '/userprofile',
+            controller  : 'UserProfileController',
+            templateUrl : 'views/users/userprofile.html'
+        })
+        .state('address',{
+            url : '/address',
+            controller  : 'AddressController',
+            templateUrl : 'views/users/address.html'
+        })
         .state('404',{
             templateUrl: 'views/404.html'
         });

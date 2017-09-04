@@ -465,3 +465,436 @@ input#img-6:checked~.nav-dots label#img-dot-6 {
 
 
 /* Home page slide end */
+
+/* User profile page start */
+
+.padding-bottom-3x {
+    padding-bottom: 72px !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem!important;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-lg-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.user-info-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: -1px;
+    padding-top: 90px;
+    padding-bottom: 30px;
+    border: 1px solid #e1e7ec;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    overflow: hidden;
+}
+
+.user-info-wrapper .user-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-position: center;
+    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.user-info-wrapper .info-label {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    height: 26px;
+    padding: 0 12px;
+    border-radius: 13px;
+    background-color: #fff;
+    color: #606975;
+    font-size: 12px;
+    line-height: 26px;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.18);
+    cursor: pointer;
+}
+
+.user-info-wrapper .user-info {
+    display: table;
+    position: relative;
+    width: 100%;
+    padding: 0 18px;
+    z-index: 5;
+}
+
+.user-info-wrapper .user-info .user-avatar {
+    position: relative;
+    width: 115px;
+}
+
+.user-info-wrapper .user-info .user-avatar, .user-info-wrapper .user-info .user-data {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.user-info-wrapper .user-info .user-avatar .edit-avatar {
+    display: block;
+    position: absolute;
+    top: -2px;
+    right: 2px;
+    width: 36px;
+    height: 36px;
+    transition: opacity .3s;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #606975;
+    line-height: 34px;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+    opacity: 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+img, figure {
+    max-width: 100%;
+    height: auto;
+	vertical-align: middle;
+	border: 3px solid #fff;
+}
+
+.user-info-wrapper .user-info .user-data {
+    padding-top: 48px;
+    padding-left: 12px;
+}
+
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.col-lg-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.hidden-lg-up {
+    display: none !important;
+}
+
+.padding-top-2x {
+    padding-top: 48px !important;
+}
+
+.mt-2 {
+    margin-top: 0.5rem!important;
+}
+
+.col-md-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+	max-width: 50%;
+	
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control:not(textarea) {
+	height: 44px;
+	
+	padding: 0 18px 3px;
+    border: 1px solid #dbe2e8;
+    border-radius: 22px;
+    background-color: #fff;
+    color: #606975;
+    font-family: "Maven Pro",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	appearance: none;
+	display: block;
+    width: 100%;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    padding-left: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+button, input {
+    overflow: visible;
+}
+
+input, button, select, optgroup, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+a, area, button, [role="button"], input, label, select, summary, textarea {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.col-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+hr {
+    margin: 0;
+    border: 0;
+	border-top: 1px solid #e1e7ec;
+	margin-left: -2px;
+}
+
+.mt-2 {
+    margin-top: 0.5rem!important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem!important;
+}
+
+.d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+
+.flex-wrap {
+    -ms-flex-wrap: wrap!important;
+    flex-wrap: wrap!important;
+}
+
+.justify-content-between {
+    -ms-flex-pack: justify!important;
+    justify-content: space-between!important;
+}
+
+.align-items-center {
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+
+.custom-control {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    min-height: 1.5rem;
+    padding-left: 1.5rem;
+	margin-right: 1rem;
+	
+	margin-bottom: 5px !important;
+    padding-left: 1.5rem !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+
+.d-block {
+    display: block!important;
+}
+
+.margin-right-none {
+    margin-right: 0 !important;
+}
+
+.btn {
+    display: inline-block;
+    position: relative;
+    height: 44px;
+    margin-top: 8px;
+    margin-right: 12px;
+    margin-bottom: 8px;
+    padding: 0 22px;
+    transform: translateZ(0);
+    transition: all .4s;
+    border: 1px solid transparent;
+    border-radius: 22px;
+    background-color: transparent;
+    background-image: none;
+    color: #606975;
+    font-family: "Maven Pro",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: .07em;
+    line-height: 42px;
+    white-space: nowrap;
+    cursor: pointer;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-primary {
+    background-color: #0da9ef;
+}
+
+.btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+    color: #fff;
+}
+
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.user-info-wrapper+.list-group .list-group-item:first-child {
+    border-radius: 0;
+}
+
+a.list-group-item {
+    padding-top: .87rem;
+    padding-bottom: .87rem;
+}
+
+a.list-group-item, .list-group-item-action {
+    transition: all .25s;
+    color: #606975;
+    font-weight: 500;
+}
+
+.list-group-item {
+    border-color: #e1e7ec;
+    background-color: #fff;
+	text-decoration: none;
+	
+	display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item.active {
+    border-color: #0da9ef;
+    background-color: #0da9ef;
+    color: #fff;
+    cursor: default;
+    pointer-events: none;
+}
+
+.containerUser{
+	width:95%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+	width: 1000px;
+	margin-top:50px;
+  
+  }
+
+/* User profile page end */
+
+/* User profile address page start */
+.hidden-lg-up {
+    display: none !important;
+}
+
+.padding-top-2x {
+    padding-top: 48px !important;
+}
+
+.mt-2 {
+    margin-top: 0.5rem!important;
+}
+
+h4, .h4 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin: 0;
+    color: #374250;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.padding-bottom-1x {
+    padding-bottom: 24px !important;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: 44px;
+}
+
+select.form-control {
+    padding-right: 38px;
+    background-position: center right 17px;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNv…9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+    background-repeat: no-repeat;
+	background-size: 9px 9px;
+}
+
+.form-control {
+    padding: 0 18px 3px;
+    border: 1px solid #dbe2e8;
+    border-radius: 22px;
+    background-color: #fff;
+    color: #606975;
+    font-family: "Maven Pro",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	appearance: none;
+	
+	display: block;
+	width: 100%;
+	
+	line-height: 1.25;
+	background-clip: padding-box;
+	transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+}
+
+
+
+/* User profile address page end */
