@@ -60,9 +60,9 @@
 }
 
 .btn-outline-primary{
-	border-color: #0da9ef;
+	border-color: #606975 !important;
 	background-color: transparent;
-	color: #0da9ef;
+	color: #606975;
 }
 
 .btn-sm{
@@ -614,7 +614,7 @@ img, figure {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
 	max-width: 50%;
-	
+
 	position: relative;
     width: 100%;
     min-height: 1px;
@@ -628,7 +628,7 @@ img, figure {
 
 .form-control:not(textarea) {
 	height: 44px;
-	
+
 	padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
     border-radius: 22px;
@@ -720,7 +720,7 @@ hr {
     min-height: 1.5rem;
     padding-left: 1.5rem;
 	margin-right: 1rem;
-	
+
 	margin-bottom: 5px !important;
     padding-left: 1.5rem !important;
     font-size: 14px !important;
@@ -805,7 +805,7 @@ a.list-group-item, .list-group-item-action {
     border-color: #e1e7ec;
     background-color: #fff;
 	text-decoration: none;
-	
+
 	display: block;
     padding: .75rem 1.25rem;
     margin-bottom: -1px;
@@ -829,7 +829,7 @@ a.list-group-item, .list-group-item-action {
 	padding-left: 15px;
 	width: 1000px;
 	margin-top:50px;
-  
+
   }
 
 /* User profile page end */
@@ -889,10 +889,10 @@ select.form-control {
     -webkit-appearance: none;
     -moz-appearance: none;
 	appearance: none;
-	
+
 	display: block;
 	width: 100%;
-	
+
 	line-height: 1.25;
 	background-clip: padding-box;
 	transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
