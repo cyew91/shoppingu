@@ -77,6 +77,10 @@
 	margin-left: 15px;
 }
 
+.main-slider{
+		/*height: 350px;*/
+}
+
 footer {
 	position: fixed;
 	left: 0px;
@@ -146,7 +150,6 @@ footer p {
 body {
 	margin: 0;
 	color: #6a6f8c;
-	background: #c8c8c8;
 	font: 600 16px/18px 'Open Sans', sans-serif;
 }
 
@@ -339,7 +342,7 @@ a {
 
 /* Home page slide start */
 
-@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+/*@import url(https://fonts.googleapis.com/css?family=Varela+Round);
 html,
 body {
 	background: #FFFFFF;
@@ -461,7 +464,7 @@ input#img-4:checked~.nav-dots label#img-dot-4,
 input#img-5:checked~.nav-dots label#img-dot-5,
 input#img-6:checked~.nav-dots label#img-dot-6 {
 	background: rgba(0, 0, 0, 0.8);
-}
+}*/
 
 
 /* Home page slide end */

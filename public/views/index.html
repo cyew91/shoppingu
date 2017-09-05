@@ -1,5 +1,5 @@
 <header>
-	<ul class="slides">
+	<!-- <ul class="slides">
 		<input type="radio" name="radio-btn" id="img-1" checked />
 		<li class="slide-container">
 			<div class="slide">
@@ -74,105 +74,82 @@
 			<label for="img-5" class="nav-dot" id="img-dot-5"></label>
 			<label for="img-6" class="nav-dot" id="img-dot-6"></label>
 		</li>
-	</ul>
+	</ul> -->
+
+	<!-- <div class="carousel-item">
+		<img src="{{productImg1}}" alt="lol">
+		<div class="carousel-caption d-none d-md-block">
+			<h3>FOOCERTONG</h3>
+			<p>FOOCERTONGFOOCERTONGFOOCERTONGFOOCERTONGFOOCERTONGFOOCERTONGFOOCERTONGFOOCERTONG</p>
+		</div>
+	</div> -->
+
+	<div id="mainCarousel" class="carousel slide" data-ride="carousel">
+	  <ol class="carousel-indicators">
+	    <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#mainCarousel" data-slide-to="1"></li>
+	    <li data-target="#mainCarousel" data-slide-to="2"></li>
+	  </ol>
+	  <div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class='d-block w-100' style="height:500px;" src="{{productImg1}}" alt="lol">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Kang Gary</h3>
+					<p>ShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppingu</p>
+				</div>
+			</div>
+
+			<div class="carousel-item">
+				<img class='d-block w-100' style="height:500px;" src="{{productImg2}}" alt="lol">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Song Ji Hyo</h3>
+					<p>ShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppingu</p>
+				</div>
+			</div>
+
+			<div class="carousel-item">
+				<img class='d-block w-100' style="height:500px;" src="{{productImg3}}" alt="lol">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Chi Shi Zheng</h3>
+					<p>ShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppinguShoppingu</p>
+				</div>
+			</div>
+	  </div>
+	  <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
 
 	<h4 class="product-category-title">
 		<span>Top Categories AAA</span>
 	</h4>
 	<slick class="slider" infinite=true slides-to-show=3 slides-to-scroll=1 style="margin-top:10px;">
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg1}}">
-			<div class="product-desc-div">
-				<span>Kang Gary 1</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg1}}", b : "Kang Gary 1"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg1}}">
-			<div class="product-desc-div">
-				<span>Kang Gary 2</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg1}}", b : "Kang Gary 2"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg1}}">
-			<div class="product-desc-div">
-				<span>Kang Gary 3</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg1}}", b : "Kang Gary 3"})'>View Products</a>
-				</div>
-			</div>
-		</div>
+		<div product-showcase class="product-img-div" product-title="Kang Gary 1" product-img="{{productImg1}}"></div>
+		<div product-showcase class="product-img-div" product-title="Kang Gary 2" product-img="{{productImg1}}"></div>
+		<div product-showcase class="product-img-div" product-title="Kang Gary 3" product-img="{{productImg1}}"></div>
 	</slick>
 
 	<h4 class="product-category-title">
 		<span>Top Categories BBB</span>
 	</h4>
 	<slick class="slider" infinite=true slides-to-show=3 slides-to-scroll=1 style="margin-top:10px;">
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg2}}">
-			<div class="product-desc-div">
-				<span>Song Ji Hyo 1</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg2}}", b : "Song Ji Hyo 1"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg2}}">
-			<div class="product-desc-div">
-				<span>Song Ji Hyo 2</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg2}}", b : "Song Ji Hyo 2"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg2}}">
-			<div class="product-desc-div">
-				<span>Song Ji Hyo 3</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg2}}", b : "Song Ji Hyo 3"})'>View Products</a>
-				</div>
-			</div>
-		</div>
+		<div product-showcase class="product-img-div" product-title="Song Ji Hyo 1" product-img="{{productImg2}}"></div>
+		<div product-showcase class="product-img-div" product-title="Song Ji Hyo 2" product-img="{{productImg2}}"></div>
+		<div product-showcase class="product-img-div" product-title="Song Ji Hyo 3" product-img="{{productImg2}}"></div>
 	</slick>
 
 	<h4 class="product-category-title">
 		<span>Top Categories CCC</span>
 	</h4>
 	<slick class="slider" infinite=true slides-to-show=3 slides-to-scroll=1 style="margin-top:10px;">
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg3}}">
-			<div class="product-desc-div">
-				<span>Chi Shi Zhen 1</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg3}}", b : "Chi Shi Zhen 1"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg3}}">
-			<div class="product-desc-div">
-				<span>Chi Shi Zhen 2</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg3}}", b : "Chi Shi Zhen 2"})'>View Products</a>
-				</div>
-			</div>
-		</div>
-		<div class="product-img-div">
-			<img class="product-img" src="{{productImg3}}">
-			<div class="product-desc-div">
-				<span>Chi Shi Zhen 3</span>
-				<div>
-					<a class="btn btn-outline-primary btn-sm" ui-sref='foo({a : "{{productImg3}}", b : "Chi Shi Zhen 3"})'>View Products</a>
-				</div>
-			</div>
-		</div>
+		<div product-showcase class="product-img-div" product-title="Chi Shi Zhen 1" product-img="{{productImg3}}"></div>
+		<div product-showcase class="product-img-div" product-title="Chi Shi Zhen 2" product-img="{{productImg3}}"></div>
+		<div product-showcase class="product-img-div" product-title="Chi Shi Zhen 3" product-img="{{productImg3}}"></div>
 	</slick>
 
 	<style type="text/css">
