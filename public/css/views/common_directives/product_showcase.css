@@ -1,0 +1,15 @@
+.product-img{
+	width: 100%;
+	padding: 5px;
+	border-radius: 9px;
+}
+
+.product-img-div{
+	/*border: 1px solid #606975;
+	border-radius: 7px;*/
+}
+
+.product-desc-div{
+	text-align: center;
+	margin-bottom: 0px !important;
+}

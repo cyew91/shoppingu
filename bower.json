@@ -15,7 +15,8 @@
     "install": "^1.0.4",
     "angular-fblogin": "*",
     "slick-carousel": "^1.7.1",
-    "bootstrap": "v4.0.0-beta"
+    "bootstrap": "v4.0.0-beta",
+    "owl.carousel": "^2.2.1"
   },
   "resolutions": {
     "angular": "1.6.5"

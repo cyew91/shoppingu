@@ -14,71 +14,30 @@
 	padding-right: 0px;
 }
 
-.product-img{
-	width: 100%;
-	padding: 5px;
-	border-radius: 9px;
-}
-
-.product-img-div{
-	border: 1px solid #606975;
-	border-radius: 7px;
-}
-
-.product-desc-div{
-	text-align: center;
-	margin-bottom: 0px !important;
-}
-
-.btn{
-	display: inline-block;
-	position: relative;
-	height: 44px;
-	margin-top: 8px;
-	margin-right: 12px;
-	margin-bottom: 8px;
-	padding: 0 22px;
-	transform: translateZ(0);
-	transition: all .4s;
-	border: 1px solid transparent;
-	border-radius: 22px;
-	background-color: transparent;
-	background-image: none;
-	color: #606975;
-	font-family: "Maven Pro", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 500;
-	letter-spacing: .07em;
-	line-height: 42px;
-	white-space: nowrap;
-	cursor: pointer;
-	vertical-align: middle;
-	text-transform: uppercase;
-	text-decoration: none;
-	text-align: center;
-}
-
-.btn-outline-primary{
-	border-color: #606975 !important;
-	background-color: transparent;
-	color: #606975;
-}
-
-.btn-sm{
-	height: 36px;
-	padding: 0 18px;
-	border-radius: 18px;
-	font-size: 12px;
-	line-height: 34px;
-}
-
-.product-category-title{
-	margin-left: 15px;
-}
-
 .main-slider{
 		/*height: 350px;*/
+}
+
+#myCarousel .list-inline {
+		white-space:nowrap;
+		overflow-x:auto;
+}
+
+#myCarousel .carousel-indicators {
+		position: static;
+		left: initial;
+		width: initial;
+		margin-left: initial;
+}
+
+#myCarousel .carousel-indicators > li {
+		width: initial;
+		height: initial;
+		text-indent: initial;
+}
+
+#myCarousel .carousel-indicators > li.active img {
+		opacity: 0.7;
 }
 
 footer {
@@ -144,13 +103,27 @@ footer p {
 	margin-right: 5px;
 }
 
+.text-center{
+	text-align: center !important
+}
 
+.text-left{
+	text-align: left !important
+}
+
+.text-right{
+	text-align: right !important
+}
+
+.mb-30{
+	margin-bottom: 30px !important;
+}
 /* Login page */
 
 body {
 	margin: 0;
 	color: #6a6f8c;
-	font: 600 16px/18px 'Open Sans', sans-serif;
+	font-family: 'Mandali', sans-serif;
 }
 
 *,
@@ -338,136 +311,6 @@ a {
 .foot-lnk {
 	text-align: center;
 }
-
-
-/* Home page slide start */
-
-/*@import url(https://fonts.googleapis.com/css?family=Varela+Round);
-html,
-body {
-	background: #FFFFFF;
-}
-
-.slides {
-	padding: 0;
-	width: 100%;
-	height: 520px;
-	display: block;
-	margin: 0 auto;
-	position: relative;
-	margin-bottom: 25px;
-}
-
-.slides * {
-	user-select: none;
-	-ms-user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-webkit-touch-callout: none;
-}
-
-.slides input {
-	display: none;
-}
-
-.slide-container {
-	display: block;
-}
-
-.slide {
-	top: 0;
-	opacity: 0;
-	width: 100%;
-	height: 520px;
-	display: block;
-	position: absolute;
-	transform: scale(0);
-	transition: all .7s ease-in-out;
-	margin-bottom: 25px;
-}
-
-.slide img {
-	width: 100%;
-	height: 100%;
-}
-
-.nav label {
-	width: 150px;
-	height: 100%;
-	display: none;
-	position: absolute;
-	opacity: 0;
-	z-index: 9;
-	cursor: pointer;
-	transition: opacity .2s;
-	color: #FFFFFF;
-	font-size: 100pt;
-	text-align: center;
-	line-height: 380px;
-	font-family: "Varela Round", sans-serif;
-	/*background-color: rgba(255, 255, 255, .3);*/
-	text-shadow: 0px 0px 15px rgb(119, 119, 119);
-}
-
-.slide:hover+.nav label {
-	opacity: 0.5;
-}
-
-.nav label:hover {
-	opacity: 1;
-}
-
-.nav .next {
-	right: 0;
-}
-
-input:checked+.slide-container .slide {
-	opacity: 1;
-	transform: scale(1);
-	transition: opacity 1s ease-in-out;
-}
-
-input:checked+.slide-container .nav label {
-	display: block;
-}
-
-.nav-dots {
-	width: 100%;
-	bottom: 9px;
-	height: 11px;
-	display: block;
-	position: absolute;
-	text-align: center;
-}
-
-.nav-dots .nav-dot {
-	top: -5px;
-	width: 11px;
-	height: 11px;
-	margin: 0 4px;
-	position: relative;
-	border-radius: 100%;
-	display: inline-block;
-	background-color: rgba(0, 0, 0, 0.6);
-}
-
-.nav-dots .nav-dot:hover {
-	cursor: pointer;
-	background-color: rgba(0, 0, 0, 0.8);
-}
-
-input#img-1:checked~.nav-dots label#img-dot-1,
-input#img-2:checked~.nav-dots label#img-dot-2,
-input#img-3:checked~.nav-dots label#img-dot-3,
-input#img-4:checked~.nav-dots label#img-dot-4,
-input#img-5:checked~.nav-dots label#img-dot-5,
-input#img-6:checked~.nav-dots label#img-dot-6 {
-	background: rgba(0, 0, 0, 0.8);
-}*/
-
-
-/* Home page slide end */
 
 /* User profile page start */
 
