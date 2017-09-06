@@ -123,6 +123,7 @@ footer p {
 body {
 	margin: 0;
 	color: #6a6f8c;
+	font-family: "Maven Pro", Helvetica, Arial, sans-serif !important;
 }
 
 *,
