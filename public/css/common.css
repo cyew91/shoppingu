@@ -3,10 +3,6 @@
 	margin-left: 0
 }
 
-.content {
-
-}
-
 .container {
 	width: 100%;
 	max-width: 100%;
@@ -16,6 +12,10 @@
 
 .main-slider{
 		/*height: 350px;*/
+}
+
+.page-content{
+	margin: 50px;
 }
 
 #myCarousel .list-inline {
@@ -118,6 +118,69 @@ footer p {
 .mb-30{
 	margin-bottom: 30px !important;
 }
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+	align-items: center !important;
+}
+
+.col-md-7{
+	-ms-flex: 0 0 58.333333%;
+	flex: 0 0 58.333333%;
+	max-width: 58.333333%;
+}
+
+.col-md-5{
+	-ms-flex: 0 0 41.666667%;
+	flex: 0 0 41.666667%;
+	max-width: 41.666667%;
+}
+
+.col-md-5 img{
+	width: 270px !important;
+	margin: auto !important;
+	display: block !important;
+}
+
+.display-3{
+	font-size: 50px;
+}
+
+.text-muted{
+	color: #9da9b9 !important;
+}
+
+.opacity-75{
+	opacity: .75 !important;
+}
+
+.list-icon{
+	padding: 0;
+	list-style: none;
+}
+
+.list-icon>li{
+	position: relative;
+	margin-bottom: 6px;
+	padding-left: 22px;
+}
+
+.list-icon>li>i{
+	display: block;
+	position: absolute;
+	left: 0;
+	line-height: inherit;
+}
+
+.navi-link{
+	transition: color .3s;
+	color: #606975;
+	text-decoration: none;
+}
+
 /* Login page */
 
 body {
