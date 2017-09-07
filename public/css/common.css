@@ -181,6 +181,10 @@ footer p {
 	text-decoration: none;
 }
 
+.slick-slider{
+	width: 75% !important;
+	margin: auto !important;
+}
 /* Login page */
 
 body {
