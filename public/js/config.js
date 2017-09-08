@@ -22,9 +22,17 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             url : '/signup',
             templateUrl: 'views/users/signup.html'
         })
+        .state('AboutUs', {
+            url : '/aboutus',
+            templateUrl: 'views/aboutus.html'
+        })
         .state('Faq', {
             url : '/faq',
             templateUrl: 'views/faq.html'
+        })
+        .state('ContactUs', {
+            url : '/contactus',
+            templateUrl: 'views/contactus.html'
         })
         .state('articles',{
             url : '/article',
