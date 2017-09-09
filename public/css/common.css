@@ -137,11 +137,9 @@ footer p {
 }
 
 .row{
-	display: flex;
-	flex-wrap: wrap;
+	
 	margin-right: -15px;
 	margin-left: -15px;
-	align-items: center !important;
 }
 
 .col-md-7{
@@ -484,9 +482,9 @@ a {
 }
 
 .row {
-    display: -ms-flexbox;
+    
     display: flex;
-    -ms-flex-wrap: wrap;
+    
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
@@ -594,6 +592,10 @@ img, figure {
     flex-direction: column;
     padding-left: 0;
     margin-bottom: 0;
+}
+
+div {
+    display: block;
 }
 
 .col-lg-8 {
@@ -836,6 +838,10 @@ a.list-group-item, .list-group-item-action {
 
   }
 
+form {
+    margin-top: 0em;
+}
+
 /* User profile page end */
 
 /* User profile address page start */
@@ -902,6 +908,121 @@ select.form-control {
 	transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
 }
 
-
-
 /* User profile address page end */
+/* User profile order page start */
+
+.margin-bottom-none {
+    margin-bottom: 0 !important;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+table {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.table thead th, .table td, .table th {
+    border-color: #e1e7ec;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table th, .table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #e9ecef;
+}
+
+th {
+	text-align: left;
+	font-weight: bold;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.text-medium {
+    font-weight: 500 !important;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+
+/* User profile order page start */
+/* Title page start */
+.page-title {
+    width: 100%;
+    margin-bottom: 60px;
+    padding: 36px 0;
+    border-bottom: 1px solid #e1e7ec;
+    background-color: #f5f5f5;
+}
+
+.page-title>.container, .page-title>.container-fluid {
+    display: table;
+}
+
+.page-title .column:first-child {
+    padding-right: 20px;
+}
+
+.page-title .column {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.page-title h1, .page-title h2, .page-title h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.25;
+}
+
+.page-title .column {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+
+
+
+/* Title page end */

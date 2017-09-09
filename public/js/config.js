@@ -70,6 +70,16 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             controller  : 'AddressController',
             templateUrl : 'views/users/address.html'
         })
+        .state('order',{
+            url : '/order',
+            controller  : 'OrderController',
+            templateUrl : 'views/users/order.html'
+        })
+        .state('post',{
+            url : '/post',
+            controller  : 'PostController',
+            templateUrl : 'views/users/post.html'
+        })
         .state('404',{
             templateUrl: 'views/404.html'
         });
