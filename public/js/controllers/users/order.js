@@ -6,4 +6,8 @@ angular.module('mean.system')
 
     $scope.a = $stateParams.a;
     $scope.b = $stateParams.b;
+
+    $scope.fooOnClick = function(id) {
+      alert(id);
+    };
   }]);

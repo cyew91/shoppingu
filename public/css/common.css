@@ -137,7 +137,7 @@ footer p {
 }
 
 .row{
-	
+
 	margin-right: -15px;
 	margin-left: -15px;
 }
@@ -276,6 +276,20 @@ footer p {
 .sub-menu>li{
 	display: block;
 	position: relative;
+}
+
+.site-logo{
+	width: 232px !important;
+	padding: 10px 0 14px 30px;
+	text-decoration: none;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.site-logo>img{
+	display: block;
+	width: 100%;
+	border: none;
 }
 /* Login page */
 
@@ -482,9 +496,9 @@ a {
 }
 
 .row {
-    
+
     display: flex;
-    
+
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
@@ -1021,7 +1035,11 @@ tbody {
     vertical-align: middle;
 }
 
-
+.site-menu ul>li:hover>.sub-menu{
+	display: block;
+	-webkit-animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+}
 
 
 
