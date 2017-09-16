@@ -11,53 +11,10 @@
           <li class="has-children"><a ui-sref="contactus"><span>Contact Us</span></a></li>
         </ul>
       </li>
+      <li>
+        <a ui-sref="signup"><span>Sign Up</span></a>
+      </li>
       <li class="active"><a ui-sref="contactus"><span>Contact Us</span></a></li>
     </ul>
   </nav>
-  <!-- <div class="collapse navbar-collapse" data-ng-controller="HeaderController">
-      <a class="navbar-brand" ui-sref="home">Shoppingu</a>
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-              <a class="nav-link" ui-sref="userprofile">Shopper</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" ui-sref="SignUp">Traveller</a>
-          </li>
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-                  Category
-              </a>
-              <div class="dropdown-menu" ng-model="Categories" ng-repeat="a in category">
-                  <a class="dropdown-item" ng-href="{{a}}">{{a}}</a>
-              </div>
-          </li>
-          <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-              <a ui-sref="{{item.state}}">{{item.title}}</a>
-          </li>
-      </ul>
-
-      <ul class="navbar-nav" data-ng-hide="global.authenticated">
-          <li class="nav-item">
-              <a class="nav-link" ui-sref="Faq">FAQ</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" ui-sref="SignUp">Sign Up</a>
-          </li>
-          <li class="nav-item"></li>
-          <li>
-              <a class="nav-link" ui-sref="SignIn">Login</a>
-          </li>
-      </ul>
-
-      <ul class="navbar-nav" data-ng-show="global.authenticated">
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-  				{{global.user.name}} <b class="caret"></b>
-  			</a>
-              <div class="dropdown-menu">
-                  <a class="dropdown-item" ng-click="SignOut()">Log Out</a>
-              </div>
-          </li>
-      </ul>
-  </div> -->
 </header>
