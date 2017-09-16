@@ -45,10 +45,10 @@ module.exports = function(grunt) {
             js: {
                 files: [
                     {cwd: 'bower_components/angular-bootstrap', src: ['**/*.js'], dest: 'public/lib/angular-bootstrap', expand: true},
-                    {cwd: 'bower_components/angular-cookies',   src: ['angular-cookies*'], dest: 'public/lib/angular-cookies',   expand: true}, 
+                    {cwd: 'bower_components/angular-cookies',   src: ['angular-cookies*'], dest: 'public/lib/angular-cookies',   expand: true},
                     {cwd: 'bower_components/angular-mocks',     src: ['**/*.js'], dest: 'public/lib/angular-mocks',     expand: true},
                     {cwd: 'bower_components/angular-resource',  src: ['angular-resource*'], dest: 'public/lib/angular-resource',  expand: true},
-                    {cwd: 'bower_components/angular-route',     src: ['angular-route*'], dest: 'public/lib/angular-route',     expand: true},                    
+                    {cwd: 'bower_components/angular-route',     src: ['angular-route*'], dest: 'public/lib/angular-route',     expand: true},
                     {cwd: 'bower_components/angular',   src: ['angular*'], dest: 'public/lib/angular',           expand: true},
                     {cwd: 'bower_components/angular-ui-utils/demo',                      src: ['**/*.js'], dest: 'public/lib/angular-ui-utils/demo',                         expand: true},
                     {cwd: 'bower_components/angular-ui-utils/test',                      src: ['**/*.js'], dest: 'public/lib/angular-ui-utils/test',                         expand: true},
@@ -83,7 +83,8 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/angular-slick/dist',                         src: ['slick*'], dest: 'public/lib/angular-slick/dist', expand: true},
                     {cwd: 'bower_components/bootstrap/dist',                             src: ['**/bootstrap*'], dest: 'public/lib/bootstrap/dist', expand: true},
                     {cwd: 'bower_components/popper.js/dist/umd',                         src: ['popper*'], dest: 'public/lib/popper.js/dist/umd', expand: true},
-                    {cwd: 'bower_components/owl.carousel/dist',                          src: ['**/*.*'], dest: 'public/lib/owl.carousel/dist', expand: true}
+                    {cwd: 'bower_components/owl.carousel/dist',                          src: ['**/*.*'], dest: 'public/lib/owl.carousel/dist', expand: true},
+                    {cwd: 'bower_components/photoswipe/dist',                          src: ['**/*.*'], dest: 'public/lib/photoswipe/dist', expand: true}
                 ]
             }
         },

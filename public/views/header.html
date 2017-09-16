@@ -1,78 +1,17 @@
 <header calss="navbar navbar-sticky navbar-stuck">
-  <a class="site-logo" href="index.html"><img src="img/shoppingu-logo.png" alt="Shoppingu"></a>
+  <a class="site-logo" ui-sref="home"><img src="img/shoppingu-logo.png" alt="Shoppingu"></a>
   <nav class="site-menu">
     <ul>
-      <li><a ui-sref="home"><span>Home</span></a>
-      </li>
-      <li><a href="shop-grid-ls.html"><span>Shop</span></a>
-        <!-- <ul class="sub-menu">
-            <li><a href="shop-categories.html">Shop Categories</a></li>
-          <li class="has-children"><a href="shop-grid-ls.html"><span>Shop Grid</span></a>
-            <ul class="sub-menu">
-                <li><a href="shop-grid-ls.html">Grid Left Sidebar</a></li>
-                <li><a href="shop-grid-rs.html">Grid Right Sidebar</a></li>
-                <li><a href="shop-grid-ns.html">Grid No Sidebar</a></li>
-            </ul>
-          </li>
-          <li class="has-children"><a href="shop-list-ls.html"><span>Shop List</span></a>
-            <ul class="sub-menu">
-                <li><a href="shop-list-ls.html">List Left Sidebar</a></li>
-                <li><a href="shop-list-rs.html">List Right Sidebar</a></li>
-                <li><a href="shop-list-ns.html">List No Sidebar</a></li>
-            </ul>
-          </li>
-            <li><a href="shop-single.html">Single Product</a></li>
-            <li><a href="cart.html">Cart</a></li>
-          <li class="has-children"><a href="checkout-address.html"><span>Checkout</span></a>
-            <ul class="sub-menu">
-                <li><a href="checkout-address.html">Address</a></li>
-                <li><a href="checkout-shipping.html">Shipping</a></li>
-                <li><a href="checkout-payment.html">Payment</a></li>
-                <li><a href="checkout-review.html">Review</a></li>
-                <li><a href="checkout-complete.html">Complete</a></li>
-            </ul>
-          </li>
-        </ul> -->
-      </li>
-      <li><a ui-sref="userprofile"><span>Account</span></a>
-        <!-- <ul class="sub-menu">
-            <li><a href="account-login.html">Login / Register</a></li>
-            <li><a href="account-password-recovery.html">Password Recovery</a></li>
-            <li><a href="account-orders.html">Orders List</a></li>
-            <li><a href="account-wishlist.html">Wishlist</a></li>
-            <li><a href="account-profile.html">Profile Page</a></li>
-            <li><a href="account-address.html">Contact / Shipping Address</a></li>
-            <li><a href="account-tickets.html">My Tickets</a></li>
-        </ul> -->
-      </li>
-      <li><a href="blog-rs.html"><span>Blog</span></a>
+      <li><a ui-sref="home"><span>Home</span></a></li>
+      <li><a ui-sref="aboutus"><span>About Us</span></a></li>
+      <li><a ui-sref="userprofile"><span>Account</span></a></li>
+      <li><a ui-sref="home"><span>Menu</span></a>
         <ul class="sub-menu toolbar-dropdown">
-          <li class="has-children"><a href="blog-rs.html"><span>Blog Layout</span></a>
-            <!-- <ul class="sub-menu">
-                <li><a href="blog-rs.html">Blog Right Sidebar</a></li>
-                <li><a href="blog-ls.html">Blog Left Sidebar</a></li>
-                <li><a href="blog-ns.html">Blog No Sidebar</a></li>
-            </ul> -->
-          </li>
-          <li class="has-children"><a href="blog-single-rs.html"><span>Single Post Layout</span></a>
-            <!-- <ul class="sub-menu">
-                <li><a href="blog-single-rs.html">Post Right Sidebar</a></li>
-                <li><a href="blog-single-ls.html">Post Left Sidebar</a></li>
-                <li><a href="blog-single-ns.html">Post No Sidebar</a></li>
-            </ul> -->
-          </li>
+          <li class="has-children"><a ui-sref="aboutus"><span>About Us</span></a></li>
+          <li class="has-children"><a ui-sref="contactus"><span>Contact Us</span></a></li>
         </ul>
       </li>
-      <li class="active"><a href="#"><span>Pages</span></a>
-        <!-- <ul class="sub-menu">
-            <li><a href="about.html">About Us</a></li>
-            <li class="active"><a href="contacts.html">Contacts</a></li>
-            <li><a href="faq.html">Help / FAQ</a></li>
-            <li><a href="search-results.html">Search Results</a></li>
-            <li><a href="404.html">404 Not Found</a></li>
-          <li><a class="text-danger" href="docs/dev-setup.html">Documentation</a></li>
-        </ul> -->
-      </li>
+      <li class="active"><a ui-sref="contactus"><span>Contact Us</span></a></li>
     </ul>
   </nav>
   <!-- <div class="collapse navbar-collapse" data-ng-controller="HeaderController">

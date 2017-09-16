@@ -9,4 +9,5 @@ angular.module('mean.system')
       $scope.productImg3 = "http://img.etnews.com/news/article/2016/04/04/article_04104822604409.jpg";
 
       $('.carousel').carousel();
+      
   }]);

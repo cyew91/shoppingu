@@ -8,12 +8,12 @@ angular.module('mean.system')
         productTitle  : '@',
         productImg : '@'
       },
-      templateUrl : './views/common_directives/product_showcase.html',
+      templateUrl : './views/directives/productShowcase.html',
       transclude: true,
       bindToController : true,
       controllerAs  : 'productShowcaseCtrl',
       controller  : function(){
 
       }
-    }
+    };
   }]);

@@ -14,56 +14,56 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             controller : 'IndexController',
             templateUrl: 'views/index.html'
         })
-        .state('SignIn',{
+        .state('signin',{
             url : '/signin',
-            templateUrl: 'views/users/signin.html'
+            templateUrl: 'views/users/signIn.html'
         })
-        .state('SignUp',{
+        .state('signup',{
             url : '/signup',
-            templateUrl: 'views/users/signup.html'
+            templateUrl: 'views/users/signUp.html'
         })
-        .state('AboutUs', {
+        .state('aboutus', {
             url : '/aboutus',
             templateUrl: 'views/aboutus.html'
         })
-        .state('Faq', {
+        .state('faq', {
             url : '/faq',
             templateUrl: 'views/faq.html'
         })
-        .state('ContactUs', {
+        .state('contactus', {
             url : '/contactus',
-            templateUrl: 'views/contactus.html'
+            templateUrl: 'views/contactUs.html'
         })
         .state('articles',{
             url : '/article',
             controller : 'ArticlesController',
             templateUrl: 'views/articles/list.html'
         })
-        .state('createArticle',{
+        .state('createarticle',{
             url : '/article/create',
             controller : 'ArticlesController',
             templateUrl: 'views/articles/create.html'
         })
-        .state('editArticles',{
+        .state('editarticles',{
             url : '/article/{articleId}/edit',
             controller : 'ArticlesController',
             templateUrl: 'views/articles/edit.html'
         })
-        .state('viewArticle',{
+        .state('viewarticle',{
             url : '/article/{articleId}',
             controller : 'ArticlesController',
             templateUrl: 'views/articles/view.html'
         })
-        .state('foo',{
-            url : '/foo',
+        .state('productdetails',{
+            url : '/productdetails',
             params  : {'a': null, 'b': null},
-            controller  : 'FooController',
-            templateUrl : 'views/foo.html'
+            controller  : 'ProductDetailsController',
+            templateUrl : 'views/productDetails.html'
         })
         .state('userprofile',{
             url : '/userprofile',
             controller  : 'UserProfileController',
-            templateUrl : 'views/users/userprofile.html'
+            templateUrl : 'views/users/userProfile.html'
         })
         .state('address',{
             url : '/address',
