@@ -1,3 +1,7 @@
+.margin-bottom-1x {
+    margin-bottom: 24px !important;
+}
+
 .btn{
 	display: inline-block;
 	position: relative;
@@ -48,8 +52,7 @@
 
 .card{
   border-radius: 7px;
-  border-color: #e1e7ec
-
+  border-color: #e1e7ec;
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -115,4 +118,80 @@
 .accordion [data-toggle='collapse'].collapsed::after{
 	-webkit-transform: rotate(-180deg);
 	transform: rotate(-180deg);
+}
+
+.input-group-box {
+    display: block;
+    position: relative;
+}
+
+.input-group-box .form-control {
+    padding-left: 35px;
+}
+
+.input-group-box .input-group-box-addon {
+    left: 15px;
+    transition: color .3s;
+    background-color: transparent !important;
+    color: #9da9b9;
+}
+
+.input-group-box .input-group-box-addon, .input-group-box .input-group-box-btn {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.btn-primary {
+    background-color: #0da9ef;
+}
+
+.btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+    color: #fff;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    margin-right: 0 !important;
+    margin-bottom: 12px;
+    margin-left: 0 !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}
+
+.facebook-btn {
+    border-color: #3b5998;
+    background-color: transparent;
+    color: #3b5998;
+}
+
+.facebook-btn, .twitter-btn, .google-btn {
+    text-transform: none;
+}
+
+.facebook-btn>i, .twitter-btn>i, .google-btn>i {
+    margin-top: 0;
+}
+
+.facebook-btn:hover {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.btn>i {
+    display: inline-block;
+    margin-top: -2px;
+    vertical-align: middle;
+}
+
+.forget-password-header {
+	margin-bottom: 16px;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 1.2;
 }

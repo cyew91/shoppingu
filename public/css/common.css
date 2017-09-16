@@ -988,14 +988,6 @@ hr {
     user-select: none;
 }
 
-.btn-primary {
-    background-color: #0da9ef;
-}
-
-.btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
-    color: #fff;
-}
-
 .list-group {
     display: -ms-flexbox;
     display: flex;
