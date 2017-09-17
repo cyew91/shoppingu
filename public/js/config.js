@@ -60,6 +60,14 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             controller  : 'ProductDetailsController',
             templateUrl : 'views/productDetails.html'
         })
+        .state('postTravel',{
+            url : '/posttravel',
+            templateUrl : 'views/product/post/postTravel.html'
+        })
+        .state('postProduct',{
+            url : '/postproduct',
+            templateUrl : 'views/product/post/postProduct.html'
+        })
         .state('userprofile',{
             url : '/userprofile',
             controller  : 'UserProfileController',
