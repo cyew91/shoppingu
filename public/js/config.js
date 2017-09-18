@@ -60,11 +60,11 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
             controller  : 'ProductDetailsController',
             templateUrl : 'views/productDetails.html'
         })
-        .state('postTravel',{
+        .state('posttravel',{
             url : '/posttravel',
             templateUrl : 'views/product/post/postTravel.html'
         })
-        .state('postProduct',{
+        .state('postproduct',{
             url : '/postproduct',
             templateUrl : 'views/product/post/postProduct.html'
         })
