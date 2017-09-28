@@ -17,7 +17,7 @@ angular.module('mean.system')
        startPosition: 'URLHash'
    })
    
-   $("#lightgallery").lightGallery();
+   $(".lightgallery").lightGallery();
 
    
 }]);
