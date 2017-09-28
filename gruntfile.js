@@ -84,7 +84,9 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/bootstrap/dist',                             src: ['**/bootstrap*'], dest: 'public/lib/bootstrap/dist', expand: true},
                     {cwd: 'bower_components/popper.js/dist/umd',                         src: ['popper*'], dest: 'public/lib/popper.js/dist/umd', expand: true},
                     {cwd: 'bower_components/owl.carousel/dist',                          src: ['**/*.*'], dest: 'public/lib/owl.carousel/dist', expand: true},
-                    {cwd: 'bower_components/photoswipe/dist',                          src: ['**/*.*'], dest: 'public/lib/photoswipe/dist', expand: true}
+                    {cwd: 'bower_components/photoswipe/dist',                            src: ['**/*.*'], dest: 'public/lib/photoswipe/dist', expand: true},
+                    {cwd: 'bower_components/lightgallery/dist/js',                       src: ['**/*.*'], dest: 'public/lib/lightgallery/dist/js', expand: true},
+                    {cwd: 'bower_components/lightgallery/dist/css',                       src: ['**/*.*'], dest: 'public/lib/lightgallery/dist/css', expand: true}
                 ]
             }
         },

@@ -15,6 +15,10 @@ angular.module('mean.system')
        URLhashListener:true,
        autoplayHoverPause:true,
        startPosition: 'URLHash'
-   });
+   })
+   
+   $("#lightgallery").lightGallery();
 
+   
 }]);
+
