@@ -66,6 +66,7 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         })
         .state('postproduct',{
             url : '/postproduct',
+            controller  : 'PostProductController',
             templateUrl : 'views/product/post/postProduct.html'
         })
         .state('userprofile',{
@@ -91,6 +92,10 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         .state('forgetpassword',{
             url : '/forgetpassword',
             templateUrl : 'views/users/forgetPassword.html'
+        })
+        .state('uploadimage',{
+            url : '/uploadimage',
+            controller : 'UploadImageController'
         })
         .state('404',{
             templateUrl: 'views/404.html'

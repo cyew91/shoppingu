@@ -27,6 +27,8 @@ script(type='text/javascript', src='/js/services/authenticate.js')
 script(type='text/javascript', src='/js/controllers/articles.js')
 script(type='text/javascript', src='/js/controllers/index.js')
 script(type='text/javascript', src='/js/controllers/productDetails.js')
+script(type='text/javascript', src='/js/controllers/postProduct.js')
+script(type='text/javascript', src='/js/controllers/uploadImage.js')
 script(type='text/javascript', src='/js/controllers/header.js')
 script(type='text/javascript', src='/js/controllers/users/auth.js')
 script(type='text/javascript', src='/js/controllers/users/signIn.js')
@@ -39,6 +41,8 @@ script(type='text/javascript', src='/js/controllers/users/post.js')
 
 //Application Directives
 script(type='text/javascript', src='/js/directives/productShowcase.js')
+script(type='text/javascript', src='/js/directives/dropzone.js')
+
 //Jquery
 script(type='text/javascript', src='/lib/jquery/dist/jquery.js')
 
@@ -53,19 +57,15 @@ script(type='text/javascript', src='/lib/bootstrap/dist/js/bootstrap.js')
 script(type='text/javascript', src='/js/featherIcons.js')
 //script(type='text/javascript', src='https://unpkg.com/feather-icons/dist/feather.min.js')
 
-
 //Owl Carousel
 script(type='text/javascript', src='/lib/owl.carousel/dist/owl.carousel.js')
-
-//Photoswipe
-script(type='text/javascript', src='/lib/photoswipe/dist/photoswipe.min.js')
 
 if (process.env.NODE_ENV == 'development')
     //Livereload script rendered
     script(type='text/javascript', src='http://localhost:35729/livereload.js')
 
 //LightGallery
-script(type='text/javascript', src='/lib/lightgallery/dist/js/jquery.min.js')
-script(type='text/javascript', src="/lib/lightgallery/dist/js/lg-thumbnail.min.js")
-script(type='text/javascript', src="/lib/lightgallery/dist/js/lg-fullscreen.min.js")
 script(type='text/javascript', src='/lib/lightgallery/dist/js/lightgallery.min.js')
+
+//Dropzone
+script(type='text/javascript', src='/lib/dropzone/dist/dropzone.js')

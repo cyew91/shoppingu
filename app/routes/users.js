@@ -23,21 +23,18 @@ module.exports = function (app) {
     }), users.session);
 
 
-    // Setting social authentication routes
+// Setting social authentication routes
 
 // Setting the facebook oauth route
-
     app.post('/auth/facebook/token', users.facebookUser);
-
 
     app.post('/auth/google', users.googleSocailUser);
 
-    // Setting the twitter oauth route
+// Setting the twitter oauth route
     app.post('/auth/twitter', users.twitterSocialUser);
 
-    // Finish with setting up the userId param
+// Finish with setting up the userId param
     app.param('userId', users.user);
 
 
 };
-
