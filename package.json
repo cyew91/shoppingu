@@ -41,7 +41,7 @@
     "lodash": "latest",
     "method-override": "^2.3.5",
     "morgan": "^1.6.1",
-    "mysql": "^2.9.0",
+    "mysql": "^2.15.0",
     "nconf": "^0.8.2",
     "owl.carousel": "^2.2.0",
     "passport": "^0.3.2",
