@@ -1,20 +1,22 @@
 'use strict';
 
-angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global','$state', 'SignUp', function ($scope, $window, Global, $state, SignUp) {
+angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global', '$state', 'SignUp', function ($scope, $window, Global, $state, SignUp) {
     $scope.global = Global;
 
 
-    $scope.signUp = function(user) {
+    $scope.signUp = function () {
 
         var signUp = new SignUp({
-            name: user.name,
-            email: user.email,
-            username : user.userName,
-            password : user.password
+            name: this.name,
+            lastName: this.lastName,
+            email: this.email,
+            phoneNumber: this.phoneNumber,
+            password: this.password,
+            confirmPassword: this.confirmPassword
         });
 
-        signUp.$save(function(response) {
-            if(response.status === 'success'){
+        signUp.$save(function (response) {
+            if (response.status === 'success') {
                 $window.location.href = '/';
             }
         });

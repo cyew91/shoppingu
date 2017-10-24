@@ -4,52 +4,64 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <form class="form-horizontal" ng-submit="signUp(user)">
-                        <h3 class="margin-bottom-1x"><strong>No Account? Register</strong></h3>
+                    <form class="form-horizontal" ng-submit="signUp()">
+                        <h3 class="margin-bottom-1x">
+                            <strong>No Account? Register</strong>
+                        </h3>
                         <p>Registration takes less than a minute but gives you full control over your orders.</p>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-fn"><strong>Name</strong></label>
-                                    <input class="form-control" type="text" id="reg-fn" required="">
+                                    <label for="reg-fn">
+                                        <strong>Name</strong>
+                                    </label>
+                                    <input class="form-control" type="text" id="reg-fn" ng-model="name" required="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-ln"><strong>Last Name</strong></label>
-                                    <input class="form-control" type="text" id="reg-ln" required="">
+                                    <label for="reg-ln">
+                                        <strong>Last Name</strong>
+                                    </label>
+                                    <input class="form-control" type="text" id="reg-ln" ng-model="lastName" required="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-email"><strong>E-mail Address</strong></label>
-                                    <input class="form-control" type="email" id="reg-email" required="">
+                                    <label for="reg-email">
+                                        <strong>E-mail Address</strong>
+                                    </label>
+                                    <input class="form-control" type="email" id="reg-email" ng-model="email" required="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-phone"><strong>Phone Number</strong></label>
-                                    <input class="form-control" type="text" id="reg-phone" required="">
+                                    <label for="reg-phone">
+                                        <strong>Phone Number</strong>
+                                    </label>
+                                    <input class="form-control" type="text" id="reg-phone" ng-model="phoneNumber" required="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-pass"><strong>Password</strong></label>
-                                    <input class="form-control" type="password" id="reg-pass" required="">
+                                    <label for="reg-pass">
+                                        <strong>Password</strong>
+                                    </label>
+                                    <input class="form-control" type="password" id="reg-pass" ng-model="password" required="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="reg-pass-confirm"><strong>Confirm Password</strong></label>
-                                    <input class="form-control" type="password" id="reg-pass-confirm" required="">
+                                    <label for="reg-pass-confirm">
+                                        <strong>Confirm Password</strong>
+                                    </label>
+                                    <input class="form-control" type="password" id="reg-pass-confirm" ng-model="confirmPassword" required="">
                                 </div>
                             </div>
                             <div class="col-12 text-center text-right">
                                 <button class="btn btn-primary margin-bottom-none" type="submit">Register</button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
