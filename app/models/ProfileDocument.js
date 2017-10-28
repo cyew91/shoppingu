@@ -2,42 +2,26 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
-        ProfileID: {
+    var ProfileDocument = sequelize.define('T_Profile_Document', {
+        ProfileDocumentID: {
             type: DataTypes.STRING(36),
             primaryKey: true,
             allowNull: false
         },
-        FirstName: {
-            type: DataTypes.STRING(45),
+        ProfileID: {
+            type: DataTypes.STRING(36),
             allowNull: false
         },
-        LastName: {
-            type: DataTypes.STRING(45),
-            allowNull: false
-        },
-        FullName: {
-            type: DataTypes.STRING(100),
-            allowNull: false
-        },
-        Address: {
+        DocumentName: {
             type: DataTypes.STRING(500),
             allowNull: false
         },
-        Email: {
-            type: DataTypes.STRING(45),
+        DocumentType: {
+            type: DataTypes.CHAR(20),
             allowNull: false
         },
-        ContactNo: {
-            type: DataTypes.STRING(45),
-            allowNull: false
-        },
-        Gender: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        DOB: {
-            type: DataTypes.DATE,
+        DocumentPath: {
+            type: DataTypes.STRING(500),
             allowNull: false
         },
         Remarks: {
@@ -59,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
         LastUpdatedBy: {
             type: DataTypes.STRING(36),
             allowNull: false
-        },
+        }
     }, {
          // don't add the timestamp attributes (updatedAt, createdAt)
          timestamps: false,
@@ -70,12 +54,12 @@ module.exports = function (sequelize, DataTypes) {
     },
 
     {
-        associate: function(models){
-            Profile.hasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
+        associate: function(models) {
+            ProfileDocument.BelongTo(models.Profile);
         }
     }
 
 );
 
-    return Profile;
+    return ProfileDocument;
 };

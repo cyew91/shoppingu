@@ -2,43 +2,35 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
-        ProfileID: {
+    var ProfileAccount = sequelize.define('T_Profile_Account', {
+        ProfileAccountID: {
             type: DataTypes.STRING(36),
             primaryKey: true,
             allowNull: false
         },
-        FirstName: {
-            type: DataTypes.STRING(45),
+        ProfileID: {
+            type: DataTypes.STRING(36),
             allowNull: false
         },
-        LastName: {
-            type: DataTypes.STRING(45),
+        LoginID: {
+            type: DataTypes.STRING(36),
+            allowNull: true
+        },
+        SaltPass: {
+            type: 'VARBINARY(100)',
             allowNull: false
         },
-        FullName: {
-            type: DataTypes.STRING(100),
+        HashPass: {
+            type: 'VARBINARY(100)',
             allowNull: false
         },
-        Address: {
-            type: DataTypes.STRING(500),
-            allowNull: false
-        },
-        Email: {
-            type: DataTypes.STRING(45),
-            allowNull: false
-        },
-        ContactNo: {
-            type: DataTypes.STRING(45),
-            allowNull: false
-        },
-        Gender: {
+        RetryCount: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
-        DOB: {
-            type: DataTypes.DATE,
-            allowNull: false
+        IsActive:{
+            type: DataTypes.INTEGER,
+            allowNull: true
         },
         Remarks: {
             type: DataTypes.STRING(500),
@@ -59,7 +51,7 @@ module.exports = function (sequelize, DataTypes) {
         LastUpdatedBy: {
             type: DataTypes.STRING(36),
             allowNull: false
-        },
+        }
     }, {
          // don't add the timestamp attributes (updatedAt, createdAt)
          timestamps: false,
@@ -70,12 +62,12 @@ module.exports = function (sequelize, DataTypes) {
     },
 
     {
-        associate: function(models){
-            Profile.hasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
+        associate: function(models) {
+            ProfileAccount.BelongTo(models.Profile);
         }
     }
 
 );
 
-    return Profile;
+    return ProfileAccount;
 };
