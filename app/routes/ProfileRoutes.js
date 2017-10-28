@@ -7,12 +7,12 @@ var passport = require('passport');
 
 module.exports = function (app) {
     // Profile Routes
-    var profiles = require('../../app/controllers/profiles');
+    var profiles = require('../../app/controllers/ProfileControllers');
 
-    app.get('/profiles/:profileId', profiles.show)
+    app.get('/profile/:profileId', profiles.show)
 
     // Setting up the profile api
-    app.post('/profiles', profiles.create);
+    app.post('/profile', profiles.create);
 
     app.param('profileId', profiles.getProfileId);
 };

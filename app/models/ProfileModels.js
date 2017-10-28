@@ -4,20 +4,20 @@ module.exports = function (sequelize, DataTypes) {
 
     var Profile = sequelize.define('T_Profile', {
         ProfileID: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(36),
             primaryKey: true
         },
-        FirstName: DataTypes.STRING,
-        LastName: DataTypes.STRING,
-        FullName: DataTypes.STRING,
-        Address: DataTypes.STRING,
+        FirstName: DataTypes.STRING(45),
+        LastName: DataTypes.STRING(45),
+        FullName: DataTypes.STRING(100),
+        Address: DataTypes.STRING(500),
         Gender: DataTypes.INTEGER,
         DOB: DataTypes.DATE,
-        Remarks: DataTypes.STRING,
+        Remarks: DataTypes.STRING(500),
         CreatedDate: DataTypes.DATE,
-        CreatedBy: DataTypes.STRING,
+        CreatedBy: DataTypes.STRING(36),
         LastUpdatedDate: DataTypes.DATE,
-        LastUpdatedBy: DataTypes.STRING
+        LastUpdatedBy: DataTypes.STRING(36)
     }, {
          // don't add the timestamp attributes (updatedAt, createdAt)
          timestamps: false,
