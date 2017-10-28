@@ -6,15 +6,19 @@ angular.module('mean.system')
 
     $scope.dropzoneConfig = {
      'options': { // passed into the Dropzone constructor
-       'url': 'uploadimage'
+       'url': 'uploadImage.html',
+       //'clickable': true,
+       //'autoProcessQueue': false,
      },
-     'eventHandlers': {
-       'sending': function (file, xhr, formData) {
-         console.log('Sending');
-       },
-       'success': function (file, response) {
-         console.log('Success');
-       }
-     }
+    //  'eventHandlers': {
+    //    'sending': function (file, xhr, formData) {
+    //      console.log('Sending');
+    //    },
+    //    'success': function (file, response) {
+    //      console.log('Success');
+    //    }
+    //  }
+    
+    
    };
 }]);

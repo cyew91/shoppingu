@@ -71,6 +71,9 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         })
         .state('userprofile',{
             url : '/userprofile',
+            params: {
+                profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
+            },
             controller  : 'UserProfileController',
             templateUrl : 'views/users/userProfile.html'
         })
@@ -95,7 +98,8 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         })
         .state('uploadimage',{
             url : '/uploadimage',
-            controller : 'UploadImageController'
+            controller : 'UploadImageController',
+            templateUrl : 'views/uploadImage.html'
         })
         .state('404',{
             templateUrl: 'views/404.html'

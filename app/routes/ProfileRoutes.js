@@ -13,6 +13,7 @@ module.exports = function (app) {
 
     // Setting up the profile api
     app.post('/profile', profiles.create);
+    app.put('/profile/:profileId', profiles.update);
 
     app.param('profileId', profiles.getProfileId);
 };

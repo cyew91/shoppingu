@@ -22,3 +22,4 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.router', 'ui.bootstrap', 
 angular.module('mean.system', []);
 angular.module('mean.articles', []);
 angular.module('mean.auth', []);
+//angular.module('mean.t_profile', []);

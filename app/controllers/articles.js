@@ -23,6 +23,7 @@ exports.article = function(req, res, next, id) {
     }).catch(function(err){
         return next(err);
     });
+    
 };
 
 /**

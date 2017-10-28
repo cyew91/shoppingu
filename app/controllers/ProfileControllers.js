@@ -49,3 +49,21 @@ exports.create = function (req, res, next) {
         res.send({status: 'Exception', message: err})
     });
 };
+
+// Update Profile
+exports.update = function(req, res) {
+    
+    // create a new variable to hold the article that was placed on the req object.
+    var profile = req.profile;
+
+    profile.updateAttributes({
+        FirstName: req.body.FirstName,
+        LastName: req.body.LastName,
+        Email: req.body.Email,
+        ContactNo: req.body.ContactNo
+    }).then(function(a){
+        return res.jsonp(a);
+    }).catch(function(err){
+        return res.send({status: 'Exception', message: err});
+    });
+};

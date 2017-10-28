@@ -97,6 +97,7 @@ exports.user = function (req, res, next, id) {
             return next(new Error('Failed to load User ' + id));
         }
         req.profile = user;
+        console.log(req);
         next();
     }).catch(function (err) {
         next(err);
