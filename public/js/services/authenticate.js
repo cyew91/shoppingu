@@ -17,5 +17,5 @@ angular.module('mean.auth').service("LogIn", ['$resource', function($resource) {
     return $resource('/users/session');
 }]);
 angular.module('mean.auth').service("SignUp", ['$resource', function($resource) {
-    return $resource('/profiles');
+    return $resource('/profile');
 }]);

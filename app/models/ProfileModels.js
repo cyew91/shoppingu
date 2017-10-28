@@ -5,8 +5,7 @@ module.exports = function (sequelize, DataTypes) {
     var Profile = sequelize.define('T_Profile', {
         ProfileID: {
             type: DataTypes.STRING(36),
-            primaryKey: true,
-            allowNull: false
+            primaryKey: true
         },
         FirstName: {
             type: DataTypes.STRING(45),
@@ -22,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         Address: {
             type: DataTypes.STRING(500),
-            allowNull: false
+            allowNull: true
         },
         Email: {
             type: DataTypes.STRING(45),
@@ -34,11 +33,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         Gender: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         DOB: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         Remarks: {
             type: DataTypes.STRING(500),

@@ -2,8 +2,8 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProfileAccount = sequelize.define('T_Profile_Account', {
-            ProfileAccountID: {
+    var ProfileDocument = sequelize.define('T_Profile_Document', {
+            ProfileDocumentID: {
                 type: DataTypes.STRING(36),
                 primaryKey: true
             },
@@ -11,25 +11,17 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.STRING(36),
                 allowNull: false
             },
-            LoginID: {
-                type: DataTypes.STRING(36),
-                allowNull: true
-            },
-            SaltPass: {
-                type: 'VARBINARY(100)',
+            DocumentName: {
+                type: DataTypes.STRING(500),
                 allowNull: false
             },
-            HashPass: {
-                type: 'VARBINARY(100)',
+            DocumentType: {
+                type: DataTypes.CHAR(20),
                 allowNull: false
             },
-            RetryCount: {
-                type: DataTypes.INTEGER,
-                allowNull: true
-            },
-            IsActive: {
-                type: DataTypes.INTEGER,
-                allowNull: true
+            DocumentPath: {
+                type: DataTypes.STRING(500),
+                allowNull: false
             },
             Remarks: {
                 type: DataTypes.STRING(500),
@@ -62,11 +54,11 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProfileAccount.BelongTo(models.Profile);
+                ProfileDocument.BelongTo(models.Profile);
             }
         }
 
     );
 
-    return ProfileAccount;
+    return ProfileDocument;
 };
