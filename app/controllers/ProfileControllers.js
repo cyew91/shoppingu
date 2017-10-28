@@ -46,9 +46,6 @@ exports.create = function (req, res, next) {
             "result": "success"
         });
     }).catch(function (err) {
-        res.render('users/signup', {
-            message: message,
-            user: user
-        });
+        res.send({status: 'Exception', message: err})
     });
 };
