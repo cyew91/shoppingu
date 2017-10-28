@@ -2,42 +2,22 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
-            ProfileID: {
+    var ProductSubCat = sequelize.define('T_Profile', {
+            ProductSubCatID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            FirstName: {
-                type: DataTypes.STRING(45),
+            ProductCatID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            LastName: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            FullName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            Address: {
+            ProductSubCatDesc: {
                 type: DataTypes.STRING(500),
-                allowNull: true
-            },
-            Email: {
-                type: DataTypes.STRING(45),
                 allowNull: false
             },
-            ContactNo: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            Gender: {
+            IsActive: {
                 type: DataTypes.INTEGER,
-                allowNull: true
-            },
-            DOB: {
-                type: DataTypes.DATE,
                 allowNull: true
             },
             Remarks: {
@@ -71,13 +51,12 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                Profile.hasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.ProfileDocument, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.Product, {foreignKey: 'ProfileID'});
+                ProductSubCat.hasOne(models.ProductDetail, {foreignKey: 'ProductSubCatID'});
+                ProductSubCat.BelongTo(models.ProductCat, {foreignKey: 'ProductCatID'});
             }
         }
 
     );
 
-    return Profile;
+    return ProductSubCat;
 };

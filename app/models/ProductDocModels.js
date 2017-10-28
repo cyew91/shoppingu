@@ -2,43 +2,27 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
-            ProfileID: {
+    var ProductDocument = sequelize.define('T_Profile', {
+            ProductDocumentID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            FirstName: {
-                type: DataTypes.STRING(45),
+            ProductDetailID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            LastName: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            FullName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            Address: {
+            DocumentName: {
                 type: DataTypes.STRING(500),
-                allowNull: true
-            },
-            Email: {
-                type: DataTypes.STRING(45),
                 allowNull: false
             },
-            ContactNo: {
-                type: DataTypes.STRING(45),
+            DocumentType: {
+                type: DataTypes.CHAR(30),
                 allowNull: false
             },
-            Gender: {
-                type: DataTypes.INTEGER,
-                allowNull: true
-            },
-            DOB: {
-                type: DataTypes.DATE,
-                allowNull: true
+            DocumentPath: {
+                type: DataTypes.STRING(500),
+                allowNull: false
             },
             Remarks: {
                 type: DataTypes.STRING(500),
@@ -71,13 +55,11 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                Profile.hasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.ProfileDocument, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.Product, {foreignKey: 'ProfileID'});
+                ProductDocument.BelongTo(models.ProductDetail, {foreignKey: 'ProductDetailID'});
             }
         }
 
     );
 
-    return Profile;
+    return ProductDocument;
 };

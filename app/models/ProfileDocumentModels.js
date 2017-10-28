@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
                 primaryKey: true
             },
             ProfileID: {
-                type: DataTypes.STRING(36),
+                type: DataTypes.UUID,
                 allowNull: false
             },
             DocumentName: {
@@ -54,7 +54,7 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProfileDocument.BelongTo(models.Profile);
+                ProfileDocument.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
             }
         }
 

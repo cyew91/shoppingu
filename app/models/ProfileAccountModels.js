@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
                 primaryKey: true
             },
             ProfileID: {
-                type: DataTypes.STRING(36),
+                type: DataTypes.UUID,
                 allowNull: false
             },
             LoginID: {
@@ -62,7 +62,7 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProfileAccount.BelongTo(models.Profile);
+                ProfileAccount.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
             }
         }
 

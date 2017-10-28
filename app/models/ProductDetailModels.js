@@ -2,43 +2,39 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
-            ProfileID: {
+    var ProductDetail = sequelize.define('T_Profile', {
+            ProductDetailID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            FirstName: {
-                type: DataTypes.STRING(45),
+            ProductID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            LastName: {
-                type: DataTypes.STRING(45),
+            ProductCatID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            FullName: {
-                type: DataTypes.STRING(100),
+            ProductSubCatID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            Address: {
-                type: DataTypes.STRING(500),
-                allowNull: true
-            },
-            Email: {
-                type: DataTypes.STRING(45),
+            DetailDesription: {
+                type: DataTypes.STRING(3000),
                 allowNull: false
             },
-            ContactNo: {
-                type: DataTypes.STRING(45),
+            CurrencyID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            Gender: {
+            Amount: {
+                type: DataTypes.DECIMAL(10,3),
+                allowNull: false
+            },
+            DetailDesription: {
                 type: DataTypes.INTEGER,
-                allowNull: true
-            },
-            DOB: {
-                type: DataTypes.DATE,
-                allowNull: true
+                allowNull: false
             },
             Remarks: {
                 type: DataTypes.STRING(500),
@@ -71,13 +67,14 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                Profile.hasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.ProfileDocument, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.Product, {foreignKey: 'ProfileID'});
+                ProductDetail.BelongTo(models.Product, {foreignKey: 'ProductID'});
+                ProductDetail.BelongTo(models.ProductCat, {foreignKey: 'ProductCatID'});
+                ProductDetail.BelongTo(models.ProductSubCat, {foreignKey: 'ProductSubCatID'});
+                ProductDetail.BelongTo(models.Currency, {foreignKey: 'CurrencyID'});
             }
         }
 
     );
 
-    return Profile;
+    return ProductDetail;
 };
