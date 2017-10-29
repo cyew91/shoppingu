@@ -1,27 +1,63 @@
 <header calss="navbar navbar-sticky navbar-stuck">
-  <a class="site-logo" ui-sref="home"><img src="img/shoppingu-logo.png" alt="Shoppingu"></a>
+  <a class="site-logo" ui-sref="home" style="z-index: 99; position: relative;">
+    <img src="img/shoppingu-logo.png" alt="Shoppingu">
+  </a>
   
   <nav class="site-menu">
     <ul>
-      <li><a ui-sref="home"><span>Home</span></a></li>
-      <li><a ui-sref="aboutus"><span>About Us</span></a></li>
-      <li><a ui-sref="userprofile"><span>Account</span></a></li>
-      <li><a ui-sref="home"><span>Post</span></a>
+      <li>
+        <a ui-sref="home">
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="aboutus">
+          <span>About Us</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="userprofile">
+          <span>Account</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="home">
+          <span>Post</span>
+        </a>
         <ul class="sub-menu toolbar-dropdown">
-          <li class="has-children"><a ui-sref="posttravel"><span>Post Travel</span></a></li>
-          <li class="has-children"><a ui-sref="postproduct"><span>Post Product</span></a></li>
+          <li class="has-children">
+            <a ui-sref="posttravel">
+              <span>Post Travel</span>
+            </a>
+          </li>
+          <li class="has-children">
+            <a ui-sref="postproduct">
+              <span>Post Product</span>
+            </a>
+          </li>
         </ul>
       </li>
-      <li><a ui-sref="signup"><span>Sign Up</span></a></li>
-      <li><a ui-sref="signin"><span>Sign In</span></a></li>
-      <li class="active"><a ui-sref="contactus"><span>Contact Us</span></a></li>
+      <li>
+        <a ui-sref="signup">
+          <span>Sign Up</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="signin">
+          <span>Sign In</span>
+        </a>
+      </li>
+      <li class="active">
+        <a ui-sref="contactus">
+          <span>Contact Us</span>
+        </a>
+      </li>
     </ul>
   </nav>
   <div class="toolbar">
     <div class="search"></div>
-      <form id="searchbar">
-          <input type="search" placeholder="Search">
-      </form>
+    <form id="searchbar">
+      <input type="search" placeholder="Search">
+    </form>
   </div>
 </header>
-
