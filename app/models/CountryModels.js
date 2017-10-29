@@ -2,18 +2,18 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Currency = sequelize.define('T_Profile', {
-            CurrencyID: {
+    var Country = sequelize.define('T_Profile', {
+            CountryID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            CurrencyCode: {
-                type: DataTypes.CHAR(5),
+            CountryCode: {
+                type: DataTypes.CHAR(3),
                 allowNull: false
             },
-            CurrencyName: {
-                type: DataTypes.STRING(200),
+            CountryName: {
+                type: DataTypes.STRING(45),
                 allowNull: false
             }
         }, 
@@ -29,11 +29,11 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                Currency.HasOne(models.ProductDetail, {foreignKey: 'CurrencyID'});
+                Country.HasOne(models.Travel, {foreignKey: 'CountryID'});
             }
         }
 
     );
 
-    return Currency;
+    return Country;
 };

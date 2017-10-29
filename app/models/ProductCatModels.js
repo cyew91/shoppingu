@@ -2,17 +2,13 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProductSubCat = sequelize.define('T_Profile', {
-            ProductSubCatID: {
+    var ProductCat = sequelize.define('T_Profile', {
+            ProductCatID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            ProductCatID: {
-                type: DataTypes.UUID,
-                allowNull: false
-            },
-            ProductSubCatDesc: {
+            ProductCatDesc: {
                 type: DataTypes.STRING(500),
                 allowNull: false
             },
@@ -51,12 +47,12 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProductSubCat.hasOne(models.ProductDetail, {foreignKey: 'ProductSubCatID'});
-                ProductSubCat.BelongTo(models.ProductCat, {foreignKey: 'ProductCatID'});
+                ProductCat.HasOne(models.ProductDetail, {foreignKey: 'ProductCatID'});
+                ProductCat.HasOne(models.ProductSubCat, {foreignKey: 'ProductCatID'});
             }
         }
 
     );
 
-    return ProductSubCat;
+    return ProductCat;
 };

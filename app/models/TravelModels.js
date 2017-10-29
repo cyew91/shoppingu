@@ -2,19 +2,35 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProductCat = sequelize.define('T_Profile', {
-            ProductCatID: {
+    var Travel = sequelize.define('T_Profile', {
+            TravelID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            ProductCatDesc: {
+            ProfileID: {
+                type: DataTypes.UUID,
+                allowNull: false
+            },
+            CountryID: {
+                type: DataTypes.UUID,
+                allowNull: false
+            },
+            TravelDescription: {
                 type: DataTypes.STRING(500),
                 allowNull: false
             },
-            IsActive: {
+            TravelStartDate: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            TravelEndDate: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            IsExpired: {
                 type: DataTypes.INTEGER,
-                allowNull: true
+                allowNull: false
             },
             Remarks: {
                 type: DataTypes.STRING(500),
@@ -47,12 +63,13 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProductCat.hasOne(models.ProductDetail, {foreignKey: 'ProductCatID'});
-                ProductCat.hasOne(models.ProductSubCat, {foreignKey: 'ProductCatID'});
+                Travel.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
+                Travel.BelongTo(models.Country, {foreignKey: 'CountryID'});
+                Travel.HasOne(models.Product, {foreignKey: 'TravelID'});
             }
         }
 
     );
 
-    return ProductCat;
+    return Travel;
 };
