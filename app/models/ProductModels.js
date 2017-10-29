@@ -59,7 +59,7 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                Product.HasOne(models.ProductDetail, {foreignKey: 'ProductID'});
+                Product.HasMany(models.ProductDetail, {foreignKey: 'ProductID'});
                 Product.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
                 Product.BelongTo(models.Travel, {foreignKey: 'TravelID'});
             }

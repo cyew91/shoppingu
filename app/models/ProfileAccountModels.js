@@ -4,7 +4,7 @@ module.exports = function (sequelize, DataTypes) {
 
     var ProfileAccount = sequelize.define('T_Profile_Account', {
             ProfileAccountID: {
-                type: DataTypes.STRING(36),
+                type: DataTypes.UUID,
                 primaryKey: true
             },
             ProfileID: {

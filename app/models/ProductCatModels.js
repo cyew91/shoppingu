@@ -48,7 +48,7 @@ module.exports = function (sequelize, DataTypes) {
         {
             associate: function (models) {
                 ProductCat.HasOne(models.ProductDetail, {foreignKey: 'ProductCatID'});
-                ProductCat.HasOne(models.ProductSubCat, {foreignKey: 'ProductCatID'});
+                ProductCat.HasMany(models.ProductSubCat, {foreignKey: 'ProductCatID'});
             }
         }
 

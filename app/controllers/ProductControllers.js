@@ -6,7 +6,7 @@
 var db = require('../../config/sequelize'),
     config = require('../../config/config');
 
-exports.getProductId = function(req, res, next, ProductID) {
+exports.getProductID = function(req, res, next, ProductID) {
     console.log('id => ' + ProductID);
     db.T_Product.find({where: {ProductID: ProductID}}).then(function(product){
         if(!product) {
@@ -21,22 +21,20 @@ exports.getProductId = function(req, res, next, ProductID) {
 };
 
 /**
- * Show a profile
+ * Show a product
  */
 exports.show = function(req, res) {
-    // Sending down the profile that was just preloaded by the profiles.getProfileId function
-    // and saves profile on the req object.
-    return res.jsonp(req.profile);
+    return res.jsonp(req.product);
 };
 
 /**
- * Create profile
+ * Create product
  */
 exports.create = function (req, res, next) {
     var message = null;
-    var profile = db.T_Profile.build(req.body);
+    var product = db.T_Product.build(req.body);
 
-    profile.save().then(function () {
+    product.save().then(function () {
         return res.jsonp({
             "result": "success"
         });
@@ -45,17 +43,17 @@ exports.create = function (req, res, next) {
     });
 };
 
-// Update Profile
+// Update Product
 exports.update = function(req, res) {
     
     // create a new variable to hold the article that was placed on the req object.
-    var profile = req.profile;
+    var product = req.product;
 
-    profile.updateAttributes({
-        FirstName: req.body.FirstName,
-        LastName: req.body.LastName,
-        Email: req.body.Email,
-        ContactNo: req.body.ContactNo
+    product.updateAttributes({
+        // FirstName: req.body.FirstName,
+        // LastName: req.body.LastName,
+        // Email: req.body.Email,
+        // ContactNo: req.body.ContactNo
     }).then(function(a){
         return res.jsonp(a);
     }).catch(function(err){

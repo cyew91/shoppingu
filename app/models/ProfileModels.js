@@ -73,8 +73,8 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 Profile.HasOne(models.ProfileAccount, {foreignKey: 'ProfileID'});
                 Profile.HasOne(models.ProfileDocument, {foreignKey: 'ProfileID'});
-                Profile.HasOne(models.Product, {foreignKey: 'ProfileID'});
-                Profile.HasOne(models.Travel, {foreignKey: 'ProfileID'});
+                Profile.HasMany(models.Product, {foreignKey: 'ProfileID'});
+                Profile.HasMany(models.Travel, {foreignKey: 'ProfileID'});
             }
         }
 
