@@ -79,6 +79,9 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         })
         .state('address',{
             url : '/address',
+            params: {
+                profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
+            },
             controller  : 'AddressController',
             templateUrl : 'views/users/address.html'
         })

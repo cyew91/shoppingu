@@ -51,7 +51,7 @@ exports.create = function (req, res, next) {
 };
 
 // Update Profile
-exports.update = function(req, res) {
+exports.updateProfile = function(req, res) {
     
     // create a new variable to hold the article that was placed on the req object.
     var profile = req.profile;
@@ -60,7 +60,23 @@ exports.update = function(req, res) {
         FirstName: req.body.FirstName,
         LastName: req.body.LastName,
         Email: req.body.Email,
-        ContactNo: req.body.ContactNo
+        ContactNo: req.body.ContactNo,
+        Gender: req.body.Gender,
+        DOB: req.body.DOB
+    }).then(function(a){
+        return res.jsonp(a);
+    }).catch(function(err){
+        return res.send({status: 'Exception', message: err});
+    });
+};
+
+exports.updateAddress = function(req, res) {
+    
+    // create a new variable to hold the article that was placed on the req object.
+    var profile = req.profile;
+
+    profile.updateAttributes({
+        Address: req.body.Address
     }).then(function(a){
         return res.jsonp(a);
     }).catch(function(err){

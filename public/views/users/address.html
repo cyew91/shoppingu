@@ -1,6 +1,6 @@
 
 
-<div class="containerUser padding-bottom-3x mb-2" data-ng-controller="AddressController">
+<div class="containerUser padding-bottom-3x mb-2" data-ng-controller="AddressController" ng-init="findOne()">
     <div class="row">
             <div ng-include="'../views/users/userprofilemain.html'" class="col-lg-4"></div>
         <div class="col-lg-8">
@@ -12,7 +12,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">Address 1</label> 
-                        <input class="form-control" type="text" id="account-fn" value="" required>
+                        <input class="form-control" type="text" id="account-fn" value="{{profile.Address}}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -50,7 +50,7 @@
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <label class="custom-control custom-checkbox d-block"></label>
-                        <button class="btn btn-primary margin-right-none" type="button" data-toast data-toast-postion="topRight">
+                        <button class="btn btn-primary margin-right-none" type="button" data-toast data-toast-postion="topRight" ng-click="updateAddress()">
                             Update Address
                         </button>
                     </div>
