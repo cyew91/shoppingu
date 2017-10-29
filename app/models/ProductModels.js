@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Product = sequelize.define('T_Profile', {
+    var Product = sequelize.define('T_Product', {
             ProductID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,

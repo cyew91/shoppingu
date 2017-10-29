@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Travel = sequelize.define('T_Profile', {
+    var Travel = sequelize.define('T_Travel', {
             TravelID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,

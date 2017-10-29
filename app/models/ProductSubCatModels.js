@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProductSubCat = sequelize.define('T_Profile', {
+    var ProductSubCat = sequelize.define('T_Product_SubCat', {
             ProductSubCatID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
