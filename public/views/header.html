@@ -2,7 +2,7 @@
   <a class="site-logo" ui-sref="home" style="z-index: 99; position: relative;">
     <img src="img/shoppingu-logo.png" alt="Shoppingu">
   </a>
-  
+
   <nav class="site-menu">
     <ul>
       <li>
@@ -54,10 +54,44 @@
       </li>
     </ul>
   </nav>
+
   <div class="toolbar">
-    <div class="search"></div>
-    <form id="searchbar">
-      <input type="search" placeholder="Search">
-    </form>
+    <div class="inner">
+        <div class="search"></div>
+        <form id="searchbar">
+          <input type="search" placeholder="Search">
+        </form>
+      <div class="tools">
+        <div class="account">
+            <a href="../account-orders.html"></a>
+            <i class="icon-head"></i>
+            <ul class="toolbar-dropdown">
+              <li class="sub-menu-user">
+                <div class="user-ava">
+                  <img src="../img/account/user-ava-sm.jpg" alt="Daniel Adams">
+                </div>
+                <div class="user-info">
+                  <h6 class="user-name">Daniel Adams</h6>
+                  <span class="text-xs text-muted">290 Reward points</span>
+                </div>
+              </li>
+              <li>
+                <a href="../account-profile.html">My Profile</a>
+              </li>
+              <li>
+                <a href="../account-orders.html">Orders List</a>
+              </li>
+              <li>
+                <a href="../account-wishlist.html">Wishlist</a>
+              </li>
+              <li class="sub-menu-separator"></li>
+              <li>
+                <a href="#">
+                  <i class="icon-unlock"></i>Logout</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
   </div>
 </header>
