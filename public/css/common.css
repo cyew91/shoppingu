@@ -796,7 +796,7 @@ a {
 img, figure {
     max-width: 100%;
     height: auto;
-		vertical-align: middle;
+	vertical-align: middle;
 }
 
 .user-info-wrapper .user-info .user-data {
@@ -1392,16 +1392,6 @@ input::-webkit-input-placeholder {
 	content: "\e074";
 }
 
-.toolbar .account>.toolbar-dropdown{
-	left: 50%;
-	margin-left: -100px;
-}
-
-.toolbar-dropdown{
-	margin-top: 7px !important;
-	text-align: left;
-}
-
 .sub-menu, .toolbar-dropdown{
 	display: none;
 	position: absolute;
@@ -1467,21 +1457,9 @@ input::-webkit-input-placeholder {
 	position: relative;
 }
 
-.sub-menu>li.sub-menu-user .user-ava, .toolbar-dropdown>li.sub-menu-user .user-ava{
-	width: 44px;
-}
-
 .sub-menu>li.sub-menu-user .user-ava, .toolbar-dropdown>li.sub-menu-user .user-ava, .sub-menu>li.sub-menu-user .user-info, .toolbar-dropdown>li.sub-menu-user .user-info{
 	display: table-cell;
 	vertical-align: middle;
-}
-
-.sub-menu>li.sub-menu-user .user-ava>img, .toolbar-dropdown>li.sub-menu-user .user-ava>img{
-	display: block;
-	width: 44px;
-	padding: 3px;
-	border: 1px solid #e1e7ec;
-	border-radius: 50%;	
 }
 
 .sub-menu>li.sub-menu-user .user-info, .toolbar-dropdown>li.sub-menu-user .user-info{
@@ -1523,4 +1501,78 @@ input::-webkit-input-placeholder {
 	margin-bottom: 3px;
 	border-top: 1px solid #e1e7ec;
 }
+
+
+
+.toolbar .account:hover>.toolbar-dropdown, .toolbar .cart:hover>.toolbar-dropdown {
+    display: block;
+    -webkit-animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sub-menu>li.sub-menu-user .user-info>.user-name, .toolbar-dropdown>li.sub-menu-user .user-info>.user-name {
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.sub-menu>li.sub-menu-user .user-info>span, .toolbar-dropdown>li.sub-menu-user .user-info>span {
+    display: block;
+}
+
+.text-xs {
+    font-size: 12px;
+}
+
+.sub-menu>li.sub-menu-user .user-ava, .toolbar-dropdown>li.sub-menu-user .user-ava {
+	width: 44px;
+}
+
+.toolbar .account>.toolbar-dropdown {
+    left: 50%;
+	margin-left: -150px;
+	margin-top: 7px !important;
+}
+
+.toolbar-dropdown {
+    margin-top: 7px !important;
+    text-align: left;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 18px;
+    line-height: 1.8;
+}
+
+.sub-menu>li.sub-menu-user .user-ava, .toolbar-dropdown>li.sub-menu-user .user-ava, .sub-menu>li.sub-menu-user .user-info, .toolbar-dropdown>li.sub-menu-user .user-info {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.sub-menu>li.sub-menu-user .user-ava>img, .toolbar-dropdown>li.sub-menu-user .user-ava>img {
+    display: block;
+    width: 44px;
+    padding: 3px;
+    border: 1px solid #e1e7ec;
+}
+
+.sub-menu>li>a>i, .toolbar-dropdown>li>a>i {
+    display: inline-block;
+    margin-top: -2px;
+    margin-right: 6px;
+    font-size: .9em;
+    vertical-align: middle;
+}
+
+.toolbar .search>a, .toolbar .account>a, .toolbar .cart>a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
 /* Title page end */
