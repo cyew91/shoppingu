@@ -8,5 +8,13 @@ CREATE TABLE IF NOT EXISTS db_version (
     PRIMARY KEY (ID)
 )engine=InnoDB;
 
-INSERT INTO db_version (Version, LastUpdatedDate, LastUpdatedBy) 
-VALUES ("0.0.1", NOW(), "SYSTEM");
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT Version FROM db_version WHERE Version = "0.0.1") THEN
+		INSERT INTO db_version (Version, LastUpdatedDate, LastUpdatedBy) VALUES ("0.0.1", NOW(), "SYSTEM");
+    END IF;
+END$$
+DELIMITER ;
+CALL shoppingu_procedure();
