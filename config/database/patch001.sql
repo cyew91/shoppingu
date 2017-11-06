@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS t_product (
     ProfileID VARCHAR(36) NOT NULL,
     TravelID VARCHAR(36) NOT NULL,
     Description VARCHAR(500) NOT NULL,
-    Amount Decimal(10,3) NOT NULL,
+    Amount Decimal(10,3) NULL,
     IsActive Int(1) NOT NULL,
     Remarks VARCHAR(500) NULL,
     CreatedDate Datetime NOT NULL,
