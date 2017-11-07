@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.UUID,
                 allowNull: false
             },
-            DetailDesription: {
+            DetailDescription: {
                 type: DataTypes.STRING(3000),
                 allowNull: false
             },
@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.DECIMAL(10,3),
                 allowNull: false
             },
-            DetailDesription: {
+            Status: {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },

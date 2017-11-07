@@ -43,3 +43,4 @@ migrations/
 *.swp
 *.swo
 .vscode/launch.json
+*.sql
