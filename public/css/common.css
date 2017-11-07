@@ -777,7 +777,7 @@ a {
 .user-info-wrapper .user-info .user-avatar .edit-avatar {
     display: block;
     position: absolute;
-    top: -2px;
+    top: -18px;
     right: 2px;
     width: 36px;
     height: 36px;
@@ -791,6 +791,16 @@ a {
     opacity: 0;
     text-align: center;
     text-decoration: none;
+}
+
+.user-info-wrapper .user-info .user-avatar .edit-avatar::before {
+    font-family: feather;
+    font-size: 17px;
+    content: '\e058';
+}
+
+.user-info-wrapper .user-info .user-avatar:hover .edit-avatar {
+    opacity: 1;
 }
 
 img, figure {
