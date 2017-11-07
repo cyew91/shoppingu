@@ -1,4 +1,4 @@
--- This script only run ONE time when you setting up your local.
+-- This script only run ONE time when you set up your local db.
 
 CREATE TABLE IF NOT EXISTS db_version (
 	ID INT NOT NULL AUTO_INCREMENT,

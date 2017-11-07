@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS t_profile_document (
 	ON DELETE RESTRICT
 )engine=InnoDB;
 
-
 CREATE TABLE IF NOT EXISTS t_profile_account (
 	ProfileAccountID VARCHAR(36) NOT NULL,
     ProfileID VARCHAR(45) NOT NULL,
