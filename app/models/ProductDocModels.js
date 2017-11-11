@@ -25,8 +25,7 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             Remarks: {
-                type: DataTypes.STRING(500),
-                allowNull: true
+                type: DataTypes.STRING(500)
             },
             CreatedDate: {
                 type: DataTypes.DATE,

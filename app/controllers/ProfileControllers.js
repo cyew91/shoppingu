@@ -5,6 +5,8 @@
  */
 var db = require('../../config/sequelize'),
     config = require('../../config/config');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 /**
  * Find profile by id
@@ -82,4 +84,41 @@ exports.updateAddress = function(req, res) {
     }).catch(function(err){
         return res.send({status: 'Exception', message: err});
     });
+};
+
+/**
+ * Create profile account
+ */
+exports.createProfileAccount = function (req, res, next) {
+    var message = null;
+    var profileAccount = db.T_Profile_Account.build(req.body);
+
+    profileAccount.save().then(function () {
+        return res.jsonp({
+            "result": "success"
+        });
+    }).catch(function (err) {
+        res.send({status: 'Exception', message: err})
+    });
+};
+
+exports.getProfileAccount= function(req, res, next, ProfileAccountID) {
+    console.log('id => ' + ProfileAccountID); 
+    db.T_Profile_Account.find({where: {ProfileAccountID: ProfileAccountID}}).then(function(profileAccount){
+        if(!profileAccount) {
+            return next(new Error('Failed to load ProfileAccountID ' + ProfileAccountID));
+        } else {
+            req.profileAccount = profileAccount;
+            return next();            
+        }
+    }).catch(function(err){
+        return next(err);
+    });
+};
+
+/**
+ * Show a profile account
+ */
+exports.showProfileAccount = function(req, res) {
+    return res.jsonp(req.profileAccount);
 };

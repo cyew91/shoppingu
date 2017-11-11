@@ -15,8 +15,13 @@ module.exports = function (app) {
 
     // Setting up the profile api
     app.post('/profile', profiles.create);
-
     app.param('profileId', profiles.getProfileId);
+
+
+    var profileaccount = require('../../app/controllers/ProfileControllers');
+    app.get('/profileaccount/:ProfileAccountID', profileaccount.showProfileAccount);
+    app.post('/profileaccount', profileaccount.createProfileAccount);
+    app.param('ProfileAccountID', profileaccount.getProfileAccount);
 
 
 };

@@ -21,8 +21,7 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             Address: {
-                type: DataTypes.STRING(500),
-                allowNull: true
+                type: DataTypes.STRING(500)
             },
             Email: {
                 type: DataTypes.STRING(45),
@@ -33,16 +32,13 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             Gender: {
-                type: DataTypes.INTEGER,
-                allowNull: true
+                type: DataTypes.INTEGER
             },
             DOB: {
-                type: DataTypes.DATE,
-                allowNull: true
+                type: DataTypes.DATE
             },
             Remarks: {
-                type: DataTypes.STRING(500),
-                allowNull: true
+                type: DataTypes.STRING(500)
             },
             CreatedDate: {
                 type: DataTypes.DATE,

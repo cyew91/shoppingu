@@ -25,12 +25,10 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             IsActive: {
-                type: DataTypes.INTEGER,
-                allowNull: true
+                type: DataTypes.INTEGER
             },
             Remarks: {
-                type: DataTypes.STRING(500),
-                allowNull: true
+                type: DataTypes.STRING(500)
             },
             CreatedDate: {
                 type: DataTypes.DATE,

@@ -4,7 +4,8 @@ module.exports = function (sequelize, DataTypes) {
 
     var ProfileDocument = sequelize.define('T_Profile_Document', {
             ProfileDocumentID: {
-                type: DataTypes.STRING(36),
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             ProfileID: {
@@ -24,8 +25,7 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             Remarks: {
-                type: DataTypes.STRING(500),
-                allowNull: true
+                type: DataTypes.STRING(500)
             },
             CreatedDate: {
                 type: DataTypes.DATE,

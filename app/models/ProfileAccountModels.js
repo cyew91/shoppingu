@@ -1,10 +1,12 @@
 'use strict';
+const bcrypt = require("bcrypt");
 
 module.exports = function (sequelize, DataTypes) {
 
     var ProfileAccount = sequelize.define('T_Profile_Account', {
             ProfileAccountID: {
                 type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             ProfileID: {
@@ -12,28 +14,23 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             LoginID: {
-                type: DataTypes.STRING(36),
-                allowNull: true
+                type: DataTypes.STRING(36)
             },
             SaltPass: {
-                type: 'VARBINARY(100)',
-                allowNull: false
+                type: DataTypes.STRING(1000)
             },
             HashPass: {
-                type: 'VARBINARY(100)',
+                type: DataTypes.STRING(1000),
                 allowNull: false
             },
             RetryCount: {
-                type: DataTypes.INTEGER,
-                allowNull: true
+                type: DataTypes.INTEGER
             },
             IsActive: {
-                type: DataTypes.INTEGER,
-                allowNull: true
+                type: DataTypes.INTEGER
             },
             Remarks: {
                 type: DataTypes.STRING(500),
-                allowNull: true
             },
             CreatedDate: {
                 type: DataTypes.DATE,
@@ -51,7 +48,9 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.STRING(36),
                 allowNull: false
             }
-        }, {
+        }, 
+        
+        {
             // don't add the timestamp attributes (updatedAt, createdAt)
             timestamps: false,
             // disable the modification of tablenames; By default, sequelize will automatically
@@ -64,9 +63,50 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 ProfileAccount.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
             }
+        },
+
+        {
+            instanceMethods: {
+                generateHash(HashPass) {
+                    return bcrypt.hash(HashPass, bcrypt.genSaltSync(8));
+                },
+                validPassword(HashPass) {
+                    return bcrypt.compare(HashPass, this.HashPass);
+                }
+            }
         }
 
     );
 
+    var hasSecurePassword = function(ProfileAccount, options, callback) {
+        // if (ProfileAccount.HashPass != user.password_confirmation) {
+        //     throw new Error("Password confirmation doesn't match Password");
+        // }
+        bcrypt.hash(ProfileAccount.get('HashPass'), 10, function(err, hash) {
+            if (err) return callback(err);
+            ProfileAccount.set('HashPass', hash);
+            return callback(null, options);
+        });
+    };
+    
+    ProfileAccount.beforeCreate(function(ProfileAccount, options, callback) {
+        ProfileAccount.LoginID = ProfileAccount.LoginID.toLowerCase();
+        if (ProfileAccount.HashPass)
+            hasSecurePassword(ProfileAccount, options, callback);
+        else
+            return callback(null, options);
+    })
+    ProfileAccount.beforeUpdate(function(ProfileAccount, options, callback) {
+        ProfileAccount.LoginID = ProfileAccount.LoginID.toLowerCase();
+        if (ProfileAccount.HashPass)
+            hasSecurePassword(ProfileAccount, options, callback);
+        else
+            return callback(null, options);
+    })
+
     return ProfileAccount;
 };
+
+
+
+

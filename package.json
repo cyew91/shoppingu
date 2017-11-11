@@ -18,8 +18,10 @@
     "test": "node node_modules/grunt-cli/bin/grunt test"
   },
   "dependencies": {
+    "@angular/core": "^5.0.1",
     "angular-feather": "^3.2.2",
     "async": "latest",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.14.1",
     "bower": "latest",
     "compression": "^1.6.0",
