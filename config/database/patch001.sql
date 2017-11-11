@@ -1,4 +1,4 @@
--- 0.0.1 Certong 6/11/2017
+-- 0.0.2 Certong 6/11/2017
 -- Create table script.
 UPDATE db_version SET Version = '0.0.2', LastUpdatedDate = NOW(), LastUpdatedBy = 'Certong' WHERE ID = 1;
 
@@ -205,4 +205,5 @@ CREATE TABLE IF NOT EXISTS t_product_document (
 	ON DELETE RESTRICT
 )engine=InnoDB;
 
--- End 0.0.1 Certong 6/11/2017
+-- End 0.0.2 Certong 6/11/2017
+
