@@ -136,6 +136,24 @@ CREATE TABLE IF NOT EXISTS t_product (
 	ON DELETE RESTRICT
 )engine=InnoDB;
 
+CREATE TABLE IF NOT EXISTS t_product_subCat (
+	ProductSubCatID VARCHAR(36) NOT NULL,
+    ProductCatID VARCHAR(36) NOT NULL,
+    ProductSubCatDesc VARCHAR(500) NOT NULL,
+    IsActive INT(1) NOT NULL,
+    Remarks VARCHAR(500) NULL,
+    CreatedDate Datetime NOT NULL,
+    CreatedBy VARCHAR(36) NOT NULL,
+	LastUpdatedDate Datetime NOT NULL,
+    LastUpdatedBy VARCHAR(36) NOT NULL,
+    PRIMARY KEY (ProductSubCatID),
+
+	FOREIGN KEY fk_ProductCatID(ProductCatID)
+    REFERENCES t_product_cat(ProductCatID)
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
+)engine=InnoDB;
+
 CREATE TABLE IF NOT EXISTS t_product_detail (
 	ProductDetailID VARCHAR(36) NOT NULL,
     ProductID VARCHAR(36) NOT NULL,
@@ -164,24 +182,6 @@ CREATE TABLE IF NOT EXISTS t_product_detail (
     
     FOREIGN KEY fk_ProductSubCatID(ProductSubCatID)
     REFERENCES t_product_subCat(ProductSubCatID)
-    ON UPDATE CASCADE
-	ON DELETE RESTRICT
-)engine=InnoDB;
-
-CREATE TABLE IF NOT EXISTS t_product_subCat (
-	ProductSubCatID VARCHAR(36) NOT NULL,
-    ProductCatID VARCHAR(36) NOT NULL,
-    ProductSubCatDesc VARCHAR(500) NOT NULL,
-    IsActive INT(1) NOT NULL,
-    Remarks VARCHAR(500) NULL,
-    CreatedDate Datetime NOT NULL,
-    CreatedBy VARCHAR(36) NOT NULL,
-	LastUpdatedDate Datetime NOT NULL,
-    LastUpdatedBy VARCHAR(36) NOT NULL,
-    PRIMARY KEY (ProductSubCatID),
-
-	FOREIGN KEY fk_ProductCatID(ProductCatID)
-    REFERENCES t_product_cat(ProductCatID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
 )engine=InnoDB;
