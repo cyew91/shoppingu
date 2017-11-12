@@ -213,4 +213,4 @@ UPDATE db_version SET Version = '0.0.3', LastUpdatedDate = NOW(), LastUpdatedBy 
 
 ALTER TABLE `SHOPPINGU_TEST`.`T_Profile_Account` CHANGE COLUMN `SaltPass` `SaltPass` VARCHAR(1000)  NULL  , CHANGE COLUMN `HashPass` `HashPass` VARCHAR(1000)  NOT NULL  ;
 
--- End 0.0.2 ChengYew 12/11/2017
+-- End 0.0.3 ChengYew 12/11/2017
