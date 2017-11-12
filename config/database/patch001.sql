@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS t_profile_account (
 	ProfileAccountID VARCHAR(36) NOT NULL,
     ProfileID VARCHAR(45) NOT NULL,
     LoginID INT(11) NOT NULL,
-    SaltPass VARCHAR(1000),
-    HashPass VARCHAR(1000) NULL,
+    SaltPass VARBINARY(100) NOT NULL,
+    HashPass VARBINARY(100) NULL,
     RetryCount INT(11) NOT NULL,
     IsActive INT(1),
     Remarks VARCHAR(500) NULL,
@@ -207,3 +207,10 @@ CREATE TABLE IF NOT EXISTS t_product_document (
 
 -- End 0.0.2 Certong 6/11/2017
 
+-- 0.0.3 ChengYew 12/11/2017
+-- Change T_Profile_Account HashPass data type and set SaltPass to not null.
+UPDATE db_version SET Version = '0.0.3', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+ALTER TABLE `SHOPPINGU_TEST`.`T_Profile_Account` CHANGE COLUMN `SaltPass` `SaltPass` VARCHAR(1000)  NULL  , CHANGE COLUMN `HashPass` `HashPass` VARCHAR(1000)  NOT NULL  ;
+
+-- End 0.0.2 ChengYew 12/11/2017
