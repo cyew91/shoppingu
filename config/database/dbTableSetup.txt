@@ -554,3 +554,25 @@ INSERT INTO T_Product_SubCat VALUES (uuid(),'4bca9698-c787-11e7-84e9-90bbf6a2477
 INSERT INTO T_Product_SubCat VALUES (uuid(),'4bca9698-c787-11e7-84e9-90bbf6a2477f',"Others",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');
 
 -- END 0.0.4 ChengYew 14/11/2017
+
+-- 0.0.5 CerTong 14/11/2017
+-- Add new columns in t_profile.
+UPDATE db_version SET Version = '0.0.5', LastUpdatedDate = NOW(), LastUpdatedBy = 'CerTong' WHERE ID = 1;
+
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'email') THEN
+		ALTER TABLE t_profile ADD COLUMN Email VARCHAR(45) NULL AFTER Address;
+    END IF;
+
+    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'ContactNo') THEN
+		ALTER TABLE t_profile ADD COLUMN ContactNo VARCHAR(45) NULL AFTER Email;
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END 0.0.5 CerTong 14/11/2017
+
