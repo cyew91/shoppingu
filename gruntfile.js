@@ -87,8 +87,8 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/lightgallery/dist/js',                       src: ['**/*.*'], dest: 'public/lib/lightgallery/dist/js', expand: true},
                     {cwd: 'bower_components/lightgallery/dist/css',                       src: ['**/*.*'], dest: 'public/lib/lightgallery/dist/css', expand: true},
                     {cwd: 'bower_components/dropzone/dist',                       src: ['**/*.*'], dest: 'public/lib/dropzone/dist', expand: true},
-                    {cwd: 'bower_components/dropzone/dist',                       src: ['**/*.*'], dest: 'public/lib/dropzone/dist', expand: true}
-
+                    {cwd: 'bower_components/select2/dist/',                       src: ['**/*.*'], dest: 'public/lib/select2/dist', expand: true}
+                    
                 ]
             }
         },

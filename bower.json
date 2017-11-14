@@ -19,7 +19,8 @@
     "owl.carousel": "^2.2.1",
     "angular-slick": "^0.2.1",
     "lightgallery": "^1.6.1",
-    "dropzone": "^5.1.1"
+    "dropzone": "^5.1.1",
+    "select2": "^4.0.5"
   },
   "resolutions": {
     "angular": "1.6.6",

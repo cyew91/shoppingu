@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Country = sequelize.define('T_Country', {
+    var Country = sequelize.define('t_country', {
             CountryID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
