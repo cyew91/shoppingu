@@ -576,3 +576,19 @@ DELIMITER ;
 CALL shoppingu_procedure();
 -- END 0.0.5 CerTong 14/11/2017
 
+-- 0.0.6 CerTong 14/11/2017
+-- Modify table t_profile_account.
+UPDATE db_version SET Version = '0.0.6', LastUpdatedDate = NOW(), LastUpdatedBy = 'CerTong' WHERE ID = 1;
+
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile_account' AND COLUMN_NAME = 'LoginID') THEN
+		ALTER TABLE t_profile_account MODIFY LoginID VARCHAR(36);
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END 0.0.6 CerTong 14/11/2017
