@@ -48,8 +48,8 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.STRING(36),
                 allowNull: false
             }
-        }, 
-        
+        },
+
         {
             // don't add the timestamp attributes (updatedAt, createdAt)
             timestamps: false,
@@ -61,7 +61,9 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
-                ProfileAccount.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
+                ProfileAccount.BelongTo(models.Profile, {
+                    foreignKey: 'ProfileID'
+                });
             }
         },
 
@@ -78,25 +80,25 @@ module.exports = function (sequelize, DataTypes) {
 
     );
 
-    var hasSecurePassword = function(ProfileAccount, options, callback) {
+    var hasSecurePassword = function (ProfileAccount, options, callback) {
         // if (ProfileAccount.HashPass != user.password_confirmation) {
         //     throw new Error("Password confirmation doesn't match Password");
         // }
-        bcrypt.hash(ProfileAccount.get('HashPass'), 10, function(err, hash) {
+        bcrypt.hash(ProfileAccount.get('HashPass'), 10, function (err, hash) {
             if (err) return callback(err);
             ProfileAccount.set('HashPass', hash);
             return callback(null, options);
         });
     };
-    
-    ProfileAccount.beforeCreate(function(ProfileAccount, options, callback) {
+
+    ProfileAccount.beforeCreate(function (ProfileAccount, options, callback) {
         ProfileAccount.LoginID = ProfileAccount.LoginID.toLowerCase();
         if (ProfileAccount.HashPass)
             hasSecurePassword(ProfileAccount, options, callback);
         else
             return callback(null, options);
     })
-    ProfileAccount.beforeUpdate(function(ProfileAccount, options, callback) {
+    ProfileAccount.beforeUpdate(function (ProfileAccount, options, callback) {
         ProfileAccount.LoginID = ProfileAccount.LoginID.toLowerCase();
         if (ProfileAccount.HashPass)
             hasSecurePassword(ProfileAccount, options, callback);
@@ -106,7 +108,3 @@ module.exports = function (sequelize, DataTypes) {
 
     return ProfileAccount;
 };
-
-
-
-

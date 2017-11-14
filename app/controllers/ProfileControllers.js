@@ -13,16 +13,20 @@ const saltRounds = 10;
  * Note: This is called every time that the parameter :profileId is used in a URL. 
  * Its purpose is to preload the profile on the req object then call the next function. 
  */
-exports.getProfileId = function(req, res, next, ProfileID) {
+exports.getProfileId = function (req, res, next, ProfileID) {
     console.log('id => ' + ProfileID);
-    db.T_Profile.find({where: {ProfileID: ProfileID}}).then(function(profile){
-        if(!profile) {
+    db.T_Profile.find({
+        where: {
+            ProfileID: ProfileID
+        }
+    }).then(function (profile) {
+        if (!profile) {
             return next(new Error('Failed to load ProfileId ' + ProfileID));
         } else {
             req.profile = profile;
-            return next();            
+            return next();
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         return next(err);
     });
 };
@@ -30,7 +34,7 @@ exports.getProfileId = function(req, res, next, ProfileID) {
 /**
  * Show a profile
  */
-exports.show = function(req, res) {
+exports.show = function (req, res) {
     // Sending down the profile that was just preloaded by the profiles.getProfileId function
     // and saves profile on the req object.
     return res.jsonp(req.profile);
@@ -41,20 +45,45 @@ exports.show = function(req, res) {
  */
 exports.create = function (req, res, next) {
     var message = null;
-    var profile = db.T_Profile.build(req.body);
+    var profileDetail = {
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        FullName: req.body.firstName + req.body.lastName,
+        Address: "",
+        Email: req.body.email,
+        ContactNo: req.body.phoneNumber,
+        Gender: 0,
+        DOB: Date.now(),
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+    };
 
-    profile.save().then(function () {
-        return res.jsonp({
-            "result": "success"
+    if (req.body.password === req.body.confirmPassword) {
+        var profile = db.T_Profile.build(profileDetail);
+        req.body.profileId = profile.ProfileID;
+
+        profile.save().then(function () {
+            return next();
+        }).catch(function (err) {
+            res.send({
+                status: 'Exception',
+                message: err
+            })
         });
-    }).catch(function (err) {
-        res.send({status: 'Exception', message: err})
-    });
+    } else {
+        res.send({
+            status: 'Error',
+            message: 'Password is not same with confirm password'
+        })
+    }
 };
 
 // Update Profile
-exports.updateProfile = function(req, res) {
-    
+exports.updateProfile = function (req, res) {
+
     // create a new variable to hold the article that was placed on the req object.
     var profile = req.profile;
 
@@ -65,24 +94,30 @@ exports.updateProfile = function(req, res) {
         ContactNo: req.body.ContactNo,
         Gender: req.body.Gender,
         DOB: req.body.DOB
-    }).then(function(a){
+    }).then(function (a) {
         return res.jsonp(a);
-    }).catch(function(err){
-        return res.send({status: 'Exception', message: err});
+    }).catch(function (err) {
+        return res.send({
+            status: 'Exception',
+            message: err
+        });
     });
 };
 
-exports.updateAddress = function(req, res) {
-    
+exports.updateAddress = function (req, res) {
+
     // create a new variable to hold the article that was placed on the req object.
     var profile = req.profile;
 
     profile.updateAttributes({
         Address: req.body.Address
-    }).then(function(a){
+    }).then(function (a) {
         return res.jsonp(a);
-    }).catch(function(err){
-        return res.send({status: 'Exception', message: err});
+    }).catch(function (err) {
+        return res.send({
+            status: 'Exception',
+            message: err
+        });
     });
 };
 
@@ -91,27 +126,48 @@ exports.updateAddress = function(req, res) {
  */
 exports.createProfileAccount = function (req, res, next) {
     var message = null;
-    var profileAccount = db.T_Profile_Account.build(req.body);
+    var profileAccountDetail = {
+        ProfileID: req.body.profileId,
+        LoginID: req.body.email,
+        SaltPass: null,
+        HashPass: req.body.password,
+        RetryCount: 0,
+        IsActive: 1,
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000"
+    };
+
+    var profileAccount = db.T_Profile_Account.build(profileAccountDetail);
 
     profileAccount.save().then(function () {
         return res.jsonp({
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({status: 'Exception', message: err})
+        res.send({
+            status: 'Exception',
+            message: err
+        })
     });
 };
 
-exports.getProfileAccount= function(req, res, next, ProfileAccountID) {
-    console.log('id => ' + ProfileAccountID); 
-    db.T_Profile_Account.find({where: {ProfileAccountID: ProfileAccountID}}).then(function(profileAccount){
-        if(!profileAccount) {
+exports.getProfileAccount = function (req, res, next, ProfileAccountID) {
+    console.log('id => ' + ProfileAccountID);
+    db.T_Profile_Account.find({
+        where: {
+            ProfileAccountID: ProfileAccountID
+        }
+    }).then(function (profileAccount) {
+        if (!profileAccount) {
             return next(new Error('Failed to load ProfileAccountID ' + ProfileAccountID));
         } else {
             req.profileAccount = profileAccount;
-            return next();            
+            return next();
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         return next(err);
     });
 };
@@ -119,6 +175,6 @@ exports.getProfileAccount= function(req, res, next, ProfileAccountID) {
 /**
  * Show a profile account
  */
-exports.showProfileAccount = function(req, res) {
+exports.showProfileAccount = function (req, res) {
     return res.jsonp(req.profileAccount);
 };
