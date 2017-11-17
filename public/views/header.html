@@ -1,7 +1,23 @@
 <header calss="navbar navbar-sticky navbar-stuck">
-  <a class="site-logo" ui-sref="home" style="z-index: 99; position: relative;">
-    <img src="img/shoppingu-logo.png" alt="Shoppingu">
-  </a>
+
+  <!-- <form id="MainSearchForm" method="get">
+    <input type="text" name="site_search" placeholder="Type to search...">
+    <div>
+      <span id="MainSearchClear">Clear</span>
+      <span id="MainSearchClose">
+        <i class="icon-cross">
+        </i>
+      </span>
+    </div>
+  </form> -->
+
+  <div style="position: absolute; top: 0; left: 0; height: 100%; z-index: 5;">
+    <div style="display: table; height: 100%; min-height: 100%">
+      <a class="site-logo" ui-sref="home" style="z-index: 99; position: relative;">
+        <img src="img/shoppingu-logo.png" alt="Shoppingu">
+      </a>
+    </div>
+  </div>
 
   <nav class="site-menu">
     <ul>
@@ -25,12 +41,12 @@
           <span>Post</span>
         </a>
         <ul class="sub-menu toolbar-dropdown">
-          <li class="has-children">
+          <li>
             <a ui-sref="posttravel">
               <span>Post Travel</span>
             </a>
           </li>
-          <li class="has-children">
+          <li>
             <a ui-sref="postproduct">
               <span>Post Product</span>
             </a>
@@ -55,43 +71,50 @@
     </ul>
   </nav>
 
-  <div class="toolbar">
-    <div class="inner">
-        <div class="search"></div>
-        <form id="searchbar">
-          <input type="search">
-        </form>
-      <div class="tools">
+  <div class="headerSideToolbar">
+    <div>
+      <div>
+        <div class="search">
+          <i class="icon-search"></i>
+        </div>
         <div class="account">
-            <a ui-sref="userprofile"></a>
-            <i class="icon-head"></i>
-            <ul class="toolbar-dropdown">
-              <li class="sub-menu-user">
-                <div class="user-ava">
-                  <img src="img/Gary.jpg" alt="Daniel Adams">
-                </div>
-                <div class="user-info">
-                  <h6 class="user-name">Yap Kaa Sheng</h6>
-                  <span class="text-xs text-muted">290 Reward points</span>
-                </div>
-              </li>
-              <li>
-                <a ui-sref="userprofile">My Profile</a>
-              </li>
-              <li>
-                <a ui-sref="order">Orders List</a>
-              </li>
-              <li>
-                <a href="../account-wishlist.html">Wishlist</a>
-              </li>
-              <li class="sub-menu-separator"></li>
-              <li>
-                <a href="#">
-                  <i class="icon-unlock"></i>
-                  Logout
-                </a>
-              </li>
-            </ul>
+          <a ui-sref="userprofile"></a>
+          <i class="icon-head"></i>
+          <ul>
+            <li id="UserBoxDetail">
+              <div class="user-ava" style="width: 44px;">
+                <img src="img/Gary.jpg" alt="Daniel Adams" style="display: block;
+                width: 44px;
+                padding: 3px;
+                border: 1px solid #e1e7ec;
+                border-radius: 50%;">
+              </div>
+              <div style="padding-left: 8px;">
+                <h6 class="user-name" style="margin-bottom: 2px; font-size: 14px;">Yap Kaa Sheng</h6>
+                <span class="text-xs text-muted" style="display: block;">290 Reward points</span>
+              </div>
+            </li>
+            <li class="UserBoxList">
+              <a ui-sref="userprofile">My Profile</a>
+            </li>
+            <li class="UserBoxList">
+              <a ui-sref="order">Orders List</a>
+            </li>
+            <li class="UserBoxList">
+              <a href="../account-wishlist.html">Wishlist</a>
+            </li>
+            <li class="UserBoxList" style="margin-top: 5px; margin-bottom: 3px; border-top: 1px solid #e1e7ec;"></li>
+            <li class="UserBoxList">
+              <a href="#">
+                <i class="icon-unlock" style="display: inline-block;
+                margin-top: -2px;
+                margin-right: 6px;
+                font-size: .9em;
+                vertical-align: middle;"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
