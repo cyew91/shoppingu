@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('T_Profile', {
+    var Profile = sequelize.define('t_profile', {
             ProfileID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,

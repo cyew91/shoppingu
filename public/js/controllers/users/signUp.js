@@ -14,8 +14,8 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
         });
 
         signUp.$save(function (response) {
-            if (response.status === 'success') {
-                $window.location.href = '/';
+            if (response.result === 'success') {
+                $state.go('signin');
             }
         });
     };

@@ -12,7 +12,6 @@ module.exports = function (app) {
 // User Routes
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);
-    console.log("asd");
     app.get('/users/user', users.user);
 
 // Setting up the users api

@@ -3,24 +3,23 @@
 /**
  * Module dependencies.
  */
-var db = require('../../config/sequelize'),
-    config = require('../../config/config');
+var db = require('../../config/sequelize');
 
 //----------------------------------------Start----------------------------------------
 //Product
 /**
  * Retrieve a product by ProductID
  */
-exports.getProductID = function(req, res, next, ProductID) {
+exports.getProductID = function (req, res, next, ProductID) {
     console.log('id => ' + ProductID);
-    db.T_Product.find({where: {ProductID: ProductID}}).then(function(product){
-        if(!product) {
+    db.T_Product.find({ where: { ProductID: ProductID } }).then(function (product) {
+        if (!product) {
             return next(new Error('Failed to load ProductID ' + ProductID));
         } else {
             req.product = product;
-            return next();            
+            return next();
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         return next(err);
     });
 };
@@ -28,7 +27,7 @@ exports.getProductID = function(req, res, next, ProductID) {
 /**
  * Show a product
  */
-exports.show = function(req, res) {
+exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
@@ -44,15 +43,15 @@ exports.create = function (req, res, next) {
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({status: 'Exception', message: err})
+        res.send({ status: 'Exception', message: err })
     });
 };
 
 /**
  * Update Product
  */
-exports.update = function(req, res) {
-    
+exports.update = function (req, res) {
+
     // create a new variable to hold the article that was placed on the req object.
     var product = req.product;
 
@@ -61,10 +60,10 @@ exports.update = function(req, res) {
         // LastName: req.body.LastName,
         // Email: req.body.Email,
         // ContactNo: req.body.ContactNo
-    }).then(function(a){
+    }).then(function (a) {
         return res.jsonp(a);
-    }).catch(function(err){
-        return res.send({status: 'Exception', message: err});
+    }).catch(function (err) {
+        return res.send({ status: 'Exception', message: err });
     });
 };
 //----------------------------------------End----------------------------------------
@@ -74,16 +73,16 @@ exports.update = function(req, res) {
 /**
  * Retrieve a product detail by ProductDetailID
  */
-exports.getProductDetailID = function(req, res, next, ProductDetailID) {
-    console.log('id => ' + ProductDetailID); 
-    db.T_Product_Detail.find({where: {ProductDetailID: ProductDetailID}}).then(function(productdetail){
-        if(!productdetail) {
+exports.getProductDetailID = function (req, res, next, ProductDetailID) {
+    console.log('id => ' + ProductDetailID);
+    db.T_Product_Detail.find({ where: { ProductDetailID: ProductDetailID } }).then(function (productdetail) {
+        if (!productdetail) {
             return next(new Error('Failed to load ProductDetailID ' + ProductDetailID));
         } else {
             req.productdetail = productdetail;
-            return next();            
+            return next();
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         return next(err);
     });
 };
@@ -91,7 +90,7 @@ exports.getProductDetailID = function(req, res, next, ProductDetailID) {
 /**
  * Show a product detail
  */
-exports.showProductDetail = function(req, res) {
+exports.showProductDetail = function (req, res) {
     return res.jsonp(req.productdetail);
 };
 
@@ -100,22 +99,22 @@ exports.showProductDetail = function(req, res) {
  */
 exports.createProductDetail = function (req, res, next) {
     var message = null;
-    var productdetail= db.T_Product_Detail.build(req.body);
+    var productdetail = db.T_Product_Detail.build(req.body);
 
     productdetail.save().then(function () {
         return res.jsonp({
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({status: 'Exception', message: err})
+        res.send({ status: 'Exception', message: err })
     });
 };
 
 /**
  * Update product detail
  */
-exports.updateProductDetail = function(req, res) {
-    
+exports.updateProductDetail = function (req, res) {
+
     // create a new variable to hold the article that was placed on the req object.
     var productdetail = req.productdetail;
 
@@ -124,10 +123,10 @@ exports.updateProductDetail = function(req, res) {
         // LastName: req.body.LastName,
         // Email: req.body.Email,
         // ContactNo: req.body.ContactNo
-    }).then(function(a){
+    }).then(function (a) {
         return res.jsonp(a);
-    }).catch(function(err){
-        return res.send({status: 'Exception', message: err});
+    }).catch(function (err) {
+        return res.send({ status: 'Exception', message: err });
     });
 };
 //----------------------------------------End----------------------------------------
@@ -137,16 +136,16 @@ exports.updateProductDetail = function(req, res) {
 /**
  * Retrieve a product document by ProductDocumentID
  */
-exports.getProductDocumentID = function(req, res, next, ProductDocumentID) {
-    console.log('id => ' + ProductDocumentID); 
-    db.T_Product_Document.find({where: {ProductDocumentID: ProductDocumentID}}).then(function(productdocument){
-        if(!productdocument) {
+exports.getProductDocumentID = function (req, res, next, ProductDocumentID) {
+    console.log('id => ' + ProductDocumentID);
+    db.T_Product_Document.find({ where: { ProductDocumentID: ProductDocumentID } }).then(function (productdocument) {
+        if (!productdocument) {
             return next(new Error('Failed to load ProductDocumentID ' + ProductDocumentID));
         } else {
             req.productdocument = productdocument;
-            return next();            
+            return next();
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         return next(err);
     });
 };
@@ -154,7 +153,7 @@ exports.getProductDocumentID = function(req, res, next, ProductDocumentID) {
 /**
  * Show a product document
  */
-exports.showProductDocument = function(req, res) {
+exports.showProductDocument = function (req, res) {
     return res.jsonp(req.productdocument);
 };
 
@@ -163,22 +162,22 @@ exports.showProductDocument = function(req, res) {
  */
 exports.createProductDocument = function (req, res, next) {
     var message = null;
-    var productdocument= db.T_Product_Document.build(req.body);
+    var productdocument = db.T_Product_Document.build(req.body);
 
     productdocument.save().then(function () {
         return res.jsonp({
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({status: 'Exception', message: err})
+        res.send({ status: 'Exception', message: err })
     });
 };
 
 /**
  * Update product document
  */
-exports.updateProductDocument = function(req, res) {
-    
+exports.updateProductDocument = function (req, res) {
+
     // create a new variable to hold the article that was placed on the req object.
     var productdocument = req.productdocument;
 
@@ -187,10 +186,24 @@ exports.updateProductDocument = function(req, res) {
         // LastName: req.body.LastName,
         // Email: req.body.Email,
         // ContactNo: req.body.ContactNo
-    }).then(function(a){
+    }).then(function (a) {
         return res.jsonp(a);
-    }).catch(function(err){
-        return res.send({status: 'Exception', message: err});
+    }).catch(function (err) {
+        return res.send({ status: 'Exception', message: err });
     });
 };
 //----------------------------------------End----------------------------------------
+
+
+exports.getAllProduct = function (req, res, next) {
+    db.t_product_detail.findAll({include: [db.t_product_document]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};

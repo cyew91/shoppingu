@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProductDetail = sequelize.define('T_Product_Detail', {
+    var ProductDetail = sequelize.define('t_product_detail', {
             ProductDetailID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -66,6 +66,7 @@ module.exports = function (sequelize, DataTypes) {
 
         {
             associate: function (models) {
+                ProductDetail.HasMany(models.ProductDocument, {foreignKey: 'ProductDetailID'});
                 ProductDetail.BelongTo(models.Product, {foreignKey: 'ProductID'});
                 ProductDetail.BelongTo(models.ProductCat, {foreignKey: 'ProductCatID'});
                 ProductDetail.BelongTo(models.ProductSubCat, {foreignKey: 'ProductSubCatID'});

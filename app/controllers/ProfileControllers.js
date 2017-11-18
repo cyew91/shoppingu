@@ -62,7 +62,7 @@ exports.create = function (req, res, next) {
     };
 
     if (req.body.password === req.body.confirmPassword) {
-        var profile = db.T_Profile.build(profileDetail);
+        var profile = db.t_profile.build(profileDetail);
         req.body.profileId = profile.ProfileID;
 
         profile.save().then(function () {
@@ -140,7 +140,7 @@ exports.createProfileAccount = function (req, res, next) {
         LastUpdatedBy: "00000000-0000-0000-0000-000000000000"
     };
 
-    var profileAccount = db.T_Profile_Account.build(profileAccountDetail);
+    var profileAccount = db.t_profile_account.build(profileAccountDetail);
 
     profileAccount.save().then(function () {
         return res.jsonp({

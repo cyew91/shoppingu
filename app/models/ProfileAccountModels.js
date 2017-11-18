@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProfileAccount = sequelize.define('T_Profile_Account', {
+    var ProfileAccount = sequelize.define('t_profile_account', {
             ProfileAccountID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
