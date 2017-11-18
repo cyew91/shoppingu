@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProductSubCat = sequelize.define('T_Product_SubCat', {
+    var ProductSubCat = sequelize.define('t_product_subcat', {
             ProductSubCatID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -45,15 +45,11 @@ module.exports = function (sequelize, DataTypes) {
             // transform all passed model names (first parameter of define) into plural.
             // if you don't want that, set the following
             freezeTableName: true,
-        },
-
-        {
             associate: function (models) {
-                ProductSubCat.HasOne(models.ProductDetail, {foreignKey: 'ProductSubCatID'});
-                ProductSubCat.BelongTo(models.ProductCat, {foreignKey: 'ProductCatID'});
+                ProductSubCat.hasOne(models.t_product_detail, {foreignKey: 'ProductSubCatID'});
+                ProductSubCat.belongsTo(models.t_product_cat, {foreignKey: 'ProductCatID'});
             }
         }
-
     );
 
     return ProductSubCat;

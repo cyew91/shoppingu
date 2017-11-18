@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var ProfileDocument = sequelize.define('T_Profile_Document', {
+    var ProfileDocument = sequelize.define('t_profile_document', {
             ProfileDocumentID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -50,14 +50,10 @@ module.exports = function (sequelize, DataTypes) {
             // transform all passed model names (first parameter of define) into plural.
             // if you don't want that, set the following
             freezeTableName: true,
-        },
-
-        {
             associate: function (models) {
-                ProfileDocument.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
+                ProfileDocument.belongsTo(models.t_profile, {foreignKey: 'ProfileID'});
             }
         }
-
     );
 
     return ProfileDocument;

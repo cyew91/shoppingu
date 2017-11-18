@@ -25,14 +25,10 @@ module.exports = function (sequelize, DataTypes) {
             // transform all passed model names (first parameter of define) into plural.
             // if you don't want that, set the following
             freezeTableName: true,
-        },
-
-        {
             associate: function (models) {
-                Country.HasOne(models.Travel, {foreignKey: 'CountryID'});
+                Country.hasOne(models.t_travel, {foreignKey: 'CountryID'});
             }
         }
-
     );
 
     return Country;

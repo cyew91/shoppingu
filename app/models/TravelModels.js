@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Travel = sequelize.define('T_Travel', {
+    var Travel = sequelize.define('t_travel', {
             TravelID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -58,16 +58,12 @@ module.exports = function (sequelize, DataTypes) {
             // transform all passed model names (first parameter of define) into plural.
             // if you don't want that, set the following
             freezeTableName: true,
-        },
-
-        {
             associate: function (models) {
-                Travel.BelongTo(models.Profile, {foreignKey: 'ProfileID'});
-                Travel.BelongTo(models.Country, {foreignKey: 'CountryID'});
-                Travel.HasOne(models.Product, {foreignKey: 'TravelID'});
+                Travel.belongsTo(models.t_product_detail, {foreignKey: 'ProfileID'});
+                Travel.belongsTo(models.t_country, {foreignKey: 'CountryID'});
+                Travel.hasOne(models.t_product, {foreignKey: 'TravelID'});
             }
         }
-
     );
 
     return Travel;

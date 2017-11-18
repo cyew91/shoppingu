@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Currency = sequelize.define('T_Currency', {
+    var Currency = sequelize.define('t_currency', {
             CurrencyID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -25,14 +25,10 @@ module.exports = function (sequelize, DataTypes) {
             // transform all passed model names (first parameter of define) into plural.
             // if you don't want that, set the following
             freezeTableName: true,
-        },
-
-        {
             associate: function (models) {
-                Currency.HasOne(models.ProductDetail, {foreignKey: 'CurrencyID'});
+                Currency.hasOne(models.t_product_detail, {foreignKey: 'CurrencyID'});
             }
         }
-
     );
 
     return Currency;
