@@ -22,5 +22,13 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         });
     };
 
+    $scope.search = function(){
+       console.log('asdhasdhkjh');
+    };
+
+    $scope.clear = function(){
+        $('#InputSearch').text = '';
+    };
+
     $scope.category = {cat1 : "Men's Fashion", cat2 : "Women's Fashion", cat3 : "Kid", cat4 : "Mobile"};
 }]);

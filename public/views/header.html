@@ -1,15 +1,15 @@
-<header calss="navbar navbar-sticky navbar-stuck">
+<header calss="navbar navbar-sticky navbar-stuck" ng-controller="HeaderController">
 
-  <form id="MainSearchForm" method="get" ng-show="showme">
-    <input type="text" name="site_search" placeholder="Type to search...">
+  <div id="MainSearchForm" ng-show="showme" ng-form="search()">
+    <input type="text" name="site_search" placeholder="Type to search..." ng-change="search()" ng-model="inputSearch">
     <div>
-      <span id="MainSearchClear">Clear</span>
+      <span id="MainSearchClear" ng-click="inputSearch = null">Clear</span>
       <span id="MainSearchClose">
         <i class="icon-cross" ng-click="showme=false">
         </i>
       </span>
     </div>
-  </form>
+  </div>
 
   <div style="position: absolute; top: 0; left: 0; height: 100%; z-index: 5;">
     <div style="display: table; height: 100%; min-height: 100%">
@@ -74,8 +74,8 @@
   <div class="headerSideToolbar">
     <div>
       <div>
-        <div class="search">
-          <i class="icon-search" ng-click="showme=true"></i>
+        <div class="search" ng-click="showme=true">
+          <i class="icon-search"></i>
         </div>
         <div class="account">
           <a ui-sref="userprofile"></a>

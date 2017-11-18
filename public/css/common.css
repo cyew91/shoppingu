@@ -1368,6 +1368,9 @@ tbody {
 	transition: .3s;
 	background-color: #fff;
 	z-index: 10;
+
+	-webkit-animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 #MainSearchForm > input{
@@ -1386,7 +1389,7 @@ tbody {
 #MainSearchForm > div{
 	position: absolute; 
 	top: 50%; 
-	right: 30px; 
+	right: 70px; 
 	margin-top: -20px; 
 	z-index: 5;
 }
