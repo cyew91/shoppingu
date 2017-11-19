@@ -196,7 +196,9 @@ exports.updateProductDocument = function (req, res) {
 
 
 exports.getAllProduct = function (req, res, next) {
-    db.t_product_detail.findAll({include: [db.t_product_document]})
+    db.t_product_detail.findAll({include: [
+        {model: db.t_product_document}
+    ]})
     .then(function(result){
         return res.jsonp(result);
     })

@@ -1439,3 +1439,322 @@ tbody {
 .search-control {
     padding: 5px 10px;
 }
+
+/* start Result page */
+
+.pagination {
+    display: table;
+    width: 100%;
+    border-top: 1px solid #e1e7ec;
+}
+
+.pagination>.column {
+    display: table-cell;
+    padding-top: 16px;
+    vertical-align: middle;
+}
+
+.pagination .pages {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination .pages>li {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 34px;
+    text-align: center;
+}
+
+.pagination .pages>li.active>a {
+    border-color: #0da9ef;
+    background-color: #0da9ef;
+    color: #fff;
+}
+
+.pagination .pages>li>a {
+    display: block;
+    width: 36px;
+    height: 36px;
+    transition: all .3s;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: #606975;
+    line-height: 34px;
+    text-decoration: none;
+}
+
+.col-xl-3 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+	max-width: 25%;
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-lg-4 {
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.order-lg-1 {
+    -ms-flex-order: 1;
+    order: 1;
+}
+
+.sidebar {
+    width: 100%;
+    max-width: 400px;
+}
+
+article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+.hidden-lg-up {
+    display: none !important;
+}
+
+.padding-top-2x {
+    padding-top: 48px !important;
+}
+
+.widget {
+    margin-bottom: 38px;
+}
+
+.widget-title {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e1e7ec;
+    color: #9da9b9;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.widget-categories ul, .widget-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.widget-categories ul>li, .widget-links ul>li {
+    position: relative;
+    margin-bottom: 5px;
+    padding-left: 14px;
+}
+
+.widget-categories ul>li.has-children.expanded::before, .widget-links ul>li.has-children.expanded::before {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.widget-categories ul>li::before, .widget-links ul>li::before {
+    display: block;
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 0;
+    height: 0;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transition: -webkit-transform .35s;
+    transition: transform .35s;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    color: #9da9b9;
+    content: '';
+}
+
+.widget-categories ul>li>a, .widget-links ul>li>a {
+    display: inline-block;
+    transition: color .3s;
+    color: #606975;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.widget-categories ul>li>span, .widget-links ul>li>span {
+    margin-left: 4px;
+    color: #9da9b9;
+}
+
+.widget-categories ul>li.has-children.expanded>ul, .widget-links ul>li.has-children.expanded>ul {
+    max-height: 800px;
+}
+
+.widget-categories ul>li.has-children>ul, .widget-links ul>li.has-children>ul {
+    max-height: 0;
+    transition: max-height .6s;
+    overflow: hidden;
+}
+
+.widget-categories ul>li.has-children ul, .widget-links ul>li.has-children ul {
+    border-left: 1px solid #dee5ea;
+}
+
+.widget-categories ul, .widget-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.widget-categories ul>li, .widget-links ul>li {
+    position: relative;
+    margin-bottom: 5px;
+    padding-left: 14px;
+}
+
+.widget-categories ul>li.has-children ul li::before, .widget-links ul>li.has-children ul li::before {
+    top: 14px;
+    width: 8px;
+    height: 1px;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    border: 0;
+    background-color: #dee5ea;
+    color: transparent;
+}
+
+.widget-categories ul>li.has-children ul li a, .widget-links ul>li.has-children ul li a {
+    font-size: 13px;
+}
+
+.product-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #e1e7ec;
+    border-radius: 7px;
+	background-color: #fff;
+	margin-right: 10px;
+}
+
+.product-card .product-thumb {
+    display: block;
+    width: 100%;
+	margin-bottom: 10px;
+	height: 175px;
+}
+
+.product-card .product-title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.product-card .product-price {
+    margin-bottom: 10px;
+    color: #606975;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.product-card .product-buttons {
+    padding: 12px 0 8px;
+    text-align: center;
+}
+
+.isotope-grid:not(.filter-grid)[style]>.grid-item {
+    display: inline-block;
+    -webkit-animation: showGrid .6s;
+	animation: showGrid .6s;
+	/* position: absolute; */
+	margin-right: 35px;
+}
+
+.isotope-grid.cols-3 .grid-sizer, .isotope-grid.cols-3 .grid-item {
+    width: calc((100% / 3) - 20px);
+}
+
+.isotope-grid:not(.filter-grid)>.grid-item {
+    display: none;
+}
+
+.isotope-grid .grid-item {
+    margin-bottom: 30px;
+}
+
+.isotope-grid .gutter-sizer {
+    width: 30px;
+}
+
+.isotope-grid:not(.filter-grid)[style] {
+    background: none;
+}
+
+.isotope-grid:not(.filter-grid) {
+    min-height: 180px;
+    background-position: center;
+    background-image: url(../img/loading.gif);
+    background-repeat: no-repeat;
+    background-size: 74px;
+}
+
+.isotope-grid {
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-toolbar {
+    display: table;
+    width: 100%;
+}
+
+.padding-bottom-1x {
+    padding-bottom: 24px !important;
+}
+
+.mb-2, .my-2 {
+    margin-bottom: .5rem !important;
+}
+
+.shop-toolbar>.column {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.shop-sorting label {
+    margin: 0;
+    padding: 8px 5px 8px 0;
+    color: #9da9b9;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.shop-sorting label, .shop-sorting .form-control, .shop-sorting span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.shop-sorting .form-control {
+    width: 100%;
+    max-width: 186px;
+    margin-right: 10px;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
+/* end Result page */

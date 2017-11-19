@@ -28,6 +28,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.UUID,
             allowNull: false
         },
+        ProductName: {
+            type: DataTypes.STRING(50),
+            allowNull: false
+        },
         Amount: {
             type: DataTypes.DECIMAL(10, 3),
             allowNull: false
@@ -63,7 +67,7 @@ module.exports = function (sequelize, DataTypes) {
             // if you don't want that, set the following
             freezeTableName: true,
             associate: function (models) {
-                ProductDetail.hasMany(models.t_product_document, { foreignKey: 'ProductDetailID' });
+                ProductDetail.hasOne(models.t_product_document, { foreignKey: 'ProductDetailID' });
                 ProductDetail.belongsTo(models.t_product, { foreignKey: 'ProductID' });
                 ProductDetail.belongsTo(models.t_product_cat, { foreignKey: 'ProductCatID' });
                 ProductDetail.belongsTo(models.t_product_subcat, { foreignKey: 'ProductSubCatID' });
