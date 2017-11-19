@@ -129,8 +129,6 @@ exports.createProfileAccount = function (req, res, next) {
     var profileAccountDetail = {
         ProfileID: req.body.profileId,
         LoginID: req.body.email,
-        SaltPass: null,
-        HashPass: req.body.password,
         RetryCount: 0,
         IsActive: 1,
         Remarks: "",
@@ -141,7 +139,9 @@ exports.createProfileAccount = function (req, res, next) {
     };
 
     var profileAccount = db.t_profile_account.build(profileAccountDetail);
-
+    profileAccount.SaltPass = profileAccount.makeSalt();
+    profileAccount.HashPass = profileAccount.encryptPassword(req.body.password, profileAccount.SaltPass);
+        
     profileAccount.save().then(function () {
         return res.jsonp({
             "result": "success"
