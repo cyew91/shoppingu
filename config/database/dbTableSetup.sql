@@ -274,3 +274,24 @@ DELIMITER ;
 
 CALL shoppingu_procedure();
 -- END 0.0.7 CerTong 18/11/2017
+
+-- 0.0.8 ChengYew 20/11/2017
+-- Add 'Status' column into T_Country table.
+UPDATE db_version SET Version = '0.0.8', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 'T_Country' AND COLUMN_NAME = 'Status') THEN
+		ALTER TABLE T_Country ADD COLUMN Status INT NOT NULL AFTER CountryName;
+        
+        UPDATE T_Country
+        SET Status=0
+        WHERE Status IS NULL;
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END ChengYew 20/11/2017

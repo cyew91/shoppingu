@@ -15,7 +15,7 @@ const saltRounds = 10;
  */
 exports.getProfileId = function (req, res, next, ProfileID) {
     console.log('id => ' + ProfileID);
-    db.T_Profile.find({
+    db.t_profile.find({
         where: {
             ProfileID: ProfileID
         }
