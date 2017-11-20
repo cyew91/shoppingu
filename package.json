@@ -62,7 +62,7 @@
     "slick-carousel": "^1.7.1",
     "standard-error": "^1.1.0",
     "view-helpers": "latest",
-    "winston": "latest"
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
