@@ -1,4 +1,6 @@
 <div class="page-content">
+  <h3>Travel Information</h3>
+
   <div class="row bs-wizard" style="border-bottom:0; margin-bottom:60px;">
     <div class="col-xs-3 bs-wizard-step complete">
       <div class="text-center bs-wizard-stepnum">Travel</div>
@@ -28,29 +30,36 @@
     </div>
   </div>
 
-  <h3>Travel Information</h3>
-  <div class="col-sm-4" style="margin-top: 20px;">
-    <div id="foo" class="form-group">
-      <label for="large-pill-input">Destination</label>
-      <select class="js-example-basic-single" name="state" style="width: 300px;">
+  <div style="width: 100% !important;">
+    <div style="float:left; width:330px;">
+      <label for="normal-pill-input">Destination</label>
+    </div>
+    <div style="float:left; width:250px;">
+      <label for="normal-pill-input">Date From</label>
+    </div>
+    <div style="float:left; width:250px;">
+      <label for="normal-pill-input">Date From</label>
+    </div>
+  </div>
+
+  <div style="float:left; width: 100% !important;">
+    <div style="float:left; width:330px;">
+      <select class="js-example-basic-single" name="state" style="width: 300px; height: 40px !important; line-height: 35px !important;">
         <option data-ng-repeat="country in countryList" class="dropdown-item" href="#" value={{country.CountryCode}}>
           {{country.CountryName}}
         </option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="normal-pill-input">Travel Date From</label>
-      <input class="form-control" type="date" id="date-input" value="2017-06-13">
-    </div>
-    <div class="form-group">
-      <label for="normal-pill-input">Travel Date To</label>
-      <input class="form-control" type="date" id="date-input" value="2017-06-13">
+    <div style="float:left;">
+      <div class="input-daterange">
+        <input type="text" name="start" class="dateRangePicker" />
+        <input type="text" name="end" class="dateRangePicker" style="margin-left: 30px;"/>
+      </div>
     </div>
   </div>
-  <div style="text-align:right;">
-    <button class="btn btn-secondary" ui-sref="postproduct">
-      Continue
-    </button>
+
+  <div style="width: 100%; text-align: right;">
+    <button class="btn btn-secondary" ui-sref="postproduct">Continue</button>
   </div>
 </div>

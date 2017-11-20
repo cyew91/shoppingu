@@ -16,27 +16,164 @@
         </div>
       </div>
       <!-- Product Grid -->
-      <div class="isotope-grid cols-3 mb-2" style="position: relative; height: 1438.44px;">
+      <div class="isotope-grid cols-3 mb-2"  ng-init="searchResult()" style="position: relative; height: 1438.44px;">
         <div class="gutter-sizer"></div>
         <div class="grid-sizer"></div>
         <!-- Product -->
-        <div class="grid-item" style="position: absolute; left: 0px; top: 0px;">
+        <div class="grid-item" ng-repeat="item in product">
           <div class="product-card">
             <a class="product-thumb" href="">
-              <img src="img/shop/products/01.jpg" alt="Product">
+              <img src="{{item.t_product_document.DocumentPath}}" alt="Product">
             </a>
             <h3 class="product-title">
-              <a href="">Testing</a>
+              <a href="">{{item.ProductName}}</a>
             </h3>
             <h4 class="product-price">
-              RM100.00
+              RM {{item.Amount}}
             </h4>
             <div class="product-buttons">
               <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
             </div>
           </div>
         </div>
+        
       </div>
+      <!-- Pagination -->
+      <nav class="pagination">
+        <div class="column">
+          <ul class="pages">
+            <li class="active">
+              <a href="#">1</a>
+            </li>
+            <li>
+              <a href="#">2</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- Sidebar -->
+    <div class="col-xl-3 col-lg-4 order-lg-1">
+      <aside class="sidebar">
+        <div class="padding-top-2x hidden-lg-up"></div>
+        <!-- Widget Categories -->
+        <section class="widget widget-categories">
+          <h3 class="widget-title">Shop Categories</h3>
+          <ul>
+            <li class="has-children expanded">
+              <a href="#">Shoes</a>
+              <span>(122)</span>
+              <ul>
+                <li>
+                  <a href="#">Women's</a>
+                  <ul>
+                    <li>
+                      <a href="#">Sneakers</a>
+                    </li>
+                    <li>
+                      <a href="#">Heels</a>
+                    </li>
+                    <li>
+                      <a href="#">Loafers</a>
+                    </li>
+                    <li>
+                      <a href="#">Sandals</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Men's</a>
+                  <span>(102)</span>
+                  <ul>
+                    <li>
+                      <a href="#">Boots</a>
+                    </li>
+                    <li>
+                      <a href="#">Oxfords</a>
+                    </li>
+                    <li>
+                      <a href="#">Loafers</a>
+                    </li>
+                    <li>
+                      <a href="#">Sandals</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Boy's Shoes</a>
+                  <span>(102)</span>
+                </li>
+              </ul>
+            </li>
+            <li class="has-children">
+              <a href="#">Clothing</a>
+              <span>(122)</span>
+              <ul>
+                <li>
+                  <a href="#">Women's</a>
+                  <ul>
+                    <li>
+                      <a href="#">Dresses</a>
+                    </li>
+                    <li>
+                      <a href="#">Shirts & Tops</a>
+                    </li>
+                    <li>
+                      <a href="#">Swimwear</a>
+                    </li>
+                    <li>
+                      <a href="#">Shorts</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Men's</a>
+                  <span>(102)</span>
+                  <ul>
+                    <li>
+                      <a href="#">Shirts & Tops</a>
+                    </li>
+                    <li>
+                      <a href="#">Shorts</a>
+                    </li>
+                    <li>
+                      <a href="#">Swimwear</a>
+                    </li>
+                    <li>
+                      <a href="#">Pants</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Kid's Clothing</a>
+                  <span>(102)</span>
+                </li>
+              </ul>
+            </li>
+            <li class="has-children">
+              <a href="#">Bags</a>
+              <span>(122)</span>
+              <ul>
+                <li>
+                  <a href="#">Handbag</a>
+                </li>
+                <li>
+                  <a href="#">Backpacks</a>
+                  <span>(2)</span>
+                </li>
+                <li>
+                  <a href="#">Wallet & Accessories</a>
+                  <span>(12)</span>
+                </li>
+                <li>
+                  <a href="#">Luggage</a>
+                  <span>(10)</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </aside>
     </div>
   </div>
 </div>
