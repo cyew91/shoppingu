@@ -1714,7 +1714,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
     -webkit-animation: showGrid .6s;
 	animation: showGrid .6s;
 	/* position: absolute; */
-	margin-right: 35px;
+	margin-right: 15px;
 }
 
 .isotope-grid.cols-3 .grid-sizer, .isotope-grid.cols-3 .grid-item {

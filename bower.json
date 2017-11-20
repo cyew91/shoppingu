@@ -20,7 +20,8 @@
     "angular-slick": "^0.2.1",
     "lightgallery": "^1.6.1",
     "dropzone": "^5.1.1",
-    "select2": "^4.0.5"
+    "select2": "^4.0.5",
+    "bootstrap-datepicker": "latest"
   },
   "resolutions": {
     "angular": "1.6.6",
