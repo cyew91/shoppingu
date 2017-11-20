@@ -218,10 +218,6 @@ ALTER TABLE `T_Profile_Account` CHANGE COLUMN `SaltPass` `SaltPass` VARCHAR(1000
 -- Country and Category Settings
 UPDATE db_version SET Version = '0.0.4', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
 
-DELETE FROM T_Country WHERE CountryID !='';
-DELETE FROM T_Product_SubCat WHERE ProductSubCatID !='';
-DELETE FROM T_Product_Cat WHERE ProductCatID !='';
-
 -- END 0.0.4 ChengYew 14/11/2017
 
 -- 0.0.5 CerTong 14/11/2017

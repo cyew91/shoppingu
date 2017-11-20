@@ -1,4 +1,8 @@
 
+DELETE FROM T_Country WHERE CountryID !='';
+DELETE FROM T_Product_SubCat WHERE ProductSubCatID !='';
+DELETE FROM T_Product_Cat WHERE ProductCatID !='';
+
 INSERT INTO T_Country VALUES ('ed739838-95e5-11e7-b85b-5d64dd272c67','AG','Antigua and Barbuda');
 INSERT INTO T_Country VALUES ('ed7249e2-95e5-11e7-b85b-5d64dd272c67','DZ','Algeria');
 INSERT INTO T_Country VALUES ('ed71ddf4-95e5-11e7-b85b-5d64dd272c67','AF','Afghanistan');
@@ -244,7 +248,6 @@ INSERT INTO T_Country VALUES ('ed8f8048-95e5-11e7-b85b-5d64dd272c67','YE','Yemen
 INSERT INTO T_Country VALUES ('ed8fa12c-95e5-11e7-b85b-5d64dd272c67','ZR','Zaire');
 INSERT INTO T_Country VALUES ('ed8fc4c2-95e5-11e7-b85b-5d64dd272c67','ZM','Zambia');
 INSERT INTO T_Country VALUES ('ed8fed76-95e5-11e7-b85b-5d64dd272c67','ZW','Zimbabwe');
-
 
 INSERT INTO T_Product_Cat VALUES ('4bc9abf2-c787-11e7-84e9-90bbf6a2477f',"Women's Fashion",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');
 INSERT INTO T_Product_Cat VALUES ('4bca03ea-c787-11e7-84e9-90bbf6a2477f',"Beauty and Health",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');

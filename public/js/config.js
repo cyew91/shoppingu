@@ -111,6 +111,15 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         .state('profileIcon',{
             url : '/profileIcon',
             templateUrl : 'views/users/account-orders.html'
+        })
+        .state('searchResult', {
+            url : '/searchresult',
+            params: {
+                productDetailId: '1',
+            },
+            controller : 'SearchResultController',
+            templateUrl: 'views/searchResult.html'
+			
         });
 }
 ]);

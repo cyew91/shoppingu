@@ -33,17 +33,7 @@ angular.module('mean.articles')
       //});
     };
 
-    $scope.updateAddress = function() {
-      var profile = $scope.profile;
-      if (!profile.updated) {
-          profile.updated = [];
-      }
-      profile.updated.push(new Date().getTime());
-      //profile.$update(function() {
-        //$state.go('home');
-      profile.$update();
-      //});
-    };
+    
 
   }]);
 
