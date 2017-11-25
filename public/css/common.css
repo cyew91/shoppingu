@@ -1791,4 +1791,12 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
     box-sizing: border-box;
 }
 
+.container-search {
+	width: 100%;
+	max-width: 100%;
+	padding-left: 50px;
+	padding-right: 0px;
+	padding-top: 50px; 
+}
+
 /* end Result page */

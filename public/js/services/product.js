@@ -12,8 +12,13 @@
 // }]);
 
 angular.module('mean.auth').service("GetProductResult", ['$resource', function($resource) {
-    return $resource('/product');
+    return $resource('/productDetail/:productDetailID', {productDetailID: '@productDetailID'});
 }]);
+
+angular.module('mean.auth').service("GetProductID", ['$resource', function($resource) {
+    return $resource('/product/:productName', {productName: '@productName'});
+}]);
+
 
 // angular.module('mean.auth').factory("Articles", ['$resource', function($resource) {
 //     return $resource('profile/:profileId', {

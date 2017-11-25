@@ -115,7 +115,7 @@ angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($
         .state('searchResult', {
             url : '/searchresult',
             params: {
-                productDetailId: '1',
+                productDetailID: null
             },
             controller : 'SearchResultController',
             templateUrl: 'views/searchResult.html'

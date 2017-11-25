@@ -11,8 +11,11 @@ module.exports = function (app) {
     var country = require('../../app/controllers/CountryControllers');
     
     //Product
-    app.route('/product')
+    app.route('/productDetail/:productDetailID')
     .get(product.getAllProduct);
+
+    app.route('/product/:productName')
+    .get(product.getProductByProdName);
 
     app.route('/product/:productId')
     .get(product.show)
@@ -20,6 +23,8 @@ module.exports = function (app) {
     .put(product.update);
 
     app.param('productId', product.getProductID);
+    app.param('productName', product.getProductByProdName);
+    app.param('productDetailID', product.getAllProduct);
     
     //Country
     app.get('/country', country.all);

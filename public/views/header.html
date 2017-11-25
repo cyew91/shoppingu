@@ -1,7 +1,7 @@
 <header calss="navbar navbar-sticky navbar-stuck" ng-controller="HeaderController">
 
-  <div id="mainSearchForm" ng-show="showme" ng-form="search()">
-    <input type="text" name="site_search" placeholder="Type to search..." ng-change="search()" ng-model="inputSearch">
+  <div id="mainSearchForm" ng-show="showme" ng-form="search()" >
+    <input type="text" name="site_search" ng-keypress="$event.keyCode === 13 && search()"  placeholder="Type to search..."  ng-model="inputSearch">
     <div>
       <span id="mainSearchClear" ng-click="inputSearch = null">Clear</span>
       <span id="mainSearchClose">

@@ -195,8 +195,8 @@ exports.updateProductDocument = function (req, res) {
 //----------------------------------------End----------------------------------------
 
 
-exports.getAllProduct = function (req, res, next) {
-    db.t_product_detail.findAll({include: [
+exports.getAllProduct = function (req, res, next, ProductDetailID) {
+    db.t_product_detail.findAll({ where: {ProductDetailID: ProductDetailID}, include: [
         {model: db.t_product_document}
     ]})
     .then(function(result){
@@ -209,3 +209,19 @@ exports.getAllProduct = function (req, res, next) {
         })
     });
 };
+
+exports.getProductByProdName = function (req, res, next, ProductName) {
+    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+

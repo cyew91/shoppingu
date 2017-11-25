@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'Global', 'SignOut', '$state', function ($scope, Global, SignOut, $state) {
+angular.module('mean.system').controller('HeaderController', ['$scope', 'Global', 'SignOut', '$state', 'GetProductID', function ($scope, Global, SignOut, $state, GetProductID) {
     $scope.global = Global;
+    //$scope.productDetailId = $stateParams.productDetailId;    
 
     $scope.menu = [{
         "title": "Articles",
@@ -22,9 +23,20 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         });
     };
 
-    $scope.search = function(){
+    //$scope.search = function(){
        
-    };
+    //};
 
-    $scope.category = {cat1 : "Men's Fashion", cat2 : "Women's Fashion", cat3 : "Kid", cat4 : "Mobile"};
+    $scope.search = function() {
+        GetProductID.query({
+            productName: $scope.inputSearch
+        }, function(result) {
+            //$scope.firstName = result.FirstName;
+            //$scope.lastName = result.LastName;
+            $scope.product = result;
+            $state.go('searchResult',{productDetailID: result});
+        });
+      };
+
+    
 }]);
