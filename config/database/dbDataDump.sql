@@ -332,3 +332,42 @@ INSERT INTO T_Product_SubCat VALUES ('7c4cd1d8-c943-11e7-84e9-90bbf6a2477f','4bc
 INSERT INTO T_Product_SubCat VALUES ('7c4d057c-c943-11e7-84e9-90bbf6a2477f','4bca9698-c787-11e7-84e9-90bbf6a2477f',"Sport Accessories",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');
 INSERT INTO T_Product_SubCat VALUES ('7c4d3772-c943-11e7-84e9-90bbf6a2477f','4bca9698-c787-11e7-84e9-90bbf6a2477f',"Sport Gears",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');
 INSERT INTO T_Product_SubCat VALUES ('7c4d6788-c943-11e7-84e9-90bbf6a2477f','4bca9698-c787-11e7-84e9-90bbf6a2477f',"Others",1,null,now(),'2e3da212-9953-11e7-b85b-5d64dd272c67',now(),'2e3da212-9953-11e7-b85b-5d64dd272c67');
+
+
+
+-- start product testing data--
+delete from t_product_document;
+delete from t_product_detail;
+delete from t_product;
+delete from t_travel;
+delete from t_profile;
+
+insert into t_profile (ProfileID, FirstName, LastName, FullName, Address, Email, ContactNo, Gender, DOB, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('2e3da212-9953-11e7-b85b-5d64dd272c67', 'Cer Ton', 'YU', 'YU CHENG YEW', 'Kang Ching Road', '123', '321', '1', '1992-01-01 00:00:00', '', '2017-09-14 21:46:59', '00000000-0000-0000-0000-000000000000', '2017-09-14 21:46:59', '00000000-0000-0000-0000-000000000000');
+
+insert into t_travel (TravelID, ProfileID, CountryID, TravelDescription, TravelStartDate, TravelEndDate, IsExpired, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('36add56b-d380-11e7-8fce-8086f20f4c17', '2e3da212-9953-11e7-b85b-5d64dd272c67', 'ed8335f4-95e5-11e7-b85b-5d64dd272c67', 'Malaysia', now(), now(), 0, 'Test', now(), 'Me', now(), 'You');
+insert into t_travel (TravelID, ProfileID, CountryID, TravelDescription, TravelStartDate, TravelEndDate, IsExpired, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('a0f3739a-d388-11e7-8fce-8086f20f4c17', '2e3da212-9953-11e7-b85b-5d64dd272c67', 'ed82bb06-95e5-11e7-b85b-5d64dd272c67', 'Macau', now(), now(), 0, 'Test', now(), 'Me', now(), 'You');
+
+insert into t_product (ProductID, ProfileID, TravelID, Description, Amount, IsActive, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('9a709637-d380-11e7-8fce-8086f20f4c17', '2e3da212-9953-11e7-b85b-5d64dd272c67', '36add56b-d380-11e7-8fce-8086f20f4c17', 'First Product', 50, 1, 'Test', now(), 'Me', now(), 'You');
+
+insert into t_product_detail (ProductDetailID, ProductID, ProductCatID, ProductSubCatID, DetailDescription, CurrencyID, ProductName, Amount, Status, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('c2b23c80-d380-11e7-8fce-8086f20f4c17', '9a709637-d380-11e7-8fce-8086f20f4c17', '4bc9abf2-c787-11e7-84e9-90bbf6a2477f', '76440341-cc1e-11e7-909a-8086f20f4c17', 'first item', 'c1858e5e-995d-11e7-b85b-5d64dd272c67', 'first Item', 30, 1, 'Perfect', now(), 'Me', now(), 'You');
+insert into t_product_detail (ProductDetailID, ProductID, ProductCatID, ProductSubCatID, DetailDescription, CurrencyID, ProductName, Amount, Status, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('c2b23cf3-d380-11e7-8fce-8086f20f4c17', '9a709637-d380-11e7-8fce-8086f20f4c17', '4bc9abf2-c787-11e7-84e9-90bbf6a2477f', '76440341-cc1e-11e7-909a-8086f20f4c17', 'second item', 'c1858e5e-995d-11e7-b85b-5d64dd272c67', 'second Item', 40, 1, 'Perfect2', now(), 'Me', now(), 'You');
+insert into t_product_detail (ProductDetailID, ProductID, ProductCatID, ProductSubCatID, DetailDescription, CurrencyID, ProductName, Amount, Status, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('c2b23d14-d380-11e7-8fce-8086f20f4c17', '9a709637-d380-11e7-8fce-8086f20f4c17', '4bc9abf2-c787-11e7-84e9-90bbf6a2477f', '76440341-cc1e-11e7-909a-8086f20f4c17', 'third item', 'c1858e5e-995d-11e7-b85b-5d64dd272c67', 'third Item', 50, 1, 'Perfect3', now(), 'Me', now(), 'You');
+insert into t_product_detail (ProductDetailID, ProductID, ProductCatID, ProductSubCatID, DetailDescription, CurrencyID, ProductName, Amount, Status, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('c2b23d29-d380-11e7-8fce-8086f20f4c17', '9a709637-d380-11e7-8fce-8086f20f4c17', '4bc9abf2-c787-11e7-84e9-90bbf6a2477f', '76440341-cc1e-11e7-909a-8086f20f4c17', 'forth item', 'c1858e5e-995d-11e7-b85b-5d64dd272c67', 'forth Item', 60, 1, 'Perfect4', now(), 'Me', now(), 'You');
+
+insert into t_product_document (ProductDocumentID, ProductDetailID, DocumentName, DocumentType, DocumentPath, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('ec95014d-d380-11e7-8fce-8086f20f4c17', 'c2b23c80-d380-11e7-8fce-8086f20f4c17', 'Shoes', 'abc', 'img/nmd.jpg', 'NMD', now(), 'Me', now(), 'You');
+insert into t_product_document (ProductDocumentID, ProductDetailID, DocumentName, DocumentType, DocumentPath, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('ec95019b-d380-11e7-8fce-8086f20f4c17', 'c2b23cf3-d380-11e7-8fce-8086f20f4c17', 'Phone', 'abc', 'img/iphonexdesign.jpg', 'iphone', now(), 'Me', now(), 'You');
+insert into t_product_document (ProductDocumentID, ProductDetailID, DocumentName, DocumentType, DocumentPath, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('ec95027d-d380-11e7-8fce-8086f20f4c17', 'c2b23d14-d380-11e7-8fce-8086f20f4c17', 'Pant', 'abc', 'img/nmd2.jpg', 'NMD', now(), 'Me', now(), 'You');
+insert into t_product_document (ProductDocumentID, ProductDetailID, DocumentName, DocumentType, DocumentPath, Remarks, CreatedDate, CreatedBy, LastUpdatedDate, LastUpdatedBy)
+values ('ec950299-d380-11e7-8fce-8086f20f4c17', 'c2b23d29-d380-11e7-8fce-8086f20f4c17', 'Hat', 'abc', 'img/nmd3.jpg', 'iphone', now(), 'Me', now(), 'You');
+-- end product testing data --

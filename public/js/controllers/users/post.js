@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('mean.system')
-  .controller('PostController', ['$scope', 'Global', '$stateParams', function($scope, Global, $stateParams){
+  .controller('PostController', ['$scope', 'Global', '$stateParams', 'GetTravel', function($scope, Global, $stateParams, GetTravel){
     $scope.global = Global;
 
-    $scope.a = $stateParams.a;
-    $scope.b = $stateParams.b;
+    $scope.getTrip = function() {
+      GetTravel.query(function(result) {
+          $scope.travel = result;
+      });
+    };
   }]);

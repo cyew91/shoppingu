@@ -1,6 +1,6 @@
 
 
-<div class="containerUser padding-bottom-3x mb-2" data-ng-controller="OrderController">
+<div class="containerUser padding-bottom-3x mb-2" data-ng-controller="PostController" ng-init="getTrip()">
     <div class="row">
         <div ng-include="'../views/users/userprofilemain.html'" class="col-lg-4"></div>
         <div class="col-lg-8">
@@ -14,22 +14,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="item in travel">
                             <td>
-                                <a href="productdetails" class="text-medium">BKK (Bangkok, Thailand) - KUL (Kuala Lumpur, Malaysia)</a>
+                                <a href="productdetails" class="text-medium">{{item.TravelDescription}}</a>
                             </td>
-                            <td>August 08, 2017</td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="text-medium">SIN (Singapore, Singapore) - KUL (Kuala Lumpur, Malaysia)</span>
-                            </td>
-                            <td>November 08, 2017</td>
-
-                        </tr>
-                        
-                        
+                            <td>{{item.TravelStartDate}}</td>
+                        </tr>                        
                     </tbody>
                 </table>
             </div>
