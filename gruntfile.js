@@ -89,7 +89,7 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/dropzone/dist',                              src: ['**/*.*'], dest: 'public/lib/dropzone/dist', expand: true},
                     {cwd: 'bower_components/select2/dist/',                              src: ['**/*.*'], dest: 'public/lib/select2/dist', expand: true},
                     {cwd: 'bower_components/bootstrap-datepicker/dist',                 src: ['**/*.*'], dest: 'public/lib/bootstrap-datepicker/dist', expand: true},
-                    {cwd: 'bower_components/angucomplete',                 src: ['**/*.*'], dest: 'public/lib/angucomplete', expand: true}
+                    {cwd: 'bower_components/angucomplete-alt',                 src: ['**/*.*'], dest: 'public/lib/angucomplete', expand: true}
                     
                 ]
             }

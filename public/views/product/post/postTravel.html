@@ -26,20 +26,26 @@
   <div style="background-color: #FEF9E7; width: 100%; height: 300px; padding: 30px;">
     <div style="padding-left : 60px; padding-right: 60px; margin-left: 15px; margin-right: 15px;">
       <h4>Where are you going to travel</h4>
-      <form id="input-progress" role="form" style="clear: left; padding-top: 30px;">
+      <form name="travelForm" ng-submit="submitTravelForm(travelForm.$valid)" role="form" style="clear: left; padding-top: 30px;" novalidate>
         <div style="float:left; width: 100% !important;">
-          <div angucomplete-alt placeholder="Enter country you going to travel" maxlength="50" pause="100" selected-object="selectedCountry"
+          <!-- <input type="text" ng-model="foo" required/> -->
+          <div id="autocomplete" angucomplete-alt maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
             local-data="countryList" search-fields="CountryName" title-field="CountryName" minlength="1" input-class="form-control form-control-small"
-            match-class="highlight" style="width: 450px; float: left; margin-right: 3px;">
+            match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;">
           </div>
           <div class="input-daterange" style="float: left;">
-            <input id="datepickerFrom" type="text" name="start" class="form-control dateRangePicker" style="height: 44px; width: 200px; float: left; margin-right: 3px;"
-              placeholder="Date From" />
-            <input id="datepickerTo" type="text" name="end" class="form-control dateRangePicker" style="height: 44px; width: 200px; margin-right: 3px;"
-              placeholder="Date To" />
+            <input id="datepickerFrom" type="text" name="startDate" class="form-control dateRangePicker" style="height: 44px; width: 200px; float: left; margin-right: 3px;"
+              placeholder="Date From" ng-model="startDate" required/>
+            <input id="datepickerTo" type="text" name="toDate" class="form-control dateRangePicker" style="height: 44px; width: 200px; margin-right: 3px;"
+              placeholder="Date To" ng-model="toDate" required/>
           </div>
           <div style="width: 100%;">
-            <button class="btn btn-secondary" ui-sref="postproduct" style="height: 65px; margin: 0px !important;">Continue</button>
+            <!-- <button class="btn btn-secondary" ui-sref="postproduct" ui-sref-active="active" style="height: 65px; margin: 0px !important;">
+              Continue
+            </button> -->
+            <button type="submit" class="btn btn-secondary" style="height: 65px; margin: 0px !important;">
+              Continue
+            </button>
           </div>
         </div>
       </form>
