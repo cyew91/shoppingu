@@ -1,32 +1,48 @@
 <div class="page-content">
-  <h3>Travel Information</h3>
-
-  <div class="row bs-wizard" style="border-bottom:0; margin-bottom:60px;">
-    <div class="col-xs-3 bs-wizard-step complete">
-      <div class="text-center bs-wizard-stepnum">Travel</div>
-      <div class="progress">
-        <div class="progress-bar"></div>
+  <div class="form-step">
+    <div class="step item-details-indicator active activated">
+      <div class="step-divider"></div>
+      <div class="step-group">
+        <div class="step-number">1</div>
+        <div class="step-title">Travel Details</div>
       </div>
-      <a href="#" class="bs-wizard-dot"></a>
-      <div class="bs-wizard-info text-center">aaaaa</div>
     </div>
-
-    <div class="col-xs-3 bs-wizard-step disabled">
-      <div class="text-center bs-wizard-stepnum">Product</div>
-      <div class="progress">
-        <div class="progress-bar"></div>
+    <div class="step shipment-indicator">
+      <div class="step-divider"></div>
+      <div class="step-group">
+        <div class="step-number">2</div>
+        <div class="step-title">Product</div>
       </div>
-      <a href="#" class="bs-wizard-dot"></a>
-      <div class="bs-wizard-info text-center">bbbbb</div>
     </div>
-
-    <div class="col-xs-3 bs-wizard-step disabled">
-      <div class="text-center bs-wizard-stepnum">Review</div>
-      <div class="progress">
-        <div class="progress-bar"></div>
+    <div class="step payment-indicator">
+      <div class="step-divider"></div>
+      <div class="step-group">
+        <div class="step-number">3</div>
+        <div class="step-title">Review</div>
       </div>
-      <a href="#" class="bs-wizard-dot"></a>
-      <div class="bs-wizard-info text-center">ccccc</div>
+    </div>
+  </div>
+
+  <div style="background-color: #FEF9E7; width: 100%; height: 300px; padding: 30px;">
+    <div style="padding-left : 60px; padding-right: 60px; margin-left: 15px; margin-right: 15px;">
+      <h4>Where are you going to travel</h4>
+      <form id="input-progress" role="form" style="clear: left; padding-top: 30px;">
+        <div style="float:left; width: 100% !important;">
+          <div angucomplete-alt placeholder="Enter country you going to travel" maxlength="50" pause="100" selected-object="selectedCountry"
+            local-data="countryList" search-fields="CountryName" title-field="CountryName" minlength="1" input-class="form-control form-control-small"
+            match-class="highlight" style="width: 450px; float: left; margin-right: 3px;">
+          </div>
+          <div class="input-daterange" style="float: left;">
+            <input id="datepickerFrom" type="text" name="start" class="form-control dateRangePicker" style="height: 44px; width: 200px; float: left; margin-right: 3px;"
+              placeholder="Date From" />
+            <input id="datepickerTo" type="text" name="end" class="form-control dateRangePicker" style="height: 44px; width: 200px; margin-right: 3px;"
+              placeholder="Date To" />
+          </div>
+          <div style="width: 100%;">
+            <button class="btn btn-secondary" ui-sref="postproduct" style="height: 65px; margin: 0px !important;">Continue</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -44,39 +60,4 @@
   <!-- <div style="float: left; width: 100px; height: 80px; display: flex; align-items: center;">
     <div class="align-middle"><span><strong>Travel</strong></span></div>
   </div> -->
-
-  <form id="input-progress" role="form" style="clear: left">
-    <div style="width: 100% !important;">
-      <div style="float:left; width:330px;">
-        <label for="normal-pill-input">Destination</label>
-      </div>
-      <div style="float:left; width:250px;">
-        <label for="normal-pill-input">Date From</label>
-      </div>
-      <div style="float:left; width:250px;">
-        <label for="normal-pill-input">Date To</label>
-      </div>
-    </div>
-
-    <div style="float:left; width: 100% !important;">
-      <div style="float:left; width:330px;">
-        <select class="js-example-basic-single" name="state" style="width: 300px; height: 40px !important; line-height: 35px !important;">
-          <option data-ng-repeat="country in countryList" class="dropdown-item" href="#" value={{country.CountryCode}}>
-            {{country.CountryName}}
-          </option>
-        </select>
-      </div>
-
-      <div style="float:left;">
-        <div class="input-daterange">
-          <input id="datepickerFrom" type="text" name="start" class="dateRangePicker" />
-          <input id="datepickerTo" type="text" name="end" class="dateRangePicker" style="margin-left: 30px;" />
-        </div>
-      </div>
-    </div>
-  </form>
-
-  <div style="width: 100%; text-align: right;">
-    <button class="btn btn-secondary" ui-sref="postproduct">Continue</button>
-  </div>
 </div>

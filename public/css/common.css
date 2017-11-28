@@ -32,7 +32,7 @@
 }
 
 .page-content{
-	margin: 50px;
+	/* padding: 50px; */
 }
 
 #myCarousel .list-inline {
@@ -857,10 +857,8 @@ div {
 
 .form-control:not(textarea) {
 	height: 44px;
-
 	padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
-    border-radius: 22px;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -975,7 +973,6 @@ hr {
     transform: translateZ(0);
     transition: all .4s;
     border: 1px solid transparent;
-    border-radius: 22px;
     background-color: transparent;
     background-image: none;
     color: #606975;
@@ -1358,6 +1355,22 @@ tbody {
 	animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+@-webkit-keyframes fadeIn {from{opacity: 0}to{opacity: 1}}
+@keyframes fadeIn {from{opacity: 0}to{opacity: 1}}
+
+@-webkit-keyframes fadeOut {from{opacity: 1}to{opacity: 0}}
+@keyframes fadeOut {from{opacity: 1}to{opacity: 0}}
+
+.fadeOut{
+	-webkit-animation: fadeOut .5s ease both;
+	animation: fadeOut .5s ease both;
+}
+
+.fadeIn{
+	-webkit-animation: fadeIn .5s ease both;
+	animation: fadeIn .5s ease both
+}
+
 #mainSearchForm{
 	opacity: 1; visibility: visible;display: block;
 	position: absolute;
@@ -1368,9 +1381,6 @@ tbody {
 	transition: .3s;
 	background-color: #fff;
 	z-index: 10;
-
-	-webkit-animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	animation: submenu-show 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 #mainSearchForm > input{
@@ -1464,8 +1474,12 @@ tbody {
 
 /* Post Travel Start */
 .dateRangePicker{
-	border: 1px solid #aaa; 
-	border-radius: 4px !important;
+	border: 1px solid #ececec; 
+	border-radius: 2px !important;
+	height: 65px !important;
+	border: none !important;
+	background-color: #ffffff !important;
+	/* background-color: #f8f9fa !important; */
 }
 
 .input-daterange > input{
@@ -1790,6 +1804,8 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 *::before, *::after {
     box-sizing: border-box;
 }
+
+/* end Result page */
 
 .container-search {
 	width: 100%;

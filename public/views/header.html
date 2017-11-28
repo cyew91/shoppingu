@@ -1,11 +1,11 @@
 <header calss="navbar navbar-sticky navbar-stuck" ng-controller="HeaderController">
 
-  <div id="mainSearchForm" ng-show="showme" ng-form="search()" >
+  <div id="mainSearchForm" ng-show='showSearchBar' ng-form="search()" >
     <input type="text" name="site_search" ng-keypress="$event.keyCode === 13 && search()"  placeholder="Type to search..."  ng-model="inputSearch">
     <div>
       <span id="mainSearchClear" ng-click="inputSearch = null">Clear</span>
-      <span id="mainSearchClose">
-        <i class="icon-cross" ng-click="showme=false">
+      <span id="mainSearchClose" ng-click="closeSearch()">
+        <i class="icon-cross">
         </i>
       </span>
     </div>
@@ -74,7 +74,7 @@
   <div class="headerSideToolbar">
     <div>
       <div>
-        <div class="search" ng-click="showme=true">
+        <div class="search" ng-click="openSearch()">
           <i class="icon-search"></i>
         </div>
         <div class="account" ng-show="global.authenticated">

@@ -2,8 +2,6 @@
 
 angular.module('mean.system').controller('HeaderController', ['$scope', 'Global', 'SignOut', '$state', 'GetProductID', function ($scope, Global, SignOut, $state, GetProductID) {
     $scope.global = Global;
-    //$scope.productDetailId = $stateParams.productDetailId;    
-
     $scope.menu = [{
         "title": "Articles",
         "state": "articles"
@@ -11,32 +9,39 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         "title": "Create New Article",
         "state": "createArticle"
     }];
-
+    $scope.showSearchBar = false;
     $scope.isCollapsed = false;
 
-    $scope.SignOut = function(){
-        SignOut.get(function(response){
-            if(response.status === 'success'){
+    $scope.SignOut = function () {
+        SignOut.get(function (response) {
+            if (response.status === 'success') {
                 $scope.global = null;
                 $state.go('home');
             }
         });
     };
 
-    //$scope.search = function(){
-       
-    //};
+    $scope.openSearch = function () {
+        $('#mainSearchForm').addClass("fadeIn");
+        $scope.showSearchBar = true;
+    };
 
-    $scope.search = function() {
+    $scope.closeSearch = function () {
+        $('#mainSearchForm').removeClass('fadeIn');
+        $('#mainSearchForm').addClass('fadeOut');
+        $scope.showSearchBar = false;        
+    };
+
+    $scope.search = function () {
         GetProductID.query({
             productName: $scope.inputSearch
-        }, function(result) {
+        }, function (result) {
             //$scope.firstName = result.FirstName;
             //$scope.lastName = result.LastName;
             $scope.product = result;
-            $state.go('searchResult',{productDetailID: result});
+            $state.go('searchResult', { productDetailID: result });
         });
-      };
+    };
 
-    
+
 }]);
