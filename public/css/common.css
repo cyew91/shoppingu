@@ -1084,6 +1084,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     text-transform: none;
 }
 
+h7{
+	color: #374250;
+	font-weight: 700;
+	font-size: 1em;
+}
+
 .padding-bottom-1x {
     padding-bottom: 24px !important;
 }
@@ -1103,7 +1109,6 @@ select.form-control {
 .form-control {
     padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
-    border-radius: 22px;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -1816,3 +1821,16 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 }
 
 /* end Result page */
+
+.form-background{
+	background-color: #FEF9E7; 
+	width: 100%;
+	padding: 30px;
+}
+
+.form-background > div{
+	padding-left : 60px; 
+	padding-right: 60px; 
+	margin-left: 15px; 
+	margin-right: 15px;
+}

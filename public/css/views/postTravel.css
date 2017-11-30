@@ -62,7 +62,6 @@
 }
 
 .active .step-number:before{
-    content: "Step";
     display: inline-block;
     margin-right: 3px;
 }
@@ -93,4 +92,95 @@
 
 ::placeholder{
     color: #b6b6b6 !important;
+}
+
+/* Progress bar */
+.ProgressBar {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2em 0 3em;
+    list-style: none;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+.ProgressBar-step {
+    text-align: center;
+    position: relative;
+    width: 100%;
+  }
+  .ProgressBar-step:before, .ProgressBar-step:after {
+    content: "";
+    height: 0.2em;
+    background-color: #9f9fa3;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    left: -50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.25s ease-out;
+  }
+  .ProgressBar-step:first-child:before, .ProgressBar-step:first-child:after {
+    display: none;
+  }
+  .ProgressBar-step:after {
+    background-color: #0DA99F;
+    width: 0%;
+  }
+  .ProgressBar-step.is-complete + .ProgressBar-step.is-current:after, .ProgressBar-step.is-complete + .ProgressBar-step.is-complete:after {
+    width: 100%;
+  }
+
+  .ProgressBar-icon {
+    width: 6.5em;
+    height: 3.5em;
+    background-color: #9f9fa3;
+    fill: #9f9fa3;
+    border-radius: 5%;
+    padding: 0.5em;
+    max-width: 100%;
+    z-index: 10;
+    position: relative;
+    transition: all 0.25s ease-out;
+  }
+  .is-current .ProgressBar-icon {
+    fill: #0DA99F;
+    background-color: #0DA99F;
+  }
+  .is-complete .ProgressBar-icon {
+    fill: #dbf1ff;
+    background-color: #0DA99F;
+  }
+  
+  .ProgressBar-stepLabel {
+    display: block;
+    text-transform: uppercase;
+    color: #9f9fa3;
+    position: absolute;
+    padding-top: 0.5em;
+    width: 100%;
+    transition: all 0.25s ease-out;
+  }
+  .is-current > .ProgressBar-stepLabel, .is-complete > .ProgressBar-stepLabel {
+    color: #000;
+  }
+    
+/* FOR CODEPEN FORMATTING */
+.wrapper {
+  max-width: 1000px;
+  margin: 4em auto;
+  font-size: 16px;
+}
+/* END CODEPEN FORMATTING */
+
+.showText{
+    display: block;
+}
+
+.hideText{
+    display: none;
 }

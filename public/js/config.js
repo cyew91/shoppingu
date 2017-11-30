@@ -1,125 +1,137 @@
 'use strict';
 
 //Setting up route
-angular.module('mean').config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider) {
+angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise(function($injector, $location){
-        $injector.invoke(['$state', function($state) {
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+        $injector.invoke(['$state', function ($state) {
             $state.go('404');
         }]);
     });
+
     $stateProvider
-        .state('home',{
-            url : '/',
-            controller : 'IndexController',
+        .state('home', {
+            url: '/',
+            controller: 'IndexController',
             templateUrl: 'views/index.html'
         })
-        .state('signin',{
-            url : '/signin',
+        .state('signin', {
+            url: '/signin',
             templateUrl: 'views/users/signIn.html'
         })
-        .state('signup',{
-            url : '/signup',
+        .state('signup', {
+            url: '/signup',
             templateUrl: 'views/users/signUp.html'
         })
         .state('aboutus', {
-            url : '/aboutus',
+            url: '/aboutus',
             templateUrl: 'views/aboutus.html'
         })
         .state('faq', {
-            url : '/faq',
+            url: '/faq',
             templateUrl: 'views/faq.html'
         })
         .state('contactus', {
-            url : '/contactus',
+            url: '/contactus',
             templateUrl: 'views/contactUs.html'
         })
-        .state('articles',{
-            url : '/article',
-            controller : 'ArticlesController',
+        .state('articles', {
+            url: '/article',
+            controller: 'ArticlesController',
             templateUrl: 'views/articles/list.html'
         })
-        .state('createarticle',{
-            url : '/article/create',
-            controller : 'ArticlesController',
+        .state('createarticle', {
+            url: '/article/create',
+            controller: 'ArticlesController',
             templateUrl: 'views/articles/create.html'
         })
-        .state('editarticles',{
-            url : '/article/{articleId}/edit',
-            controller : 'ArticlesController',
+        .state('editarticles', {
+            url: '/article/{articleId}/edit',
+            controller: 'ArticlesController',
             templateUrl: 'views/articles/edit.html'
         })
-        .state('viewarticle',{
-            url : '/article/{articleId}',
-            controller : 'ArticlesController',
+        .state('viewarticle', {
+            url: '/article/{articleId}',
+            controller: 'ArticlesController',
             templateUrl: 'views/articles/view.html'
         })
-        .state('productdetails',{
-            url : '/productdetails',
-            params  : {'a': null, 'b': null},
-            controller  : 'ProductDetailsController',
-            templateUrl : 'views/productDetails.html'
+        .state('productdetails', {
+            url: '/productdetails',
+            params: { 'a': null, 'b': null },
+            controller: 'ProductDetailsController',
+            templateUrl: 'views/productDetails.html'
         })
-        .state('posttravel',{
-            url : '/posttravel',
-            controller  : 'PostTravelController',
-            templateUrl : 'views/product/post/postTravel.html'
+        .state('posttravel', {
+            abstract: true,
+            url: '/posttravel',
+            controller: 'PostTravelController',
+            templateUrl: 'views/product/post/post.html'
         })
-        .state('postproduct',{
-            url : '/postproduct',
-            controller  : 'PostProductController',
-            templateUrl : 'views/product/post/postProduct.html'
+        .state('posttravel.travel', {
+            url: '',
+            controller: 'PostTravelController',
+            templateUrl: 'views/product/post/travel.html'
         })
-        .state('userprofile',{
-            url : '/userprofile',
+        .state('posttravel.product', {
+            url: '/posttravel/product',
+            controller: 'PostTravelController',
+            templateUrl: 'views/product/post/product.html'
+        })
+        .state('posttravel.review', {
+            url: '/posttravel/review',
+            controller: 'PostTravelController',
+            templateUrl: 'views/product/post/review.html'
+        })
+        .state('userprofile', {
+            url: '/userprofile',
             params: {
                 profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
             },
-            controller  : 'UserProfileController',
-            templateUrl : 'views/users/userProfile.html'
+            controller: 'UserProfileController',
+            templateUrl: 'views/users/userProfile.html'
         })
-        .state('address',{
-            url : '/address',
+        .state('address', {
+            url: '/address',
             params: {
                 profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
             },
-            controller  : 'AddressController',
-            templateUrl : 'views/users/address.html'
+            controller: 'AddressController',
+            templateUrl: 'views/users/address.html'
         })
-        .state('order',{
-            url : '/order',
-            controller  : 'OrderController',
-            templateUrl : 'views/users/order.html'
+        .state('order', {
+            url: '/order',
+            controller: 'OrderController',
+            templateUrl: 'views/users/order.html'
         })
-        .state('post',{
-            url : '/post',
-            controller  : 'PostController',
-            templateUrl : 'views/users/post.html'
+        .state('post', {
+            url: '/post',
+            controller: 'PostController',
+            templateUrl: 'views/users/post.html'
         })
-        .state('forgetpassword',{
-            url : '/forgetpassword',
-            templateUrl : 'views/users/forgetPassword.html'
+        .state('forgetpassword', {
+            url: '/forgetpassword',
+            templateUrl: 'views/users/forgetPassword.html'
         })
-        .state('uploadimage',{
-            url : '/uploadimage',
-            controller : 'UploadImageController',
-            templateUrl : 'views/uploadImage.html'
+        .state('uploadimage', {
+            url: '/uploadimage',
+            controller: 'UploadImageController',
+            templateUrl: 'views/uploadImage.html'
         })
-        .state('404',{
+        .state('404', {
             templateUrl: 'views/404.html'
         })
-        .state('profileIcon',{
-            url : '/profileIcon',
-            templateUrl : 'views/users/account-orders.html'
+        .state('profileIcon', {
+            url: '/profileIcon',
+            templateUrl: 'views/users/account-orders.html'
         })
         .state('searchResult', {
-            url : '/searchresult',
+            url: '/searchresult',
             params: {
                 productDetailID: null
             },
-            controller : 'SearchResultController',
+            controller: 'SearchResultController',
             templateUrl: 'views/searchResult.html'
-			
+
         });
 }
 ]);
