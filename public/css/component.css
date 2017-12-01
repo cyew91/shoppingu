@@ -46,6 +46,11 @@
 	border-color: #0DA99F;
 }
 
+.btn-form{
+	background-color: #FF7043 !important;
+	border-color: #FF7043 !important;
+}
+
 .btn-sm{
 	height: 36px;
 	padding: 0 18px;

@@ -4,7 +4,7 @@
             <svg class="ProgressBar-icon">
                 <text id="text1" x="40" y="25" fill="white" style="font-size: 19px; display: none;">1</text>
                 <text id="textStep1" x="15" y="25" fill="white" style="font-size: 19px;">Step 1</text>
-                <use id="check1" xlink:href="#checkmark-bold" style=" display: none;" />
+                <use id="check1" xlink:href="#checkmark-bold" style=" display: none; fill: #fff" />
             </svg>
             <span class="ProgressBar-stepLabel">Travel</span>
         </li>
@@ -12,7 +12,7 @@
             <svg class="ProgressBar-icon">
                 <text id="text2" x="40" y="25" fill="white" style="font-size: 19px;">2</text>
                 <text id="textStep2" x="15" y="25" fill="white" style="font-size: 19px; display: none;">Step 2</text>
-                <use id="check2" xlink:href="#checkmark-bold" style=" display: none;" />
+                <use id="check2" xlink:href="#checkmark-bold" style=" display: none; fill: #fff" />
             </svg>
             <span class="ProgressBar-stepLabel">Product</span>
         </li>
@@ -20,7 +20,7 @@
             <svg class="ProgressBar-icon">
                 <text id="text3" x="40" y="25" fill="white" style="font-size: 19px;">3</text>
                 <text id="textStep3" x="15" y="25" fill="white" style="font-size: 19px; display: none;">Step 3</text>
-                <use id="check3" xlink:href="#checkmark-bold" style=" display: none;" />
+                <use id="check3" xlink:href="#checkmark-bold" style=" display: none; fill: #fff" />
             </svg>
             <span class="ProgressBar-stepLabel">Review</span>
         </li>
@@ -31,14 +31,14 @@
             <form id="signup-form" novalidate>
                 <div ui-view></div>
                 <div style="display:inline-block ; width: 100%; text-align: right;">
-                    <button id="btnBack" class="btn btn-secondary" ng-click="back(count = count - 1)" 
+                    <button id="btnBack" class="btn btn-secondary btn-form" ng-click="back(count = count - 1)" 
                         ng-show="count > 1" ui-sref-active="active"
-                        style="height: 65px; margin: 0px !important;">
+                        style="margin: 0px !important;">
                         Back
                     </button>
 
-                    <button id="btnContinue" class="btn btn-secondary" ng-click="continue(count = count + 1)"  ui-sref-active="active"
-                        style="height: 65px; margin: 0px !important;">
+                    <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="continue(count = count + 1)"  ui-sref-active="active"
+                        style="margin: 0px !important;">
                         <span ng-show="count <= 2">Continue</span>
                         <span ng-show="count >= 3">Save</span>
                     </button>

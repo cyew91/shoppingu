@@ -1481,7 +1481,6 @@ tbody {
 .dateRangePicker{
 	border: 1px solid #ececec; 
 	border-radius: 2px !important;
-	height: 65px !important;
 	border: none !important;
 	background-color: #ffffff !important;
 	/* background-color: #f8f9fa !important; */
@@ -1823,7 +1822,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 /* end Result page */
 
 .form-background{
-	background-color: #FEF9E7; 
+	background-color: #E8F5E9; 
 	width: 100%;
 	padding: 30px;
 }
