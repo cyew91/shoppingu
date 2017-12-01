@@ -73,12 +73,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             templateUrl: 'views/product/post/travel.html'
         })
         .state('posttravel.product', {
-            url: '/posttravel/product',
             controller: 'PostTravelController',
             templateUrl: 'views/product/post/product.html'
         })
         .state('posttravel.review', {
-            url: '/posttravel/review',
             controller: 'PostTravelController',
             templateUrl: 'views/product/post/review.html'
         })
@@ -103,11 +101,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'OrderController',
             templateUrl: 'views/users/order.html'
         })
-        .state('post', {
-            url: '/post',
-            controller: 'PostController',
-            templateUrl: 'views/users/post.html'
-        })
+        // .state('post', {
+        //     url: '/post',
+        //     controller: 'PostController',
+        //     templateUrl: 'views/users/post.html'
+        // })
         .state('forgetpassword', {
             url: '/forgetpassword',
             templateUrl: 'views/users/forgetPassword.html'

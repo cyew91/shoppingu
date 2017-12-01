@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('mean').controller('PostTravelController', ['$scope', '$state', 'GetCountryList', function ($scope, $state, GetCountryList) {
-
+    $scope.count = 1;
     $scope.countryList = [];
 
     const init = function () {

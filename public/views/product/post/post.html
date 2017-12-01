@@ -32,12 +32,12 @@
                 <div ui-view></div>
                 <div style="display:inline-block ; width: 100%; text-align: right;">
                     <button id="btnBack" class="btn btn-secondary" ng-click="back(count = count - 1)" 
-                        ng-show="count > 1" ng-init="count=1" ui-sref-active="active"
+                        ng-show="count > 1" ui-sref-active="active"
                         style="height: 65px; margin: 0px !important;">
                         Back
                     </button>
 
-                    <button id="btnContinue" class="btn btn-secondary" ng-click="continue(count = count + 1)" ng-init="count=1" ui-sref-active="active"
+                    <button id="btnContinue" class="btn btn-secondary" ng-click="continue(count = count + 1)"  ui-sref-active="active"
                         style="height: 65px; margin: 0px !important;">
                         <span ng-show="count <= 2">Continue</span>
                         <span ng-show="count >= 3">Save</span>
