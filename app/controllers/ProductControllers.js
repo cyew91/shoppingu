@@ -34,14 +34,26 @@ exports.show = function (req, res) {
 /**
  * Create product
  */
-exports.create = function (req, res, next) {
+exports.createProduct = function (req, res, next) {
     var message = null;
-    var product = db.T_Product.build(req.body);
+    var product = {
+        ProfileID: req.user,
+        TravelID: req.body.TravelID,
+        Description: "",
+        Amount: "",
+        IsActive: 1,
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+    };
 
-    product.save().then(function () {
-        return res.jsonp({
-            "result": "success"
-        });
+    var productSave = db.T_Product.build(product);
+    req.body.ProductID = productSave.ProductID;
+
+    productSave.save().then(function () {
+        return next();
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });
@@ -99,12 +111,26 @@ exports.showProductDetail = function (req, res) {
  */
 exports.createProductDetail = function (req, res, next) {
     var message = null;
-    var productdetail = db.T_Product_Detail.build(req.body);
+    var productdetail = {
+        ProductID: req.body.ProductID,
+        ProductCatID: "",
+        ProductSubCatID: "",
+        CurrencyID: "",
+        ProductName: req.body.email,
+        Amount: 0,
+        Status: "",
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+    };
 
-    productdetail.save().then(function () {
-        return res.jsonp({
-            "result": "success"
-        });
+    var productDetailSave = db.T_Product_Detail.build(productdetail);
+    req.body.ProductDetailID = productDetailSave.ProductDetailID;
+
+    productDetailSave.save().then(function () {
+        return next();
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });
@@ -151,18 +177,21 @@ exports.getProductDocumentID = function (req, res, next, ProductDocumentID) {
 };
 
 /**
- * Show a product document
- */
-exports.showProductDocument = function (req, res) {
-    return res.jsonp(req.productdocument);
-};
-
-/**
  * Create product document
  */
 exports.createProductDocument = function (req, res, next) {
     var message = null;
-    var productdocument = db.T_Product_Document.build(req.body);
+    var productdocument = {
+        ProductDetailID: req.body.ProductDetailID,
+        DocumentName: "",
+        DocumentType: "",
+        DocumentPath: "",
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+    };
 
     productdocument.save().then(function () {
         return res.jsonp({
@@ -194,10 +223,42 @@ exports.updateProductDocument = function (req, res) {
 };
 //----------------------------------------End----------------------------------------
 
+//----------------------------------------Start----------------------------------------
+//ProductDetail
+/**
+ * Create, Update and Select from Travel table.
+ */
+exports.createTravel = function (req, res, next) {
+    var message = null;
+    var travel = {
+        ProfileID: req.user,
+        CountryID: "",
+        TravelDescription: "",
+        TravelStartDate: "",
+        TravelEndDate: req.body.email,
+        IsExpired: 0,
+        Remarks: "",
+        CreatedDate: Date.now(),
+        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+    };
 
-exports.getAllProduct = function (req, res, next, ProductDetailID) {
-    db.t_product_detail.findAll({ where: {ProductDetailID: ProductDetailID}, include: [
-        {model: db.t_product_document}
+    var travelSave = db.T_Travel.build(travel);
+    req.body.TravelID = travelSave.TravelID;
+
+    travelSave.save().then(function () {
+        return next();
+    }).catch(function (err) {
+        res.send({ status: 'Exception', message: err })
+    });
+};
+
+ //----------------------------------------End----------------------------------------
+
+exports.getAllProductDetailByProdId = function (req, res, next, ProductID) {
+    db.t_product.findAll({ where: {ProductID: ProductID}, include: [
+        {model: db.t_product_detail}
     ]})
     .then(function(result){
         return res.jsonp(result);
@@ -224,4 +285,39 @@ exports.getProductByProdName = function (req, res, next, ProductName) {
         })
     });
 };
+
+//----------------------------------------Start----------------------------------------
+//Product Categories
+/**
+ * Get Product Categories Lists
+ */
+exports.getProductCat = function(req, res){
+    db.t_product_cat.findAll()
+    .then(function(productCat){
+        return res.jsonp(productCat);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductSubCat = function (req, res, next, ProductCatID) {
+    db.t_product_cat.findAll({ where: {ProductCatID: ProductCatID}, include: [
+        {model: db.t_product_subcat}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+  //----------------------------------------End----------------------------------------
 

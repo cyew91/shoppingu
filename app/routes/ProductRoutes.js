@@ -11,21 +11,27 @@ module.exports = function (app) {
     var country = require('../../app/controllers/CountryControllers');
     
     //Product
-    app.route('/productDetail/:productDetailID')
-    .get(product.getAllProduct);
-
-    app.route('/product/:productName')
-    .get(product.getProductByProdName);
+    // app.route('/product/:productId')
+    // .get(product.getAllProductByProdId);
+    app.route('/product/productname/:productName')
+    .get(product.show);
 
     app.route('/product/:productId')
     .get(product.show)
-    .post(product.create)
+    .post(product.createTravel, product.createProduct, product.createProductDetail, product.createProductDocument)
     .put(product.update);
 
-    app.param('productId', product.getProductID);
+    //Product Categories and Sub Categories
+    app.route('/product/productcat/:productcat')
+    .get(product.show);
+
+    app.get('/product',product.getProductCat);
+
+    // app.param('productId', product.getProductID);
     app.param('productName', product.getProductByProdName);
-    app.param('productDetailID', product.getAllProduct);
-    
+    app.param('productId', product.getAllProductDetailByProdId);
+    app.param('productcat', product.getProductSubCat);
+
     //Country
     app.get('/country', country.all);
 };
