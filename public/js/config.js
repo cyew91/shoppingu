@@ -64,20 +64,28 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('posttravel', {
             abstract: true,
             url: '/posttravel',
-            controller: 'PostTravelController',
             templateUrl: 'views/product/post/post.html'
         })
         .state('posttravel.travel', {
             url: '',
-            controller: 'PostTravelController',
+            params: {
+                productObj: null
+            },
+            controller: 'TravelController',
             templateUrl: 'views/product/post/travel.html'
         })
         .state('posttravel.product', {
-            controller: 'PostTravelController',
+            params: {
+                productObj: null
+            },
+            controller: 'ProductController',
             templateUrl: 'views/product/post/product.html'
         })
         .state('posttravel.review', {
-            controller: 'PostTravelController',
+            params: {
+                productObj: null
+            },
+            controller: 'ReviewController',
             templateUrl: 'views/product/post/review.html'
         })
         .state('userprofile', {
@@ -101,11 +109,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'OrderController',
             templateUrl: 'views/users/order.html'
         })
-        // .state('post', {
-        //     url: '/post',
-        //     controller: 'PostController',
-        //     templateUrl: 'views/users/post.html'
-        // })
+        .state('post', {
+            url: '/post',
+            controller: 'PostController',
+            templateUrl: 'views/users/post.html'
+        })
         .state('forgetpassword', {
             url: '/forgetpassword',
             templateUrl: 'views/users/forgetPassword.html'

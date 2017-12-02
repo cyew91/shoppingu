@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.router', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.articles', 'mean.auth','satellizer','angularFblogin', 'slick', 'angucomplete-alt'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.articles', 'mean.auth','satellizer','angularFblogin', 'slick', 'angucomplete-alt'])
 .config(function ($authProvider) {
 
     $authProvider.twitter({

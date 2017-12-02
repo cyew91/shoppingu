@@ -1,18 +1,26 @@
 'use strict'
 
-angular.module('mean').controller('PostTravelController', ['$scope', '$state', 'GetCountryList', function ($scope, $state, GetCountryList) {
-    $scope.count = 1;
+angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', function ($scope, $state, $stateParams, GetCountryList) {
+
     $scope.countryList = [];
 
     const init = function () {
         GetCountryList.query(function (list) {
             $scope.countryList = list;
         });
+
+        if($stateParams.productObj == null){
+            console.log($stateParams.productObj == null)
+            $scope.productObj={
+                count: 1
+            }
+        }else{
+            $scope.productObj = $stateParams.productObj;
+            console.log($scope.productObj)
+        }
     };
 
     init();
-
-    $('.js-example-basic-single').select2();
 
     $('.input-daterange').datepicker({
         autoclose: true,
@@ -21,17 +29,19 @@ angular.module('mean').controller('PostTravelController', ['$scope', '$state', '
         clearBtn: true
     });
 
-    $scope.submitTravelForm = function (isValid) {
+    $('#datepickerFrom').on('changeDate', function() {
+        $scope.productObj.startDate = $('#datepickerFrom').datepicker('getFormattedDate');
+    });
 
-        $('#autocomplete_value').prop('required', true);
-        $('#autocomplete_value').removeAttr('placeholder');
+    $('#datepickerTo').on('changeDate', function() {
+        $scope.productObj.toDate = $('#datepickerTo').datepicker('getFormattedDate')
+    });
 
-        if (isValid) {
-            alert("yeah");
-        } else {
-            alert("damn");
+    $scope.selectedCountry = function (selected) {
+        if (selected) {
+            $scope.productObj.countryId = selected.description.CountryID;
         }
-    }
+    };
 
     $scope.continue = function (count) {
         $('#text' + count).css('display', 'none');
@@ -49,39 +59,13 @@ angular.module('mean').controller('PostTravelController', ['$scope', '$state', '
             $bar.children().first().addClass("is-current");
         }
 
+        console.log(count);
         if (count == 2) {
-            console.log('2');
-            $state.go('posttravel.product');
+            console.log($scope.productObj);
+            $state.go('posttravel.product', {productObj: $scope.productObj});
         } else if (count == 3) {
-            $state.go('posttravel.review');
-        }
-    }
-
-    $scope.back = function (count) {
-        $('#text' + count).css('display', 'none');
-        $('#textStep' + count).css('display', 'block');
-
-        $('#text' + (count + 1)).css('display', 'block');
-        $('#textStep' + (count + 1)).css('display', 'none');
-
-        $('#check' + (count)).css('display', 'none');
-        $('#check' + (count + 1)).css('display', 'none');
-
-        console.log('#text' + count);
-
-        var $bar = $(".ProgressBar");
-        if ($bar.children(".is-current").length > 0) {
-            $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
-        } else {
-            $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
-        }
-
-        if (count == 2) {
-            $state.go('posttravel.product');
-        } else if (count == 3) {
-            $state.go('posttravel.review');
-        } else if (count == 1) {
-            $state.go('posttravel.travel');
+            console.log($scope.productObj);
+            $state.go('posttravel.review', {productObj: $scope.productObj});
         }
     }
 

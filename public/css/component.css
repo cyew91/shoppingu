@@ -41,6 +41,12 @@
   	border-color: #0DA99F;
 }
 
+.btn-danger{
+	color: #fff;
+	background-color: #dc3545;
+	border-color: #dc3545;
+}
+
 .btn-secondary:hover{
 	background-color: #0DA99F;
 	border-color: #0DA99F;

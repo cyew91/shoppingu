@@ -44,6 +44,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: [
+                    {cwd: 'bower_components/angular-animate', src: ['**/*.js'], dest: 'public/lib/angular-animate', expand: true},
                     {cwd: 'bower_components/angular-bootstrap', src: ['**/*.js'], dest: 'public/lib/angular-bootstrap', expand: true},
                     {cwd: 'bower_components/angular-cookies',   src: ['angular-cookies*'], dest: 'public/lib/angular-cookies',   expand: true},
                     {cwd: 'bower_components/angular-mocks',     src: ['**/*.js'], dest: 'public/lib/angular-mocks',     expand: true},

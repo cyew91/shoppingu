@@ -1,0 +1,50 @@
+#productListTable{
+    margin-bottom: 0px;
+}
+
+#productListTable th{
+    color: #2b686e;
+    background-color: #91ced4;
+    font-weight: lighter ;
+    border: none;
+}
+
+#productListTable td{
+    border: none;
+}
+
+#productListTable tr:hover{
+    cursor: pointer;
+}
+
+#productListTable tr:nth-child(odd) {
+    background-color: #edf7f8;
+}
+
+#productListTable tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.div-product-list-table {
+    border: 1px solid #327a81;
+    border-radius: 10px;
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+  }
+
+  .div-product-list-table-header {
+    background-color: #327a81;
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .btn-small{
+      line-height: 0px !important;
+      height: 25px !important;
+      width: 25px !important;
+      padding: 0px !important;
+      margin: 0px !important;
+  }

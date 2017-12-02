@@ -22,7 +22,8 @@
     "dropzone": "^5.1.1",
     "select2": "^4.0.5",
     "bootstrap-datepicker": "latest",
-    "angucomplete-alt": "^3.0.0"
+    "angucomplete-alt": "^3.0.0",
+    "angular-animate": "1.6.6"
   },
   "resolutions": {
     "angular": "1.6.6",

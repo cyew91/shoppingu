@@ -5,13 +5,24 @@
         match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;">
     </div>
     <div class="input-daterange" style="float: left;">
-        <input id="datepickerFrom" type="text" name="startDate" class="form-control dateRangePicker" style="height: 44px; width: 200px; float: left; margin-right: 3px;"
-            placeholder="Date From" ng-model="startDate" required/>
-        <input id="datepickerTo" type="text" name="toDate" class="form-control dateRangePicker" style="height: 44px; width: 200px; margin-right: 3px;"
-            placeholder="Date To" ng-model="toDate" required/>
+        <input id="datepickerFrom" type="text" name="startDate" class="form-control dateRangePicker" placeholder="Date From" ng-model="productObj.startDate"
+        />
+        <input id="datepickerTo" type="text" name="toDate" class="form-control dateRangePicker" placeholder="Date To" ng-model="productObj.toDate"
+        />
     </div>
 </div>
+<div style="display:inline-block ; width: 100%; text-align: right;">
+    <button id="btnBack" class="btn btn-secondary btn-form" ng-click="back(productObj.count = productObj.count - 1)" ng-show="productObj.count > 1"
+        ui-sref-active="active" style="margin: 0px !important;">
+        Back
+    </button>
 
+    <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="continue(productObj.count = productObj.count + 1)"
+        style="margin: 0px !important;">
+        <span ng-show="productObj.count <= 2">Continue</span>
+        <span ng-show="productObj.count >= 3">Save</span>
+    </button>
+</div>
 <!-- <div id="progress-inputs" class="progress" style="margin-top: 30px; margin-bottom: 30px; width: 40%;
     float: left;">
     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-vluemax="100"
