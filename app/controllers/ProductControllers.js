@@ -7,12 +7,25 @@ var db = require('../../config/sequelize');
 
 //----------------------------------------Start----------------------------------------
 //Product
+exports.getProduct = function(req, res){
+    db.t_product.findAll()
+    .then(function(product){
+        return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
 /**
  * Retrieve a product by ProductID
  */
-exports.getProductID = function (req, res, next, ProductID) {
+exports.getProductByProdId = function (req, res, next, ProductID) {
     console.log('id => ' + ProductID);
-    db.T_Product.find({ where: { ProductID: ProductID } }).then(function (product) {
+    db.t_product.find({ where: { ProductID: ProductID } }).then(function (product) {
         if (!product) {
             return next(new Error('Failed to load ProductID ' + ProductID));
         } else {
@@ -24,10 +37,24 @@ exports.getProductID = function (req, res, next, ProductID) {
     });
 };
 
+exports.getProductByProfileIdAndTravelId = function (req, res, next) {
+    db.t_product.find({ where: {ProfileID: req.params.profileId, TravelID: req.params.travelId}
+    })
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
 /**
  * Show a product
  */
-exports.show = function (req, res) {
+exports.show= function (req, res) {
     return res.jsonp(req.product);
 };
 
@@ -62,7 +89,7 @@ exports.createProduct = function (req, res, next) {
 /**
  * Update Product
  */
-exports.update = function (req, res) {
+exports.updateProduct = function (req, res) {
 
     // create a new variable to hold the article that was placed on the req object.
     var product = req.product;
@@ -85,17 +112,46 @@ exports.update = function (req, res) {
 /**
  * Retrieve a product detail by ProductDetailID
  */
-exports.getProductDetailID = function (req, res, next, ProductDetailID) {
-    console.log('id => ' + ProductDetailID);
-    db.T_Product_Detail.find({ where: { ProductDetailID: ProductDetailID } }).then(function (productdetail) {
-        if (!productdetail) {
-            return next(new Error('Failed to load ProductDetailID ' + ProductDetailID));
-        } else {
-            req.productdetail = productdetail;
-            return next();
-        }
-    }).catch(function (err) {
-        return next(err);
+exports.getProductDetail = function(req, res){
+    db.t_product_detail.findAll()
+    .then(function(product){
+        return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductDetailByProdId = function (req, res, next, ProductID) {
+    db.t_product.findAll({ where: {ProductID: ProductID}, include: [
+        {model: db.t_product_detail}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductDetailByProdName = function (req, res, next, ProductName) {
+    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
     });
 };
 
@@ -162,9 +218,22 @@ exports.updateProductDetail = function (req, res) {
 /**
  * Retrieve a product document by ProductDocumentID
  */
-exports.getProductDocumentID = function (req, res, next, ProductDocumentID) {
+exports.getProductDocument = function(req, res){
+    db.t_product_document.findAll()
+    .then(function(product){
+        return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductDocumentById = function (req, res, next, ProductDocumentID) {
     console.log('id => ' + ProductDocumentID);
-    db.T_Product_Document.find({ where: { ProductDocumentID: ProductDocumentID } }).then(function (productdocument) {
+    db.t_product_document.find({ where: { ProductDocumentID: ProductDocumentID } }).then(function (productdocument) {
         if (!productdocument) {
             return next(new Error('Failed to load ProductDocumentID ' + ProductDocumentID));
         } else {
@@ -173,6 +242,21 @@ exports.getProductDocumentID = function (req, res, next, ProductDocumentID) {
         }
     }).catch(function (err) {
         return next(err);
+    });
+};
+
+exports.getProductDocumentByProdDetailId = function (req, res, next, ProductName) {
+    db.t_product_detail.findAll({where: {ProductDetailID: ProductDetailID}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
     });
 };
 
@@ -256,36 +340,6 @@ exports.createTravel = function (req, res, next) {
 
  //----------------------------------------End----------------------------------------
 
-exports.getAllProductDetailByProdId = function (req, res, next, ProductID) {
-    db.t_product.findAll({ where: {ProductID: ProductID}, include: [
-        {model: db.t_product_detail}
-    ]})
-    .then(function(result){
-        return res.jsonp(result);
-    })
-    .catch(function(err){
-        return res.render('error', {
-            error: err,
-            status: 500
-        })
-    });
-};
-
-exports.getProductByProdName = function (req, res, next, ProductName) {
-    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}, include: [
-        {model: db.t_product_document}
-    ]})
-    .then(function(result){
-        return res.jsonp(result);
-    })
-    .catch(function(err){
-        return res.render('error', {
-            error: err,
-            status: 500
-        })
-    });
-};
-
 //----------------------------------------Start----------------------------------------
 //Product Categories
 /**
@@ -293,8 +347,8 @@ exports.getProductByProdName = function (req, res, next, ProductName) {
  */
 exports.getProductCat = function(req, res){
     db.t_product_cat.findAll()
-    .then(function(productCat){
-        return res.jsonp(productCat);
+    .then(function(product){
+        return res.jsonp(product);
     })
     .catch(function(err){
         return res.render('error', {
@@ -304,12 +358,10 @@ exports.getProductCat = function(req, res){
     });
 };
 
-exports.getProductSubCat = function (req, res, next, ProductCatID) {
-    db.t_product_cat.findAll({ where: {ProductCatID: ProductCatID}, include: [
-        {model: db.t_product_subcat}
-    ]})
-    .then(function(result){
-        return res.jsonp(result);
+exports.getProductSubCat = function (req, res) {
+    db.t_product_subcat.findAll()
+    .then(function(product){
+        return res.jsonp(product);
     })
     .catch(function(err){
         return res.render('error', {
@@ -320,4 +372,3 @@ exports.getProductSubCat = function (req, res, next, ProductCatID) {
 };
 
   //----------------------------------------End----------------------------------------
-

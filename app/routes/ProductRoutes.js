@@ -6,32 +6,64 @@
 var passport = require('passport');
 
 module.exports = function (app) {
-    //Product Routes
+    //Routes
     var product = require('../../app/controllers/ProductControllers');
     var country = require('../../app/controllers/CountryControllers');
     
-    //Product
-    // app.route('/product/:productId')
-    // .get(product.getAllProductByProdId);
-    app.route('/product/productname/:productName')
-    .get(product.show);
-
+//----------------------------------------------------------------------------------------------------
+    //Get Product By ProductID and Update Product
     app.route('/product/:productId')
     .get(product.show)
-    .post(product.createTravel, product.createProduct, product.createProductDetail, product.createProductDocument)
-    .put(product.update);
+    .put(product.updateProduct);
 
-    //Product Categories and Sub Categories
-    app.route('/product/productcat/:productcat')
+    //Get All Product and Create Product
+    app.route('/product')
+    .get(product.getProduct)
+    .post(product.createTravel, product.createProduct, product.createProductDetail, product.createProductDocument)
+
+//----------------------------------------------------------------------------------------------------
+    //Get All Product Details
+    app.get('/productdetail',product.getProductDetail);
+
+    //Get Product Details By ProductDetailID
+    app.route('/productdetail/:productDetailId')
     .get(product.show);
 
-    app.get('/product',product.getProductCat);
+    //Get Product By Product Name
+    app.route('/productdetail/productdetailname/:productdetailname')
+    .get(product.show);
 
-    // app.param('productId', product.getProductID);
-    app.param('productName', product.getProductByProdName);
-    app.param('productId', product.getAllProductDetailByProdId);
-    app.param('productcat', product.getProductSubCat);
+    //Post Product Detail Page
+    app.route('/productdetail/:profileId/:travelId')
+    .get(product.getProductByProfileIdAndTravelId);
 
+//----------------------------------------------------------------------------------------------------
+    //Get All Product Documents
+    app.get('/productdocument',product.getProductDocument);
+
+    //Get Product Documents By ProductDocumentID
+    app.route('/productdocument/:productDocumentId')
+    .get(product.show);
+ 
+    //Get Product Documents By ProductDetailID
+    app.route('/productdocument/productdetailId/:productDocumentDetailId')
+    .get(product.show);
+//----------------------------------------------------------------------------------------------------
+    //Product Categories and Sub Categories
+    app.get('/productcat', product.getProductCat);
+    app.get('/productsubcat',product.getProductSubCat);
+
+//----------------------------------------------------------------------------------------------------
+    //Param
+    app.param('productId', product.getProductByProdId);
+    app.param('productdetailname', product.getProductDetailByProdName);
+    app.param('productDetailId', product.getProductDetailByProdId);
+    app.param('productDocumentId', product.getProductDocumentById);
+    app.param('productDocumentDetailId', product.getProductDocumentByProdDetailId);
+    app.param(['travelId'], product.getProductByProfileIdAndTravelId);
+
+//----------------------------------------------------------------------------------------------------
     //Country
     app.get('/country', country.all);
+
 };
