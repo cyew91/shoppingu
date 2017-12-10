@@ -71,12 +71,12 @@ exports.createProduct = function (req, res, next) {
         IsActive: 1,
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        CreatedBy: req.user,
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedBy: req.user
     };
 
-    var productSave = db.T_Product.build(product);
+    var productSave = db.t_product.build(product);
     req.body.ProductID = productSave.ProductID;
 
     productSave.save().then(function () {
@@ -95,16 +95,15 @@ exports.updateProduct = function (req, res) {
     var product = req.product;
 
     product.updateAttributes({
-        // FirstName: req.body.FirstName,
-        // LastName: req.body.LastName,
-        // Email: req.body.Email,
-        // ContactNo: req.body.ContactNo
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: req.user
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
         return res.send({ status: 'Exception', message: err });
     });
 };
+
 //----------------------------------------End----------------------------------------
 
 //----------------------------------------Start----------------------------------------
@@ -171,18 +170,19 @@ exports.createProductDetail = function (req, res, next) {
         ProductID: req.body.ProductID,
         ProductCatID: "",
         ProductSubCatID: "",
+        DetailDescription: req.body.productDescription,
         CurrencyID: "",
-        ProductName: req.body.email,
-        Amount: 0,
-        Status: "",
+        ProductName: req.body.productName,
+        Amount: req.body.productAmount,
+        Status: 1,
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        CreatedBy: req.user,
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedBy: req.user
     };
 
-    var productDetailSave = db.T_Product_Detail.build(productdetail);
+    var productDetailSave = db.t_product_detail.build(productdetail);
     req.body.ProductDetailID = productDetailSave.ProductDetailID;
 
     productDetailSave.save().then(function () {
@@ -201,10 +201,14 @@ exports.updateProductDetail = function (req, res) {
     var productdetail = req.productdetail;
 
     productdetail.updateAttributes({
-        // FirstName: req.body.FirstName,
-        // LastName: req.body.LastName,
-        // Email: req.body.Email,
-        // ContactNo: req.body.ContactNo
+        ProductCatID: "",
+        ProductSubCatID: "",
+        DetailDescription: req.body.productDescription,
+        CurrencyID: "",
+        ProductName: req.body.productName,
+        Amount: req.body.productAmount,
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: req.user
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
@@ -272,9 +276,9 @@ exports.createProductDocument = function (req, res, next) {
         DocumentPath: "",
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        CreatedBy: req.user,
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedBy: req.user
     };
 
     productdocument.save().then(function () {
@@ -295,10 +299,11 @@ exports.updateProductDocument = function (req, res) {
     var productdocument = req.productdocument;
 
     productdocument.updateAttributes({
-        // FirstName: req.body.FirstName,
-        // LastName: req.body.LastName,
-        // Email: req.body.Email,
-        // ContactNo: req.body.ContactNo
+        DocumentName: "",
+        DocumentType: "",
+        DocumentPath: "",
+        LastUpdatedDate: Date.now(),
+        LastUpdatedBy: req.user
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
@@ -319,16 +324,16 @@ exports.createTravel = function (req, res, next) {
         CountryID: "",
         TravelDescription: "",
         TravelStartDate: "",
-        TravelEndDate: req.body.email,
+        TravelEndDate: "",
         IsExpired: 0,
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
+        CreatedBy: req.user,
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+        LastUpdatedBy: req.user
     };
 
-    var travelSave = db.T_Travel.build(travel);
+    var travelSave = db.t_travel.build(travel);
     req.body.TravelID = travelSave.TravelID;
 
     travelSave.save().then(function () {

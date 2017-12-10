@@ -295,3 +295,24 @@ DELIMITER ;
 
 CALL shoppingu_procedure();
 -- END ChengYew 20/11/2017
+
+-- 0.0.9 ChengYew 10/12/2017
+-- Set TravelStartDate and TravelEndDate to ullable and add 'IsRequest' column into T_Travel table.
+UPDATE db_version SET Version = '0.0.9', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+ALTER TABLE `T_Travel` CHANGE COLUMN `TravelStartDate` `TravelStartDate` DATETIME NULL  , CHANGE COLUMN `TravelEndDate` `TravelEndDate` DATETIME NULL;
+
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 'T_Travel' AND COLUMN_NAME = 'IsRequest') THEN
+        ALTER TABLE T_Travel ADD COLUMN IsRequest INT(1) NOT NULL AFTER TravelEndDate ;
+
+        UPDATE T_Travel
+        SET IsRequest=0
+        WHERE IsRequest IS NULL;
+    END IF;
+END$$
+DELIMITER ;
+-- END ChengYew 10/12/2017

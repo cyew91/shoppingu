@@ -15,6 +15,10 @@ module.exports = function (sequelize, DataTypes) {
             CountryName: {
                 type: DataTypes.STRING(45),
                 allowNull: false
+            },
+            Status: {
+                type: DataTypes.INTEGER,
+                allowNull: false
             }
         }, 
         

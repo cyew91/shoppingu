@@ -14,7 +14,7 @@ module.exports = function (app) {
     //Get Product By ProductID and Update Product
     app.route('/product/:productId')
     .get(product.show)
-    .put(product.updateProduct);
+    .put(product.updateProduct, product.updateProductDetail, product.updateProductDocument);
 
     //Get All Product and Create Product
     app.route('/product')

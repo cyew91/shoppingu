@@ -21,11 +21,13 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             },
             TravelStartDate: {
-                type: DataTypes.DATE,
-                allowNull: false
+                type: DataTypes.DATE
             },
             TravelEndDate: {
-                type: DataTypes.DATE,
+                type: DataTypes.DATE
+            },
+            IsRequest: {
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             IsExpired: {
