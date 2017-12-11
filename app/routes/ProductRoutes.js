@@ -34,8 +34,11 @@ module.exports = function (app) {
     .get(product.show);
 
     //Post Product Detail Page
-    app.route('/productdetail/:profileId/:travelId')
+    app.route('/postproductdetail/:profileId/:travelId')
     .get(product.getProductByProfileIdAndTravelId);
+
+    app.route('/productdetaillisting/:productId')
+    .get(product.getProductByProductID2);
 
 //----------------------------------------------------------------------------------------------------
     //Get All Product Documents

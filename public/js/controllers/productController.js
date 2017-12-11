@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', function ($scope, $state, $stateParams, $uibModal) {
 
     const init = function () {
         $scope.productObj = $stateParams.productObj;
@@ -25,7 +25,24 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         $scope.seletedProduct = product;
         console.log($scope.seletedProduct);
         $('#modal-product').modal('show');
+          
     }
+
+    $scope.open = function (product) {
+        var modalInstance = $uibModal.open({
+          //scope: $scope,
+          //animation: $scope.animationsEnabled,
+          templateUrl: 'views/editProductDetail.html',
+          controller: 'EditProductDetailController',
+          //size: size,
+          resolve: {
+            addProductToList: function() {
+              return $scope.addProductToList;
+              //$('#modal-product').modal('show');
+            }
+          }
+        })
+      };
 
     $scope.continue = function (count) {
         $('#text' + count).css('display', 'none');

@@ -1836,3 +1836,48 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 	margin-left: 15px; 
 	margin-right: 15px;
 }
+
+/* Edit Post Product CSS Start */
+.form-control-edit:not(textarea) {
+	height: 44px;
+	padding: 0 18px 3px;
+    border: 1px solid #dbe2e8;
+    background-color: #fff;
+    color: #606975;
+    font-family: "Maven Pro",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	/* appearance: none; */
+	display: block;
+	width: 100%;
+	/* position: static; */
+	/* margin-left: 10%; */
+}
+
+/* Edit Post Product CSS End */
+
+.trposts{
+	cursor: pointer;
+}
+
+/* postProductDetail Page Start */
+.row h1 {
+	margin-bottom: 15px;
+	display: inline-block
+}
+
+.listing {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+	padding-left: 15px;
+	
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+	max-width: 66.666667%;
+	
+	margin-left: 130px;
+}
+/* postProductDetail Page End */

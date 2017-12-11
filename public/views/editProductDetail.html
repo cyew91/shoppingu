@@ -1,0 +1,36 @@
+<div class="form-background">
+    <div>
+    <form id="signup-form">
+        <div style="margin-top: 20px;">
+            <div class="form-group" style="margin-bottom: 30px;">
+                <h7>Product Name</h7>
+                <input name="productName" ng-model="product.productName" class="form-control" type="text">
+            </div>
+            <div class="form-group" style="margin-bottom: 30px;">
+                <h7>Product Main Categories</h7>
+                <input name="productMainCategory" ng-model="product.productMainCategory" class="form-control" type="text">
+            </div>
+            <div class="form-group" style="margin-bottom: 30px;">
+                <h7>Product Sub Categories</h7>
+                <input name="productSubCategory" ng-model="product.productSubCategory" class="form-control" type="text">
+            </div>
+            <div class="form-group" style="margin-bottom: 30px;">
+                <h7>Product Description</h7>
+                <input name="productDescription" ng-model="product.productDescription" class="form-control" type="text">
+            </div>
+            <div class="form-group" style="margin-bottom: 30px;">
+                <h7>Amount</h7>
+                <input name="productAmount" ng-model="product.productAmount" class="form-control" type="text" ng-disabled="true">
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<div style="display:inline-block ; width: 95%; text-align: right;">
+    <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="continue(productObj.count = productObj.count + 1)"
+        style="margin: 0px !important;">
+        <span >Save</span>
+    </button>
+</div>
+

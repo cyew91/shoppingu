@@ -10,10 +10,8 @@ angular.module('mean.system')
 
     $scope.findOne = function() {
       GetUser.get({
-        profileId: $scope.profileId
+        profileId: $scope.global.user.ProfileID
       }, function(result) {
-          //$scope.firstName = result.FirstName;
-          //$scope.lastName = result.LastName;
           $scope.profile = result;
       });
     };

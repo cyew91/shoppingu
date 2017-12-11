@@ -1,0 +1,45 @@
+<div class="container-search padding-bottom-3x mb-1">
+  <div class="row">
+    <div class="col-xl-9 col-lg-8 order-lg-2">
+      <div class="shop-toolbar padding-bottom-1x mb-2">
+        <div class="column">
+          <div class="shop-sorting">
+            <label for="sorting">Sort by:</label>
+            <select class="form-control" id="sorting">
+              <option>Popularity</option>
+              <option>Low - High Price</option>
+              <option>High - Low Price</option>
+            </select>
+            <span class="text-muteed">Showing:</span>
+            <span>1 item</span>
+          </div>
+        </div>
+      </div>
+      <!-- Product Grid -->
+      <div class="isotope-grid cols-3 mb-2" ng-init="searchResult()" style="position: relative; height: 1638.44px;">
+        <div class="gutter-sizer"></div>
+        <div class="grid-sizer"></div>
+        <!-- Product -->
+        <div class="grid-item" ng-repeat="item in product">
+          <div class="product-card">
+            <a class="product-thumb" href="">
+              <img src="{{item.t_product_document.DocumentPath}}" alt="Product">
+            </a>
+            <h3 class="product-title">
+              <a href="">{{item.ProductName}}</a>
+            </h3>
+            <h4 class="product-price">
+              RM {{item.Amount}}
+            </h4>
+            <div class="product-buttons">
+              <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</div>

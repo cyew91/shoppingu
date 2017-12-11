@@ -11,14 +11,16 @@
                         <tr>
                             <th>Trip</th>
                             <th>Trip Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in travel">
+                        <tr class="trposts" ng-repeat="item in travel" ng-click="getProductId(item.TravelID)" >
                             <td>
-                                <a href="productdetails" class="text-medium">{{item.TravelDescription}}</a>
+                                <a class="text-medium">{{item.t_country.CountryName}}</a>
                             </td>
-                            <td>{{item.TravelStartDate}}</td>
+                            <td>{{item.TravelStartDate | date:'MM/dd/yyyy'}}</td>
+                            <td>Expired</td>
                         </tr>                        
                     </tbody>
                 </table>

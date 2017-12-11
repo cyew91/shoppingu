@@ -5,22 +5,16 @@ angular.module('mean.articles')
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
 
-    $scope.a = $stateParams.a;
-    $scope.b = $stateParams.b;
-
-    $scope.abc = "Gary";
-    console.log($scope.abc);
-
-    $scope.findOne = function() {
+    const init = function() {
       GetUser.get({
-        profileId: $scope.profileId
+        profileId: $scope.global.user.ProfileID
       }, function(result) {
-          //$scope.firstName = result.FirstName;
-          //$scope.lastName = result.LastName;
           $scope.profile = result;
       });
     };
     
+    init();
+
     $scope.updateProfile = function() {
       var profile = $scope.profile;
       if (!profile.updated) {

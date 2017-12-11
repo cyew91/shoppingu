@@ -154,6 +154,21 @@ exports.getProductDetailByProdName = function (req, res, next, ProductName) {
     });
 };
 
+exports.getProductByProductID2 = function (req, res, next) {
+    db.t_product_detail.findAll({ where: {ProductID: req.params.productId}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
 /**
  * Show a product detail
  */

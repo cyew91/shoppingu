@@ -1,0 +1,31 @@
+<div class="container-search padding-bottom-3x mb-1" ng-init="getProductDetailResult()">
+  <div class="row">
+    <div class="listing">
+      <h1>Listing</h1>
+        <!-- Product Grid -->
+        <div class="isotope-grid cols-3 mb-2"  style="position: relative;">
+          <div class="gutter-sizer"></div>
+          <div class="grid-sizer"></div>
+          <!-- Product -->
+          <div class="grid-item" ng-repeat="item in productDetail">
+            <div class="product-card">
+              <a class="product-thumb" href="">
+                <img src="/img/nmd.jpg" alt="Product">
+              </a>
+              <h3 class="product-title">
+                <a href="">{{item.ProductName}}</a>
+              </h3>
+              <h4 class="product-price">
+                RM {{item.Amount}}
+              </h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-primary btn-sm" ng-click="open()">Edit</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,3 +1,4 @@
+
 <form novalidate>
     <div style="margin-top: 20px;">
         <div class="form-group" style="margin-bottom: 30px;">
@@ -38,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="addedProduct in productObj.productList track by $index" ng-click="onRowSelect(addedProduct)">
+            <tr ng-repeat="addedProduct in productObj.productList track by $index" ng-click="open(addedProduct)">
                 <td style="padding: 5px; text-align: center; vertical-align: middle" ng-click="$event.stopPropagation()">
                     <button class="btn btn-danger btn-small" ng-click="removeFromList($index)">X</button>
                 </td>
@@ -66,23 +67,3 @@
     </button>
 </div>
 
-<div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>why: {{selectedProduct.productAmount}}</p>
-                <input type="text" ng-model="selectedProduct.productAmount"/>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>

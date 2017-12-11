@@ -17,6 +17,8 @@ module.exports = function (app) {
     // app.param('profileId', profiles.getProfileId);
 
     // Travel Routes
-    app.route('/travel')
+    app.route('/travel/:tprofileId')
     .get(travels.allTravel);
+
+    app.param('tprofileId', travels.allTravel);
 };

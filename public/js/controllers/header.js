@@ -34,10 +34,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
 
     $scope.search = function () {
         GetProductID.query({
-            productName: $scope.inputSearch
+            productdetailname: $scope.inputSearch
         }, function (result) {
-            //$scope.firstName = result.FirstName;
-            //$scope.lastName = result.LastName;
             $scope.product = result;
             $state.go('searchResult', { productDetailID: result });
         });
