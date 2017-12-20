@@ -68,6 +68,7 @@ module.exports = function (sequelize, DataTypes) {
             freezeTableName: true,
             associate: function (models) {
                 ProductDetail.hasOne(models.t_product_document, { foreignKey: 'ProductDetailID' });
+                ProductDetail.hasMany(models.t_customer_order, { foreignKey: 'ProductDetailID' });
                 ProductDetail.belongsTo(models.t_product, { foreignKey: 'ProductID' });
                 ProductDetail.belongsTo(models.t_product_cat, { foreignKey: 'ProductCatID' });
                 ProductDetail.belongsTo(models.t_product_subcat, { foreignKey: 'ProductSubCatID' });

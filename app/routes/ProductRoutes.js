@@ -38,7 +38,7 @@ module.exports = function (app) {
     .get(product.getProductByProfileIdAndTravelId);
 
     app.route('/productdetaillisting/:productId')
-    .get(product.getProductByProductID2);
+    .get(product.getProductDetailByProductID);
 
 //----------------------------------------------------------------------------------------------------
     //Get All Product Documents
@@ -55,6 +55,8 @@ module.exports = function (app) {
     //Product Categories and Sub Categories
     app.get('/productcat', product.getProductCat);
     app.get('/productsubcat',product.getProductSubCat);
+    app.route('/productsubcat/:productCatID')
+    .get(product.show);
 
 //----------------------------------------------------------------------------------------------------
     //Param
@@ -63,6 +65,7 @@ module.exports = function (app) {
     app.param('productDetailId', product.getProductDetailByProdId);
     app.param('productDocumentId', product.getProductDocumentById);
     app.param('productDocumentDetailId', product.getProductDocumentByProdDetailId);
+    app.param('productCatID', product.getProductSubCatByProductCatId);
     app.param(['travelId'], product.getProductByProfileIdAndTravelId);
 
 //----------------------------------------------------------------------------------------------------

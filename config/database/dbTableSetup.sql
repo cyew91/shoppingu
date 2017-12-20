@@ -316,3 +316,34 @@ BEGIN
 END$$
 DELIMITER ;
 -- END ChengYew 10/12/2017
+
+
+-- 0.0.10 ChengYew 19/12/2017
+-- New table for customer order.
+UPDATE db_version SET Version = '0.0.10', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+CREATE  TABLE T_Customer_Order (
+  `CustomerOrderID` VARCHAR(36) NOT NULL ,
+  `ProfileID` VARCHAR(36) NOT NULL ,
+  `ProductDetailID` VARCHAR(36) NOT NULL ,
+  `Quantity` INT NULL ,
+  `Amount` DECIMAL(10,3) NULL ,
+  `Remarks` VARCHAR(500) NULL ,
+  `CreatedDate` DATETIME NOT NULL ,
+  `CreatedBy` VARCHAR(36) NOT NULL ,
+  `UpdatedDate` DATETIME NOT NULL ,
+  `LastUpdatedBy` VARCHAR(36) NOT NULL ,
+  PRIMARY KEY (`CustomerOrderID`) ,
+  INDEX `ProfileID_idx` (`ProfileID` ASC) ,
+  INDEX `ProductDetailID_idx` (`ProductDetailID` ASC) ,
+  CONSTRAINT `ProfileID`
+    FOREIGN KEY (`ProfileID` )
+    REFERENCES `T_Profile` (`ProfileID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ProductDetailID`
+    FOREIGN KEY (`ProductDetailID` )
+    REFERENCES `T_Product_Detail` (`ProductDetailID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+-- END ChengYew 19/12/2017

@@ -2,40 +2,25 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('t_profile', {
-            ProfileID: {
+    var CustomerOrder = sequelize.define('t_customer_order', {
+            CustomerOrderID: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            FirstName: {
-                type: DataTypes.STRING(45),
+            ProfileID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            LastName: {
-                type: DataTypes.STRING(45),
+            ProductDetailID: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
-            FullName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            Address: {
-                type: DataTypes.STRING(500)
-            },
-            Email: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            ContactNo: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            Gender: {
+            Quantity: {
                 type: DataTypes.INTEGER
             },
-            DOB: {
-                type: DataTypes.DATE
+            Amount: {
+                type: DataTypes.DECIMAL(10, 3)
             },
             Remarks: {
                 type: DataTypes.STRING(500)
@@ -64,14 +49,11 @@ module.exports = function (sequelize, DataTypes) {
             // if you don't want that, set the following
             freezeTableName: true,
             associate: function (models) {
-                Profile.hasOne(models.t_profile_account, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.t_profile_document, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_product, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_travel, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_customer_order, {foreignKey: 'ProfileID'});
+                CustomerOrder.belongsTo(models.t_profile, { foreignKey: 'ProfileID' });
+                CustomerOrder.belongsTo(models.t_product_detail, { foreignKey: 'ProductDetailID' });
             }
         }
     );
 
-    return Profile;
+    return CustomerOrder;
 };

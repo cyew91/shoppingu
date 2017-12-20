@@ -154,7 +154,7 @@ exports.getProductDetailByProdName = function (req, res, next, ProductName) {
     });
 };
 
-exports.getProductByProductID2 = function (req, res, next) {
+exports.getProductDetailByProductID = function (req, res, next) {
     db.t_product_detail.findAll({ where: {ProductID: req.params.productId}, include: [
         {model: db.t_product_document}
     ]})
@@ -369,6 +369,21 @@ exports.getProductCat = function(req, res){
     db.t_product_cat.findAll()
     .then(function(product){
         return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductSubCatByProductCatId = function (req, res, next, ProductCatID) {
+    db.t_product_cat.findAll({where: {ProductCatID: ProductCatID}, include: [
+        {model: db.t_product_subcat}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
     })
     .catch(function(err){
         return res.render('error', {
