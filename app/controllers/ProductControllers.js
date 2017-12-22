@@ -367,14 +367,28 @@ exports.createTravel = function (req, res, next) {
  */
 exports.getProductCat = function(req, res){
     db.t_product_cat.findAll()
-    .then(function(product){
-        return res.jsonp(product);
+    .then(function(productcat){
+        return res.jsonp(productcat);
     })
     .catch(function(err){
         return res.render('error', {
             error: err,
             status: 500
         })
+    });
+};
+
+exports.getProductCatByProdCatId = function (req, res, next, ProductCatID) {
+    console.log('id => ' + ProductCatID);
+    db.t_product_cat.find({ where: { ProductCatID: ProductCatID } }).then(function (product) {
+        if (!product) {
+            return next(new Error('Failed to load ProductCatID ' + ProductCatID));
+        } else {
+            req.product = product;
+            return next();
+        }
+    }).catch(function (err) {
+        return next(err);
     });
 };
 
