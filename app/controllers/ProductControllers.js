@@ -169,6 +169,21 @@ exports.getProductDetailByProductID = function (req, res, next) {
     });
 };
 
+exports.getProductDetailByProdSubCatID = function (req, res, next) {
+    db.t_product_detail.findAll({ where: {ProductSubCatID: req.params.productSubCatId}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
 /**
  * Show a product detail
  */
@@ -411,6 +426,21 @@ exports.getProductSubCat = function (req, res) {
     db.t_product_subcat.findAll()
     .then(function(product){
         return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductCatAndSubCat = function (req, res, next) {
+    db.t_product_cat.findAll({include: [
+        {model: db.t_product_subcat}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
     })
     .catch(function(err){
         return res.render('error', {

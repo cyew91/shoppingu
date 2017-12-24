@@ -40,6 +40,10 @@ module.exports = function (app) {
     app.route('/productdetaillisting/:productId')
     .get(product.getProductDetailByProductID);
 
+    //Get Product Details By ProductSubCatID
+    app.route('/productdetail/productsubcatid/:productSubCatId')
+    .get(product.show);
+
 //----------------------------------------------------------------------------------------------------
     //Get All Product Documents
     app.get('/productdocument',product.getProductDocument);
@@ -61,6 +65,8 @@ module.exports = function (app) {
     app.route('/productsubcat/:productCatIDForSubCat')
     .get(product.show);
 
+    app.get('/productcatandsubcat', product.getProductCatAndSubCat);
+
 //----------------------------------------------------------------------------------------------------
     //Param
     app.param('productId', product.getProductByProdId);
@@ -71,6 +77,7 @@ module.exports = function (app) {
     app.param('productCatIDForSubCat', product.getProductSubCatByProductCatId);
     app.param('productCatID', product.getProductCatByProdCatId);
     app.param(['travelId'], product.getProductByProfileIdAndTravelId);
+    app.param(['productSubCatId'], product.getProductDetailByProdSubCatID);
 
 //----------------------------------------------------------------------------------------------------
     //Country
