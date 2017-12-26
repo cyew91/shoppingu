@@ -1,6 +1,9 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', function ($scope, $state, $stateParams, $uibModal) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProductCategory', 'GetProductSubCategory',function ($scope, $state, $stateParams, $uibModa, GetProductCategory, GetProductSubCategory) {
+
+    $scope.productCategoryList = [];
+    $scope.productSubCategoryList = [];
 
     const init = function () {
         $scope.productObj = $stateParams.productObj;
@@ -8,6 +11,17 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         if ($scope.productObj.productList == null) {
             $scope.productObj.productList = [];
         }
+
+        GetProductCategory.query(function (list) {
+            $scope.productCategoryList = list;
+        });
+
+        GetProductSubCategory.query(function (list) {
+            $scope.productSubCategoryList = list;
+        });
+
+        $('.js-example-basic-single').select2();
+        
     }
 
     init();
@@ -22,12 +36,11 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     }
 
     $scope.onRowSelect = function (product) {
-        $scope.seletedProduct = product;
+        $scope.seletedProduct = Object.create(product);
         console.log($scope.seletedProduct);
         $('#modal-product').modal('show');
-          
     }
-
+    
     $scope.open = function (product) {
         var modalInstance = $uibModal.open({
           //scope: $scope,
@@ -43,7 +56,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
           }
         })
       };
-
+      
     $scope.continue = function (count) {
         $('#text' + count).css('display', 'none');
         $('#textStep' + count).css('display', 'block');

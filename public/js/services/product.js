@@ -30,6 +30,14 @@ angular.module('mean.articles').service("GetProductDetail", ['$resource', functi
     return $resource('/productdetaillisting/:productId', {productId: '@productId'});
 }]);
 
+angular.module('mean.auth').service("GetProductCategory", ['$resource', function($resource) {
+    return $resource('/productcat');
+}]);
+
+angular.module('mean.auth').service("GetProductSubCategory", ['$resource', function($resource) {
+    return $resource('/productsubcat');
+}]);
+
 // angular.module('mean.auth').factory("Articles", ['$resource', function($resource) {
 //     return $resource('profile/:profileId', {
 //         profileId: '@profileId'
