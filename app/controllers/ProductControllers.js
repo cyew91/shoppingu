@@ -154,8 +154,23 @@ exports.getProductDetailByProdName = function (req, res, next, ProductName) {
     });
 };
 
-exports.getProductByProductID2 = function (req, res, next) {
+exports.getProductDetailByProductID = function (req, res, next) {
     db.t_product_detail.findAll({ where: {ProductID: req.params.productId}, include: [
+        {model: db.t_product_document}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductDetailByProdSubCatID = function (req, res, next) {
+    db.t_product_detail.findAll({ where: {ProductSubCatID: req.params.productSubCatId}, include: [
         {model: db.t_product_document}
     ]})
     .then(function(result){
@@ -367,8 +382,37 @@ exports.createTravel = function (req, res, next) {
  */
 exports.getProductCat = function(req, res){
     db.t_product_cat.findAll()
-    .then(function(product){
-        return res.jsonp(product);
+    .then(function(productcat){
+        return res.jsonp(productcat);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductCatByProdCatId = function (req, res, next, ProductCatID) {
+    console.log('id => ' + ProductCatID);
+    db.t_product_cat.find({ where: { ProductCatID: ProductCatID } }).then(function (product) {
+        if (!product) {
+            return next(new Error('Failed to load ProductCatID ' + ProductCatID));
+        } else {
+            req.product = product;
+            return next();
+        }
+    }).catch(function (err) {
+        return next(err);
+    });
+};
+
+exports.getProductSubCatByProductCatId = function (req, res, next, ProductCatID) {
+    db.t_product_cat.findAll({where: {ProductCatID: ProductCatID}, include: [
+        {model: db.t_product_subcat}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
     })
     .catch(function(err){
         return res.render('error', {
@@ -382,6 +426,21 @@ exports.getProductSubCat = function (req, res) {
     db.t_product_subcat.findAll()
     .then(function(product){
         return res.jsonp(product);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductCatAndSubCat = function (req, res, next) {
+    db.t_product_cat.findAll({include: [
+        {model: db.t_product_subcat}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
     })
     .catch(function(err){
         return res.render('error', {
