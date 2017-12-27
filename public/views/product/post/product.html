@@ -6,9 +6,8 @@
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Main Categories</h7>
-            <!-- <input name="productMainCategory" ng-model="product.productMainCategory" class="form-control" type="text"> -->
             <select class="js-example-basic-single" name="productCategory" style="width: 100%;">
-                <option ng-repeat="productCategory in productCategoryList">{{productCategory.ProductCatDesc}}</option>
+                <option ng-repeat="productCategory in productCategoryList" id={productCategory.ProductCatID}>{{productCategory.ProductCatDesc}}</option>
             </select>
         </div>
         <div class="form-group" style="margin-bottom: 30px;">

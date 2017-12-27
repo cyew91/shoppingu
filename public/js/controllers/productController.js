@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProductCategory', 'GetProductSubCategory',function ($scope, $state, $stateParams, $uibModa, GetProductCategory, GetProductSubCategory) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat) {
 
     $scope.productCategoryList = [];
     $scope.productSubCategoryList = [];
@@ -12,12 +12,9 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
             $scope.productObj.productList = [];
         }
 
-        GetProductCategory.query(function (list) {
+        GetProdCatAndSubCat.query(function (list) {
             $scope.productCategoryList = list;
-        });
-
-        GetProductSubCategory.query(function (list) {
-            $scope.productSubCategoryList = list;
+            console.log(list);
         });
 
         $('.js-example-basic-single').select2();
@@ -25,6 +22,11 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     }
 
     init();
+
+    $('.js-example-basic-single').on('select2:select', function (e) {
+        var data = e.params.data;
+        console.log(data);
+    });
 
     $scope.addProductToList = function () {
         $scope.productObj.productList.push($scope.product);

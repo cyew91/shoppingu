@@ -30,23 +30,6 @@ angular.module('mean.articles').service("GetProductDetail", ['$resource', functi
     return $resource('/productdetaillisting/:productId', {productId: '@productId'});
 }]);
 
-<<<<<<< HEAD
-angular.module('mean.auth').service("GetProductCategory", ['$resource', function($resource) {
-    return $resource('/productcat');
-}]);
-
-angular.module('mean.auth').service("GetProductSubCategory", ['$resource', function($resource) {
-    return $resource('/productsubcat');
-}]);
-
-// angular.module('mean.auth').factory("Articles", ['$resource', function($resource) {
-//     return $resource('profile/:profileId', {
-//         profileId: '@profileId'
-//     }, {
-//         update: {method: 'PUT'}
-//     });
-// }]);
-=======
 angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', function($resource){
     return $resource('/productcatandsubcat');
 }]);
@@ -54,4 +37,3 @@ angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', fun
 angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$resource', function($resource) {
     return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'});
 }]);
->>>>>>> 4aebe660e55ffc064a7ab69099d68e1b4bbfa1c3
