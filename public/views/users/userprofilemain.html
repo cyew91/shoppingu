@@ -17,21 +17,9 @@
         </div>
     </aside>
     <nav class="list-group">
-        <a class="list-group-item" ui-sref="userprofile">
-            <i class="icon-head"></i>
-            Profile
-        </a>
-        <a class="list-group-item" ui-sref="address">
-            <i class="icon-map"></i>
-            Addresses
-        </a>
-        <a class="list-group-item" ui-sref="order">
-            <i class="icon-bag"></i>
-            Orders
-        </a>
-        <a class="list-group-item" ui-sref="post">
-            <i class="icon-bag"></i>
-            Posts
+        <a id="{{item.accId}}" class="list-group-item" ui-sref="{{item.accLink}}" ng-click="selectedMenu($index)" ng-repeat="item in accountMenu">
+            <i class="{{item.accIcon}}"></i>
+            {{item.accName}}
         </a>
     </nav>
 </div>

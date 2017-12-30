@@ -37,5 +37,7 @@ angular.module('mean.articles')
       });
     };
 
+    $scope.currentPage = 1;
+    //$scope.productLength = $scope.product.length;
   }]);
 

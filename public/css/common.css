@@ -814,15 +814,6 @@ img, figure {
     padding-left: 12px;
 }
 
-.list-group {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
-}
-
 div {
     display: block;
 }
@@ -1004,8 +995,14 @@ hr {
     margin-bottom: 0;
 }
 
-.user-info-wrapper+.list-group .list-group-item:first-child {
+/* .user-info-wrapper+.list-group .list-group-item:first-child {
     border-radius: 0;
+} */
+
+
+.list-group-item:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 }
 
 a.list-group-item {
@@ -1023,12 +1020,22 @@ a.list-group-item, .list-group-item-action {
     border-color: #e1e7ec;
     background-color: #fff;
 	text-decoration: none;
-
+	position: relative;
 	display: block;
     padding: .75rem 1.25rem;
     margin-bottom: -1px;
     background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
+	border: 1px solid rgba(0,0,0,.125);
+	text-decoration: none;
+}
+
+a.list-group-item:hover, a.list-group-item:active, .list-group-item-action:hover, .list-group-item-action:focus, .list-group-item-action:active {
+    background-color: #f5f5f5;
+    color: #606975;
+}
+
+.list-group-item:focus {
+    text-decoration: none;
 }
 
 .list-group-item.active {
@@ -1036,7 +1043,14 @@ a.list-group-item, .list-group-item-action {
     background-color: #0da9ef;
     color: #fff;
     cursor: default;
-    pointer-events: none;
+	pointer-events: none;
+	z-index: 2;
+}
+
+.list-group-item i {
+    margin-top: -4px;
+    margin-right: 8px;
+    font-size: 1.1em;
 }
 
 .containerUser{

@@ -170,6 +170,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             },
             controller: 'ProductController',
             templateUrl: 'views/product/post/product.html'
+        })
+        .state('userprofilemain', {
+            url: '/userprofilemain',
+            controller: 'UserProfileMainController',
+            templateUrl: 'views/users/userprofilemain.html'
             
         });
 }

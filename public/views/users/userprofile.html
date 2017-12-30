@@ -1,7 +1,7 @@
 
 
 <div class="containerUser padding-bottom-3x mb-2" data-ng-controller="UserProfileController" >
-    <div class="row">
+    <div class="row" ng-controller="UserProfileMainController">
             <div ng-include="'../views/users/userprofilemain.html'" class="col-lg-4"></div>
         <div class="col-lg-8">
             <div class="padding-top-2x mt-2 hidden-lg-up">
@@ -11,7 +11,6 @@
                     <div class="form-group">
                         <label for="account-fn">First Name</label>
                         <input class="form-control" type="text" id="account-fn" ng-model="profile.FirstName" value="{{profile.FirstName}}" required>
-                        
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -51,8 +50,11 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <div class="input-daterange" style="float: left;">
                         <label for="account-ln">Date of Birth</label>
-                        <input class="form-control" type="date" id="date-input" value="2017-06-13">
+                        <input id="datepickerFrom" type="text" name="startDate" class="form-control" placeholder="DOB" ng-model="productObj.startDate" />
+                        <!-- <input class="form-control" type="date" id="date-input" value="2017-06-13"> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">

@@ -15,6 +15,19 @@ angular.module('mean.articles')
     
     init();
 
+    $scope.accountMenu = [{accId: 'a1',accName: 'Profiles'}, {accId: 'a2',accName: 'Addresses'}];
+
+    $('.input-daterange').datepicker({
+      autoclose: true,
+      keepEmptyValues: true,
+      format: 'dd-mm-yyyy',
+      clearBtn: true
+    });
+
+    $('#datepickerFrom').on('changeDate', function() {
+      $scope.productObj.startDate = $('#datepickerFrom').datepicker('getFormattedDate');
+    });
+
     $scope.updateProfile = function() {
       var profile = $scope.profile;
       if (!profile.updated) {
