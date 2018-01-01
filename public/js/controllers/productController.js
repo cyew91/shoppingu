@@ -49,7 +49,6 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
 
     $scope.onRowSelect = function (product) {
         $scope.seletedProduct = Object.create(product);
-        console.log($scope.seletedProduct);
         $('#modal-product').modal('show');
     }
     
@@ -86,10 +85,8 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         }
 
         if (count == 2) {
-            console.log($scope.productObj);
             $state.go('posttravel.product', { productObj: $scope.productObj });
         } else if (count == 3) {
-            console.log($scope.productObj);
             $state.go('posttravel.review', { productObj: $scope.productObj });
         }
     }
@@ -104,8 +101,6 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         $('#check' + (count)).css('display', 'none');
         $('#check' + (count + 1)).css('display', 'none');
 
-        console.log('#text' + count);
-
         var $bar = $(".ProgressBar");
         if ($bar.children(".is-current").length > 0) {
             $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
@@ -114,13 +109,10 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         }
 
         if (count == 2) {
-            console.log($scope.productObj);
             $state.go('posttravel.product', { productObj: $scope.productObj });
         } else if (count == 3) {
-            console.log($scope.productObj);
             $state.go('posttravel.review', { productObj: $scope.productObj });
         } else if (count == 1) {
-            console.log($scope.productObj);
             $state.go('posttravel.travel', { productObj: $scope.productObj });
         }
     }

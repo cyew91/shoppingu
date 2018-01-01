@@ -1,8 +1,8 @@
 <h4>Where are you going to travel</h4>
 <div style="width: 100% !important; margin-top: 15px;">
-    <div id="autocomplete" angucomplete-alt maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
-        local-data="countryList" search-fields="CountryName" title-field="CountryName" minlength="1" input-class="form-control form-control-small"
-        match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;">
+    <div angucomplete-alt id="autocomplete"  maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
+        local-data="travelObject.countryList" search-fields="CountryName" title-field="CountryName" minlength="1" input-class="form-control form-control-small"
+        initial-value="travelObject.initCountry" match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;">
     </div>
     <div class="input-daterange" style="float: left;">
         <input id="datepickerFrom" type="text" name="startDate" class="form-control dateRangePicker" placeholder="Date From" ng-model="productObj.startDate"
