@@ -14,18 +14,28 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
 
         GetProdCatAndSubCat.query(function (list) {
             $scope.productCategoryList = list;
-            console.log(list);
         });
 
-        $('.js-example-basic-single').select2();
-        
+        $('#selectMainCategory').select2();
+        $('#selectSubCategory').select2();
     }
 
     init();
 
-    $('.js-example-basic-single').on('select2:select', function (e) {
+    $('#selectMainCategory').on('select2:select', function (e) {
         var data = e.params.data;
-        console.log(data);
+        $scope.productSubCategoryList = [];
+
+        $scope.$apply(function(){
+            $scope.productCategoryList.forEach(categoryItem => {
+
+                categoryItem['t_product_subcats'].forEach(subCategoryItem => {
+                    if(subCategoryItem['ProductCatID'] === data['id']){
+                        $scope.productSubCategoryList.push(subCategoryItem);
+                    }
+                });
+            });
+        });
     });
 
     $scope.addProductToList = function () {

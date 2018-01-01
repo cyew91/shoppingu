@@ -6,13 +6,19 @@
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Main Categories</h7>
-            <select class="js-example-basic-single" name="productCategory" style="width: 100%;">
-                <option ng-repeat="productCategory in productCategoryList" id={productCategory.ProductCatID}>{{productCategory.ProductCatDesc}}</option>
+            <select id="selectMainCategory" class="js-example-basic-single" name="productCategory" style="width: 100%;">
+                <option ng-repeat="productCategory in productCategoryList" value={{productCategory.ProductCatID}}>
+                    {{productCategory.ProductCatDesc}}
+                </option>
             </select>
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Sub Categories</h7>
-            <input name="productSubCategory" ng-model="product.productSubCategory" class="form-control" type="text">
+            <select id="selectSubCategory" class="js-example-basic-single" name="productSubCategory" style="width: 100%;">
+                <option ng-repeat="productSubCategory in productSubCategoryList" value={{productSubCategory.ProductSubCatID}}>
+                    {{productSubCategory.ProductSubCatDesc}}
+                </option>
+            </select>
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Description</h7>
