@@ -1,6 +1,7 @@
 'use strict'
 
 angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', function ($scope, $state, $stateParams, GetCountryList) {
+    $scope.buyer = $stateParams.buyer;
 
     $scope.travelObject = {
         countryList: [],

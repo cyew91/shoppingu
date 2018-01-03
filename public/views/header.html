@@ -42,8 +42,13 @@
         </a>
         <ul class="sub-menu toolbar-dropdown">
           <li>
-            <a ui-sref="posttravel.travel">
-              <span>Post Travel</span>
+            <a ui-sref="posttravel.travel({buyer: false})">
+              <span>Traveller</span>
+            </a>
+          </li>
+          <li>
+            <a ui-sref="posttravel.travel({buyer: true})">
+              <span>Buyer</span>
             </a>
           </li>
         </ul>
