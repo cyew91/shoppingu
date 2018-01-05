@@ -347,3 +347,15 @@ CREATE  TABLE T_Customer_Order (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 -- END ChengYew 19/12/2017
+
+
+-- 0.0.11 ChengYew 05/01/2018
+-- New table for customer order.
+UPDATE db_version SET Version = '0.0.11', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+ALTER TABLE T_Product ADD COLUMN PostType INT(2) NOT NULL  AFTER Amount;
+
+UPDATE T_Product
+SET PostType=0
+WHERE TravelID!='';
+-- END ChengYew 05/01/2018
