@@ -24,6 +24,9 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.DECIMAL(10,3),
                 allowNull: false
             },
+            PostType: {
+                type: DataTypes.INTEGER
+            },
             IsActive: {
                 type: DataTypes.INTEGER
             },
