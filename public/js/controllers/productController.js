@@ -5,6 +5,8 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     $scope.productCategoryList = [];
     $scope.productSubCategoryList = [];
 
+    Dropzone.autoDiscover = false;
+
     const init = function () {
         $scope.productObj = $stateParams.productObj;
 
@@ -21,6 +23,23 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     }
 
     init();
+
+    $("#dropzoneProductImage").dropzone({
+         url: '/uploadProductImage',
+         addRemoveLinks: true,
+
+         sending: function(file, xhr, formdata){
+            console.log('Sending');
+
+            var csrftoken = document.head.querySelector("[name=csrf-token]").content;
+            console.log(csrftoken);
+            formdata.append('_csrf', csrftoken);
+            
+         },
+         success: function(file, response){
+            console.log('Sucess');
+         }
+    });
 
     $('#selectMainCategory').on('select2:select', function (e) {
         var data = e.params.data;

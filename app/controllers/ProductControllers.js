@@ -450,4 +450,10 @@ exports.getProductCatAndSubCat = function (req, res, next) {
     });
 };
 
+exports.uploadProductImage = function ( req, res ) {
+    return res.render('201', {
+        Success: 'Yeah',
+        status: 201
+    });
+}
   //----------------------------------------End----------------------------------------

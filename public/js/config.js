@@ -176,7 +176,6 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             url: '/userprofilemain',
             controller: 'UserProfileMainController',
             templateUrl: 'views/users/userprofilemain.html'
-            
         });
 }
 ]);

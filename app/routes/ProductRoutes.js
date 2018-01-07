@@ -83,4 +83,6 @@ module.exports = function (app) {
     //Country
     app.get('/country', country.all);
 
+    //Dropzone: Upload product image
+    app.post('/uploadProductImage', product.uploadProductImage);
 };
