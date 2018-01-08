@@ -5,6 +5,17 @@
  */
 var passport = require('passport');
 
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+    }
+  })
+var upload = multer({ storage: storage }).any();
+
 module.exports = function (app) {
     //Routes
     var product = require('../../app/controllers/ProductControllers');
@@ -84,5 +95,14 @@ module.exports = function (app) {
     app.get('/country', country.all);
 
     //Dropzone: Upload product image
-    app.post('/uploadProductImage', product.uploadProductImage);
+    // app.post('/uploadProductImage', product.uploadProductImage);
+    app.post('/uploadProductImage', function (req, res) {
+        upload(req, res, function (err) {
+          if (err) {
+            return res.json({ success: false , message: 'Damnit'});
+          }
+          return res.json({ success: true, message: 'Yeah'});
+          // Everything went fine
+        })
+      })
 };

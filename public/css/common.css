@@ -1895,3 +1895,9 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 	margin-left: 130px;
 }
 /* postProductDetail Page End */
+
+.dz-error-message{
+	opacity: 1 !important;
+	width: auto !important;
+
+}

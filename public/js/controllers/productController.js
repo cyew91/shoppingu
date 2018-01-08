@@ -31,6 +31,8 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
          sending: function(file, xhr, formdata){
             console.log('Sending');
 
+            console.log(file);
+
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
             console.log(csrftoken);
             formdata.append('_csrf', csrftoken);
@@ -38,6 +40,9 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
          },
          success: function(file, response){
             console.log('Sucess');
+         },
+         error: function(file, response){
+            console.log(response);
          }
     });
 
