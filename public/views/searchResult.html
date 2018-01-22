@@ -1,3 +1,9 @@
+<!-- Bootstrap 4 alpha CSS -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script> -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" /> -->
+
 <div class="container-search padding-bottom-3x mb-1">
   <div class="row">
     <div class="col-xl-9 col-lg-8 order-lg-2">
@@ -15,42 +21,70 @@
           </div>
         </div>
       </div>
-      <!-- Product Grid -->
-      <div class="isotope-grid cols-3 mb-2" style="position: relative; height: 1638.44px;">
-        <div class="gutter-sizer"></div>
-        <div class="grid-sizer"></div>
-        <!-- Product -->
-        <div class="grid-item" ng-repeat="item in product">
-          <div class="product-card">
-            <a class="product-thumb" href="">
-              <img src="{{item.t_product_document.DocumentPath}}" alt="Product">
-            </a>
-            <h3 class="product-title">
-              <a href="">{{item.ProductName}}</a>
-            </h3>
-            <h4 class="product-price">
-              RM {{item.Amount}}
-            </h4>
-            <div class="product-buttons">
-              <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
+      <!-- Tab -->
+      <ul class="nav nav-tabs" role="tablist" id="myTab" ng-init="type = 0">
+        <li class="nav-item">
+          <a class="nav-link active" href="#profile1" ng-click="selectedTab(1); isTravel(0)" data-toggle="tab" role="tab" aria-selected="true">Traveller</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#request" ng-click="selectedTab(2); isTravel(1)" data-toggle="tab" role="tab" aria-selected="false">Request</a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content" ng-init="selectedTab(1); isTravel(0)">
+        <div class="tab-pane" id="profile1" role="tabpanel">
+          <!-- Product Grid Travel-->
+          <div class="isotope-grid cols-3 mb-2" style="position: relative; height: 1638.44px;">
+            <div class="gutter-sizer"></div>
+            <div class="grid-sizer"></div>
+            <!-- Product -->
+            <div class="grid-item" ng-repeat="item in tFilteredTodos">
+              <div class="product-card">
+                <a class="product-thumb" href="">
+                  <img src="{{item.t_product_document.DocumentPath}}" alt="Product">
+                </a>
+                <h3 class="product-title">
+                  <a href="">{{item.ProductName}}</a>
+                </h3>
+                <h4 class="product-price">
+                  RM {{item.Amount}}
+                </h4>
+                <div class="product-buttons">
+                  <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- Pagination Travel -->
+          <!-- <h4>{{todos.length}} total</h4> -->
+          <ul uib-pagination total-items="tTotalItems" ng-model="tCurrentPage" max-size="tMaxSize" boundary-links="true" items-per-page="12" ng-click="isTravel(1)"></ul>
         </div>
-        
+        <div class="tab-pane" id="request" role="tabpanel">
+          <!-- Product Grid Request-->
+          <div class="isotope-grid cols-3 mb-2" style="position: relative; height: 1638.44px;">
+            <div class="gutter-sizer"></div>
+            <div class="grid-sizer"></div>
+            <!-- Product -->
+            <div class="grid-item" ng-repeat="itemReq in rFilteredTodos">
+              <div class="product-card">
+                <a class="product-thumb" href="">
+                  <img src="{{itemReq.t_product_document.DocumentPath}}" alt="Product">
+                </a>
+                <h3 class="product-title">
+                  <a href="">{{itemReq.ProductName}}</a>
+                </h3>
+                <h4 class="product-price">
+                  RM {{itemReq.Amount}}
+                </h4>
+                <div class="product-buttons">
+                  <button class="btn btn-outline-primary btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul uib-pagination total-items="rTotalItems" ng-model="rCurrentPage" max-size="rMaxSize" boundary-links="true" items-per-page="12" ng-click="isTravel(0)"></ul>
+        </div>
       </div>
-      <!-- Pagination -->
-      <nav class="pagination">
-        <div class="column">
-          <ul class="pages">
-            <li class="active">
-              <a href="#">1</a>
-            </li>
-            <li>
-              <a href="#">2</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </div>
     <!-- Sidebar -->
     <div class="col-xl-3 col-lg-4 order-lg-1" ng-init="menuTree()">

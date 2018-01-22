@@ -139,10 +139,47 @@ exports.getProductDetailByProdId = function (req, res, next, ProductID) {
     });
 };
 
+// exports.getProductDetailByProdName = function (req, res, next, ProductName) {
+//     db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}, PostType: false, include: [
+//         {model: db.t_product_document}
+//     ]})
+//     .then(function(result){
+//         return res.jsonp(result);
+//     })
+//     .catch(function(err){
+//         return res.render('error', {
+//             error: err,
+//             status: 500
+//         })
+//     });
+// };
+
 exports.getProductDetailByProdName = function (req, res, next, ProductName) {
-    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}, include: [
-        {model: db.t_product_document}
-    ]})
+    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}
+    , include: [
+        // {model: db.t_product, where: {PostType: 0}}
+        {model: db.t_product}
+        ,{model: db.t_product_document}
+    ]
+})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};
+
+exports.getProductDetailByProdNameReq = function (req, res, next, ProductName) {
+    db.t_product_detail.findAll({ where: {ProductName: {$like: '%' + ProductName + '%'}}
+    , include: [
+        {model: db.t_product, where: {PostType: 1}}
+        ,{model: db.t_product_document}
+    ]
+})
     .then(function(result){
         return res.jsonp(result);
     })
@@ -171,7 +208,8 @@ exports.getProductDetailByProductID = function (req, res, next) {
 
 exports.getProductDetailByProdSubCatID = function (req, res, next) {
     db.t_product_detail.findAll({ where: {ProductSubCatID: req.params.productSubCatId}, include: [
-        {model: db.t_product_document}
+        {model: db.t_product_document},
+        {model: db.t_product}
     ]})
     .then(function(result){
         return res.jsonp(result);

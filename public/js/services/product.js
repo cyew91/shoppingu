@@ -19,6 +19,10 @@ angular.module('mean.articles').service("GetProductID", ['$resource', function($
     return $resource('/productdetail/productdetailname/:productdetailname', {productdetailname: '@productdetailname'});
 }]);
 
+angular.module('mean.articles').service("GetProductIDReq", ['$resource', function($resource) {
+    return $resource('/productdetail/productdetailnamereq/:productdetailnamereq', {productdetailnamereq: '@productdetailnamereq'});
+}]);
+
 angular.module('mean.articles').service("GetProductIDByProfileAndTravel", ['$resource', function($resource) {
     return $resource('/postproductdetail/:profileId/:travelId', {
         profileId: '@profileId',

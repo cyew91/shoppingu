@@ -44,6 +44,10 @@ module.exports = function (app) {
     app.route('/productdetail/productdetailname/:productdetailname')
     .get(product.show);
 
+    //Get Product By Product Name Request
+    app.route('/productdetail/productdetailnamereq/:productdetailnamereq')
+    .get(product.show);
+
     //Post Product Detail Page
     app.route('/postproductdetail/:profileId/:travelId')
     .get(product.getProductByProfileIdAndTravelId);
@@ -82,6 +86,7 @@ module.exports = function (app) {
     //Param
     app.param('productId', product.getProductByProdId);
     app.param('productdetailname', product.getProductDetailByProdName);
+    app.param('productdetailnamereq', product.getProductDetailByProdNameReq);
     app.param('productDetailId', product.getProductDetailByProdId);
     app.param('productDocumentId', product.getProductDocumentById);
     app.param('productDocumentDetailId', product.getProductDocumentByProdDetailId);

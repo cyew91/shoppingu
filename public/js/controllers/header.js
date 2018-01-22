@@ -11,6 +11,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
     }];
     $scope.showSearchBar = false;
     $scope.isCollapsed = false;
+    $scope.productTravel = [];
+    $scope.productRequest = [];
 
     $scope.SignOut = function () {
         SignOut.get(function (response) {
@@ -37,9 +39,17 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
             productdetailname: $scope.inputSearch
         }, function (result) {
             $scope.product = result;
-            $state.go('searchResult', { productDetailID: result });
+            for(var i=0;i<$scope.product.length;i++){
+                if ($scope.product[i].t_product.PostType == 0)
+                  $scope.productTravel.push($scope.product[i]);
+                else
+                  $scope.productRequest.push($scope.product[i]);
+            }
+            $state.go('searchResult', { prodTravel: $scope.productTravel, prodRequest: $scope.productRequest });
+            $scope.productTravel = [];
+            $scope.productRequest = [];
         });
     };
 
-
+    
 }]);
