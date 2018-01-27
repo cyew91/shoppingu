@@ -13,6 +13,7 @@ module.exports = function (app) {
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);
     app.get('/users/user', users.user);
+    app.get('/checkLoggedin', users.requiresLogin);
 
 // Setting up the users api
     app.post('/users', users.create);

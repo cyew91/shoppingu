@@ -39,7 +39,7 @@ exports.signup = function (req, res) {
  * Logout
  */
 exports.signout = function (req, res) {
-    console.log('Logout: { profileId: ' + req.user.ProfileID + ', loginId: ' + req.user.LoginID + ' }');
+    console.log('Logout: { profileId: ' + req.ProfileID + ', loginId: ' + req.LoginID + ' }');
     req.logout();
     return res.send({status: 'success', message: 'User logout successfully.'});
 };
@@ -106,11 +106,8 @@ exports.user = function (req, res, next, id) {
 /**
  * Generic require login routing middleware
  */
-exports.requiresLogin = function (req, res, next) {
-    if (!req.isAuthenticated()) {
-        return res.status(401).send('User is not authorized');
-    }
-    next();
+exports.requiresLogin = function (req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
 };
 
 /**

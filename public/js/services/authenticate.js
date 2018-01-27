@@ -17,6 +17,10 @@ angular.module('mean.auth').service("SignUp", ['$resource', function ($resource)
     return $resource('/profile');
 }]);
 
+angular.module('mean.auth').service("CheckLoggedIn", ['$resource', function ($resource) {
+    return $resource('/checkLoggedin');
+}]);
+
 angular.module('mean.auth').service("LogIn", ['$resource', function ($resource) {
     return $resource('/users/session');
 }]);

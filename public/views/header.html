@@ -1,6 +1,6 @@
 <header calss="navbar navbar-sticky navbar-stuck" ng-controller="HeaderController">
 
-  <div id="mainSearchForm" ng-show='showSearchBar' ng-form="search()" >
+  <div id="mainSearchForm" ng-show='showSearchBar' ng-form="search()">
     <input type="text" name="site_search" ng-keypress="$event.keyCode === 13 && search()" placeholder="Type to search..." ng-model="inputSearch">
     <div>
       <span id="mainSearchClear" ng-click="inputSearch = null">Clear</span>
@@ -53,13 +53,13 @@
           </li>
         </ul>
       </li>
-      <li ng-hide="global.authenticated">
-        <a ui-sref="signup">
+      <li>
+        <a ui-sref="signup" ng-show="!currentUser">
           <span>Sign Up</span>
         </a>
       </li>
-      <li ng-hide="global.authenticated">
-        <a ui-sref="signin">
+      <li>
+        <a ui-sref="signin" ng-show="!currentUser">
           <span>Sign In</span>
         </a>
       </li>
@@ -77,7 +77,7 @@
         <div class="search" ng-click="openSearch()">
           <i class="icon-search"></i>
         </div>
-        <div class="account" ng-show="global.authenticated">
+        <div class="account" ng-show="currentUser">
           <a ui-sref="userprofile"></a>
           <i class="icon-head"></i>
           <ul>
@@ -90,7 +90,7 @@
                 border-radius: 50%;">
               </div>
               <div style="padding-left: 8px;">
-                <h6 class="user-name" style="margin-bottom: 2px; font-size: 14px;">{{global.user.LoginID}}</h6>
+                <h6 class="user-name" style="margin-bottom: 2px; font-size: 14px;">{{ currentUser.LoginID }}</h6>
                 <span class="text-xs text-muted" style="display: block;">290 Reward points</span>
               </div>
             </li>

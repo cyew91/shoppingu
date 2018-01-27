@@ -15,10 +15,13 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
 
         signUp.$save(function (response) {
             if (response.result === 'success') {
-                $state.go('signin');
+                $('#myModal').modal('show');
             }
         });
     };
 
-
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $state.go('signin');
+    });
+    
 }]);
