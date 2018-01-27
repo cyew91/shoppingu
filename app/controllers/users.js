@@ -107,7 +107,11 @@ exports.user = function (req, res, next, id) {
  * Generic require login routing middleware
  */
 exports.requiresLogin = function (req, res) {
-    res.send(req.isAuthenticated() ? req.user : '0');
+    if (req.isAuthenticated()) {
+        res.send(req.user);
+    }else{
+        res.send({status: '0'});
+    }
 };
 
 /**

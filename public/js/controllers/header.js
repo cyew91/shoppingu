@@ -7,10 +7,11 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     $scope.productRequest = [];
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
-        if(response !== '0'){
+        if(response.status !== '0'){
             return response;
         }else{
             $scope.errorMessage = 'Not logged in';
+            $rootScope.currentUser = null;
             return "";
         }
     });
