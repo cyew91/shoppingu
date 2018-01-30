@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.auth').controller('signIn', ['$scope', '$window', '$state', 'LogIn', function ($scope, $window, $state, LogIn) {
+angular.module('mean.auth').controller('signIn', ['$scope', '$window','socket', '$state', 'LogIn', function ($scope, $window, socket, $state, LogIn) {
 
     $scope.signIn = function (user) {
 
@@ -11,6 +11,7 @@ angular.module('mean.auth').controller('signIn', ['$scope', '$window', '$state',
 
         logIn.$save(function (response) {
             if (response.status === 'success') {
+                socket.emit("addUser",{email:user.email});
                 $window.location.href = '/';
             }
         });

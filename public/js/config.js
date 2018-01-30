@@ -177,6 +177,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             url: '/userprofilemain',
             controller: 'UserProfileMainController',
             templateUrl: 'views/users/userprofilemain.html'
+        })
+        .state('chat', {
+            url: '/chat',
+            templateUrl: 'views/chat/chat.html'
         });
 }
 ]);
