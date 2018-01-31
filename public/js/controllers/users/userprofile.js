@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('UserProfileController', ['$scope', 'Global', '$stateParams', '$state', 'GetUser', function($scope, Global, $stateParams, $state, GetUser){
+  .controller('UserProfileController', ['$scope', 'Global', '$stateParams', '$state', 'GetUser', '$rootScope', function($scope, Global, $stateParams, $state, GetUser, $rootScope){
     $scope.global = Global;
-    $scope.profileId = $stateParams.profileId;
+    // $scope.profileId = $stateParams.profileId;
+    $scope.profileId = $rootScope.currentUser.ProfileID;
 
     const init = function() {
       GetUser.get({
-        profileId: $scope.global.user.ProfileID
+        profileId: $scope.profileId
       }, function(result) {
           $scope.profile = result;
       });

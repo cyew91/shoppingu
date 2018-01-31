@@ -10,16 +10,17 @@
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Main Categories</h7>
-            <select id="selectMainCategory" class="js-example-basic-single" name="productCategory" style="width: 100%;">
-                <option ng-repeat="productCategory in productCategoryList" value={{productCategory.ProductCatID}}>
+            <select id="selectMainCategory" ng-model="selectedItem" class="js-example-basic-single" name="productCategory" style="width: 100%;">
+                <option ng-repeat="productCategory in productCategoryList" ng-value="productCategory"
+                ng-selected="{{product.abc == productCategory}}">
                     {{productCategory.ProductCatDesc}}
                 </option>
             </select>
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Sub Categories</h7>
-            <select id="selectSubCategory" class="js-example-basic-single" name="productSubCategory" style="width: 100%;">
-                <option ng-repeat="productSubCategory in productSubCategoryList" value={{productSubCategory.ProductSubCatID}}>
+            <select id="selectSubCategory" ng-model="product.productSubCategory" class="js-example-basic-single" name="productSubCategory" style="width: 100%;">
+                <option ng-repeat="productSubCategory in selectedItem.t_product_subcats" ng-value="productSubCategory.ProductSubCatDesc">
                     {{productSubCategory.ProductSubCatDesc}}
                 </option>
             </select>

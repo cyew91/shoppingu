@@ -5,7 +5,7 @@
         local-data="travelObject.countryList" search-fields="CountryName" title-field="CountryName" minlength="1" input-class="form-control form-control-small"
         initial-value="travelObject.initCountry" match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;">
     </div>
-    <div class="input-daterange" style="float: left;" ng-if="buyer == false">
+    <div class="input-daterange" style="float: left;" ng-show="buyer == false">
         <input id="datepickerFrom" type="text" name="startDate" class="form-control dateRangePicker" placeholder="Date From" ng-model="productObj.startDate"
         />
         <input id="datepickerTo" type="text" name="toDate" class="form-control dateRangePicker" placeholder="Date To" ng-model="productObj.toDate"

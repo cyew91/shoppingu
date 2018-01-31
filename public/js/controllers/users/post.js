@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('PostController', ['$scope', 'Global', '$stateParams', '$state', 'GetTravel', 'GetProductIDByProfileAndTravel', 'GetProductDetail', function($scope, Global, $stateParams, $state, GetTravel, GetProductIDByProfileAndTravel, GetProductDetail){
+  .controller('PostController', ['$scope', 'Global', '$stateParams', '$state', 'GetTravel', 'GetProductIDByProfileAndTravel', 'GetProductDetail', '$rootScope', function($scope, Global, $stateParams, $state, GetTravel, GetProductIDByProfileAndTravel, GetProductDetail, $rootScope){
     $scope.global = Global;
+    $scope.profileId = $rootScope.currentUser.ProfileID;
 
     $scope.getTrip = function() {
       GetTravel.query({
-        tprofileId: $scope.global.user.ProfileID
+        tprofileId: $scope.profileId
       },function(result) {
           $scope.travel = result;
       });
@@ -14,7 +15,7 @@ angular.module('mean.articles')
 
     $scope.getProductId = function(travelId) {
       GetProductIDByProfileAndTravel.get({
-        profileId: $scope.global.user.ProfileID,
+        profileId: $scope.profileId,
         travelId: travelId
       },function(result) {
         $scope.ProdId = result.ProductID;
