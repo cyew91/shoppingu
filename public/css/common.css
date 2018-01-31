@@ -1058,10 +1058,9 @@ a.list-group-item:hover, a.list-group-item:active, .list-group-item-action:hover
 	margin-right: auto;
 	margin-left: auto;
 	padding-right: 15px;
-	padding-left: 15px;
+    padding-left: 15px;
 	width: 1000px;
 	margin-top:50px;
-
   }
 
 form {
@@ -2406,4 +2405,12 @@ body{
 
 #chat_box_send:hover{
     cursor: pointer;
+}
+
+.about-us-section{
+    margin-top: 50px;
+}
+
+.about-us-header{
+    margin-bottom: 30px;
 }
