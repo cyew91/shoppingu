@@ -2326,3 +2326,84 @@ body{
 
 
 /* Chat Page end */
+
+#chat_wrapper{
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+#chat_content_left{
+    border-left: 1px solid #0DA99F;
+    background-color: #0da9ef;
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    left: 0;
+}
+
+#chat_content_right{
+    background-color: #b2e281;
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    right: 0;
+}
+
+#chat_content_right_title{
+    position: relative;
+    border-bottom: 1px solid white;
+    min-height: 100px;
+    width: 100%;
+}
+
+#chat_content_right_title_left{
+    position: absolute;
+    width: 40%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+
+#chat_content_right_title_right{
+    position: absolute;
+    width: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+#chat_content_right_chat{
+    border-bottom: 1px solid white;
+    min-height: 240px;
+}
+#chat_content_right_tpye_box{
+    position: relative;
+    min-height: 60px;
+}
+
+#chat_box_wrapper{
+    position: absolute;
+    left: 0;
+    width: 90%;
+    height: 100%;
+}
+
+#chat_box{
+    width: 100%;
+    height: 100%;
+}
+
+#chat_box_send{
+    position: absolute;
+    right: 0;
+    width: 10%;
+    border: 1px solid black;
+    background-color: #000;
+    color: wheat;
+    height: 100%;
+}
+
+#chat_box_send:hover{
+    cursor: pointer;
+}

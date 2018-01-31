@@ -1,28 +1,15 @@
-<!-- chat room -->
+<div id="chat_wrapper">
+    <div id="chat_content_left">damn left</div>
 
-<div class="chat-room-wrapper">
-    <div class="online panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">在线<span class="user-number">{{users.length-1}}</span></h3>
+    <div id="chat_content_right">
+        <div id="chat_content_right_title">
+            <div id="chat_content_right_title_left"><h3>Country: </h3></div>
+            <div id="chat_content_right_title_right"><h3>Travel Period: </h3></div>
         </div>
-        <div class="user-wrapper panel-body">
-            <message self="nickname" scrolltothis="scrollToBottom()" info="message" ng-repeat="message in messages"></message>
-        </div>
-    </div>
-    <div class="chat-room panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{receiver?receiver:"群聊"}}</h3>
-        </div>
-        <div class="message-wrapper panel-body">
-            <!-- ngRepeat: message in messages -->
-        </div>
-        <div class="panel-footer">
-            <form class="post-form form-inline" novalidate name="postform" ng-submit="postMessage()">
-                <input type="text" class="form-control" ng-model="words" placeholder="说点什么呗" required>
-                <button type="submit" class="btn btn-success" ng-disabled="postform.$invalid">发送</button>
-            </form>
+        <div id="chat_content_right_chat"></div>
+        <div id="chat_content_right_tpye_box">
+           <div id="chat_box_wrapper"><input id="chat_box" type="text" name="fname"></div>
+            <div id="chat_box_send">Send</div>
         </div>
     </div>
 </div>
-
-<!-- end of chat room -->

@@ -13,7 +13,6 @@ angular.module('mean.system')
       bindToController : true,
       controllerAs  : 'productShowcaseCtrl',
       controller  : function(){
-
       }
     };
   }]);
