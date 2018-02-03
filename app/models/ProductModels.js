@@ -58,6 +58,7 @@ module.exports = function (sequelize, DataTypes) {
             freezeTableName: true,
             associate: function (models) {
                 Product.hasMany(models.t_product_detail, {foreignKey: 'ProductID'});
+                Product.hasMany(models.t_chat, {foreignKey: 'ProductID'});
                 Product.belongsTo(models.t_profile, {foreignKey: 'ProfileID'});
                 Product.belongsTo(models.t_travel, {foreignKey: 'TravelID'});
             }
