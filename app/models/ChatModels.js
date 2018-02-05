@@ -8,6 +8,10 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
+        ProductID: {
+            type: DataTypes.UUID,
+            allowNull: false
+        },
         ChatProfileID_A: {
             type: DataTypes.STRING(36),
             allowNull: false
@@ -49,6 +53,7 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 //ProductDocument.BelongTo(models.ProductDetail, {foreignKey: 'ProductDetailID'});
                 Chat.hasMany(models.t_chat_detail, {foreignKey: 'ChatID'}); // Adds ProductDetailID to ProductDocument
+                Chat.belongsTo(models.t_product, { foreignKey: 'ProductID' });
             }
         }
     );

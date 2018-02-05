@@ -359,3 +359,16 @@ UPDATE T_Product
 SET PostType=0
 WHERE TravelID!='';
 -- END ChengYew 05/01/2018
+
+-- 0.0.12 ChengYew 02/02/2018
+-- New table for customer order.
+UPDATE db_version SET Version = '0.0.12', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+ALTER TABLE T_Chat ADD COLUMN ProductID VARCHAR(36) NOT NULL  AFTER ChatID , 
+  ADD CONSTRAINT ProductID
+  FOREIGN KEY (ProductID)
+  REFERENCES T_Product (ProductID)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION
+, ADD INDEX ProductID_idx (ProductID ASC) ;
+-- END ChengYew 02/02/2018
