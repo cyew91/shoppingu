@@ -77,9 +77,7 @@ module.exports = function (sequelize, DataTypes) {
         // if you don't want that, set the following
         freezeTableName: true,
         associate: function (models) {
-            ProfileAccount.belongsTo(models.t_profile, {
-                foreignKey: 'ProfileID'
-            });
+            ProfileAccount.belongsTo(models.t_profile, {foreignKey: 'ProfileID'});
         }
     });
 

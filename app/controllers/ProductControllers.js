@@ -66,8 +66,8 @@ exports.createProduct = function (req, res, next) {
     var product = {
         ProfileID: req.user,
         TravelID: req.body.TravelID,
-        Description: "",
-        Amount: "",
+        Description: req.body.productDescription,
+        Amount: req.body.productAmount,
         IsActive: 1,
         Remarks: "",
         CreatedDate: Date.now(),
@@ -234,30 +234,69 @@ exports.showProductDetail = function (req, res) {
  */
 exports.createProductDetail = function (req, res, next) {
     var message = null;
-    var productdetail = {
-        ProductID: req.body.ProductID,
-        ProductCatID: "",
-        ProductSubCatID: "",
-        DetailDescription: req.body.productDescription,
-        CurrencyID: "",
-        ProductName: req.body.productName,
-        Amount: req.body.productAmount,
-        Status: 1,
-        Remarks: "",
-        CreatedDate: Date.now(),
-        CreatedBy: req.user,
-        LastUpdatedDate: Date.now(),
-        LastUpdatedBy: req.user
-    };
 
-    var productDetailSave = db.t_product_detail.build(productdetail);
-    req.body.ProductDetailID = productDetailSave.ProductDetailID;
+    $.each(req.productList, function(i, product){
 
-    productDetailSave.save().then(function () {
-        return next();
-    }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        var productdetail = {
+            ProductID: req.body.ProductID,
+            ProductCatID: product['productSubCategory']['ProductCatID'],
+            ProductSubCatID: product['productSubCategory']['ProductSubCatID'],
+            DetailDescription: req.body.productDescription,
+            CurrencyID: "",
+            ProductName: req.body.productName,
+            Amount: req.body.productAmount,
+            Status: 1,
+            Remarks: "",
+            CreatedDate: Date.now(),
+            CreatedBy: req.user,
+            LastUpdatedDate: Date.now(),
+            LastUpdatedBy: req.user,
+
+            t_product_document:{
+                DocumentName: "damnyou",
+                DocumentType: "damnyou",
+                DocumentPath: "damnyou",
+            }
+        };
+    
+        return db.ProductDetail.create(productdetail, 
+            {include: [ProductDetail]}
+        );
+
+        // var productDetailSave = db.t_product_detail.build(productdetail);
+        // req.body.ProductDetailID = productDetailSave.ProductDetailID;
+    
+        // productDetailSave.save().then(function () {
+        //     return next();
+        // }).catch(function (err) {
+        //     res.send({ status: 'Exception', message: err })
+        // });
     });
+
+    // var productdetail = {
+    //     ProductID: req.body.ProductID,
+    //     ProductCatID: "",
+    //     ProductSubCatID: "",
+    //     DetailDescription: req.body.productDescription,
+    //     CurrencyID: "",
+    //     ProductName: req.body.productName,
+    //     Amount: req.body.productAmount,
+    //     Status: 1,
+    //     Remarks: "",
+    //     CreatedDate: Date.now(),
+    //     CreatedBy: req.user,
+    //     LastUpdatedDate: Date.now(),
+    //     LastUpdatedBy: req.user
+    // };
+
+    // var productDetailSave = db.t_product_detail.build(productdetail);
+    // req.body.ProductDetailID = productDetailSave.ProductDetailID;
+
+    // productDetailSave.save().then(function () {
+    //     return next();
+    // }).catch(function (err) {
+    //     res.send({ status: 'Exception', message: err })
+    // });
 };
 
 /**
@@ -386,26 +425,38 @@ exports.updateProductDocument = function (req, res) {
  * Create, Update and Select from Travel table.
  */
 exports.createTravel = function (req, res, next) {
+    
     var message = null;
     var travel = {
-        ProfileID: req.user,
-        CountryID: "",
-        TravelDescription: "",
-        TravelStartDate: "",
-        TravelEndDate: "",
+        // req.user not working.
+        //ProfileID: req.user,
+        ProfileID: '0593f2a9-4954-444a-a53f-c8ed204df8fd',
+        CountryID: req.body.countryID,
+        TravelDescription: 'No Description',
+        //TravelDescription: req.body.travelDescription,
+        TravelStartDate: req.body.travelStartDate,
+        TravelEndDate: req.body.travelEndDate,
+        // TravelStartDate: Date.now(),
+        // TravelEndDate: Date.now(),
+        IsRequest: 0,
         IsExpired: 0,
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: req.user,
+        // CreatedBy: req.user,
+        CreatedBy: 'Damn',
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: req.user
+        // LastUpdatedBy: req.user
+        LastUpdatedBy: 'Damn'
     };
 
     var travelSave = db.t_travel.build(travel);
     req.body.TravelID = travelSave.TravelID;
 
     travelSave.save().then(function () {
-        return next();
+        //return next();
+        return res.jsonp({
+            "result": "success"
+        });
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });

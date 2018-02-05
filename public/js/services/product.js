@@ -41,3 +41,7 @@ angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', fun
 angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$resource', function($resource) {
     return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'});
 }]);
+
+angular.module('mean.articles').service('CreatePost', ['$resource', function($resource){
+    return $resource('/product');
+}]);

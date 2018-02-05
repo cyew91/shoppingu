@@ -61,7 +61,7 @@ module.exports = function (sequelize, DataTypes) {
             // if you don't want that, set the following
             freezeTableName: true,
             associate: function (models) {
-                Travel.belongsTo(models.t_product_detail, {foreignKey: 'ProfileID'});
+                Travel.belongsTo(models.t_profile, {foreignKey: 'ProfileID'});
                 Travel.belongsTo(models.t_country, {foreignKey: 'CountryID'});
                 Travel.hasOne(models.t_product, {foreignKey: 'TravelID'});
             }

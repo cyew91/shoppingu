@@ -10,7 +10,7 @@
         </div>
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Main Categories</h7>
-            <select id="selectMainCategory" ng-model="selectedItem" class="js-example-basic-single" name="productCategory" style="width: 100%;">
+            <select id="selectMainCategory" ng-model="product.productMainCategory" class="js-example-basic-single" name="productCategory" style="width: 100%;">
                 <option ng-repeat="productCategory in productCategoryList" ng-value="productCategory"
                 ng-selected="{{product.abc == productCategory}}">
                     {{productCategory.ProductCatDesc}}
@@ -20,7 +20,7 @@
         <div class="form-group" style="margin-bottom: 30px;">
             <h7>Product Sub Categories</h7>
             <select id="selectSubCategory" ng-model="product.productSubCategory" class="js-example-basic-single" name="productSubCategory" style="width: 100%;">
-                <option ng-repeat="productSubCategory in selectedItem.t_product_subcats" ng-value="productSubCategory.ProductSubCatDesc">
+                <option ng-repeat="productSubCategory in product.productMainCategory.t_product_subcats" ng-value="productSubCategory">
                     {{productSubCategory.ProductSubCatDesc}}
                 </option>
             </select>
@@ -56,8 +56,8 @@
                     <button class="btn btn-danger btn-small" ng-click="removeFromList($index)">X</button>
                 </td>
                 <td>{{addedProduct.productName}}</td>
-                <td>{{addedProduct.productMainCategory}}</td>
-                <td>{{addedProduct.productSubCategory}}</td>
+                <td>{{addedProduct.productMainCategory.ProductCatDesc}}</td>
+                <td>{{addedProduct.productSubCategory.ProductSubCatDesc}}</td>
                 <td>{{addedProduct.productDescription}}</td>
                 <td>{{addedProduct.productAmount}}</td>
             </tr>

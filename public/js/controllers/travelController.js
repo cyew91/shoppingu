@@ -19,7 +19,7 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
             }
         }else{
             $scope.productObj = $stateParams.productObj;
-            $scope.travelObject.initCountry= {CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryId'], CountryName: $scope.productObj['countryName'],Status: $scope.productObj['countryStatus']}
+            $scope.travelObject.initCountry= {CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryID'], CountryName: $scope.productObj['countryName'],Status: $scope.productObj['countryStatus']}
         }
     };
 
@@ -43,7 +43,7 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
     $scope.selectedCountry = function (selected) {
         
         if (selected && typeof(selected.description) !== 'undefined') {
-            $scope.productObj.countryId = selected.description.CountryID;
+            $scope.productObj.countryID = selected.description.CountryID;
             $scope.productObj.countryCode = selected.description.CountryCode;
             $scope.productObj.countryName = selected.description.CountryName;
             $scope.productObj.countryStatus = selected.description.Status;

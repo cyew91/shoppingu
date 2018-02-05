@@ -16,9 +16,9 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
 
         GetProdCatAndSubCat.query(function (list) {
             $scope.productCategoryList = list;
-            $scope.selectedItem = list[0];
         });
 
+        // Allow search in the dropdownlist.
         // $('#selectMainCategory').select2();
         // $('#selectSubCategory').select2();
     }
@@ -47,24 +47,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
          }
     });
 
-    // $('#selectMainCategory').on('select2:select', function (e) {
-    //     var data = e.params.data;
-    //     $scope.productSubCategoryList = [];
-
-    //     $scope.$apply(function(){
-    //         $scope.productCategoryList.forEach(categoryItem => {
-
-    //             categoryItem['t_product_subcats'].forEach(subCategoryItem => {
-    //                 if(subCategoryItem['ProductCatID'] === data['id']){
-    //                     $scope.productSubCategoryList.push(subCategoryItem);
-    //                 }
-    //             });
-    //         });
-    //     });
-    // });
-
     $scope.addProductToList = function () {
-        $scope.product.productMainCategory = $scope.selectedItem.ProductCatDesc;
         $scope.productObj.productList.push($scope.product);
         $scope.product = null;
     }
@@ -109,6 +92,8 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         } else {
             $bar.children().first().addClass("is-current");
         }
+
+        console.log($scope.productObj);
 
         if (count == 2) {
             $state.go('posttravel.product', { productObj: $scope.productObj });

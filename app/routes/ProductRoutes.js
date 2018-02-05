@@ -30,7 +30,8 @@ module.exports = function (app) {
     //Get All Product and Create Product
     app.route('/product')
     .get(product.getProduct)
-    .post(product.createTravel, product.createProduct, product.createProductDetail, product.createProductDocument)
+    .post(product.createTravel);
+    // .post(product.createTravel, product.createProduct, product.createProductDetail, product.createProductDocument)
 
 //----------------------------------------------------------------------------------------------------
     //Get All Product Details
@@ -107,7 +108,7 @@ module.exports = function (app) {
             return res.json({ success: false , message: 'Damnit'});
           }
           return res.json({ success: true, message: 'Yeah'});
-          // Everything went fine
+          // Everything OK
         })
       })
 };
