@@ -68,6 +68,7 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
         }
 
         if (count == 2) {
+            $scope.productObj.buyer = $scope.buyer;
             $state.go('posttravel.product', {productObj: $scope.productObj});
         } else if (count == 3) {
             $state.go('posttravel.review', {productObj: $scope.productObj});

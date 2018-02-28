@@ -64,16 +64,17 @@ exports.show= function (req, res) {
 exports.createProduct = function (req, res, next) {
     var message = null;
     var product = {
-        ProfileID: req.user,
+        ProfileID: req.body.profileId,
         TravelID: req.body.TravelID,
-        Description: req.body.productDescription,
-        Amount: req.body.productAmount,
+        Description: "test",
+        Amount: 30,
+        PostType: 1,
         IsActive: 1,
         Remarks: "",
         CreatedDate: Date.now(),
-        CreatedBy: req.user,
+        CreatedBy: "ks",
         LastUpdatedDate: Date.now(),
-        LastUpdatedBy: req.user
+        LastUpdatedBy: "ks"
     };
 
     var productSave = db.t_product.build(product);
@@ -81,6 +82,9 @@ exports.createProduct = function (req, res, next) {
 
     productSave.save().then(function () {
         return next();
+        // return res.jsonp({
+        //     "result": "success"
+        // });
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });
@@ -234,66 +238,87 @@ exports.showProductDetail = function (req, res) {
  */
 exports.createProductDetail = function (req, res, next) {
     var message = null;
-
-    $.each(req.productList, function(i, product){
-
-        var productdetail = {
-            ProductID: req.body.ProductID,
-            ProductCatID: product['productSubCategory']['ProductCatID'],
-            ProductSubCatID: product['productSubCategory']['ProductSubCatID'],
-            DetailDescription: req.body.productDescription,
-            CurrencyID: "",
-            ProductName: req.body.productName,
-            Amount: req.body.productAmount,
-            Status: 1,
-            Remarks: "",
-            CreatedDate: Date.now(),
-            CreatedBy: req.user,
-            LastUpdatedDate: Date.now(),
-            LastUpdatedBy: req.user,
-
-            t_product_document:{
-                DocumentName: "damnyou",
-                DocumentType: "damnyou",
-                DocumentPath: "damnyou",
-            }
-        };
-    
-        return db.ProductDetail.create(productdetail, 
-            {include: [ProductDetail]}
-        );
-
-        // var productDetailSave = db.t_product_detail.build(productdetail);
-        // req.body.ProductDetailID = productDetailSave.ProductDetailID;
-    
-        // productDetailSave.save().then(function () {
-        //     return next();
-        // }).catch(function (err) {
-        //     res.send({ status: 'Exception', message: err })
-        // });
-    });
-
     // var productdetail = {
     //     ProductID: req.body.ProductID,
-    //     ProductCatID: "",
-    //     ProductSubCatID: "",
-    //     DetailDescription: req.body.productDescription,
-    //     CurrencyID: "",
-    //     ProductName: req.body.productName,
-    //     Amount: req.body.productAmount,
+    //     ProductCatID: req.body.ProductCatID,
+    //     ProductSubCatID: req.body.ProductSubCatID,
+    //     DetailDescription: req.body.DetailDescription,
+    //     CurrencyID: req.body.CurrencyID,
+    //     ProductName: req.body.ProductName,
+    //     Amount: req.body.Amount,
     //     Status: 1,
     //     Remarks: "",
     //     CreatedDate: Date.now(),
-    //     CreatedBy: req.user,
+    //     CreatedBy: "You2",
     //     LastUpdatedDate: Date.now(),
-    //     LastUpdatedBy: req.user
+    //     LastUpdatedBy: "You3"
     // };
 
-    // var productDetailSave = db.t_product_detail.build(productdetail);
+    // var productDetailSave = db.t_product_detail.build(productdetail)
+    // if (req.body.length > 1)
+    // {
+        for (var i=0; i<req.body.productList.length; i++){
+            var productdetail = {
+                    ProductID: req.body.ProductID,
+                    ProductCatID: req.body.productList[i].productMainCategory.ProductCatID,
+                    ProductSubCatID: req.body.productList[i].productSubCategory.ProductSubCatID,
+                    DetailDescription: req.body.productList[i].productDescription,
+                    // CurrencyID: req.body.productList[i].CurrencyID,c1858e5e-995d-11e7-b85b-5d64dd272c67
+                    CurrencyID: "c1858e5e-995d-11e7-b85b-5d64dd272c67",
+                    ProductName: req.body.productList[i].productName,
+                    Amount: req.body.productList[i].productAmount,
+                    Status: 1,
+                    Remarks: "",
+                    CreatedDate: Date.now(),
+                    CreatedBy: "ks",
+                    LastUpdatedDate: Date.now(),
+                    LastUpdatedBy: "ks"
+                };
+
+            var productDetailSave = db.t_product_detail.build(productdetail);
+            req.body.ProductDetailID = productDetailSave.ProductDetailID;
+            productDetailSave.save();
+            
+        };
+        // return next();
+    // }
+    // else
+    // {
+    //     var productDetailSave = db.t_product_detail.build(req.body.productList);
+    //     productDetailSave.save();
+    //     req.body.ProductDetailID = productDetailSave.ProductDetailID;
+
+        var productdocument = {
+            ProductDetailID: req.body.ProductDetailID,
+            // DocumentName: req.body.t_product_document.DocumentName,
+            // DocumentType: req.body.t_product_document.DocumentType,
+            // DocumentPath: req.body.t_product_document.DocumentPath,
+            // Remarks: req.body.t_product_document.Remarks,
+            DocumentName: "test ks",
+            DocumentType: "test ks",
+            DocumentPath: "img/nmd.jpg",
+            Remarks: "test ks",
+            CreatedDate: Date.now(),
+            CreatedBy: "ks",
+            LastUpdatedDate: Date.now(),
+            LastUpdatedBy: "ks"
+        };
+
+        var productDocumentSave = db.t_product_document.build(productdocument);
+        productDocumentSave.save().then(function () {
+            return res.jsonp({
+                "result": "success"
+            });
+        });
+    // }
+
     // req.body.ProductDetailID = productDetailSave.ProductDetailID;
 
     // productDetailSave.save().then(function () {
-    //     return next();
+    //     // return next();
+    //     return res.jsonp({
+    //         "result": "success"
+    //     });
     // }).catch(function (err) {
     //     res.send({ status: 'Exception', message: err })
     // });
@@ -430,33 +455,28 @@ exports.createTravel = function (req, res, next) {
     var travel = {
         // req.user not working.
         //ProfileID: req.user,
-        ProfileID: '0593f2a9-4954-444a-a53f-c8ed204df8fd',
+        ProfileID: req.body.profileId,
         CountryID: req.body.countryID,
-        TravelDescription: 'No Description',
-        //TravelDescription: req.body.travelDescription,
+        TravelDescription: req.body.travelDescription,
         TravelStartDate: req.body.travelStartDate,
         TravelEndDate: req.body.travelEndDate,
-        // TravelStartDate: Date.now(),
-        // TravelEndDate: Date.now(),
-        IsRequest: 0,
-        IsExpired: 0,
-        Remarks: "",
+        IsRequest: req.body.isRequest,
+        IsExpired: req.body.isExpired,
+        Remarks: req.body.remarks,
         CreatedDate: Date.now(),
-        // CreatedBy: req.user,
-        CreatedBy: 'Damn',
+        CreatedBy: req.body.createdBy,
         LastUpdatedDate: Date.now(),
-        // LastUpdatedBy: req.user
-        LastUpdatedBy: 'Damn'
+        LastUpdatedBy: req.body.lastUpdatedBy
     };
 
     var travelSave = db.t_travel.build(travel);
     req.body.TravelID = travelSave.TravelID;
 
     travelSave.save().then(function () {
-        //return next();
-        return res.jsonp({
-            "result": "success"
-        });
+        return next();
+        // return res.jsonp({
+        //     "result": "success"
+        // });
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });

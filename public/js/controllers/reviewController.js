@@ -1,23 +1,32 @@
 'use strict'
 
-angular.module('mean').controller('ReviewController', ['$scope', '$state', '$stateParams', 'CreatePost', function ($scope, $state, $stateParams, CreatePost) {
+angular.module('mean').controller('ReviewController', ['$scope', '$state', '$stateParams', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, CreatePost, $rootScope) {
     $scope.productObj = $stateParams.productObj;
+    $scope.profileId = $rootScope.currentUser.ProfileID;
 
     $scope.createPost = function(){
         
         var createPost = new CreatePost({
             // Create Travel
-            countryID: this.productObj.countryID,
-            travelDescription: this.productObj.firstName,
-            travelStartDate: this.productObj.startDate,
-            travelEndDate: this.productObj.toDate,
+            countryID: $scope.productObj.countryID,
+            profileId: $scope.profileId,
+            travelDescription: $scope.productObj.countryName,
+            travelStartDate: $scope.productObj.startDate,
+            travelEndDate: $scope.productObj.toDate,
+            isRequest: $scope.productObj.buyer,
+            isExpired: 0,
+            remarks: "",
+            createdDate: Date.now(),
+            createdBy: 'ks',
+            lastUpdatedDate: Date.now(),
+            lastUpdatedBy: 'ks',
 
             // Create Product
-            productDescription: this.productObj.productDescription,
-            productAmount: this.productObj.productAmount,
+            productDescription: $scope.productObj.productDescription,
+            productAmount: $scope.productObj.productAmount,
 
             // Create Product Detail
-            productList: this.productObj.productList,
+            productList: $scope.productObj.productList,
 
         });
 
