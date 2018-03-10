@@ -50,9 +50,9 @@ exports.show= function (req, res) {
 exports.createChat = function (req, res, next) {
     var message = null;
     var chat = {
-        chatProfileID_A: "",
-        chatProfileID_B: "",
-        TotalMessage: "",
+        chatProfileID_Sender: req.body.From,
+        chatProfileID_Receiver: req.body.To,
+        TotalMessage: req.body.TotalMessage,
         Remarks: "",
         CreatedDate: Date.now(),
         CreatedBy: req.user,
@@ -64,7 +64,9 @@ exports.createChat = function (req, res, next) {
     req.body.ChatID = chatSave.ChatID;
 
     chatSave.save().then(function () {
-        return next();
+        return res.jsonp({
+            "result": "success"
+        });
     }).catch(function (err) {
         res.send({ status: 'Exception', message: err })
     });

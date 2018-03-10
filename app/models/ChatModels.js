@@ -12,11 +12,11 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.UUID,
             allowNull: false
         },
-        ChatProfileID_A: {
+        ChatProfileID_Sender: {
             type: DataTypes.STRING(36),
             allowNull: false
         },
-        ChatProfileID_B: {
+        ChatProfileID_Receiver: {
             type: DataTypes.STRING(36),
             allowNull: false
         },

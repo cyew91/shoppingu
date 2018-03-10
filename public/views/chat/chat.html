@@ -1,4 +1,4 @@
-<div id="chat_wrapper">
+<div id="chat_wrapper" ng-controller="CreateChat">
     <div id="chat_content_left">damn left</div>
 
     <div id="chat_content_right">
@@ -7,9 +7,9 @@
             <div id="chat_content_right_title_right"><h3>Travel Period: </h3></div>
         </div>
         <div id="chat_content_right_chat"></div>
-        <div id="chat_content_right_tpye_box">
-           <div id="chat_box_wrapper"><input id="chat_box" type="text" name="fname"></div>
-            <div id="chat_box_send">Send</div>
-        </div>
+        <form id="chat_content_right_tpye_box" ng-submit="postMessage()">
+           <div id="chat_box_wrapper"><input id="chat_box" type="text" name="fname" ng-model="words"></div>
+            <button id="chat_box_send" type="submit" ng-disabled="postform.$invalid">Send</button>
+        </form>
     </div>
 </div>

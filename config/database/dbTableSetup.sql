@@ -372,3 +372,11 @@ ALTER TABLE T_Chat ADD COLUMN ProductID VARCHAR(36) NOT NULL  AFTER ChatID ,
   ON UPDATE NO ACTION
 , ADD INDEX ProductID_idx (ProductID ASC) ;
 -- END ChengYew 02/02/2018
+
+
+-- 0.0.13 ChengYew 04/03/2018
+-- Rename Column in T_Chat table
+UPDATE db_version SET Version = '0.0.13', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+
+ALTER TABLE T_Chat CHANGE COLUMN ChatProfileID_A ChatProfileID_Sender VARCHAR(36) NOT NULL  , CHANGE COLUMN ChatProfileID_B ChatProfileID_Receiver VARCHAR(36) NOT NULL  ;
+-- END ChengYew 04/03/2018
