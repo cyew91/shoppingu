@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
       cb(null, 'public/uploads/')
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+      cb(null, file.originalname.split('.')[0] + '-' + Date.now() + '.jpg')
     }
   })
 var upload = multer({ storage: storage }).any();
@@ -103,11 +103,13 @@ module.exports = function (app) {
     //Dropzone: Upload product image
     // app.post('/uploadProductImage', product.uploadProductImage);
     app.post('/uploadProductImage', function (req, res) {
+
         upload(req, res, function (err) {
           if (err) {
             return res.json({ success: false , message: 'Damnit'});
           }
-          return res.json({ success: true, message: 'Yeah'});
+          
+          return res.json({ success: true, message: req.files});
           // Everything OK
         })
       })

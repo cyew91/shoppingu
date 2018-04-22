@@ -4,6 +4,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
 
     $scope.productCategoryList = [];
     $scope.productSubCategoryList = [];
+    $scope.productImages = [];
 
     Dropzone.autoDiscover = false;
 
@@ -32,15 +33,13 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
          sending: function(file, xhr, formdata){
             console.log('Sending');
 
-            console.log(file);
-
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
-            console.log(csrftoken);
             formdata.append('_csrf', csrftoken);
             
          },
          success: function(file, response){
-            console.log('Sucess');
+            console.log(response.message[0].filename);
+            $scope.productImages.push(response.message[0].filename);
          },
          error: function(file, response){
             console.log(response);
@@ -48,8 +47,15 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     });
 
     $scope.addProductToList = function () {
+        $scope.product.productImages = $scope.productImages;
         $scope.productObj.productList.push($scope.product);
+
         $scope.product = null;
+        $scope.productImages = [];
+
+        console.log($scope.productObj.productList);
+
+        Dropzone.forElement("div#dropzoneProductImage").removeAllFiles(true);
     }
 
     $scope.removeFromList = function (index) {
@@ -98,7 +104,9 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         if (count == 2) {
             $state.go('posttravel.product', { productObj: $scope.productObj });
         } else if (count == 3) {
-            $state.go('posttravel.review', { productObj: $scope.productObj });
+            // Temporary rhide Review page. For now direct save into DB.
+            // $state.go('posttravel.review', { productObj: $scope.productObj });
+            // Call the api here. To insert into DB.
         }
     }
 
