@@ -106,7 +106,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         } else if (count == 3) {
             // Temporary rhide Review page. For now direct save into DB.
             // $state.go('posttravel.review', { productObj: $scope.productObj });
-            // Call the api here. To insert into DB.
+            // Call the api here. To insert into DB. Should pass in '$scope.productObj' into the api to process.
         }
     }
 
