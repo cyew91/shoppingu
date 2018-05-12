@@ -7,6 +7,7 @@ angular.module('mean.system')
       $scope.productImg1 = "img/womenshirt.jpg";
       $scope.productImg2 = "img/shoes.jpg";
       $scope.productImg3 = "img/shirt.jpg";
+      $scope.productImg4 = "img/nmd.jpg";
 
       $('.carousel').carousel();
       
