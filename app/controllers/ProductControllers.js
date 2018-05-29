@@ -278,6 +278,29 @@ exports.createProductDetail = function (req, res, next) {
             var productDetailSave = db.t_product_detail.build(productdetail);
             req.body.ProductDetailID = productDetailSave.ProductDetailID;
             productDetailSave.save();
+
+            var productdocument = {
+                ProductDetailID: req.body.ProductDetailID,
+                // DocumentName: req.body.t_product_document.DocumentName,
+                // DocumentType: req.body.t_product_document.DocumentType,
+                // DocumentPath: req.body.t_product_document.DocumentPath,
+                // Remarks: req.body.t_product_document.Remarks,
+                DocumentName: "test ks",
+                DocumentType: "test ks",
+                DocumentPath: "uploads/" + req.body.productList[i].productImages[i],
+                Remarks: "test ks",
+                CreatedDate: Date.now(),
+                CreatedBy: "ks",
+                LastUpdatedDate: Date.now(),
+                LastUpdatedBy: "ks"
+            };
+    
+            var productDocumentSave = db.t_product_document.build(productdocument);
+            productDocumentSave.save().then(function () {
+                return res.jsonp({
+                    "result": "success"
+                });
+            });
             
         };
         // return next();
@@ -288,28 +311,7 @@ exports.createProductDetail = function (req, res, next) {
     //     productDetailSave.save();
     //     req.body.ProductDetailID = productDetailSave.ProductDetailID;
 
-        var productdocument = {
-            ProductDetailID: req.body.ProductDetailID,
-            // DocumentName: req.body.t_product_document.DocumentName,
-            // DocumentType: req.body.t_product_document.DocumentType,
-            // DocumentPath: req.body.t_product_document.DocumentPath,
-            // Remarks: req.body.t_product_document.Remarks,
-            DocumentName: "test ks",
-            DocumentType: "test ks",
-            DocumentPath: "img/nmd.jpg",
-            Remarks: "test ks",
-            CreatedDate: Date.now(),
-            CreatedBy: "ks",
-            LastUpdatedDate: Date.now(),
-            LastUpdatedBy: "ks"
-        };
-
-        var productDocumentSave = db.t_product_document.build(productdocument);
-        productDocumentSave.save().then(function () {
-            return res.jsonp({
-                "result": "success"
-            });
-        });
+        
     // }
 
     // req.body.ProductDetailID = productDetailSave.ProductDetailID;
