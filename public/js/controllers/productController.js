@@ -1,7 +1,7 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat) {
-
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat, CreatePost, $rootScope) {
+    $scope.profileId = $rootScope.currentUser.ProfileID;
     $scope.productCategoryList = [];
     $scope.productSubCategoryList = [];
     $scope.productImages = [];
@@ -38,7 +38,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
             
          },
          success: function(file, response){
-            console.log(response.message[0].filename);
+            //console.log(response.message[0].filename);
             $scope.productImages.push(response.message[0].filename);
          },
          error: function(file, response){
@@ -53,7 +53,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         $scope.product = null;
         $scope.productImages = [];
 
-        console.log($scope.productObj.productList);
+        //console.log($scope.productObj.productList);
 
         Dropzone.forElement("div#dropzoneProductImage").removeAllFiles(true);
     }
@@ -82,6 +82,39 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
           }
         })
       };
+
+      $scope.createPost = function(){
+        
+        var createPost = new CreatePost({
+            // Create Travel
+            countryID: $scope.productObj.countryID,
+            profileId: $scope.profileId,
+            travelDescription: $scope.productObj.countryName,
+            travelStartDate: $scope.productObj.startDate,
+            travelEndDate: $scope.productObj.toDate,
+            isRequest: $scope.productObj.buyer,
+            isExpired: 0,
+            remarks: "",
+            createdDate: Date.now(),
+            createdBy: 'ks',
+            lastUpdatedDate: Date.now(),
+            lastUpdatedBy: 'ks',
+
+            // Create Product
+            productDescription: $scope.productObj.productDescription,
+            productAmount: $scope.productObj.productAmount,
+
+            // Create Product Detail
+            productList: $scope.productObj.productList,
+
+        });
+
+        createPost.$save(function (response) {
+            if (response.result === 'success') {
+                $('#myModal').modal('show');
+            }
+        });
+    };
       
     $scope.continue = function (count) {
         $('#text' + count).css('display', 'none');
@@ -111,6 +144,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     }
 
     $scope.back = function (count) {
+        var count = 1;
         $('#text' + count).css('display', 'none');
         $('#textStep' + count).css('display', 'block');
 

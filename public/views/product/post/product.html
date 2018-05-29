@@ -70,11 +70,17 @@
         ui-sref-active="active" style="margin: 0px !important;">
         Back
     </button>
-
-    <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="continue(productObj.count = productObj.count + 1)"
+    <!-- Before drop review page -->
+    <!-- <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="continue(productObj.count = productObj.count + 1)"
         style="margin: 0px !important;">
         <span ng-show="productObj.count <= 2">Continue</span>
         <span ng-show="productObj.count >= 3">Save</span>
+    </button> -->
+    <!-- After drop review page -->
+    <button id="btnContinue" class="btn btn-secondary btn-form" ng-click="createPost()"
+        style="margin: 0px !important;">
+        <span>Post</span>
+        <!-- <span ng-show="productObj.count >= 3">Save</span> -->
     </button>
 </div>
 

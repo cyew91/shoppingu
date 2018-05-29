@@ -45,3 +45,7 @@ angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$res
 angular.module('mean.articles').service('CreatePost', ['$resource', function($resource){
     return $resource('/product');
 }]);
+
+angular.module('mean.articles').service('GetOrderByProfileId', ['$resource', function($resource){
+    return $resource('/custorderwithproduct/:cprofileId', {cprofileId: '@cprofileId'});
+}]);

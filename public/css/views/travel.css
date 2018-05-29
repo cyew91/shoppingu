@@ -9,6 +9,17 @@
     width: 72%;
 }
 
+.form-control-smallAfter {
+    border: solid red;
+    border-width: 1px;
+    -webkit-transition: width .5s ease-in-out;
+    -moz-transition: width .5s ease-in-out;
+    -o-transition: width .5s ease-in-out;
+    -ms-transition: width .5s ease-in-out;
+    transition: width .5s ease-in-out;
+    width: 72%;
+}
+
 .highlight {
 	color: #0DA99F;
 }

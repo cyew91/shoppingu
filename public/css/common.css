@@ -1129,7 +1129,6 @@ select.form-control {
     -webkit-appearance: none;
     -moz-appearance: none;
 	appearance: none;
-
 	display: block;
 	width: 100%;
 
@@ -1499,7 +1498,18 @@ tbody {
 	height: 44px; 
 	width: 200px !important; 
 	float: left; 
-	margin-right: 3px;
+    margin-right: 3px;
+}
+
+.dateRangePickerAfter{
+    border: solid;
+    border-color: red !important;
+	border-width: 1px;
+	background-color: #ffffff !important;
+	height: 44px; 
+	width: 200px !important; 
+	float: left; 
+    margin-right: 3px;
 }
 
 .input-daterange > input{
@@ -1854,7 +1864,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 .form-control-edit:not(textarea) {
 	height: 44px;
 	padding: 0 18px 3px;
-    border: 1px solid #dbe2e8;
+    border: 1px solid #e8dbdb;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -2414,3 +2424,61 @@ body{
 .about-us-header{
     margin-bottom: 30px;
 }
+
+/* Orders Product modal start */
+
+.mb-0, .my-0 {
+    margin-bottom: 0 !important;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.shopping-cart {
+    margin-bottom: 20px;
+}
+
+.shopping-cart .product-item, .wishlist-table .product-item, .order-table .product-item {
+    display: table;
+    width: 100%;
+    min-width: 150px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.shopping-cart .product-item .product-thumb, .wishlist-table .product-item .product-thumb, .order-table .product-item .product-thumb {
+    width: 140px;
+    padding-right: 20px;
+}
+
+.shopping-cart .product-item .product-thumb, .shopping-cart .product-item .product-info, .wishlist-table .product-item .product-thumb, .wishlist-table .product-item .product-info, .order-table .product-item .product-thumb, .order-table .product-item .product-info {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.shopping-cart .product-item .product-info, .wishlist-table .product-item .product-info, .order-table .product-item .product-info {
+    padding-top: 5px;
+}
+
+.shopping-cart .product-item .product-title, .wishlist-table .product-item .product-title, .order-table .product-item .product-title {
+    margin-bottom: 6px;
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.shopping-cart .product-item .product-title, .wishlist-table .product-item .product-title, .order-table .product-item .product-title {
+    margin-bottom: 6px;
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+
+/* Orders Product modal end */

@@ -20,12 +20,12 @@ module.exports = function (app) {
     .get(customerorder.getCustomerOrder)
     .post(customerorder.createCustomerOrder);
 
-    app.route('/custorderwithproduct/:custorderIdForProductDetail')
+    app.route('/custorderwithproduct/:cprofileId')
     .get(customerorder.show);
 
 //----------------------------------------------------------------------------------------------------
     //Param
     app.param('customerorderId', customerorder.getCustomerOrderById);
-    app.param('custorderIdForProductDetail', customerorder.getCustomerOrderByProfileId);
+    app.param('cprofileId', customerorder.getCustomerOrderByProfileId);
 
 };

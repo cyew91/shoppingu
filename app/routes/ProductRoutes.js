@@ -106,7 +106,7 @@ module.exports = function (app) {
 
         upload(req, res, function (err) {
           if (err) {
-            return res.json({ success: false , message: 'Damnit'});
+            return res.json({ success: false , message: 'Great'});
           }
           
           return res.json({ success: true, message: req.files});

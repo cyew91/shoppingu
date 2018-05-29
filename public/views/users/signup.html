@@ -58,6 +58,20 @@
                                     <input class="form-control" type="password" id="reg-pass-confirm" ng-model="confirmPassword" required="">
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="autocomplete">
+                                        <strong>The Country Where You Live</strong>
+                                    </label>
+                                    <div angucomplete-alt id="autocomplete" maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
+                                        local-data="travelObject.countryList" search-fields="CountryName" title-field="CountryName"
+                                        minlength="1" input-class="form-control form-control-small" initial-value="travelObject.initCountry"
+                                        match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;"
+                                        input-name="countryList" required>
+                                    </div>
+                                    <!-- <input class="form-control" type="password" id="reg-pass-confirm" ng-model="confirmPassword" required=""> -->
+                                </div>
+                            </div>
                             <div class="col-12 text-center text-right">
                                 <button class="btn btn-primary margin-bottom-none" type="submit">Register</button>
                             </div>

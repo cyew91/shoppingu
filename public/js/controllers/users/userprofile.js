@@ -11,6 +11,15 @@ angular.module('mean.articles')
         profileId: $scope.profileId
       }, function(result) {
           $scope.profile = result;
+          if ($scope.profile.Gender == 0){
+            $scope.checkFemale = "active";
+            $scope.checkMale = "inactive";
+          }
+          else{
+            $scope.checkMale = "active";
+            $scope.checkFemale = "inactive";
+          }
+
       });
     };
     
