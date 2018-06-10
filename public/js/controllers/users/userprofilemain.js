@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('UserProfileMainController', ['$scope', 'Global', '$stateParams', '$state', function($scope, Global, $stateParams, $state){
+  .controller('UserProfileMainController', ['$scope', 'Global', '$stateParams', '$state', 'fileReader', function($scope, Global, $stateParams, $state, fileReader){
     $scope.global = Global;
     
     $scope.accountMenu = [{accId: 'a1',accName: 'Profiles', accLink: "userprofile", accIcon: "icon-head"}, 
@@ -13,7 +13,12 @@ angular.module('mean.articles')
       
       $('#' + $scope.accountMenu[index].accId).addClass("active");
     };
+
+    $scope.imageSrc = null;
     
+    $scope.$on("fileProgress", function(e, progress) {
+      $scope.progress = progress.loaded / progress.total;
+    });
 
   }]);
 

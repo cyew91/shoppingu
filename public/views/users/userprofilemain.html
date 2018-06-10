@@ -7,8 +7,11 @@
         </div>
         <div class="user-info">
             <div class="user-avatar">
-                <a class="edit-avatar" href="#"></a>
-                <img src="img/Gary.jpg" alt="User">
+                <label for="file-upload" class="edit-avatar"></label>
+                <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+                <img src="{{imageSrc}}" alt="User" ng-if="imageSrc != null">
+                <img src="img/Gary.jpg" alt="User" ng-if="imageSrc == null">
+                <!-- <img src="img/Gary.jpg" alt="User"> -->
             </div>
             <div class="user-data">
                 <h4>Gary Kang</h4>

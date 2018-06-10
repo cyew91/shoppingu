@@ -2482,3 +2482,24 @@ body{
 
 
 /* Orders Product modal end */
+/* profile upload button disabled start */
+.user-info-wrapper .user-info .user-avatar input[type=file] {
+    display:none;
+}
+.user-info-wrapper .user-info .user-avatar input[type=file] + label {
+    display:inline-block;
+    margin:20px;
+    padding: 4px 32px;
+    background-color: #FFFFFF;
+    border:solid 1px #666F77;
+    border-radius: 6px;
+    color:#666F77;
+}
+.user-info-wrapper .user-info .user-avatar input[type=file]:active + label {
+    background-image: none;
+    background-color:#2D6C7A;
+    color:#FFFFFF;
+}
+
+
+/* profile upload button disabled end */
