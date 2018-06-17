@@ -59,6 +59,7 @@ exports.create = function (req, res, next) {
         CreatedBy: "00000000-0000-0000-0000-000000000000",
         LastUpdatedDate: Date.now(),
         LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+        CountryID: req.body.countryID
     };
 
     if (req.body.password === req.body.confirmPassword) {

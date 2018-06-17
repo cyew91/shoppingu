@@ -10,7 +10,8 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
             email: this.email,
             phoneNumber: this.phoneNumber,
             password: this.password,
-            confirmPassword: this.confirmPassword
+            confirmPassword: this.confirmPassword,
+            countryID: this.countryID
         });
 
         signUp.$save(function (response) {
@@ -34,16 +35,27 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
             $scope.travelObject.countryList = list; 
         });
 
-        if($stateParams.productObj == null){
-            $scope.productObj={
-                count: 1
-            }
-        }else{
-            $scope.productObj = $stateParams.productObj;
-            $scope.travelObject.initCountry= {CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryID'], CountryName: $scope.productObj['countryName'],Status: $scope.productObj['countryStatus']}
-        }
+        // if($stateParams.productObj == null){
+        //     $scope.productObj={
+        //         count: 1
+        //     }
+        // }else{
+        //     $scope.productObj = $stateParams.productObj;
+        //     $scope.travelObject.initCountry= {CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryID'], CountryName: $scope.productObj['countryName'],Status: $scope.productObj['countryStatus']}
+        // }
     };
 
     init();
+
+    $scope.selectedCountry = function (selected) {
+        
+        if (selected && typeof(selected.description) !== 'undefined') {
+            $scope.countryID = selected.description.CountryID;
+            // $scope.productObj.countryCode = selected.description.CountryCode;
+            // $scope.productObj.countryName = selected.description.CountryName;
+            // $scope.productObj.countryStatus = selected.description.Status;
+            
+        }
+    };
     
 }]);

@@ -380,3 +380,11 @@ UPDATE db_version SET Version = '0.0.13', LastUpdatedDate = NOW(), LastUpdatedBy
 
 ALTER TABLE T_Chat CHANGE COLUMN ChatProfileID_A ChatProfileID_Sender VARCHAR(36) NOT NULL  , CHANGE COLUMN ChatProfileID_B ChatProfileID_Receiver VARCHAR(36) NOT NULL  ;
 -- END ChengYew 04/03/2018
+
+-- 0.0.14 KaaSheng 17/06/2018
+-- Rename Column in T_Chat table
+UPDATE db_version SET Version = '0.0.14', LastUpdatedDate = NOW(), LastUpdatedBy = 'KaaSheng' WHERE ID = 1;
+
+ALTER TABLE T_Profile ADD COLUMN CountryID VARCHAR(36) NOT NULL;
+-- END KaaSheng 17/06/2018
+

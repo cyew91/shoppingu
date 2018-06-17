@@ -56,6 +56,10 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.STRING(36),
                 allowNull: false
             },
+            CountryID: {
+                type: DataTypes.UUID,
+                allowNull: false
+            },
         }, {
             // don't add the timestamp attributes (updatedAt, createdAt)
             timestamps: false,
