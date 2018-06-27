@@ -29,14 +29,46 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     $("#dropzoneProductImage").dropzone({
          url: '/uploadProductImage',
          addRemoveLinks: true,
+         maxFiles: 4,
+         acceptedFiles: ".jpeg,.jpg,.png,.gif",
+
+         init: function() {
+            console.log('init');
+            this.on("maxfilesexceeded", function(file){
+                 alert("No more files please!");
+                 this.removeFile(file);
+             });
+         },
 
          sending: function(file, xhr, formdata){
             console.log('Sending');
+            file.myName = file.name.split('.')[0] + '-' + Date.now() + '.jpg';
 
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
             formdata.append('_csrf', csrftoken);
+            formdata.append('myFileName', file.myName);
             
          },
+         // remove uploaded image after clicked remove
+         removedfile: function(file) {
+            var myName = file.myName; 
+
+            $.ajax({
+             type: 'POST',
+             url: '/deleteProductImage',
+             data: {myName: myName},
+             success: function(data, response){
+              console.log('success: ' + data);
+              for (var x = 0; x <= $scope.productImages.length; x++){
+                if ($scope.productImages[x] == data.message){
+                    $scope.productImages.splice(x, 1);
+                }
+              }
+             }
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+           },
          success: function(file, response){
             //console.log(response.message[0].filename);
             $scope.productImages.push(response.message[0].filename);
