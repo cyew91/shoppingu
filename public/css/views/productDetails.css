@@ -11,7 +11,7 @@
     color: #606975;
     font-size: 13px;
     text-decoration: none;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .social-button.shape-circle, .social-button.shape-rounded, .social-button.shape-square {
@@ -20,24 +20,24 @@
     margin-right: 8px;
     border: 1px solid #e1e7ec;
     line-height: 35px;
-    text-align: center
+    text-align: center;
 }
 
 .social-button.shape-circle {
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .social-button.shape-rounded {
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 .social-button:focus {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .text-center .social-button {
     margin-right: 9px;
-    margin-left: 9px
+    margin-left: 9px;
 }
 
 .tab-content {
@@ -47,5 +47,9 @@
     border-left: 1px solid #e1e7ec;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-    overflow: hidden
+    overflow: hidden;
+}
+
+.sb-facebook:hover, .sb-facebook:focus{
+    color: #3b5998 !important;
 }
