@@ -1,7 +1,5 @@
--- 0.0.2 Certong 6/11/2017 
--- Create table script. 
-UPDATE db_version SET Version = '0.0.2', LastUpdatedDate = NOW(), LastUpdatedBy = 'Certong' WHERE ID = 1;
-
+-- Certong 6/11/2017 
+-- Create table script.
 CREATE TABLE IF NOT EXISTS t_country (
 	CountryID VARCHAR(36) NOT NULL,
     CountryCode CHAR(3) NOT NULL,
@@ -58,7 +56,7 @@ CREATE TABLE IF NOT EXISTS t_profile_document (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProfileDocumentID),
     
-    FOREIGN KEY fk_ProfileID(ProfileID)
+    FOREIGN KEY (ProfileID)
     REFERENCES t_profile(ProfileID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -79,7 +77,7 @@ CREATE TABLE IF NOT EXISTS t_profile_account (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProfileAccountID),
     
-    FOREIGN KEY fk_ProfileID(ProfileID)
+    FOREIGN KEY (ProfileID)
     REFERENCES t_profile(ProfileID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -100,12 +98,12 @@ CREATE TABLE IF NOT EXISTS t_travel (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (TravelID),
     
-    FOREIGN KEY fk_ProfileID(ProfileID)
+    FOREIGN KEY (ProfileID)
     REFERENCES t_profile(ProfileID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT,
     
-    FOREIGN KEY fk_CountryID(CountryID)
+    FOREIGN KEY (CountryID)
     REFERENCES t_country(CountryID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -125,18 +123,18 @@ CREATE TABLE IF NOT EXISTS t_product (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProductID),
     
-    FOREIGN KEY fk_ProfileID(ProfileID)
+    FOREIGN KEY (ProfileID)
     REFERENCES t_profile(ProfileID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT,
    
-	FOREIGN KEY fk_TravelID(TravelID)
+	FOREIGN KEY (TravelID)
     REFERENCES t_travel(TravelID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
 )engine=InnoDB;
 
-CREATE TABLE IF NOT EXISTS t_product_subCat (
+CREATE TABLE IF NOT EXISTS t_product_subcat (
 	ProductSubCatID VARCHAR(36) NOT NULL,
     ProductCatID VARCHAR(36) NOT NULL,
     ProductSubCatDesc VARCHAR(500) NOT NULL,
@@ -148,7 +146,7 @@ CREATE TABLE IF NOT EXISTS t_product_subCat (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProductSubCatID),
 
-	FOREIGN KEY fk_ProductCatID(ProductCatID)
+	FOREIGN KEY (ProductCatID)
     REFERENCES t_product_cat(ProductCatID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -170,17 +168,17 @@ CREATE TABLE IF NOT EXISTS t_product_detail (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProductDetailID),
     
-    FOREIGN KEY fk_ProductCatID(ProductCatID)
+    FOREIGN KEY (ProductCatID)
     REFERENCES t_product_cat(ProductCatID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT,
    
-	FOREIGN KEY fk_ProductID(ProductID)
+	FOREIGN KEY (ProductID)
     REFERENCES t_product(ProductID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT,
     
-    FOREIGN KEY fk_ProductSubCatID(ProductSubCatID)
+    FOREIGN KEY (ProductSubCatID)
     REFERENCES t_product_subCat(ProductSubCatID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -199,130 +197,16 @@ CREATE TABLE IF NOT EXISTS t_product_document (
     LastUpdatedBy VARCHAR(36) NOT NULL,
     PRIMARY KEY (ProductDocumentID),
 
-	FOREIGN KEY fk_ProductDetailID(ProductDetailID)
+	FOREIGN KEY (ProductDetailID)
     REFERENCES t_product_detail(ProductDetailID)
     ON UPDATE CASCADE
 	ON DELETE RESTRICT
 )engine=InnoDB;
+-- End Certong 6/11/2017
 
--- End 0.0.2 Certong 6/11/2017
-
--- 0.0.3 ChengYew 12/11/2017
--- Change T_Profile_Account HashPass data type and set SaltPass to not null.
-UPDATE db_version SET Version = '0.0.3', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-ALTER TABLE `T_Profile_Account` CHANGE COLUMN `SaltPass` `SaltPass` VARCHAR(1000)  NULL  , CHANGE COLUMN `HashPass` `HashPass` VARCHAR(1000)  NOT NULL  ;
--- End 0.0.3 ChengYew 12/11/2017
-
--- 0.0.4 ChengYew 14/11/2017
--- Country and Category Settings
-UPDATE db_version SET Version = '0.0.4', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
--- END 0.0.4 ChengYew 14/11/2017
-
--- 0.0.5 CerTong 14/11/2017
--- Add new columns in t_profile.
-UPDATE db_version SET Version = '0.0.5', LastUpdatedDate = NOW(), LastUpdatedBy = 'CerTong' WHERE ID = 1;
-
-DROP PROCEDURE IF EXISTS shoppingu_procedure;
-DELIMITER $$
-CREATE PROCEDURE shoppingu_procedure()
-BEGIN
-	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'email') THEN
-		ALTER TABLE t_profile ADD COLUMN Email VARCHAR(45) NULL AFTER Address;
-    END IF;
-
-    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'ContactNo') THEN
-		ALTER TABLE t_profile ADD COLUMN ContactNo VARCHAR(45) NULL AFTER Email;
-    END IF;
-END$$
-DELIMITER ;
-
-CALL shoppingu_procedure();
--- END 0.0.5 CerTong 14/11/2017
-
--- 0.0.6 CerTong 14/11/2017
--- Modify table t_profile_account.
-UPDATE db_version SET Version = '0.0.6', LastUpdatedDate = NOW(), LastUpdatedBy = 'CerTong' WHERE ID = 1;
-
-DROP PROCEDURE IF EXISTS shoppingu_procedure;
-DELIMITER $$
-CREATE PROCEDURE shoppingu_procedure()
-BEGIN
-	IF EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile_account' AND COLUMN_NAME = 'LoginID') THEN
-		ALTER TABLE t_profile_account MODIFY LoginID VARCHAR(36);
-    END IF;
-END$$
-DELIMITER ;
-
-CALL shoppingu_procedure();
--- END 0.0.6 CerTong 14/11/2017
-
--- 0.0.7 CerTong 18/11/2017
--- Modify table t_product_detail, add column ProductName.
-UPDATE db_version SET Version = '0.0.7', LastUpdatedDate = NOW(), LastUpdatedBy = 'CerTong' WHERE ID = 1;
-
-DROP PROCEDURE IF EXISTS shoppingu_procedure;
-DELIMITER $$
-CREATE PROCEDURE shoppingu_procedure()
-BEGIN
-	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_product_detail' AND COLUMN_NAME = 'ProductName') THEN
-		ALTER TABLE t_product_detail ADD COLUMN ProductName VARCHAR(50) NOT NULL AFTER CurrencyID;
-    END IF;
-END$$
-DELIMITER ;
-
-CALL shoppingu_procedure();
--- END 0.0.7 CerTong 18/11/2017
-
--- 0.0.8 ChengYew 20/11/2017
--- Add 'Status' column into T_Country table.
-UPDATE db_version SET Version = '0.0.8', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-DROP PROCEDURE IF EXISTS shoppingu_procedure;
-DELIMITER $$
-CREATE PROCEDURE shoppingu_procedure()
-BEGIN
-	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 'T_Country' AND COLUMN_NAME = 'Status') THEN
-		ALTER TABLE T_Country ADD COLUMN Status INT NOT NULL AFTER CountryName;
-        
-        UPDATE T_Country
-        SET Status=0
-        WHERE Status IS NULL;
-    END IF;
-END$$
-DELIMITER ;
-
-CALL shoppingu_procedure();
--- END ChengYew 20/11/2017
-
--- 0.0.9 ChengYew 10/12/2017
--- Set TravelStartDate and TravelEndDate to ullable and add 'IsRequest' column into T_Travel table.
-UPDATE db_version SET Version = '0.0.9', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-ALTER TABLE `T_Travel` CHANGE COLUMN `TravelStartDate` `TravelStartDate` DATETIME NULL  , CHANGE COLUMN `TravelEndDate` `TravelEndDate` DATETIME NULL;
-
-DROP PROCEDURE IF EXISTS shoppingu_procedure;
-DELIMITER $$
-CREATE PROCEDURE shoppingu_procedure()
-BEGIN
-    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 'T_Travel' AND COLUMN_NAME = 'IsRequest') THEN
-        ALTER TABLE T_Travel ADD COLUMN IsRequest INT(1) NOT NULL AFTER TravelEndDate ;
-
-        UPDATE T_Travel
-        SET IsRequest=0
-        WHERE IsRequest IS NULL;
-    END IF;
-END$$
-DELIMITER ;
--- END ChengYew 10/12/2017
-
-
--- 0.0.10 ChengYew 19/12/2017
+-- ChengYew 19/12/2017
 -- New table for customer order.
-UPDATE db_version SET Version = '0.0.10', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-CREATE  TABLE T_Customer_Order (
+CREATE  TABLE t_customer_order (
   `CustomerOrderID` VARCHAR(36) NOT NULL ,
   `ProfileID` VARCHAR(36) NOT NULL ,
   `ProductDetailID` VARCHAR(36) NOT NULL ,
@@ -338,53 +222,163 @@ CREATE  TABLE T_Customer_Order (
   INDEX `ProductDetailID_idx` (`ProductDetailID` ASC) ,
   CONSTRAINT `ProfileID`
     FOREIGN KEY (`ProfileID` )
-    REFERENCES `T_Profile` (`ProfileID` )
+    REFERENCES `t_profile` (`ProfileID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `ProductDetailID`
     FOREIGN KEY (`ProductDetailID` )
-    REFERENCES `T_Product_Detail` (`ProductDetailID` )
+    REFERENCES `t_product_detail` (`ProductDetailID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 -- END ChengYew 19/12/2017
 
+-- Pong 04/08/2018
+-- Add two new table t_chat and t_chat_detail.
+CREATE TABLE IF NOT EXISTS `t_chat` (
+  `ChatID` varchar(36) NOT NULL,
+  `ProductDetailID` varchar(36) NOT NULL,
+  `ChatProfileID_Sender` varchar(36) NOT NULL,
+  `ChatProfileID_Receiver` varchar(36) NOT NULL,
+  `TotalMessages` int(11) NOT NULL,
+  `Remarks` varchar(500) DEFAULT NULL,
+  `CreatedDate` datetime NOT NULL,
+  `CreatedBy` varchar(36) NOT NULL,
+  `LastUpdatedDate` datetime NOT NULL,
+  `LastUpdatedBy` varchar(36) NOT NULL,
+  PRIMARY KEY (`ChatID`),
+  KEY `ProductDetailID_idx` (`ProductDetailID`),
+  CONSTRAINT `ProductIDetailD` FOREIGN KEY (`ProductDetailID`) REFERENCES `t_product_detail` (`ProductDetailID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)engine=InnoDB;
 
--- 0.0.11 ChengYew 05/01/2018
--- New table for customer order.
-UPDATE db_version SET Version = '0.0.11', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
+CREATE TABLE IF NOT EXISTS `t_chat_detail` (
+  `ChatDetailID` varchar(36) NOT NULL,
+  `ChatID` varchar(36) NOT NULL,
+  `Message` varchar(5000) NOT NULL,
+  `From` varchar(36) NOT NULL,
+  `Remarks` varchar(500) DEFAULT NULL,
+  `CreatedDate` datetime NOT NULL,
+  `CreatedBy` varchar(36) NOT NULL,
+  `LastUpdatedDate` datetime NOT NULL,
+  `LastUpdatedBy` varchar(36) NOT NULL,
+  PRIMARY KEY (`ChatDetailID`),
+  KEY `ChatID1_idx` (`ChatID`),
+  CONSTRAINT `ChatID1` FOREIGN KEY (`ChatID`) REFERENCES `t_chat` (`ChatID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)engine=InnoDB;
+-- END Pong 04/08/2018
 
-ALTER TABLE T_Product ADD COLUMN PostType INT(2) NOT NULL  AFTER Amount;
+-- ChengYew 12/11/2017
+-- Change t_profile_account HashPass data type and set SaltPass to not null.
+ALTER TABLE `t_profile_account` CHANGE COLUMN `SaltPass` `SaltPass` VARCHAR(1000)  NULL  , CHANGE COLUMN `HashPass` `HashPass` VARCHAR(1000)  NOT NULL  ;
+-- End ChengYew 12/11/2017
 
-UPDATE T_Product
+-- CerTong 14/11/2017
+-- Add new columns in t_profile.
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'Email') THEN
+		ALTER TABLE t_profile ADD COLUMN Email VARCHAR(45) NULL AFTER Address;
+    END IF;
+
+    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile' AND COLUMN_NAME = 'ContactNo') THEN
+		ALTER TABLE t_profile ADD COLUMN ContactNo VARCHAR(45) NULL AFTER Email;
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END CerTong 14/11/2017
+
+-- CerTong 14/11/2017
+-- Modify table t_profile_account.
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_profile_account' AND COLUMN_NAME = 'LoginID') THEN
+		ALTER TABLE t_profile_account MODIFY LoginID VARCHAR(36);
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END CerTong 14/11/2017
+
+-- CerTong 18/11/2017
+-- Modify table t_product_detail, add column ProductName.
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_product_detail' AND COLUMN_NAME = 'ProductName') THEN
+		ALTER TABLE t_product_detail ADD COLUMN ProductName VARCHAR(50) NOT NULL AFTER CurrencyID;
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END CerTong 18/11/2017
+
+-- ChengYew 20/11/2017
+-- Add 'Status' column into T_Country table.
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+	IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_country' AND COLUMN_NAME = 'Status') THEN
+		ALTER TABLE t_country ADD COLUMN Status INT NOT NULL AFTER CountryName;
+        
+        UPDATE t_country
+        SET Status=0
+        WHERE Status IS NULL;
+    END IF;
+END$$
+DELIMITER ;
+
+CALL shoppingu_procedure();
+-- END ChengYew 20/11/2017
+
+-- ChengYew 10/12/2017
+-- Set TravelStartDate and TravelEndDate to ullable and add 'IsRequest' column into T_Travel table.
+ALTER TABLE `t_travel` CHANGE COLUMN `TravelStartDate` `TravelStartDate` DATETIME NULL  , CHANGE COLUMN `TravelEndDate` `TravelEndDate` DATETIME NULL;
+
+DROP PROCEDURE IF EXISTS shoppingu_procedure;
+DELIMITER $$
+CREATE PROCEDURE shoppingu_procedure()
+BEGIN
+    IF NOT EXISTS (SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = 't_travel' AND COLUMN_NAME = 'IsRequest') THEN
+        ALTER TABLE t_travel ADD COLUMN IsRequest INT(1) NOT NULL AFTER TravelEndDate ;
+
+        UPDATE t_travel
+        SET IsRequest=0
+        WHERE IsRequest IS NULL;
+    END IF;
+END$$
+DELIMITER ;
+-- ChengYew 10/12/2017
+
+-- ChengYew 05/01/2018
+-- Add new column PostType in t_product table.
+ALTER TABLE t_product ADD COLUMN PostType INT(2) NOT NULL  AFTER Amount;
+
+UPDATE t_product
 SET PostType=0
 WHERE TravelID!='';
 -- END ChengYew 05/01/2018
 
--- 0.0.12 ChengYew 02/02/2018
--- New table for customer order.
-UPDATE db_version SET Version = '0.0.12', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-ALTER TABLE T_Chat ADD COLUMN ProductID VARCHAR(36) NOT NULL  AFTER ChatID , 
+-- ChengYew 02/02/2018
+-- Add new column ProductID in t_chat table.
+ALTER TABLE t_chat ADD COLUMN ProductID VARCHAR(36) NOT NULL  AFTER ChatID , 
   ADD CONSTRAINT ProductID
   FOREIGN KEY (ProductID)
-  REFERENCES T_Product (ProductID)
+  REFERENCES t_product (ProductID)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION
 , ADD INDEX ProductID_idx (ProductID ASC) ;
 -- END ChengYew 02/02/2018
 
-
--- 0.0.13 ChengYew 04/03/2018
--- Rename Column in T_Chat table
-UPDATE db_version SET Version = '0.0.13', LastUpdatedDate = NOW(), LastUpdatedBy = 'ChengYew' WHERE ID = 1;
-
-ALTER TABLE T_Chat CHANGE COLUMN ChatProfileID_A ChatProfileID_Sender VARCHAR(36) NOT NULL  , CHANGE COLUMN ChatProfileID_B ChatProfileID_Receiver VARCHAR(36) NOT NULL  ;
--- END ChengYew 04/03/2018
-
--- 0.0.14 KaaSheng 17/06/2018
--- Rename Column in T_Chat table
-UPDATE db_version SET Version = '0.0.14', LastUpdatedDate = NOW(), LastUpdatedBy = 'KaaSheng' WHERE ID = 1;
-
-ALTER TABLE T_Profile ADD COLUMN CountryID VARCHAR(36) NOT NULL;
+-- KaaSheng 17/06/2018
+-- Add new column CountryID in t_profile table.
+ALTER TABLE t_profile ADD COLUMN CountryID VARCHAR(36) NOT NULL;
 -- END KaaSheng 17/06/2018
-
