@@ -5,8 +5,8 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-            jade: {
-                files: ['app/views/**'],
+            pug: {
+                files: ['public/templates/**'],
                 options: {
                     livereload: true,
                 },
