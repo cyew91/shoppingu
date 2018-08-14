@@ -13,6 +13,24 @@ angular.module('mean.auth').factory("SocialAuth", ['$http', function ($http) {
     };
 }]);
 
+angular.module('mean.auth').factory('facebookService', function($q) {
+    return {
+        getMyLastName: function() {
+            var deferred = $q.defer();
+            FB.api('/me', {
+                fields: 'name,picture,email'
+            }, function(response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
+    }
+});
+
 angular.module('mean.auth').service("SignUp", ['$resource', function ($resource) {
     return $resource('/profile');
 }]);

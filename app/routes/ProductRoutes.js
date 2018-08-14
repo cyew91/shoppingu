@@ -116,7 +116,6 @@ module.exports = function (app) {
     });
     
     app.post('/deleteProductImage', function (req, res) {
-        //filePath = filePath + fileNameDateNow;
         fs.unlink(filePath + req.body.myName, function (err) {
             if (err) {
                 return res.json({ success: false , message: 'Great'});

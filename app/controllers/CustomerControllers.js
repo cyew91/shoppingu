@@ -69,7 +69,12 @@ exports.getCustomerOrderByProfileId = function (req, res, next, ProfileID) {
     // db.t_profile.findAll({where: {ProfileID: ProfileID}, include: [
     //     {model: db.t_customer_order}
     // ]})
-    db.t_customer_order.findAll({ where: { ProfileID: ProfileID } })
+    db.t_customer_order.findAll({ where: { ProfileID: ProfileID } 
+    , include: [
+        {model: db.t_product_detail}
+        ,
+        {model: db.t_product_document}
+    ]})
     .then(function(result){
         return res.jsonp(result);
     })
