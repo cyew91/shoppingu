@@ -1,13 +1,14 @@
 
 <div>
     <aside class="user-info-wrapper">
-        <div class="user-cover" style="background-image: url(img/account/user-cover-img.jpg);">
-            <div class="info-label" data-toggle="tooltip" title="You currently have 290 Reward Points to spend"><i class="icon-medal"></i>290 points</div>
+        <div class="user-cover" style="background-image: url(img/nmd.jpg);">
+            <div class=".info-label">
+            </div>
         </div>
         <div class="user-info">
             <div class="user-avatar">
                 <label for="file-upload" class="edit-avatar"></label>
-                <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" ng-Aa="imagePath">
+                <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
                 <img src="{{imageSrc}}" alt="User" ng-if="imageSrc != null">
                 <img src="img/Gary.jpg" alt="User" ng-if="imageSrc == null">
                 <!-- <img src="img/Gary.jpg" alt="User"> -->

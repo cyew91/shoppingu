@@ -52,7 +52,6 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 CustomerOrder.belongsTo(models.t_profile, { foreignKey: 'ProfileID' });
                 CustomerOrder.belongsTo(models.t_product_detail, { foreignKey: 'ProductDetailID' });
-                CustomerOrder.belongsTo(models.t_product_document, {foreignKey: 'ProductDetailID'});
             }
         }
     );

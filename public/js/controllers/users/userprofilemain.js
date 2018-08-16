@@ -10,20 +10,15 @@ angular.module('mean.articles')
                           {accId: 'a4',accName: 'Posts', accLink: "post", accIcon: "icon-bag"}];
 
     $scope.selectedMenu = function (index) {
+      
       $('#' + $scope.accountMenu[index].accId).addClass("active");
     };
 
-    // $scope.imageSrc = null;
+    $scope.imageSrc = null;
     
-    // $scope.$on("fileProgress", function(e, progress) {
-    //   $scope.progress = progress.loaded / progress.total;
-    //   // var a = $scope.imageSrc;
-    // });
-
-    $scope.onFileSelect = function($files){
-      var aimage = $scope.imagePath;
-    };
-
+    $scope.$on("fileProgress", function(e, progress) {
+      $scope.progress = progress.loaded / progress.total;
+    });
 
   }]);
 

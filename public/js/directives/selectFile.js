@@ -4,16 +4,14 @@ angular.module('mean.system')
   .directive("ngFileSelect", function(fileReader, $timeout) {
     return {
       scope: {
-        ngModel: '=',
-        ngAa: '='
+        ngModel: '='
       },
-      link: function($scope, el, $rootScope) {
+      link: function($scope, el) {
         function getFile(file) {
           fileReader.readAsDataUrl(file, $scope)
             .then(function(result) {
               $timeout(function() {
                 $scope.ngModel = result;
-                $scope.ngAa = file.name;
               });
             });
         }
