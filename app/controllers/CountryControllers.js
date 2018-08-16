@@ -11,6 +11,6 @@ exports.all = function(req, res){
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
