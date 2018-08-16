@@ -16,7 +16,6 @@
     "angular-fblogin": "*",
     "slick-carousel": "^1.7.1",
     "bootstrap": "v4.0.0-beta",
-    "owl.carousel": "^2.2.1",
     "angular-slick": "^0.2.1",
     "lightgallery": "^1.6.1",
     "dropzone": "^5.1.1",
