@@ -192,13 +192,13 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
 
         .state('proudct', {
             url: '/postproudct',
-            controller: 'productController',
+            controller: 'ProductController',
             templateUrl: 'views/travel/postProduct.html'
         })
 
         .state('review', {
             url: '/postreview',
-            controller: 'productController',
+            controller: 'ProductController',
             templateUrl: 'views/travel/postReview.html'
         })
 }
