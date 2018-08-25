@@ -15,13 +15,17 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'IndexController',
             templateUrl: 'views/index.html'
         })
-        .state('signin', {
-            url: '/signin',
-            templateUrl: 'views/users/signIn.html'
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/users/login.html'
         })
-        .state('signup', {
-            url: '/signup',
-            templateUrl: 'views/users/signUp.html'
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/users/register.html'
+        })
+        .state('forgetpassword', {
+            url: '/forgetpassword',
+            templateUrl: 'views/users/forgetPassword.html'
         })
         .state('aboutus', {
             url: '/aboutus',
@@ -115,10 +119,6 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             url: '/post',
             controller: 'PostController',
             templateUrl: 'views/users/post.html'
-        })
-        .state('forgetpassword', {
-            url: '/forgetpassword',
-            templateUrl: 'views/users/forgetPassword.html'
         })
         .state('uploadimage', {
             url: '/uploadimage',
