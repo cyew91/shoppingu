@@ -127,50 +127,5 @@ angular.module('mean.articles')
       $scope.rTotalItems = $scope.productRequest.length;
     }
 
-    // Shop Categories Widget
-    //------------------------------------------------------------------------------
-    var categoryToggle = $('.widget-categories .has-children > a');
-
-    function closeCategorySubmenu() {
-      categoryToggle.parent().removeClass('expanded');
-    }
-    categoryToggle.on('click', function(e) {
-      if($(e.target).parent().is('.expanded')) {
-        closeCategorySubmenu();
-      } else {
-        closeCategorySubmenu();
-        $(this).parent().addClass('expanded');
-      }
-    });
-
-    // Isotope Grid / Filters (Gallery)
-	//------------------------------------------------------------------------------
-
-	// Isotope Grid
-	// if($('.isotope-grid').length) {
-	// 	var $grid = $('.isotope-grid').imagesLoaded(function() {
-	// 		$grid.isotope({
-	// 			itemSelector: '.grid-item',
-	// 			transitionDuration: '0.7s',
-	// 			masonry: {
-	// 				columnWidth: '.grid-sizer',
-	// 				gutter: '.gutter-sizer'
-	// 			}
-	// 		});
-	// 	});
-	// }
-
-	// // Filtering
-	// if($('.filter-grid').length > 0) {
-	// 	var $filterGrid = $('.filter-grid');
-	// 	$('.nav-pills').on( 'click', 'a', function(e) {
-	// 		e.preventDefault();
-	// 		$('.nav-pills a').removeClass('active');
-	// 		$(this).addClass('active');
-	// 		var $filterValue = $(this).attr('data-filter');
-	// 		$filterGrid.isotope({ filter: $filterValue });
-	// 	});
-	// }
-
   }]);
 
