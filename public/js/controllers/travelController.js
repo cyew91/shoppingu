@@ -25,21 +25,6 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
 
     init();
 
-    $('.input-daterange').datepicker({
-        autoclose: true,
-        keepEmptyValues: true,
-        format: 'yyyy-mm-dd',
-        clearBtn: true
-    });
-
-    $('#datepickerFrom').on('changeDate', function() {
-        $scope.productObj.startDate = $('#datepickerFrom').datepicker('getFormattedDate');
-    });
-
-    $('#datepickerTo').on('changeDate', function() {
-        $scope.productObj.toDate = $('#datepickerTo').datepicker('getFormattedDate')
-    });
-
     $scope.selectedCountry = function (selected) {
         
         if (selected && typeof(selected.description) !== 'undefined') {
