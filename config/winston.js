@@ -5,8 +5,20 @@
  */
 var winston = require('winston');
 
+var options = {
+    console: {
+        level: 'info',
+        handleExceptions: true,
+        json: false,
+        colorize: true,
+        prettyPrint: true,
+        silent: false,
+        timestamp: false
+      },
+};
+
 const logger = winston.createLogger({
-    level: 'verbose',
+    level: 'info',
     format: winston.format.json(),
     transports: [
         //
@@ -21,8 +33,9 @@ const logger = winston.createLogger({
         }),
         new winston.transports.File({
             filename: 'combined.log',
-            level: 'verbose'
-        })
+            level: 'info'
+        }),
+        new winston.transports.Console(options.console)
     ]
 });
 
