@@ -2,31 +2,21 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Country = sequelize.define('country', {
+    var ProductCategory = sequelize.define('product_category', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        countryCode: {
+        productCategoryCode: {
             type: DataTypes.CHAR(3),
             allowNull: false,
-            field: 'country_code'
+            field: 'product_category_code'
         },
-        countryName: {
-            type: DataTypes.STRING(45),
+        productCategoryName: {
+            type: DataTypes.STRING(500),
             allowNull: false,
-            field: 'country_name'
-        },
-        currencyCode: {
-            type: DataTypes.CHAR(5),
-            allowNull: false,
-            field: 'currency_code'
-        },
-        currencyName: {
-            type: DataTypes.STRING(200),
-            allowNull: false,
-            field: 'currency_name'
+            field: 'product_category_name'
         },
         isActive: {
             type: DataTypes.BOOLEAN,
@@ -37,7 +27,11 @@ module.exports = function (sequelize, DataTypes) {
         createdAt: false,
         updatedAt: 'updated_date',
         freezeTableName: true,
+        underscored: true,
+        associate: function (models) {
+            ProductCategory.hasMany(models.product_sub_category);
+        }
     });
 
-    return Country;
+    return ProductCategory;
 };
