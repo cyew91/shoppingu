@@ -4,9 +4,9 @@ module.exports = function (sequelize, DataTypes) {
 
     var ProductCategory = sequelize.define('product_category', {
         id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
         },
         productCategoryCode: {
             type: DataTypes.CHAR(3),

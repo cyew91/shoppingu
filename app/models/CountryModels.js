@@ -4,9 +4,9 @@ module.exports = function (sequelize, DataTypes) {
 
     var Country = sequelize.define('country', {
         id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
         },
         countryCode: {
             type: DataTypes.CHAR(3),
