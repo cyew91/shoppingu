@@ -2,80 +2,101 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Profile = sequelize.define('t_profile', {
-            ProfileID: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
-                primaryKey: true
-            },
-            FirstName: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            LastName: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            FullName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            Address: {
-                type: DataTypes.STRING(500)
-            },
-            Email: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            ContactNo: {
-                type: DataTypes.STRING(45),
-                allowNull: false
-            },
-            Gender: {
-                type: DataTypes.INTEGER
-            },
-            DOB: {
-                type: DataTypes.DATE
-            },
-            Remarks: {
-                type: DataTypes.STRING(500)
-            },
-            CreatedDate: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            CreatedBy: {
-                type: DataTypes.STRING(36),
-                allowNull: false
-            },
-            LastUpdatedDate: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            LastUpdatedBy: {
-                type: DataTypes.STRING(36),
-                allowNull: false
-            },
-            CountryID: {
-                type: DataTypes.UUID,
-                allowNull: false
-            },
-        }, {
-            // don't add the timestamp attributes (updatedAt, createdAt)
-            timestamps: false,
-            // disable the modification of tablenames; By default, sequelize will automatically
-            // transform all passed model names (first parameter of define) into plural.
-            // if you don't want that, set the following
-            freezeTableName: true,
-            associate: function (models) {
-                Profile.hasOne(models.t_profile_account, {foreignKey: 'ProfileID'});
-                Profile.hasOne(models.t_profile_document, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_product, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_travel, {foreignKey: 'ProfileID'});
-                Profile.hasMany(models.t_customer_order, {foreignKey: 'ProfileID'});
-            }
+    var Profile = sequelize.define('profile', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+        },
+        firstName: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+            field: 'first_name'
+        },
+        lastName: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+            field: 'last_name'
+        },
+        address: {
+            type: DataTypes.STRING(500)
+        },
+        email: {
+            type: DataTypes.STRING(45),
+            allowNull: false
+        },
+        contactNo: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+            field: 'contact_no'
+        },
+        gender: {
+            type: DataTypes.STRING(1)
+        },
+        dateOfBirth: {
+            type: DataTypes.DATEONLY,
+            field: 'date_of_birth'
+        },
+        imageName: {
+            type: DataTypes.STRING(500),
+            allowNull: false,
+            field: 'image_name'
+        },
+        imagePath: {
+            type: DataTypes.STRING(500),
+            allowNull: false,
+            field: 'image_path'
+        },
+        loginId: {
+            type: DataTypes.STRING(36),
+            field: 'login_id'
+        },
+        hashPassword: {
+            type: DataTypes.STRING(1000),
+            allowNull: false,
+            field: 'hash_password'
+        },
+        saltPassword: {
+            type: DataTypes.STRING(1000),
+            field: 'salt_password'
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            field: 'is_active'
         }
-    );
+    }, {
+        timestamps: true,
+        createdAt: 'created_date',
+        updatedAt: 'updated_date',
+        freezeTableName: true,       
+        instanceMethods: {
+            toJSON: function () {
+                var values = this.get();
+                delete values.hashPassword;
+                delete values.saltPassword;
+                return values;
+            },
+            makeSalt: function () {
+                return crypto.randomBytes(16).toString('base64');
+            },
+            authenticate: function (plainText) {
+                return this.encryptPassword(plainText, this.saltPassword) === this.hashPassword;
+            },
+            encryptPassword: function (password, salt) {
+                if (!password || !salt) {
+                    return '';
+                }
+                salt = new Buffer(salt, 'base64');
+                return crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
+            }
+        },
+        underscored: true,
+        associate: function (models) {
+            Profile.belongsTo(models.country);
+            Profile.hasMany(models.post_travel);
+            Profile.hasMany(models.product_order);
+        }
+    });
 
     return Profile;
 };

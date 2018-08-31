@@ -2,31 +2,21 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    var Country = sequelize.define('country', {
+    var ProductSubCategory = sequelize.define('product_sub_category', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        countryCode: {
+        productSubCategoryCode: {
             type: DataTypes.CHAR(3),
             allowNull: false,
-            field: 'country_code'
+            field: 'product_sub_category_code'
         },
-        countryName: {
-            type: DataTypes.STRING(45),
+        productSubCategoryName: {
+            type: DataTypes.STRING(500),
             allowNull: false,
-            field: 'country_name'
-        },
-        currencyCode: {
-            type: DataTypes.CHAR(5),
-            allowNull: false,
-            field: 'currency_code'
-        },
-        currencyName: {
-            type: DataTypes.STRING(200),
-            allowNull: false,
-            field: 'currency_name'
+            field: 'product_sub_category_name'
         },
         isActive: {
             type: DataTypes.BOOLEAN,
@@ -39,5 +29,5 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
     });
 
-    return Country;
+    return ProductSubCategory;
 };
