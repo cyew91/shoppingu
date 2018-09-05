@@ -57,11 +57,9 @@ exports.show = function (req, res) {
 exports.createPostTravel = function (req, res, next) {
     var message = null;
     var postTravel = {
-        startDate: req.body.start_date,
-        endDate: req.body.end_date,
-        travelStatus: req.body.travel_status,
-        created_date: Date.now(),
-        updated_date: Date.now(),
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        travelStatus: req.body.travelStatus,
         country_id: req.body.country_id,
         profile_id: req.body.profile_id
     };
