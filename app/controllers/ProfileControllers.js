@@ -43,44 +43,44 @@ const saltRounds = 10;
 /**
  * Create profile
  */
-exports.create = function (req, res, next) {
-    var message = null;
-    var profileDetail = {
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        FullName: req.body.firstName + req.body.lastName,
-        Address: "",
-        Email: req.body.email,
-        ContactNo: req.body.phoneNumber,
-        Gender: 0,
-        DOB: Date.now(),
-        Remarks: "",
-        CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
-        LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
-        CountryID: req.body.countryID
-    };
+// exports.create = function (req, res, next) {
+//     var message = null;
+//     var profileDetail = {
+//         FirstName: req.body.firstName,
+//         LastName: req.body.lastName,
+//         FullName: req.body.firstName + req.body.lastName,
+//         Address: "",
+//         Email: req.body.email,
+//         ContactNo: req.body.phoneNumber,
+//         Gender: 0,
+//         DOB: Date.now(),
+//         Remarks: "",
+//         CreatedDate: Date.now(),
+//         CreatedBy: "00000000-0000-0000-0000-000000000000",
+//         LastUpdatedDate: Date.now(),
+//         LastUpdatedBy: "00000000-0000-0000-0000-000000000000",
+//         CountryID: req.body.countryID
+//     };
 
-    if (req.body.password === req.body.confirmPassword) {
-        var profile = db.t_profile.build(profileDetail);
-        req.body.profileId = profile.ProfileID;
+//     if (req.body.password === req.body.confirmPassword) {
+//         var profile = db.t_profile.build(profileDetail);
+//         req.body.profileId = profile.ProfileID;
 
-        profile.save().then(function () {
-            return next();
-        }).catch(function (err) {
-            res.send({
-                status: 'Exception',
-                message: err
-            })
-        });
-    } else {
-        res.send({
-            status: 'Error',
-            message: 'Password is not same with confirm password'
-        })
-    }
-};
+//         profile.save().then(function () {
+//             return next();
+//         }).catch(function (err) {
+//             res.send({
+//                 status: 'Exception',
+//                 message: err
+//             })
+//         });
+//     } else {
+//         res.send({
+//             status: 'Error',
+//             message: 'Password is not same with confirm password'
+//         })
+//     }
+// };
 
 // Update Profile
 // exports.updateProfile = function (req, res) {
@@ -191,7 +191,7 @@ exports.showProfileAccount = function (req, res) {
  * Note: This is called every time that the parameter :profileId is used in a URL. 
  * Its purpose is to preload the profile on the req object then call the next function. 
  */
-exports.getProfileId = function (req, res, next, id) {
+exports.getProfileById = function (req, res, next, id) {
     //console.log('id => ' + ProfileID);
     db.profile.find({
         where: {
@@ -216,12 +216,12 @@ exports.updateProfile = function (req, res) {
     var profile = req.profile;
 
     profile.updateAttributes({
-        FirstName: req.body.first_name,
-        LastName: req.body.last_name,
-        Email: req.body.email,
-        ContactNo: req.body.contact_no,
-        Gender: req.body.gender,
-        DOB: req.body.date_of_birth
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        contactNo: req.body.contactNo,
+        gender: req.body.gender,
+        dateOfBirth: req.body.dateOfBirth
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
@@ -239,7 +239,7 @@ exports.updateAddress = function (req, res) {
     var profile = req.profile;
 
     profile.updateAttributes({
-        Address: req.body.address
+        address: req.body.address
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
@@ -257,4 +257,42 @@ exports.show = function (req, res) {
     // Sending down the profile that was just preloaded by the profiles.getProfileId function
     // and saves profile on the req object.
     return res.jsonp(req.profile);
+};
+
+/**
+ * Create profile
+ */
+exports.create = function (req, res) {
+
+    var profileDetail = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        address: req.body.address,
+        email: req.body.email,
+        contactNo: req.body.contactNo,
+        gender: req.body.gender,
+        dateOfBirth: req.body.dateOfBirth,
+        country_id: req.body.country_id
+    };
+
+    if (req.body.password === req.body.confirmPassword) {
+        var profile = db.profile.build(profileDetail);
+        req.body.id = profile.id;
+
+        profile.save().then(function () {
+            return res.jsonp({
+                "result": "success"
+            });
+        }).catch(function (err) {
+            res.send({
+                status: 'Exception',
+                message: err
+            })
+        });
+    } else {
+        res.send({
+            status: 'Error',
+            message: 'Password is not same with confirm password'
+        })
+    }
 };

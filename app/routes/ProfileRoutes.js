@@ -14,5 +14,5 @@ module.exports = function (app) {
     app.route('/profile')
     .post(profiles.create, profiles.createProfileAccount);
 
-    app.param('profileId', profiles.getProfileId);
+    app.param('profileId', profiles.getProfileById);
 };
