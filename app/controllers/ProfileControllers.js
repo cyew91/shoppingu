@@ -278,8 +278,8 @@ exports.create = function (req, res) {
     if (req.body.password === req.body.confirmPassword) {
         var profile = db.profile.build(profileDetail);
         req.body.id = profile.id;
-        profile.SaltPass = user.makeSalt();
-        profile.HashPass = user.encryptPassword(req.body.password, profile.SaltPass);
+        profile.SaltPass = profile.makeSalt();
+        profile.HashPass = profile.encryptPassword(req.body.password, profile.SaltPass);
 
         profile.save().then(function () {
             return res.jsonp({
