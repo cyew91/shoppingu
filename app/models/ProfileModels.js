@@ -39,12 +39,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         imageName: {
             type: DataTypes.STRING(500),
-            allowNull: false,
+            //allowNull: false,
             field: 'image_name'
         },
         imagePath: {
             type: DataTypes.STRING(500),
-            allowNull: false,
+            //allowNull: false,
             field: 'image_path'
         },
         loginId: {

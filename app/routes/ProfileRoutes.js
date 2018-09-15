@@ -12,7 +12,7 @@ module.exports = function (app) {
     .put(profiles.updateProfile, profiles.updateAddress);
 
     app.route('/profile')
-    .post(profiles.create, profiles.createProfileAccount);
+    .post(profiles.create);
 
     app.param('profileId', profiles.getProfileById);
 };
