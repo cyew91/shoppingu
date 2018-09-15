@@ -272,14 +272,20 @@ exports.create = function (req, res) {
         contactNo: req.body.contactNo,
         gender: req.body.gender,
         dateOfBirth: req.body.dateOfBirth,
+        imageName: req.body.imageName,
+        imagePath: req.body.imagePath,
+        loginId: req.body.loginId,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
+        IsActive: req.body.IsActive,
         country_id: req.body.country_id
     };
 
     if (req.body.password === req.body.confirmPassword) {
         var profile = db.profile.build(profileDetail);
         req.body.id = profile.id;
-        profile.SaltPass = profile.makeSalt();
-        profile.HashPass = profile.encryptPassword(req.body.password, profile.SaltPass);
+        profile.saltPassword = profile.makeSalt();
+        profile.hashPassword = profile.encryptPassword(req.body.password, profile.saltPassword);
 
         profile.save().then(function () {
             return res.jsonp({
