@@ -1,5 +1,7 @@
 'use strict';
 
+var crypto = require('crypto');
+
 module.exports = function (sequelize, DataTypes) {
 
     var Profile = sequelize.define('profile', {
@@ -82,12 +84,12 @@ module.exports = function (sequelize, DataTypes) {
             authenticate: function (plainText) {
                 return this.encryptPassword(plainText, this.saltPassword) === this.hashPassword;
             },
-            encryptPassword: function (password, salt) {
-                if (!password || !salt) {
+            encryptPassword: function (password, saltPassword) {
+                if (!password || !saltPassword) {
                     return '';
                 }
-                salt = new Buffer(salt, 'base64');
-                return crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
+                saltPassword = new Buffer(saltPassword, 'base64');
+                return crypto.pbkdf2Sync(password, saltPassword, 10000, 64, 'sha512').toString('base64');
             }
         },
         underscored: true,
