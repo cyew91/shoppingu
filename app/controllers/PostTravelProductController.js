@@ -16,6 +16,25 @@ exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
+exports.byId = function (req, res, next, id) {
+    console.log('id => ' + id);
+    db.post_travel_product.find({
+        where: { id: id },
+        include: [{
+            model: db.post_travel_product_document
+        }]
+    }).then(function (product) {
+        if (!product) {
+            return next(new Error('Failed to load postTraveProductlId ' + id));
+        } else {
+            req.product = product;
+            return next();
+        }
+    }).catch(function (err) {
+        return next(err);
+    });
+};
+
 exports.byProductCategoryId = function(req, res, next, id){
     db.post_travel_product.findAll({
         where: {product_category_id: id}
@@ -84,6 +103,29 @@ exports.createProductDocument = function (req, res) {
             return res.jsonp(req.body);
         }
     ).catch(function(err){
+        return res.jsonp(err);
+    });
+};
+
+exports.updateProduct = function(req, res){
+    var product = req.product;
+
+    console.log('updateProduct');
+
+    product.updateAttributes({
+        product_name:   req.body.productName,
+        description:    req.body.description,
+        amount:         req.body.amount
+
+    }).then(function(result){
+        return result.post_travel_product_documents[0].updateAttributes({
+            imageName: req.body.imageName,
+            imagePath: req.body.imagePath
+        });
+    }).then(function(result){
+        return res.jsonp(result);
+
+    }).catch(function(err){
         return res.jsonp(err);
     });
 };
