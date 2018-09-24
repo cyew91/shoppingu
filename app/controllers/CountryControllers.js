@@ -3,7 +3,11 @@
 const db = require('../../config/sequelize');
 
 exports.all = function(req, res){
-    db.t_country.findAll()
+    db.country.findAll({
+        where: {
+            is_active: 1
+        }
+    })
     .then(function(country){
         return res.jsonp(country);
     })

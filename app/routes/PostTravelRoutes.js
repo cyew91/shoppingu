@@ -3,7 +3,7 @@
 var postTravel = require('../../app/controllers/PostTravelControllers');
 
 module.exports = function (app) {
-    // User Profile Routes
+
     app.route('/posttravel/:postTravelId')
     .get(postTravel.show)
     .put(postTravel.updatePostTravel);
