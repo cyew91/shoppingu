@@ -3,18 +3,18 @@
 const postTravelProduct = require('../controllers/PostTravelProductController');
 module.exports = function (app) {
 
-    app.route('/postTravelProduct/byId/:postTravelProductId')
+    app.route('/posttravelproduct/byid/:postTravelProductId')
         .get(postTravelProduct.show)
         .put(postTravelProduct.updateProduct);
 
-    app.route('/postTravelProduct')
+    app.route('/posttravelproduct')
         .get(postTravelProduct.all)
         .post(postTravelProduct.createProduct, postTravelProduct.createProductDocument);
 
-    app.route('/postTravelProduct/byProductCategoryId/:productCategoryId')
+    app.route('/posttravelproduct/byproductcategoryid/:productCategoryId')
         .get(postTravelProduct.show);
 
-    app.route('/postTravelProduct/:userProfileId')
+    app.route('/posttravelproduct/:userProfileId')
         .get(postTravelProduct.show);
 
     app.param('postTravelProductId', postTravelProduct.getPostTravelProductById);
