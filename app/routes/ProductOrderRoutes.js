@@ -7,7 +7,7 @@ module.exports = function (app) {
         .get(productOrder.show)
         .put(productOrder.update);
 
-    app.route('/productorder/:profileId')
+    app.route('/productorder/profile/:profileId')
         .get(productOrder.show)
 
     app.route('/productorder')
