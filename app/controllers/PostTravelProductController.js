@@ -16,8 +16,7 @@ exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
-exports.byId = function (req, res, next, id) {
-    console.log('id => ' + id);
+exports.getPostTravelProductById = function (req, res, next, id) {
     db.post_travel_product.find({
         where: { id: id },
         include: [{
@@ -35,7 +34,7 @@ exports.byId = function (req, res, next, id) {
     });
 };
 
-exports.byProductCategoryId = function(req, res, next, id){
+exports.getPostTravelProductByProductCategoryId = function(req, res, next, id){
     db.post_travel_product.findAll({
         where: {product_category_id: id}
 
@@ -51,7 +50,7 @@ exports.byProductCategoryId = function(req, res, next, id){
     });
 }
 
-exports.byProfileId = function(req, res, next, id){
+exports.getPostTravelByUserProfileId = function(req, res, next, id){
     db.post_travel.findAll({
         where: {profile_id: id},
         include: [{

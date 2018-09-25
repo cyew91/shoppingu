@@ -1,6 +1,6 @@
 'use strict';
 
-const postTravelProduct = require('../../app/controllers/PostTravelProductController');
+const postTravelProduct = require('../controllers/PostTravelProductController');
 module.exports = function (app) {
 
     app.route('/postTravelProduct/byId/:postTravelProductId')
@@ -17,7 +17,7 @@ module.exports = function (app) {
     app.route('/postTravelProduct/:userProfileId')
         .get(postTravelProduct.show);
 
-    app.param('postTravelProductId', postTravelProduct.byId);
-    app.param('productCategoryId', postTravelProduct.byProductCategoryId);
-    app.param('userProfileId', postTravelProduct.byProfileId);
+    app.param('postTravelProductId', postTravelProduct.getPostTravelProductById);
+    app.param('productCategoryId', postTravelProduct.getPostTravelProductByProductCategoryId);
+    app.param('userProfileId', postTravelProduct.getPostTravelByUserProfileId);
 };
