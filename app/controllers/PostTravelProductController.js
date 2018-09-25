@@ -52,7 +52,7 @@ exports.getPostTravelProductByProductCategoryId = function(req, res, next, id){
 
 exports.getPostTravelByUserProfileId = function(req, res, next){
     db.post_travel.findAll({
-        where: {profile_id: res.params.profileId},
+        where: {profile_id: req.params.userProfileId},
         include: [{
             model: db.post_travel_product,
             include: [{
