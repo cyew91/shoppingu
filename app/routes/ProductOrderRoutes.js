@@ -3,17 +3,16 @@
 var productOrder = require('../../app/controllers/ProductOrderControllers');
 
 module.exports = function (app) {
-    app.route('/productorder/:productOrderId')
-        .get(productOrder.show)
-        .put(productOrder.update);
-
-    app.route('/productorder/profile/:profileId')
-        .get(productOrder.show)
-
+    app.param('productOrderId', productOrder.getProductOrderById);
+    
     app.route('/productorder')
         .get(productOrder.get)
         .post(productOrder.create);
 
-    app.param('productOrderId', productOrder.getProductOrderById);
-    app.param('profileId', productOrder.getProductOrderByProfileId);
+    app.route('/productorder/profile')
+        .get(productOrder.getProductOrderByProfileId)
+
+    app.route('/productorder/:productOrderId')
+        .get(productOrder.show)
+        .put(productOrder.update);
 };

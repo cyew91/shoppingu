@@ -38,7 +38,7 @@ exports.getProductOrderById = function (req, res, next, id) {
 exports.getProductOrderByProfileId = function (req, res, next) {
     db.product_order.find({
             where: {
-                profile_id: req.params.profileId
+                profile_id: req.query.profileId
             }
         })
         .then(function (productOrder) {
