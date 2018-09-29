@@ -16,7 +16,7 @@ exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
-exports.getPostTravelProductById = function (req, res) {
+exports.getPostTravelProductById = function (req, res, next) {
     db.post_travel_product.find({
         where: { id: req.query.id },
         include: [{
