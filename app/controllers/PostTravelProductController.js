@@ -50,7 +50,7 @@ exports.getPostTravelProductByProductCategoryId = function(req, res, next, id){
     });
 }
 
-exports.getPostTravelByUserProfileId = function(req, res, next){
+exports.getPostTravelByProfileId = function(req, res){
     db.post_travel.findAll({
         where: {profile_id: req.query.profileId},
         
@@ -62,8 +62,7 @@ exports.getPostTravelByUserProfileId = function(req, res, next){
         }]
 
     }).then(function(travel){
-        req.product = travel;
-        return next();
+        return res.jsonp(travel);
         
     }).catch(function(err){
         return res.jsonp(err);

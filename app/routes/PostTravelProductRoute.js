@@ -14,10 +14,10 @@ module.exports = function (app) {
     app.route('/posttravelproduct/byproductcategoryid/:productCategoryId')
         .get(postTravelProduct.show);
 
-    app.route('/posttravelproduct/:userProfileId')
-        .get(postTravelProduct.show);
+    app.route('/posttravelproduct/')
+        .get(postTravelProduct.getPostTravelByProfileId);
 
     app.param('postTravelProductId', postTravelProduct.getPostTravelProductById);
     app.param('productCategoryId', postTravelProduct.getPostTravelProductByProductCategoryId);
-    app.param('userProfileId', postTravelProduct.getPostTravelByUserProfileId);
+    // app.param('userProfileId', postTravelProduct.getPostTravelByProfileId);
 };
