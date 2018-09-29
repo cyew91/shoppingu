@@ -24,13 +24,12 @@ exports.getPostTravelProductById = function (req, res) {
         }]
     }).then(function (product) {
         if (!product) {
-            return next(new Error('Failed to load postTraveProductlId ' + id));
+            return res.jsonp(new Error('Failed to load postTraveProductlId ' + id));
         } else {
-            req.product = product;
-            return next();
+            return res.jsonp(product);
         }
     }).catch(function (err) {
-        return next(err);
+        return res.jsonp(err);
     });
 };
 
@@ -108,7 +107,7 @@ exports.createProductDocument = function (req, res) {
 exports.updateProduct = function(req, res){
     var product = req.product;
 
-    console.log('updateProduct');
+    console.log(product);
 
     product.updateAttributes({
         product_name:   req.body.productName,
@@ -120,6 +119,7 @@ exports.updateProduct = function(req, res){
             imageName: req.body.imageName,
             imagePath: req.body.imagePath
         });
+
     }).then(function(result){
         return res.jsonp(result);
 
