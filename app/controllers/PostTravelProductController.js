@@ -16,9 +16,9 @@ exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
-exports.getPostTravelProductById = function (req, res, next, id) {
+exports.getPostTravelProductById = function (req, res) {
     db.post_travel_product.find({
-        where: { id: id },
+        where: { id: req.query.id },
         include: [{
             model: db.post_travel_product_document
         }]
@@ -34,13 +34,12 @@ exports.getPostTravelProductById = function (req, res, next, id) {
     });
 };
 
-exports.getPostTravelProductByProductCategoryId = function(req, res, next, id){
+exports.getPostTravelProductByProductCategoryId = function(req, res){
     db.post_travel_product.findAll({
-        where: {product_category_id: id}
+        where: {product_category_id: req.query.id}
 
     }).then(function(product){
-        req.product = product;
-        return next();
+        return res.jsonp(product);
         
     }).catch(function(err){
         return res.render('error', {

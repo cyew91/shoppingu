@@ -5,7 +5,7 @@
  */
 var db = require('../../config/sequelize'),
     config = require('../../config/config');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 /**
