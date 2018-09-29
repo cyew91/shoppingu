@@ -18,7 +18,7 @@ exports.show = function (req, res) {
 
 exports.getPostTravelProductById = function (req, res, next) {
     db.post_travel_product.find({
-        where: { id: req.query.id },
+        where: { id: req.params.postTravelProductId },
         include: [{
             model: db.post_travel_product_document
         }]
@@ -26,7 +26,8 @@ exports.getPostTravelProductById = function (req, res, next) {
         if (!product) {
             return res.jsonp(new Error('Failed to load postTraveProductlId ' + id));
         } else {
-            return res.jsonp(product);
+            req.product = product;
+            return next();
         }
     }).catch(function (err) {
         return res.jsonp(err);
