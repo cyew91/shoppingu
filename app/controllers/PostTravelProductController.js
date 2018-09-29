@@ -64,7 +64,7 @@ exports.getPostTravelByProfileId = function(req, res){
         return res.jsonp(travel);
         
     }).catch(function(err){
-        return res.jsonp(err);
+        return res.jsonp(req.query);
     });
 }
 
