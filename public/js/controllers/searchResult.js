@@ -127,5 +127,21 @@ angular.module('mean.articles')
       $scope.rTotalItems = $scope.productRequest.length;
     }
 
+    // Shop Categories Widget
+    //------------------------------------------------------------------------------
+    var categoryToggle = $('.widget-categories .has-children > a');
+
+    function closeCategorySubmenu() {
+      categoryToggle.parent().removeClass('expanded');
+    }
+    categoryToggle.on('click', function(e) {
+      if($(e.target).parent().is('.expanded')) {
+        closeCategorySubmenu();
+      } else {
+        closeCategorySubmenu();
+        $(this).parent().addClass('expanded');
+      }
+    });
+
   }]);
 
