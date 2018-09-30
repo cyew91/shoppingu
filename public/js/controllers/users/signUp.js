@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global', '$state', 'SignUp', 'GetCountryList', '$stateParams', function ($scope, $window, Global, $state, SignUp, GetCountryList, $stateParams) {
+angular.module('mean.auth').controller('signUp', ['$scope', 'Global', '$state', 'SignUp', function ($scope, Global, $state, SignUp) {
     $scope.global = Global;
 
     $scope.signUp = function () {
@@ -8,10 +8,10 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
-            phoneNumber: this.phoneNumber,
+            contactNo: this.phoneNumber,
+            loginId: this.userName,
             password: this.password,
-            confirmPassword: this.confirmPassword,
-            countryID: this.countryID
+            confirmPassword: this.confirmPassword
         });
 
         signUp.$save(function (response) {
@@ -22,40 +22,6 @@ angular.module('mean.auth').controller('signUp', ['$scope', '$window', 'Global',
     };
 
     $('#myModal').on('hidden.bs.modal', function (e) {
-        $state.go('signin');
+        $state.go('login');
     });
-
-    $scope.travelObject = {
-        countryList: [],
-        initCountry: {}
-    }
-
-    const init = function () {
-        GetCountryList.query(function (list) {
-            $scope.travelObject.countryList = list; 
-        });
-
-        // if($stateParams.productObj == null){
-        //     $scope.productObj={
-        //         count: 1
-        //     }
-        // }else{
-        //     $scope.productObj = $stateParams.productObj;
-        //     $scope.travelObject.initCountry= {CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryID'], CountryName: $scope.productObj['countryName'],Status: $scope.productObj['countryStatus']}
-        // }
-    };
-
-    init();
-
-    $scope.selectedCountry = function (selected) {
-        
-        if (selected && typeof(selected.description) !== 'undefined') {
-            $scope.countryID = selected.description.CountryID;
-            // $scope.productObj.countryCode = selected.description.CountryCode;
-            // $scope.productObj.countryName = selected.description.CountryName;
-            // $scope.productObj.countryStatus = selected.description.Status;
-            
-        }
-    };
-    
 }]);

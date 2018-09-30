@@ -267,18 +267,11 @@ exports.create = function (req, res) {
     var profileDetail = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        address: req.body.address,
         email: req.body.email,
         contactNo: req.body.contactNo,
-        gender: req.body.gender,
-        dateOfBirth: req.body.dateOfBirth,
-        imageName: req.body.imageName,
-        imagePath: req.body.imagePath,
         loginId: req.body.loginId,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-        IsActive: req.body.IsActive,
-        country_id: req.body.country_id
+        confirmPassword: req.body.confirmPassword
     };
 
     if (req.body.password === req.body.confirmPassword) {
