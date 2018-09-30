@@ -120,6 +120,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'PostController',
             templateUrl: 'views/users/post.html'
         })
+        .state('request', {
+            url: '/request',
+            controller: 'RequestController',
+            templateUrl: 'views/users/request.html'
+        })
         .state('uploadimage', {
             url: '/uploadimage',
             controller: 'UploadImageController',

@@ -166,7 +166,7 @@
                 </div>
                 <div class="user-info">
                     <div class="user-avatar">
-                        <a class="edit-avatar" href="#"></a>
+                        <!-- <a class="edit-avatar" href="#"></a> -->
                         <img src="img/account/user-ava.jpg" alt="User">
                     </div>
                     <div class="user-data">
@@ -190,7 +190,7 @@
                     <i class="icon-heart"></i>Wishlist
                     <span class="badge badge-primary badge-pill">3</span>
                 </a> -->
-                <a class="list-group-item with-badge" href="account-tickets.html">
+                <a class="list-group-item with-badge" ui-sref="request">
                     <i class="icon-tag"></i>My Requests
                     <span class="badge badge-primary badge-pill">4</span>
                 </a> 
@@ -201,87 +201,27 @@
         </div>
         <div class="col-lg-8">
             <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-            <div class="table-responsive">
+            <div class="table-responsive" ng-init="initMyTrips()">
                 <table class="table table-hover margin-bottom-none">
                     <thead>
                         <tr>
                             <th>Destination</th>
-                            <th>Date Purchased</th>
+                            <th>Travel Date</th>
                             <th>Status</th>
                             <!-- <th>Total</th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="item in travel">
                             <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Taiwan</a>
+                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">{{item.country.countryName}}</a>
                             </td>
-                            <td>August 08, 2017</td>
+                            <td>{{item.startDate| date: "MMMM dd, yyyy"}}</td>
                             <td>
-                                <span class="text-danger">Canceled</span>
+                                <span class="text-danger">{{item.travelStatus}}</span>
                             </td>
                             <!-- <td>
                                 <span class="text-medium">$760.50</span>
-                            </td> -->
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Singapore</a>
-                            </td>
-                            <td>July 21, 2017</td>
-                            <td>
-                                <span class="text-info">In Progress</span>
-                            </td>
-                            <!-- <td>
-                                <span class="text-medium">$315.20</span>
-                            </td> -->
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Thailand</a>
-                            </td>
-                            <td>June 15, 2017</td>
-                            <td>
-                                <span class="text-warning">Delayed</span>
-                            </td>
-                            <!-- <td>
-                                <span class="text-medium">$1,264.00</span>
-                            </td> -->
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Hong Kong</a>
-                            </td>
-                            <td>May 19, 2017</td>
-                            <td>
-                                <span class="text-success">Delivered</span>
-                            </td>
-                            <!-- <td>
-                                <span class="text-medium">$198.35</span>
-                            </td> -->
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Japan</a>
-                            </td>
-                            <td>April 04, 2017</td>
-                            <td>
-                                <span class="text-success">Delivered</span>
-                            </td>
-                            <!-- <td>
-                                <span class="text-medium">$2,133.90</span>
-                            </td> -->
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">Korea</a>
-                            </td>
-                            <td>March 30, 2017</td>
-                            <td>
-                                <span class="text-success">Delivered</span>
-                            </td>
-                            <!-- <td>
-                                <span class="text-medium">$86.40</span>
                             </td> -->
                         </tr>
                     </tbody>

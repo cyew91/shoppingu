@@ -1,14 +1,34 @@
 'use strict';
 
-angular.module('mean.articles').service('GetUser', ['$resource', function ($resource) {
-    return $resource('profile/:profileId', {
-        profileId: '@ProfileID'
+angular.module('mean.articles').service('GetUserProfileById', ['$resource', function ($resource) {
+    return $resource('profile/:id', {
+        id: '@id'
     }, {
         update: {
             method: 'PUT'
         }
     });
 }]);
+
+angular.module('mean.articles').service('GetUserAddressById', ['$resource', function ($resource) {
+  return $resource('address/:id', {
+      id: '@id'
+  }, {
+      update: {
+          method: 'PUT'
+      }
+  });
+}]);
+
+// angular.module('mean.articles').service('GetUserProfilePictureById', ['$resource', function ($resource) {
+//   return $resource('profilepicture/:id', {
+//       id: '@id'
+//   }, {
+//       update: {
+//           method: 'PUT'
+//       }
+//   });
+// }]);
 
 // angular.module('mean.auth').factory("Articles", ['$resource', function($resource) {
 //     return $resource('articles/:articleId', {
