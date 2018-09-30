@@ -29,7 +29,7 @@ var sequelize =  onHeroku ?
         port: config.db.port,
         dialect: 'mysql',
         storage: config.db.storage,
-        logging: config.enableSequelizeLog === 'true' ? winston.verbose : false
+        logging: console.log
     });
 
 // loop through all files in models directory ignoring hidden files and this file
