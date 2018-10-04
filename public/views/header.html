@@ -127,10 +127,10 @@
 </header> -->
 
 <!-- Navbar-->
-<header class="navbar navbar-sticky">
+<header class="navbar navbar-sticky" ng-controller="HeaderController">
   <!-- Search-->
   <form class="site-search" method="get">
-    <input type="text" name="site_search" placeholder="Type to search...">
+    <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()" placeholder="Type to search...">
     <div class="search-tools">
       <span class="clear-search">Clear</span>
       <span class="close-search">
@@ -150,7 +150,7 @@
   <nav class="site-menu">
     <ul>
       <li class="has-megamenu">
-        <a href="#">
+        <a ui-sref="searchResult">
           <span>Category</span>
         </a>
         <ul class="mega-menu">
@@ -276,10 +276,10 @@
               </div>
             </li>
             <li>
-              <a href="account-profile.html">My Profile</a>
+              <a ui-sref="userprofile">My Profile</a>
             </li>
             <li>
-              <a href="account-orders.html">Orders List</a>
+              <a ui-sref="order">Orders List</a>
             </li>
             <li>
               <a href="account-wishlist.html">Wishlist</a>
