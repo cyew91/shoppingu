@@ -68,6 +68,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('posttravel', {
             abstract: true,
             url: '/posttravel',
+            controller: 'travelController',
             templateUrl: 'views/product/post/post.html'
         })
         .state('posttravel.travel', {
@@ -187,6 +188,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('travel', {
             url: '/travel',
             controller: 'TravelController',
+            params: {
+                productObj: null,
+                buyer: false
+            },
             templateUrl: 'views/travel/postTravel.html'
         })
 
