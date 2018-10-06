@@ -1,7 +1,8 @@
 'use strict'
 
 angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat, CreatePost, $rootScope) {
-    $scope.profileId = $rootScope.currentUser.ProfileID;
+    // $scope.profileId = $rootScope.currentUser.ProfileID;
+    $scope.profileId = '7c4be0de-c943-11e7-84e9-90bbf6a2477f'
     $scope.productCategoryList = [];
     $scope.productSubCategoryList = [];
     $scope.productImages = [];
