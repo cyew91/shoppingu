@@ -41,16 +41,15 @@ module.exports = function (sequelize, DataTypes) {
         },
         imageName: {
             type: DataTypes.STRING(500),
-            //allowNull: false,
             field: 'image_name'
         },
         imagePath: {
             type: DataTypes.STRING(500),
-            //allowNull: false,
             field: 'image_path'
         },
         loginId: {
             type: DataTypes.STRING(36),
+            allowNull: false,
             field: 'login_id'
         },
         hashPassword: {
@@ -64,7 +63,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         isActive: {
             type: DataTypes.BOOLEAN,
-            field: 'is_active'
+            field: 'is_active',
+            defaultValue: true,
         }
     }, {
         timestamps: true,
