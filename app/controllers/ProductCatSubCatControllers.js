@@ -61,3 +61,19 @@ exports.getProductSubCatByProdCatId = function (req, res, next, product_category
         return next(err);
     });
 };
+
+
+exports.getProductCatAndSubCat = function (req, res, next) {
+    db.product_category.findAll({include: [
+        {model: db.product_sub_category}
+    ]})
+    .then(function(result){
+        return res.jsonp(result);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        })
+    });
+};

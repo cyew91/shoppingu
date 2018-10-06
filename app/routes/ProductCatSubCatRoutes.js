@@ -15,6 +15,8 @@ module.exports = function (app) {
     app.route('/productcat/productsubcat/:productsubcatbyid')
     .get(productCatSubCat.show)
 
+    app.get('/productcatandsubcat', productCatSubCat.getProductCatAndSubCat);
+
     app.param('productcatid', productCatSubCat.getProdCatById);
     app.param('productsubcatbyid', productCatSubCat.getProductSubCatByProdCatId);
 };
