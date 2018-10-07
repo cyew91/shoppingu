@@ -195,7 +195,7 @@
                     </div>
                     <div class="user-info">
                         <div class="user-avatar">
-                            <a class="edit-avatar" href="#"></a>
+                            <!-- <a class="edit-avatar" href="#"></a> -->
                             <img src="img/account/user-ava.jpg" alt="User">
                         </div>
                         <div class="user-data">
@@ -217,7 +217,7 @@
                         <i class="icon-heart"></i>Wishlist
                         <span class="badge badge-primary badge-pill">3</span>
                     </a> -->
-                    <a class="list-group-item with-badge" href="account-tickets.html">
+                    <a class="list-group-item with-badge" ui-sref="request">
                         <i class="icon-tag"></i>My Requests
                         <span class="badge badge-primary badge-pill">4</span>
                     </a> 
@@ -230,7 +230,7 @@
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 <h4>Contact Address</h4>
                 <hr class="padding-bottom-1x">
-                <form class="row">
+                <form class="row" ng-init="initAddress()">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-company">Company</label>
@@ -273,7 +273,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-address1">Address 1</label>
-                            <input class="form-control" type="text" id="account-address1" required>
+                            <input class="form-control" type="text" id="account-address1" ng-model="profile.address" value="{{profile.address}}" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -292,7 +292,7 @@
                         <hr class="margin-top-1x margin-bottom-1x">
                         <div class="text-right">
                             <button class="btn btn-primary margin-bottom-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success"
-                                data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your address updated successfuly.">Update Address</button>
+                                data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your address updated successfuly." ng-click="updateAddress()">Update Address</button>
                         </div>
                     </div>
                 </form>

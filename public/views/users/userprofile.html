@@ -102,12 +102,14 @@
                 </div>
                 <div class="user-info">
                     <div class="user-avatar">
-                        <a class="edit-avatar" href="#"></a>
+                        <label for="file-upload" class="edit-avatar"></label>
+                        <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" ng-file-name="fileName">{{fileName}}
+                        <!-- <a class="edit-avatar" href="#"></a> -->
                         <img src="img/account/user-ava.jpg" alt="User">
                     </div>
                     <div class="user-data">
-                        <h4>Daniel Adams</h4>
-                        <span>Joined February 06, 2017</span>
+                        <h4 >{{lastName}} {{firstName}}</h4>
+                        <span>Joined {{profile.created_date | date: "MMMM dd, yyyy"}}</span>
                     </div>
                 </div>
             </aside>
@@ -124,7 +126,7 @@
                     <i class="icon-heart"></i>Wishlist
                     <span class="badge badge-primary badge-pill">3</span>
                 </a> -->
-                <a class="list-group-item with-badge" href="account-tickets.html">
+                <a class="list-group-item with-badge" ui-sref="request">
                     <i class="icon-tag"></i>My Requests
                     <span class="badge badge-primary badge-pill">4</span>
                 </a> 
@@ -135,29 +137,29 @@
         </div>
         <div class="col-lg-8">
             <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-            <form class="row">
+            <form class="row" ng-init="initUserProfie()">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">First Name</label>
-                        <input class="form-control" type="text" id="account-fn" value="Daniel" required>
+                        <input class="form-control" type="text" id="account-fn" ng-model="profile.firstName" value="{{profile.firstName}}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-ln">Last Name</label>
-                        <input class="form-control" type="text" id="account-ln" value="Adams" required>
+                        <input class="form-control" type="text" id="account-ln" ng-model="profile.lastName" value="{{profile.lastName}}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email" value="daniel.adams@mail.com" disabled>
+                        <input class="form-control" type="email" id="account-email" ng-model="profile.email" value="{{profile.email}}" disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" value="+7(805) 348 95 72" required>
+                        <input class="form-control" type="text" id="account-phone" ng-model="profile.contactNo" value="{{profile.contactNo}}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -176,11 +178,11 @@
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <div class="custom-control custom-checkbox d-block">
-                            <input class="custom-control-input" type="checkbox" id="subscribe_me" checked>
-                            <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
+                            <!-- <input class="custom-control-input" type="checkbox" id="subscribe_me" checked>
+                            <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label> -->
                         </div>
                         <button class="btn btn-primary margin-right-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success"
-                            data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                            data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your profile updated successfuly." ng-click="updateUserProfile()">Update Profile</button>
                     </div>
                 </div>
             </form>

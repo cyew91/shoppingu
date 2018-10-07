@@ -218,10 +218,10 @@ exports.updateProfile = function (req, res) {
     profile.updateAttributes({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email,
+        // email: req.body.email,
         contactNo: req.body.contactNo,
-        gender: req.body.gender,
-        dateOfBirth: req.body.dateOfBirth
+        // gender: req.body.gender,
+        // dateOfBirth: req.body.dateOfBirth
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
