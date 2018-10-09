@@ -133,6 +133,9 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('404', {
             templateUrl: 'views/404.html'
         })
+        .state('500', {
+            templateUrl: 'views/500.html'
+        })
         .state('profileIcon', {
             url: '/profileIcon',
             templateUrl: 'views/users/account-orders.html'
