@@ -22,7 +22,7 @@ angular.module('mean.articles')
       //console.log($scope.seletedProduct);
       //$('#modal-product').modal('show');
       $state.go('editProductDetail');
-    }
+    };
     // $scope.searchResult = function() {
     //   GetProductResult.query({
     //     productDetailID: $scope.productDetailID

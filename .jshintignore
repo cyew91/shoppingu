@@ -1,0 +1,6 @@
+public/js/templates/scripts.min.js
+public/js/featherIcons.js
+public/js/templates/card.min.js
+public/js/templates/modernizr.min.js
+public/js/templates/vendor.min.js
+test/mocha/controllers/articleControllerSpec.js

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 angular.module('mean').controller('ReviewController', ['$scope', '$state', '$stateParams', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, CreatePost, $rootScope) {
     $scope.productObj = $stateParams.productObj;
@@ -53,14 +53,14 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
             $bar.children().first().addClass("is-current");
         }
 
-        if (count == 2) {
+        if (count === 2) {
             console.log($scope.productObj);
             $state.go('posttravel.product', {productObj: $scope.productObj});
-        } else if (count == 3) {
+        } else if (count === 3) {
             console.log($scope.productObj);
             $state.go('posttravel.review', {productObj: $scope.productObj});
         }
-    }
+    };
 
     $scope.back = function (count) {
         $('#text' + count).css('display', 'none');
@@ -83,12 +83,12 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
 
         console.log($scope.productObj);
 
-        if (count == 2) {
+        if (count === 2) {
             $state.go('posttravel.product', {productObj: $scope.productObj});
-        } else if (count == 3) {
+        } else if (count === 3) {
             $state.go('posttravel.review', {productObj: $scope.productObj});
-        } else if (count == 1) {
+        } else if (count === 1) {
             $state.go('posttravel.travel', {productObj: $scope.productObj});
         }
-    }
+    };
 }]);

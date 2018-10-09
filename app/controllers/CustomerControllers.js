@@ -16,7 +16,7 @@ exports.getCustomerOrder = function (req, res) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -31,7 +31,6 @@ exports.show= function (req, res) {
  * Retrieve a customer order by CustomerOrderID
  */
 exports.getCustomerOrderById = function (req, res, next, CustomerOrderID) {
-    console.log('id => ' + ProductID);
     db.t_customer_order.find({ where: { CustomerOrderID: CustomerOrderID } }).then(function (customerorder) {
         if (!customerorder) {
             return next(new Error('Failed to load CustomerOrderID ' + CustomerOrderID));
@@ -58,7 +57,7 @@ exports.getProductDetailByCustomerOrderID = function (req, res, next, CustomerOr
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -77,7 +76,7 @@ exports.getCustomerOrderByProfileId = function (req, res, next, ProfileID) {
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -106,7 +105,7 @@ exports.createCustomerOrder = function (req, res, next) {
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        res.send({ status: 'Exception', message: err });
     });
 };
 
