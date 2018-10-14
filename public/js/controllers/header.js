@@ -7,9 +7,9 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     $scope.productRequest = [];
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
-        if(response.status !== '0'){
+        if (response.status !== '0') {
             return response;
-        }else{
+        } else {
             $scope.errorMessage = 'Not logged in';
             $rootScope.currentUser = null;
             return "";
@@ -58,26 +58,26 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     // };
 
     // Sticky Navbar
-	// //------------------------------------------------------------------------------
-	// function stickyHeader() {
-	// 	var $body = $('body');
-	// 	var $navbar = $('.navbar-sticky');
-	// 	var $topbarH = $('.topbar').outerHeight();
-	// 	var $navbarH = $navbar.outerHeight();
-	// 	if($navbar.length) {
-	// 		$(window).on('scroll', function() {
-	// 			if($(this).scrollTop() > $topbarH) {
-	// 				$navbar.addClass('navbar-stuck');
-	// 				if(! $navbar.hasClass('navbar-ghost')) {
-	// 					$body.css('padding-top', $navbarH);
-	// 				}
-	// 			} else {
-	// 				$navbar.removeClass('navbar-stuck');
-	// 				$body.css('padding-top', 0);
-	// 			}
-	// 		});
-	// 	}
-	// }
-	// stickyHeader();
+    // //------------------------------------------------------------------------------
+    // function stickyHeader() {
+    // 	var $body = $('body');
+    // 	var $navbar = $('.navbar-sticky');
+    // 	var $topbarH = $('.topbar').outerHeight();
+    // 	var $navbarH = $navbar.outerHeight();
+    // 	if($navbar.length) {
+    // 		$(window).on('scroll', function() {
+    // 			if($(this).scrollTop() > $topbarH) {
+    // 				$navbar.addClass('navbar-stuck');
+    // 				if(! $navbar.hasClass('navbar-ghost')) {
+    // 					$body.css('padding-top', $navbarH);
+    // 				}
+    // 			} else {
+    // 				$navbar.removeClass('navbar-stuck');
+    // 				$body.css('padding-top', 0);
+    // 			}
+    // 		});
+    // 	}
+    // }
+    // stickyHeader();
 
 }]);

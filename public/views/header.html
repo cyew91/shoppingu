@@ -111,17 +111,17 @@
         </a>
       </li>
       <li>
-        <a href="login" ng-show="!currentUser">
+        <a ui-sref="login" ng-show="!currentUser">
           <span>Login</span>
         </a>
       </li>
       <li>
-        <a href="register" ng-show="!currentUser">
+        <a ui-sref="register" ng-show="!currentUser">
           <span>Register</span>
         </a>
       </li>
       <li>
-        <a ui-sref="userprofile">
+        <a ui-sref="userprofile" ng-show="currentUser">
           <span>Account</span>
         </a>
       </li>
