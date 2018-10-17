@@ -24,7 +24,7 @@ exports.getPostTravelProductById = function (req, res, next) {
         }]
     }).then(function (product) {
         if (!product) {
-            return res.jsonp(new Error('Failed to load postTraveProductlId ' + id));
+            return res.jsonp(new Error('Failed to load postTraveProductlId ' + product.id));
         } else {
             req.product = product;
             return next();
@@ -45,9 +45,9 @@ exports.getPostTravelProductByProductCategoryId = function(req, res){
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
-}
+};
 
 exports.getPostTravelByProfileId = function(req, res){
     db.post_travel.findAll({
@@ -66,7 +66,7 @@ exports.getPostTravelByProfileId = function(req, res){
     }).catch(function(err){
         return res.jsonp(req.query);
     });
-}
+};
 
 exports.createProduct = function (req, res, next) {
     const msg = '';
@@ -74,7 +74,7 @@ exports.createProduct = function (req, res, next) {
         productName: req.body.productName,
         description: req.body.description,
         amount: req.body.amount
-    }
+    };
 
     const productSave = db.post_travel_product.build(product);
 
@@ -93,7 +93,7 @@ exports.createProductDocument = function (req, res) {
         imageName: req.body.imageName,
         imagePath: req.body.imagePath,
         post_travel_product_id: req.body.postProductId
-    }
+    };
 
     const productDocumentSave = db.post_travel_product_document.build(productDocument);
     productDocumentSave.save().then(

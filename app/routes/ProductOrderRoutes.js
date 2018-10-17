@@ -10,7 +10,7 @@ module.exports = function (app) {
         .post(productOrder.create);
 
     app.route('/productorder/profile')
-        .get(productOrder.getProductOrderByProfileId)
+        .get(productOrder.getProductOrderByProfileId);
 
     app.route('/productorder/:productOrderId')
         .get(productOrder.show)

@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
       cb(null, req.body.myFileName);
     }
-  })
+  });
 var upload = multer({ storage: storage }).any();
 
 const fs = require('fs');
@@ -93,7 +93,7 @@ module.exports = function (app) {
     app.param('productdetailnamereq', product.getProductDetailByProdNameReq);
     app.param('productDetailId', product.getProductDetailByProdId);
     app.param('productDocumentId', product.getProductDocumentById);
-    app.param('productDocumentDetailId', product.getProductDocumentByProdDetailId);
+    // app.param('productDocumentDetailId', product.getProductDocumentByProdDetailId);
     app.param('productCatIDForSubCat', product.getProductSubCatByProductCatId);
     app.param('productCatID', product.getProductCatByProdCatId);
     app.param(['travelId'], product.getProductByProfileIdAndTravelId);
@@ -112,7 +112,7 @@ module.exports = function (app) {
           }
           return res.json({ success: true, message: req.files});
           // Everything OK
-        })
+        });
     });
     
     app.post('/deleteProductImage', function (req, res) {
@@ -123,6 +123,6 @@ module.exports = function (app) {
             }
             return res.json({ success: true, message: req.body.myName});
             // Everything OK
-        })
+        });
     });
 };

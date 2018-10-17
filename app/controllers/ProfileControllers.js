@@ -151,7 +151,7 @@ exports.createProfileAccount = function (req, res, next) {
         res.send({
             status: 'Exception',
             message: err
-        })
+        });
     });
 };
 
@@ -288,12 +288,12 @@ exports.create = function (req, res) {
             res.send({
                 status: 'Exception',
                 message: err
-            })
+            });
         });
     } else {
         res.send({
             status: 'Error',
             message: 'Password is not same with confirm password'
-        })
+        });
     }
 };

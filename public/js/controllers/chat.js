@@ -32,7 +32,7 @@ angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userServic
 
     $scope.scrollToBottom = function () {
         messageWrapper.scrollTop(messageWrapper[0].scrollHeight);
-    }
+    };
 
     $scope.postMessage = function () {
         $scope.nickname = "david@123";
@@ -65,7 +65,7 @@ angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userServic
                 }
             });
         }
-    }
+    };
 
     $scope.setReceiver = function (receiver) {
         $scope.receiver = receiver;
@@ -81,7 +81,7 @@ angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userServic
         if (user) {
             user.hasNewMessage = false;
         }
-    }
+    };
 
     //收到登录结果
     socket.on('userAddingResult', function (data) {
@@ -111,7 +111,7 @@ angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userServic
         if (!$scope.hasLogined) return;
         $scope.publicMessages.push({ text: data.nickname, type: "bye" });
         for (var i = 0; i < $scope.users.length; i++) {
-            if ($scope.users[i].nickname == data.nickname) {
+            if ($scope.users[i].nickname === data.nickname) {
                 $scope.users.splice(i, 1);
                 return;
             }

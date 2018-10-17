@@ -9,7 +9,7 @@ module.exports = function (app) {
     .put(postTravel.updatePostTravel);
 
     app.route('/posttravel/profileid/:profileId')
-    .get(postTravel.show)
+    .get(postTravel.show);
 
     app.route('/posttravel')
     .get(postTravel.getPostTravel)
