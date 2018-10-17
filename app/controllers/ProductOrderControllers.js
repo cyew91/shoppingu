@@ -12,7 +12,7 @@ exports.get = function (req, res) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -48,7 +48,7 @@ exports.getProductOrderByProfileId = function (req, res, next) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -78,7 +78,7 @@ exports.create = function (req, res, next) {
         res.send({
             status: 'Exception',
             message: err
-        })
+        });
     });
 };
 

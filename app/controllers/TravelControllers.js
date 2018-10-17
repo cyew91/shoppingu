@@ -15,7 +15,7 @@ exports.allTravel = function(req, res, next, ProfileID){
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 

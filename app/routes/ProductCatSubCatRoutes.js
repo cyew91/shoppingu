@@ -10,10 +10,10 @@ module.exports = function (app) {
     .get(productCatSubCat.show);
 
     app.route('/productcat/productsubcat')
-    .get(productCatSubCat.getSubProductCat)
+    .get(productCatSubCat.getSubProductCat);
 
     app.route('/productcat/productsubcat/:productsubcatbyid')
-    .get(productCatSubCat.show)
+    .get(productCatSubCat.show);
 
     app.get('/productcatandsubcat', productCatSubCat.getProductCatAndSubCat);
 

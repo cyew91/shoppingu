@@ -17,7 +17,7 @@ exports.getProductCat = function (req, res) {
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -45,7 +45,7 @@ exports.getSubProductCat = function (req, res) {
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -74,6 +74,6 @@ exports.getProductCatAndSubCat = function (req, res, next) {
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };

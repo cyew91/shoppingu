@@ -11,7 +11,7 @@ exports.getPostTravel = function (req, res) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -44,7 +44,7 @@ exports.getPostTravelByProfileId = function (req, res, next) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -72,7 +72,7 @@ exports.createPostTravel = function (req, res, next) {
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        res.send({ status: 'Exception', message: err });
     });
 };
 
