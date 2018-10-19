@@ -20,7 +20,7 @@ module.exports = function (app) {
 
 // Setting the local strategy route
     app.post('/users/session', passport.authenticate('local', {
-        failureRedirect: '/signin',
+        failureRedirect: '/login',
         failureFlash: true
     }), users.session);
 

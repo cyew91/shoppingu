@@ -136,6 +136,9 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('404', {
             templateUrl: 'views/404.html'
         })
+        .state('500', {
+            templateUrl: 'views/500.html'
+        })
         .state('profileIcon', {
             url: '/profileIcon',
             templateUrl: 'views/users/account-orders.html'
@@ -211,5 +214,20 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
 //Setting HTML5 Location Mode
 angular.module('mean').config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode(true);
-
 }]);
+
+angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedIn) {
+    $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+        var isLogin = toState.name === "login";
+        if (isLogin) {
+            return;
+        }
+
+        CheckLoggedIn.get(function (response) {
+            if (response.status === '0' && toState.name === 'travel') {
+                e.preventDefault(); 
+                $state.go('login'); 
+            }
+        });
+    });
+});

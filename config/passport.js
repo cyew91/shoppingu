@@ -11,16 +11,16 @@ var LocalStrategy = require('passport-local').Strategy,
 
 //Serialize sessions
 passport.serializeUser(function(user, done) {
-  done(null, user.ProfileID);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-    db.t_profile_account.find({where: {ProfileID: id}}).then(function(user){
+    db.profile.find({where: {id: id}}).then(function(user){
         if(!user){
             winston.warn('Logged in user not in database, user possibly deleted post-login');
             return done(null, false);
         }
-        winston.info('Session: { profileId: ' + user.ProfileID + ', loginId: ' + user.LoginID + ' }');
+        winston.info('Session: { profileId: ' + user.id + ', loginId: ' + user.loginId + ' }');
         done(null, user);
     }).catch(function(err){
         done(err, null);
@@ -29,21 +29,21 @@ passport.deserializeUser(function(id, done) {
 
 //Use local strategy
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
-  function(email, password, done) {
-    db.t_profile_account.find({ where: { LoginID: email }}).then(function(user) {
+  function(username, password, done) {
+    db.profile.find({ where: { loginId: username }}).then(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else if (!user.authenticate(password)) {
         done(null, false, { message: 'Invalid password'});
       } else {
-        winston.info('Login (local) : { profileId: ' + user.ProfileID + ', loginId: ' + user.LoginID + ' }');
+        winston.info('Login (local) : { profileId: ' + user.id + ', loginId: ' + user.loginId + ' }');
         done(null, user);
       }
     }).catch(function(err){
-      done(err);
+        done(err);
     });
   }
 ));

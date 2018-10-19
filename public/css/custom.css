@@ -1,28 +1,26 @@
-.content{
-    margin: 40px;
-}
-
-.checkout-steps>a{
+.checkout-steps>a {
     width: 33% !important;
 }
 
-
 /* profile upload button disabled start */
 .user-info-wrapper .user-info .user-avatar input[type=file] {
-    display:none;
+    display: none;
 }
-.user-info-wrapper .user-info .user-avatar input[type=file] + label {
-    display:inline-block;
-    margin:20px;
+
+.user-info-wrapper .user-info .user-avatar input[type=file]+label {
+    display: inline-block;
+    margin: 20px;
     padding: 4px 32px;
     background-color: #FFFFFF;
-    border:solid 1px #666F77;
+    border: solid 1px #666F77;
     border-radius: 6px;
-    color:#666F77;
+    color: #666F77;
 }
-.user-info-wrapper .user-info .user-avatar input[type=file]:active + label {
+
+.user-info-wrapper .user-info .user-avatar input[type=file]:active+label {
     background-image: none;
-    background-color:#2D6C7A;
-    color:#FFFFFF;
+    background-color: #2D6C7A;
+    color: #FFFFFF;
 }
+
 /* profile upload button disabled end */
