@@ -34,18 +34,19 @@ angular.module('mean.articles').service("GetProductDetail", ['$resource', functi
     return $resource('/productdetaillisting/:productId', {productId: '@productId'});
 }]);
 
-angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', function($resource){
-    return $resource('/productcatandsubcat');
-}]);
-
 angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$resource', function($resource) {
     return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'});
 }]);
 
-angular.module('mean.articles').service('CreatePost', ['$resource', function($resource){
-    return $resource('/product');
-}]);
-
 angular.module('mean.articles').service('GetOrderByProfileId', ['$resource', function($resource){
     return $resource('/custorderwithproduct/:cprofileId', {cprofileId: '@cprofileId'});
+}]);
+
+// New service after revamp
+angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', function($resource){
+    return $resource('/productcatandsubcat');
+}]);
+
+angular.module('mean.articles').service('CreatePost', ['$resource', function($resource){
+    return $resource('/posttravel');
 }]);

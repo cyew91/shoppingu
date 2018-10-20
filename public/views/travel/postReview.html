@@ -24,11 +24,11 @@
             <h5>Travel Information:</h5>
             <ul class="list-unstyled">
                 <li>
-                    <span class="text-muted">Country:</span>Malaysia</li>
+                    <span class="text-muted">Country:</span>{{productObj.countryName}}</li>
                 <li>
-                    <span class="text-muted">Date From:</span>2018-10-17</li>
+                    <span class="text-muted">Date From:</span>{{productObj.startDate}}</li>
                 <li>
-                    <span class="text-muted">Date To:</span>2018-10-30</li>
+                    <span class="text-muted">Date To:</span>{{productObj.toDate}}</li>
             </ul>
         </div>
     </div>
@@ -51,23 +51,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="model in productObj.productList">
                             <th scope="row">1</th>
-                            <td>Nike T-Shirt</td>
-                            <td>Men's Fashion</td>
-                            <td>Cloths</td>
-                            <td>2</td>
-                            <td>MYR</td>
-                            <td>65</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>iPhone X 64GB</td>
-                            <td>Digital & Mobile</td>
-                            <td>Smartphone</td>
-                            <td>1</td>
-                            <td>MYR</td>
-                            <td>4800</td>
+                            <td>{{model.productName}}</td>
+                            <td>{{model.productCategoryName}}</td>
+                            <td>{{model.productSubCategoryName}}</td>
+                            <td>{{model.quantity}}</td>
+                            <td>{{model.currency}}</td>
+                            <td>{{model.amount}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,6 +68,6 @@
 
     <div style="text-align: right;">
         <a class="btn btn-primary" href="postproduct">Back</a>
-        <a class="btn btn-primary" href="#">Confirm</a>
+        <a class="btn btn-primary" ng-click="savePostTravel()">Confirm</a>
     </div>
 </div>

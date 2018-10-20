@@ -80,14 +80,14 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'TravelController',
             templateUrl: 'views/product/post/travel.html'
         })
-        .state('posttravel.product', {
-            url: '',
-            params: {
-                productObj: null
-            },
-            controller: 'ProductController',
-            templateUrl: 'views/product/post/product.html'
-        })
+        // .state('posttravel.product', {
+        //     url: '',
+        //     params: {
+        //         productObj: null
+        //     },
+        //     controller: 'ProductController',
+        //     templateUrl: 'views/product/post/product.html'
+        // })
         .state('posttravel.review', {
             params: {
                 productObj: null
@@ -166,14 +166,14 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller : 'EditProductDetailController',
             templateUrl: 'views/editProductDetail.html'	
         })
-        .state('posttravelproduct', {
-            url: '/posttravelproduct',
-            params: {
-                productObj: null
-            },
-            controller: 'ProductController',
-            templateUrl: 'views/product/post/product.html'
-        })
+        // .state('posttravelproduct', {
+        //     url: '/posttravelproduct',
+        //     params: {
+        //         productObj: null
+        //     },
+        //     controller: 'ProductController',
+        //     templateUrl: 'views/product/post/product.html'
+        // })
         .state('userprofilemain', {
             url: '/userprofilemain',
             controller: 'UserProfileMainController',
@@ -184,26 +184,29 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'CreateChat',
             templateUrl: 'views/chat/chat.html'
         })
-
         .state('travel', {
             url: '/travel',
             controller: 'TravelController',
             params: {
-                productObj: null,
+                //productObj: null,
                 buyer: false
             },
             templateUrl: 'views/travel/postTravel.html'
         })
-
         .state('postproduct', {
             url: '/postproduct',
+            params: {
+                travelObj: null
+            },
             controller: 'ProductController',
             templateUrl: 'views/travel/postProduct.html'
         })
-
         .state('postreview', {
             url: '/postreview',
-            controller: 'ProductController',
+            params: {
+                productObj: null
+            },
+            controller: 'ReviewController',
             templateUrl: 'views/travel/postReview.html'
         })
 }

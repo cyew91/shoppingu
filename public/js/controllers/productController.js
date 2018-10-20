@@ -1,123 +1,110 @@
 'use strict'
 
 angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat, CreatePost, $rootScope) {
-    // $scope.profileId = $rootScope.currentUser.ProfileID;
-    $scope.profileId = '7c4be0de-c943-11e7-84e9-90bbf6a2477f'
-    $scope.productCategoryList = [];
-    $scope.productSubCategoryList = [];
+    $scope.travelObj = $stateParams.travelObj;
     $scope.productImages = [];
+    $scope.productList = [];
+    var count = 0;
+    $scope.currency = "MYR";
+    var isAdd = true;
+    //Dropzone.autoDiscover = false;
 
-    Dropzone.autoDiscover = false;
-
-    const init = function () {
-        $scope.productObj = $stateParams.productObj;
-
-        if ($scope.productObj.productList == null) {
-            $scope.productObj.productList = [];
-        }
+    $scope.init = function () {
+        //$scope.productObj = $stateParams.productObj;
 
         GetProdCatAndSubCat.query(function (list) {
             $scope.productCategoryList = list;
         });
-
-        // Allow search in the dropdownlist.
-        // $('#selectMainCategory').select2();
-        // $('#selectSubCategory').select2();
     }
 
-    init();
-
     $("#dropzoneProductImage").dropzone({
-         url: '/uploadProductImage',
-         addRemoveLinks: true,
-         maxFiles: 4,
-         acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        url: '/uploadProductImage',
+        addRemoveLinks: true,
+        maxFiles: 4,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif",
 
-         init: function() {
+        init: function() {
             console.log('init');
             this.on("maxfilesexceeded", function(file){
                  alert("No more files please!");
                  this.removeFile(file);
              });
-         },
+        },
 
-         sending: function(file, xhr, formdata){
+        sending: function(file, xhr, formdata){
             console.log('Sending');
             file.myName = file.name.split('.')[0] + '-' + Date.now() + '.jpg';
 
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
             formdata.append('_csrf', csrftoken);
             formdata.append('myFileName', file.myName);
-            
-         },
+        },
          // remove uploaded image after clicked remove
-         removedfile: function(file) {
+        removedfile: function(file) {
             var myName = file.myName; 
-
             $.ajax({
-             type: 'POST',
-             url: '/deleteProductImage',
-             data: {myName: myName},
-             success: function(data, response){
-              console.log('success: ' + data);
-              for (var x = 0; x <= $scope.productImages.length; x++){
-                if ($scope.productImages[x] == data.message){
-                    $scope.productImages.splice(x, 1);
+                type: 'POST',
+                url: '/deleteProductImage',
+                data: {myName: myName},
+                success: function(data, response){
+                console.log('success: ' + data);
+                for (var x = 0; x <= $scope.productImages.length; x++){
+                    if ($scope.productImages[x].imageName == data.message){
+                        $scope.productImages.splice(x, 1);
+                    }
                 }
-              }
-             }
+                }
             });
             var _ref;
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-           },
-         success: function(file, response){
+        },
+        success: function(file, response){
             //console.log(response.message[0].filename);
-            $scope.productImages.push(response.message[0].filename);
-         },
-         error: function(file, response){
+            $scope.productImages.push({imageName: response.message[0].filename, imagePath: response.message[0].path});
+        },
+        error: function(file, response){
             console.log(response);
-         }
+        }
     });
 
-    $scope.addProductToList = function () {
-        $scope.product.productImages = $scope.productImages;
-        $scope.productObj.productList.push($scope.product);
+    $scope.addToProductList = function () {
+        $scope.productList.push({
+            productName: $scope.productName,
+            productCategoryId: $scope.productCategoryName.id,
+            productCategoryName: $scope.productCategoryName.productCategoryName,
+            productSubCategoryId: $scope.productSubCategoryName.id,
+            productSubCategoryName: $scope.productSubCategoryName.productSubCategoryName,
+            quantity: $scope.quantity, 
+            currency: $scope.currency,
+            amount: $scope.amount,
+            productDescription: $scope.productDescription,
+            productImage: $scope.productImages
+        });
+        clearData();
+        count++;
+    };
 
-        $scope.product = null;
+    var clearData = function (){
+        $scope.productName = null;
+        $scope.productCategoryName.id = null;
+        $scope.productCategoryName = null;
+        $scope.productSubCategoryName.id = null;
+        $scope.productSubCategoryName = null;
+        $scope.quantity = null;
+        $scope.amount = null;
+        $scope.productDescription = null;
         $scope.productImages = [];
-
-        //console.log($scope.productObj.productList);
-
-        Dropzone.forElement("div#dropzoneProductImage").removeAllFiles(true);
-    }
+        //Dropzone.forElement("div#dropzoneProductImage").removeAllFiles(true);
+        // $("#dropzoneProductImage").removeClass('dz-started');
+        $('dz-started').remove();
+    };
 
     $scope.removeFromList = function (index) {
-        $scope.productObj.productList.splice(index, 1);
-    }
+        $scope.productList.splice(index, 1);
+    };
 
-    $scope.onRowSelect = function (product) {
-        $scope.seletedProduct = Object.create(product);
-        $('#modal-product').modal('show');
-    }
+    $scope.createPost = function(){
     
-    $scope.open = function (product) {
-        var modalInstance = $uibModal.open({
-          //scope: $scope,
-          //animation: $scope.animationsEnabled,
-          templateUrl: 'views/editProductDetail.html',
-          controller: 'EditProductDetailController',
-          //size: size,
-          resolve: {
-            addProductToList: function() {
-              return $scope.addProductToList;
-              //$('#modal-product').modal('show');
-            }
-          }
-        })
-      };
-
-      $scope.createPost = function(){
-        
         var createPost = new CreatePost({
             // Create Travel
             countryID: $scope.productObj.countryID,
@@ -150,6 +137,9 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     };
       
     $scope.continue = function (count) {
+        $scope.productObj = $scope.travelObj;
+        $scope.productObj.productList = $scope.productList;
+
         $('#text' + count).css('display', 'none');
         $('#textStep' + count).css('display', 'block');
 
@@ -165,15 +155,15 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
             $bar.children().first().addClass("is-current");
         }
 
-        console.log($scope.productObj);
+        //console.log($scope.productObj);
 
-        if (count == 2) {
-            $state.go('posttravel.product', { productObj: $scope.productObj });
-        } else if (count == 3) {
+        // if (count == 2) {
+        $state.go('postreview', { productObj: $scope.productObj });
+        // } else if (count == 3) {
             // Temporary rhide Review page. For now direct save into DB.
             // $state.go('posttravel.review', { productObj: $scope.productObj });
             // Call the api here. To insert into DB. Should pass in '$scope.productObj' into the api to process.
-        }
+        // }
     }
 
     $scope.back = function (count) {

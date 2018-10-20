@@ -12,22 +12,22 @@
         </a>
     </div>
 
-    <div class="d-flex justify-content-center" name="myForm" ng-form>
+    <div class="d-flex justify-content-center" name="myForm" ng-form ng-init="init()">
         <!-- <select class="form-control w-25" id="select-input" ng-model="country" ng-options="item.OrderID for item in ProductList">
             <option value="" label="Choose country..."></option>
             <option ng-repeat="country in "></option>
         </select> -->
         <div angucomplete-alt id="autocomplete" maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
-        local-data="travelObject.countryList" search-fields="countryName" title-field="countryName" minlength="1" input-class="form-control form-control-small"
-        initial-value="travelObject.initCountry" match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;" input-name="countryList" 
+        local-data="countryList" search-fields="countryName" title-field="countryName" minlength="1" input-class="form-control form-control-small"
+        initial-value="countryList" match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;" input-name="countryList" 
         required>
-    </div>
+        </div>
 
         <input class="form-control date dateRangePicker " id="datepickerFrom" type="text" name="startDate" placeholder="Date From.."
-            style="width: 350px; float: left; margin-right: 3px;" ng-model="productObj.startDate" required>
+            style="width: 350px; float: left; margin-right: 3px;" ng-model="startDate" ng-change="startDateSelected(startDate)" required>
 
         <input class="form-control date dateRangePicker" id="datepickerTo" type="text" name="endDate" placeholder="Date To.." style="width: 350px; float: left; margin-right: 3px;"
-            ng-model="productObj.toDate" required>
+            ng-model="toDate" required>
     </div>
     
     <!-- <div style="text-align: right;">
@@ -39,10 +39,10 @@
                 Back
             </button> -->
         
-            <button id="btnContinue" class="btn btn-primary btn-form" ng-click="continue()"
-                style="margin: 0px !important;">
-                <span ng-show="productObj.count <= 2">Continue</span>
-                <span ng-show="productObj.count >= 3">Save</span>
+            <button id="btnContinue" class="btn btn-primary btn-form" ng-click="continue()">
+                Continue
+                <!-- <span ng-show="productObj.count <= 2">Continue</span>
+                <span ng-show="productObj.count >= 3">Save</span> -->
             </button>
         </div>
 </div>
