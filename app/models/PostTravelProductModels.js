@@ -17,8 +17,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(500)
         },
         amount: {
-            type: DataTypes.DECIMAL(10, 3),
-            allowNull: false
+            type: DataTypes.DECIMAL(10, 3)
         }
     }, {
         timestamps: true,

@@ -16,7 +16,7 @@ exports.getChat = function(req, res){
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -68,7 +68,7 @@ exports.createChat = function (req, res, next) {
             "result": "success"
         });
     }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        res.send({ status: 'Exception', message: err });
     });
 };
 
@@ -107,7 +107,7 @@ exports.getChatDetail = function(req, res){
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -122,7 +122,7 @@ exports.getChatDetailByChatId = function (req, res, next, ChatID) {
         return res.render('error', {
             error: err,
             status: 500
-        })
+        });
     });
 };
 
@@ -155,7 +155,7 @@ exports.createChatDetail = function (req, res, next) {
     chatDetailSave.save().then(function () {
         return next();
     }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        res.send({ status: 'Exception', message: err });
     });
 };
 //----------------------------------------End----------------------------------------

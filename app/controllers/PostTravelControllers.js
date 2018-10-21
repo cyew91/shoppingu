@@ -11,7 +11,7 @@ exports.getPostTravel = function (req, res) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -36,7 +36,7 @@ exports.getPostTravelById = function (req, res, next, id) {
 
 //Retrieve Post Travel Information By profileId
 exports.getPostTravelByProfileId = function (req, res, next) {
-    db.post_travel.find({ where: { profile_id: req.params.profileId } })
+    db.post_travel.findAll({ where: { profile_id: req.params.profileId }, include: [{model: db.country}] })
         .then(function (postTravel) {
             return res.jsonp(postTravel);
         })
@@ -44,7 +44,7 @@ exports.getPostTravelByProfileId = function (req, res, next) {
             return res.render('error', {
                 error: err,
                 status: 500
-            })
+            });
         });
 };
 
@@ -73,7 +73,7 @@ exports.createPostTravel = function (req, res, next) {
         //     "result": "success"
         // });
     }).catch(function (err) {
-        res.send({ status: 'Exception', message: err })
+        res.send({ status: 'Exception', message: err });
     });
 };
 

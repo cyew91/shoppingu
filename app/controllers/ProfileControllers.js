@@ -5,7 +5,7 @@
  */
 var db = require('../../config/sequelize'),
     config = require('../../config/config');
-var bcrypt = require('bcrypt');
+ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 /**
@@ -151,7 +151,7 @@ exports.createProfileAccount = function (req, res, next) {
         res.send({
             status: 'Exception',
             message: err
-        })
+        });
     });
 };
 
@@ -218,10 +218,10 @@ exports.updateProfile = function (req, res) {
     profile.updateAttributes({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email,
+        // email: req.body.email,
         contactNo: req.body.contactNo,
-        gender: req.body.gender,
-        dateOfBirth: req.body.dateOfBirth
+        // gender: req.body.gender,
+        // dateOfBirth: req.body.dateOfBirth
     }).then(function (a) {
         return res.jsonp(a);
     }).catch(function (err) {
@@ -267,18 +267,11 @@ exports.create = function (req, res) {
     var profileDetail = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        address: req.body.address,
         email: req.body.email,
         contactNo: req.body.contactNo,
-        gender: req.body.gender,
-        dateOfBirth: req.body.dateOfBirth,
-        imageName: req.body.imageName,
-        imagePath: req.body.imagePath,
         loginId: req.body.loginId,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-        IsActive: req.body.IsActive,
-        country_id: req.body.country_id
+        confirmPassword: req.body.confirmPassword
     };
 
     if (req.body.password === req.body.confirmPassword) {
@@ -295,12 +288,12 @@ exports.create = function (req, res) {
             res.send({
                 status: 'Exception',
                 message: err
-            })
+            });
         });
     } else {
         res.send({
             status: 'Error',
             message: 'Password is not same with confirm password'
-        })
+        });
     }
 };

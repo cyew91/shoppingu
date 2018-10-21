@@ -61,7 +61,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         })
         .state('productdetails', {
             url: '/productdetails',
-            params: { 'a': null, 'b': null },
+            params: {
+                'a': null,
+                'b': null
+            },
             controller: 'ProductDetailsController',
             templateUrl: 'views/productDetails.html'
         })
@@ -121,6 +124,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'PostController',
             templateUrl: 'views/users/post.html'
         })
+        .state('request', {
+            url: '/request',
+            controller: 'RequestController',
+            templateUrl: 'views/users/request.html'
+        })
         .state('uploadimage', {
             url: '/uploadimage',
             controller: 'UploadImageController',
@@ -128,6 +136,9 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         })
         .state('404', {
             templateUrl: 'views/404.html'
+        })
+        .state('500', {
+            templateUrl: 'views/500.html'
         })
         .state('profileIcon', {
             url: '/profileIcon',
@@ -143,28 +154,28 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             templateUrl: 'views/searchResult.html'
         })
         .state('searchCountry', {
-            url : '/searchcountry',
+            url: '/searchcountry',
             params: {
                 productDetailID: null
             },
-            controller : 'SearchCountryController',
-            templateUrl: 'views/searchCountry.html'	
+            controller: 'SearchCountryController',
+            templateUrl: 'views/searchCountry.html'
         })
         .state('postProductDetail', {
-            url : '/postproductdetail',
+            url: '/postproductdetail',
             params: {
                 productID: null
             },
-            controller : 'PostProductDetailController',
-            templateUrl: 'views/postProductDetail.html'	
+            controller: 'PostProductDetailController',
+            templateUrl: 'views/postProductDetail.html'
         })
         .state('editProductDetail', {
-            url : '/editproductdetail',
+            url: '/editproductdetail',
             params: {
                 productDet: null
             },
-            controller : 'EditProductDetailController',
-            templateUrl: 'views/editProductDetail.html'	
+            controller: 'EditProductDetailController',
+            templateUrl: 'views/editProductDetail.html'
         })
         // .state('posttravelproduct', {
         //     url: '/posttravelproduct',
@@ -208,12 +219,26 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             },
             controller: 'ReviewController',
             templateUrl: 'views/travel/postReview.html'
-        })
-}
-]);
+        });
+}]);
 
 //Setting HTML5 Location Mode
 angular.module('mean').config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode(true);
-
 }]);
+
+angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedIn) {
+    $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+        var isLogin = toState.name === "login";
+        if (isLogin) {
+            return;
+        }
+
+        CheckLoggedIn.get(function (response) {
+            if (response.status === '0' && toState.name === 'travel') {
+                e.preventDefault(); 
+                $state.go('login'); 
+            }
+        });
+    });
+});

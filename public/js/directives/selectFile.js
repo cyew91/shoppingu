@@ -1,13 +1,15 @@
-'use strict'
+'use strict';
 
 angular.module('mean.system')
   .directive("ngFileSelect", function(fileReader, $timeout) {
     return {
       scope: {
-        ngModel: '='
+        ngModel: '=',
+        ngFileName: '='
       },
       link: function($scope, el) {
         function getFile(file) {
+          $scope.ngFileName = file.name;
           fileReader.readAsDataUrl(file, $scope)
             .then(function(result) {
               $timeout(function() {

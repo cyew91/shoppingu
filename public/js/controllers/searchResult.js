@@ -22,7 +22,7 @@ angular.module('mean.articles')
       GetProdCatAndSubCat.query(function (result) {
         $scope.menuTreeResult = result;
       });
-    }
+    };
 
     $scope.openFirst = function (index) {
       if ($('#'+$scope.menuTreeResult[index].ProductCatID).hasClass("expanded"))
@@ -33,7 +33,7 @@ angular.module('mean.articles')
       {
         $('#'+$scope.menuTreeResult[index].ProductCatID).addClass("expanded");
         for (var i=0; i<$scope.menuTreeResult.length;i++){
-          if ($scope.menuTreeResult[i] != $scope.menuTreeResult[index])
+          if ($scope.menuTreeResult[i] !== $scope.menuTreeResult[index])
             $('#'+$scope.menuTreeResult[i].ProductCatID).removeClass("expanded");
         }
       }
@@ -59,7 +59,7 @@ angular.module('mean.articles')
         var rEnd = rBegin + $scope.rNumPerPage;
         
         for(var i=0;i<$scope.product.length;i++){
-          if ($scope.product[i].t_product.PostType == 0)
+          if ($scope.product[i].t_product.PostType === 0)
           {
             $scope.productTravel.push($scope.product[i]);
             $scope.todos.push($scope.product[i]);
@@ -79,7 +79,7 @@ angular.module('mean.articles')
 
     //Tab
     $scope.selectedTab = function (number){
-      if (number == 1){
+      if (number === 1){
         $('#profile1').addClass("active");
         $('#request').removeClass("active");
       }
@@ -87,7 +87,7 @@ angular.module('mean.articles')
         $('#profile1').removeClass("active");
         $('#request').addClass("active");
       }
-    }
+    };
 
     // Pagination setup
     if ($scope.productTravel != null)
@@ -106,7 +106,7 @@ angular.module('mean.articles')
       $scope.makeTodos(); 
       
       $scope.isTravel = function (number){
-        if (number == 0)
+        if (number === 0)
         {
           $scope.$watch("tCurrentPage + tNumPerPage", function() {
             var begin = (($scope.tCurrentPage - 1) * $scope.tNumPerPage);
@@ -122,10 +122,26 @@ angular.module('mean.articles')
             $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
           });
         }
-      }
+      };
       $scope.tTotalItems = $scope.productTravel.length;
       $scope.rTotalItems = $scope.productRequest.length;
     }
+
+    // Shop Categories Widget
+    //------------------------------------------------------------------------------
+    var categoryToggle = $('.widget-categories .has-children > a');
+
+    function closeCategorySubmenu() {
+      categoryToggle.parent().removeClass('expanded');
+    }
+    categoryToggle.on('click', function(e) {
+      if($(e.target).parent().is('.expanded')) {
+        closeCategorySubmenu();
+      } else {
+        closeCategorySubmenu();
+        $(this).parent().addClass('expanded');
+      }
+    });
 
   }]);
 
