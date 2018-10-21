@@ -547,8 +547,8 @@ exports.getProductSubCat = function (req, res) {
 };
 
 exports.getProductCatAndSubCat = function (req, res, next) {
-    db.t_product_cat.findAll({include: [
-        {model: db.t_product_subcat}
+    db.product_category.findAll({include: [
+        {model: db.product_sub_category}
     ]})
     .then(function(result){
         return res.jsonp(result);

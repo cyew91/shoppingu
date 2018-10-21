@@ -13,29 +13,17 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
             $scope.countryList = list;
         });
 
-        // if ($stateParams.productObj == null) {
-        //     $scope.productObj = {
-        //         count: 1 
-        //     }
-        // } else {
-        // $scope.productObj = $stateParams.productObj;
-        //$scope.travelObject.initCountry = { CountryCode: $scope.productObj['countryCode'], CountryID: $scope.productObj['countryID'], CountryName: $scope.productObj['countryName'], Status: $scope.productObj['countryStatus'] }
-        // }
+        initDatePicker();
     };
 
-    $('.date').datepicker({
+    var initDatePicker = function () {
+        $('.date').datepicker({
         autoclose: true,
         keepEmptyValues: true,
         format: 'yyyy-mm-dd',
         clearBtn: true
-    });
-
-    // $scope.productObj.startDate = $('#datepickerFrom').datepicker('getFormattedDate');
-    // $scope.productObj.toDate = $('#datepickerTo').datepicker('getFormattedDate');
-
-    
-
-    // $('#datepickerFrom').datepicker();
+        });
+    }
 
     $scope.selectedCountry = function (selected) {
         $scope.TravelObj = selected.description;
@@ -46,7 +34,7 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
     });
 
     $('#datepickerTo').on('changeDate', function() {
-        toDate = $('#datepickerTo').datepicker('getFormattedDate')
+        toDate = $('#datepickerTo').datepicker('getFormattedDate');
     });
 
     $scope.continue = function (count) {
