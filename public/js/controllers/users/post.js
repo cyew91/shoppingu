@@ -8,7 +8,7 @@ angular.module('mean.articles')
     $scope.initMyTrips = function() {
       GetTravelByProfileId.query({
         // tprofileId: $scope.profileId
-        profileId: "0fc62662-2078-4b56-b753-4b72e557cc62"
+        profileId: $rootScope.currentUser.id
       },function(result) {
           $scope.travel = result;
       });

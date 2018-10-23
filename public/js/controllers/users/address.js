@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.system')
-  .controller('AddressController', ['$scope', 'Global', '$stateParams', 'GetUserAddressById', function($scope, Global, $stateParams, GetUserAddressById){
+  .controller('AddressController', ['$scope', 'Global', '$stateParams', '$rootScope', 'GetUserAddressById', function($scope, Global, $stateParams, $rootScope, GetUserAddressById){
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
 
@@ -10,7 +10,7 @@ angular.module('mean.system')
 
     $scope.initAddress = function() {
       GetUserAddressById.get({
-        id: "0fc62662-2078-4b56-b753-4b72e557cc62"
+        id: $rootScope.currentUser.id
       }, function(result) {
           $scope.profile = result;
       });
