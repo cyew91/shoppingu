@@ -1,33 +1,21 @@
-'use strict';
+'use strict'
 
 angular.module('mean').controller('ReviewController', ['$scope', '$state', '$stateParams', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, CreatePost, $rootScope) {
     $scope.productObj = $stateParams.productObj;
-    $scope.profileId = $rootScope.currentUser.ProfileID;
 
-    $scope.createPost = function(){
-        
+    $scope.savePostTravel = function(){   
         var createPost = new CreatePost({
             // Create Travel
-            countryID: $scope.productObj.countryID,
-            profileId: $scope.profileId,
-            travelDescription: $scope.productObj.countryName,
-            travelStartDate: $scope.productObj.startDate,
-            travelEndDate: $scope.productObj.toDate,
-            isRequest: $scope.productObj.buyer,
-            isExpired: 0,
-            remarks: "",
-            createdDate: Date.now(),
-            createdBy: 'ks',
-            lastUpdatedDate: Date.now(),
-            lastUpdatedBy: 'ks',
+            countryID: $scope.productObj.id,
+            profileId: $scope.productObj.profileId,
+            status: "Pending",
+            startDate: $scope.productObj.startDate,
+            toDate: $scope.productObj.toDate,
+            //isRequest: $scope.productObj.buyer,
+            //isExpired: 0,
 
             // Create Product
-            productDescription: $scope.productObj.productDescription,
-            productAmount: $scope.productObj.productAmount,
-
-            // Create Product Detail
             productList: $scope.productObj.productList,
-
         });
 
         createPost.$save(function (response) {
@@ -53,14 +41,14 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
             $bar.children().first().addClass("is-current");
         }
 
-        if (count === 2) {
-            console.log($scope.productObj);
-            $state.go('posttravel.product', {productObj: $scope.productObj});
-        } else if (count === 3) {
-            console.log($scope.productObj);
-            $state.go('posttravel.review', {productObj: $scope.productObj});
-        }
-    };
+        // if (count == 2) {
+        //     console.log($scope.productObj);
+        //     $state.go('posttravel.product', {productObj: $scope.productObj});
+        // } else if (count == 3) {
+        //     console.log($scope.productObj);
+        //     $state.go('posttravel.review', {productObj: $scope.productObj});
+        // }
+    }
 
     $scope.back = function (count) {
         $('#text' + count).css('display', 'none');
@@ -72,7 +60,7 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
         $('#check' + (count)).css('display', 'none');
         $('#check' + (count + 1)).css('display', 'none');
 
-        console.log('#text' + count);
+        // console.log('#text' + count);
 
         var $bar = $(".ProgressBar");
         if ($bar.children(".is-current").length > 0) {
@@ -81,14 +69,14 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
             $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
         }
 
-        console.log($scope.productObj);
+        // console.log($scope.productObj);
 
-        if (count === 2) {
+        if (count == 2) {
             $state.go('posttravel.product', {productObj: $scope.productObj});
-        } else if (count === 3) {
+        } else if (count == 3) {
             $state.go('posttravel.review', {productObj: $scope.productObj});
-        } else if (count === 1) {
+        } else if (count == 1) {
             $state.go('posttravel.travel', {productObj: $scope.productObj});
         }
-    };
+    }
 }]);

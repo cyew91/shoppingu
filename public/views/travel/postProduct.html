@@ -1,126 +1,119 @@
-<div class="container padding-bottom-3x mb-2">
-    <div class="checkout-steps" style="width: 700px; margin: 0 auto; padding: 50px 0px;">
-        <a class="progress-steps" href="#">3. Review</a>
-        <a class="progress-steps active" href="#">
-            <!-- <span class="step-indicator icon-circle-check"></span> -->
-            <span class="angle"></span>
-            2. Post Product
-        </a>
-        <a class="progress-steps" href="#">
-            <span class="angle"></span>
-            1. Post Travel
-        </a>
-    </div>
+<script src="lib/dropzone/dist/min/dropzone.min.js"></script>
+<div class="content">
+  <div class="checkout-steps" style="width: 700px; margin: 0 auto; padding: 50px 0px;">
+    <a class="progress-steps" href="#">3. Review</a>
+    <a class="progress-steps active" href="#">
+      <!-- <span class="step-indicator icon-circle-check"></span> -->
+      <span class="angle"></span>
+      2. Post Product
+    </a>
+    <a class="progress-steps" href="#">
+      <span class="angle"></span>
+      1. Post Travel
+    </a>
+  </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="col-lg-9 col-md-8 order-md-2">
-            <h6 class="text-muted text-normal text-uppercase margin-top-2x">Post Product</h6>
-            <hr class="margin-bottom-1x">
-            <div class="form-group row">
-              <label class="col-2 col-form-label" for="text-input">Product Name</label>
-              <div class="col-10">
-                <input class="form-control" type="text" id="text-input">
-              </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="select-input">Product Categories</label>
-                <div class="col-10">
-                  <select class="form-control" id="select-input">
-                    <option>Choose option...</option>
-                    <option>Men's Fashion</option>
-                    <option>Women's Fashion</option>
-                    <option>Digital & Mobile</option>
-                  </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="select-input">Product Sub Categories</label>
-                <div class="col-10">
-                  <select class="form-control" id="select-input">
-                    <option>Choose option...</option>
-                    <option>Clothes</option>
-                    <option>Watches</option>
-                    <option>Wallets</option>
-                  </select>
-                </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-2 col-form-label" for="textarea-input">Product Description</label>
-              <div class="col-10">
-                <textarea class="form-control" id="textarea-input" rows="5"></textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="number-input">Quantity</label>
-                <div class="col-10">
-                  <input class="form-control" type="number" id="number-input" value="3">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="text-input">Currency</label>
-                <div class="col-10">
-                  <input class="form-control" type="text" id="text-input" disabled="true" value="MYR">
-                </div>
-              </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="text-input">Amount</label>
-                <div class="col-10">
-                  <input class="form-control" type="text" id="text-input">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-2 col-form-label" for="file-input">Upload Product Image</label>
-                <div class="col-10">
-                  <div class="custom-file">
-                    <input class="custom-file-input" type="file" id="file-input">
-                    <label class="custom-file-label" for="file-input">Choose file...</label>
-                  </div>
-                </div>
-            </div>
-            <div style="text-align: left;">
-                <button class="btn btn-primary margin-top-none" type="submit" >Add</button>
-            </div>
-            <br/><br/>
-            <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Product Name</th>
-                      <th>Product Cat.</th>
-                      <th>Product Sub Cat.</th>
-                      <th>Quantity</th>
-                      <th>Currency</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Nike T-Shirt</td>
-                      <td>Men's Fashion</td>
-                      <td>Cloths</td>
-                      <td>2</td>
-                      <td>MYR</td>
-                      <td>65</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>iPhone X 64GB</td>
-                      <td>Digital & Mobile</td>
-                      <td>Smartphone</td>
-                      <td>1</td>
-                      <td>MYR</td>
-                      <td>4800</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-9 col-md-8 order-md-2">
+      <h6 class="text-muted text-normal text-uppercase margin-top-2x">Post Product</h6>
+      <hr class="margin-bottom-1x">
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="text-input">Product Name</label>
+        <div class="col-10">
+          <input class="form-control" type="text" id="text-input" ng-model="productName">
         </div>
-    </div>    
-    
-    <div style="text-align: right;">
-        <a class="btn btn-primary" href="travel">Back</a>
-        <a class="btn btn-primary" href="postreview">Next</a>
+      </div>
+      <div class="form-group row" ng-init="init()">
+        <label class="col-2 col-form-label" for="select-input">Product Categories</label>
+        <div class="col-10">
+          <select id="selectMainCategory" ng-model="productCategoryName" class="js-example-basic-single form-control" name="productCategory"
+            style="width: 100%;">
+            <option ng-repeat="productCategory in productCategoryList" ng-value="productCategory" ng-selected="{{product.abc == productCategory}}">
+              {{productCategory.productCategoryName}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="select-input">Product Sub Categories</label>
+        <div class="col-10">
+            <select id="selectSubCategory" ng-model="productSubCategoryName" class="js-example-basic-single form-control" name="productSubCategory" style="width: 100%;">
+                <option ng-repeat="productSubCategory in productCategoryName.product_sub_categories" ng-value="productSubCategory">
+                    {{productSubCategory.productSubCategoryName}}
+                </option>
+            </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="textarea-input">Product Description</label>
+        <div class="col-10">
+          <textarea class="form-control" id="textarea-input" rows="5" ng-model="productDescription"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="number-input">Quantity</label>
+        <div class="col-10">
+          <input class="form-control" type="number" id="number-input" ng-model="quantity">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="text-input">Currency</label>
+        <div class="col-10">
+          <input class="form-control" type="text" id="text-input" ng-model="currency" disabled="true">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="text-input">Amount</label>
+        <div class="col-10">
+          <input class="form-control" type="text" id="text-input" ng-model="amount">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="file-input">Upload Product Image</label>
+        <div id="dropzoneContainer" class="col-10">
+            <div id="dropzoneProductImage" class="dropzone"></div>
+        </div>
+      </div>
+      <div style="text-align: left;">
+        <button class="btn btn-primary margin-top-none" type="submit" ng-click="addToProductList()">Add</button>
+      </div>
+      <br/>
+      <br/>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Remove</th>
+              <!-- <th>Product</th> -->
+              <th>Product Name</th>
+              <th>Product Cat.</th>
+              <th>Product Sub Cat.</th>
+              <th>Quantity</th>
+              <th>Currency</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="model in productList">
+              <td style="padding: 5px; text-align: center; vertical-align: middle">
+                  <button class="btn btn-danger btn-sm" ng-click="removeFromList($index)">X</button>
+              </td>
+              <!-- <th scope="row">1</th> -->
+              <td>{{model.productName}}</td>
+              <td>{{model.productCategoryName}}</td>
+              <td>{{model.productSubCategoryName}}</td>
+              <td>{{model.quantity}}</td>
+              <td>{{model.currency}}</td>
+              <td>{{model.amount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+
+  <div style="text-align: right;">
+    <a class="btn btn-primary" href="travel">Back</a>
+    <a class="btn btn-primary" ng-click="continue()">Next</a>
+  </div>
 </div>

@@ -13,7 +13,7 @@ module.exports = function (app) {
 
     app.route('/posttravel')
     .get(postTravel.getPostTravel)
-    .post(postTravel.createPostTravel);
+    .post(postTravel.createPostTravel, postTravel.createPostTravelProduct);
 
     app.param('postTravelId', postTravel.getPostTravelById);
     app.param('profileId', postTravel.getPostTravelByProfileId);

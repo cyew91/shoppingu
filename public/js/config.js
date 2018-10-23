@@ -71,6 +71,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('posttravel', {
             abstract: true,
             url: '/posttravel',
+            controller: 'travelController',
             templateUrl: 'views/product/post/post.html'
         })
         .state('posttravel.travel', {
@@ -82,14 +83,14 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'TravelController',
             templateUrl: 'views/product/post/travel.html'
         })
-        .state('posttravel.product', {
-            url: '',
-            params: {
-                productObj: null
-            },
-            controller: 'ProductController',
-            templateUrl: 'views/product/post/product.html'
-        })
+        // .state('posttravel.product', {
+        //     url: '',
+        //     params: {
+        //         productObj: null
+        //     },
+        //     controller: 'ProductController',
+        //     templateUrl: 'views/product/post/product.html'
+        // })
         .state('posttravel.review', {
             params: {
                 productObj: null
@@ -176,14 +177,14 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'EditProductDetailController',
             templateUrl: 'views/editProductDetail.html'
         })
-        .state('posttravelproduct', {
-            url: '/posttravelproduct',
-            params: {
-                productObj: null
-            },
-            controller: 'ProductController',
-            templateUrl: 'views/product/post/product.html'
-        })
+        // .state('posttravelproduct', {
+        //     url: '/posttravelproduct',
+        //     params: {
+        //         productObj: null
+        //     },
+        //     controller: 'ProductController',
+        //     templateUrl: 'views/product/post/product.html'
+        // })
         .state('userprofilemain', {
             url: '/userprofilemain',
             controller: 'UserProfileMainController',
@@ -196,17 +197,27 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         })
         .state('travel', {
             url: '/travel',
+            params: {
+                //productObj: null,
+                buyer: false
+            },
             controller: 'TravelController',
             templateUrl: 'views/travel/postTravel.html'
         })
         .state('postproduct', {
             url: '/postproduct',
+            params: {
+                travelObj: null
+            },
             controller: 'ProductController',
             templateUrl: 'views/travel/postProduct.html'
         })
         .state('postreview', {
             url: '/postreview',
-            controller: 'ProductController',
+            params: {
+                productObj: null
+            },
+            controller: 'ReviewController',
             templateUrl: 'views/travel/postReview.html'
         });
 }]);
