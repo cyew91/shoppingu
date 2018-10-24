@@ -1,51 +1,50 @@
-'use strict';
+'use strict'
 
 angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', function ($scope, $state, $stateParams, GetCountryList) {
     $scope.buyer = $stateParams.buyer;
+    $scope.profileId = '0fc62662-2078-4b56-b753-4b72e557cc62'
+    var startDate;
+    var toDate;
 
-    $scope.travelObject = {
-        countryList: [],
-        initCountry: {}
-    };
+    $scope.count = 1;
 
-    const init = function () {
+    $scope.init = function () {
         GetCountryList.query(function (list) {
-            $scope.travelObject.countryList = list;
+            $scope.countryList = list;
         });
 
-        if ($stateParams.productObj == null) {
-            $scope.productObj = {
-                count: 1
-            };
-        } else {
-            $scope.productObj = $stateParams.productObj;
-            $scope.travelObject.initCountry = {
-                CountryCode: $scope.productObj.countryCode,
-                CountryID: $scope.productObj.countryID,
-                CountryName: $scope.productObj.countryName,
-                Status: $scope.productObj.countryStatus
-            };
-        }
+        initDatePicker();
     };
 
-    init();
+    var initDatePicker = function () {
+        $('.date').datepicker({
+        autoclose: true,
+        keepEmptyValues: true,
+        format: 'yyyy-mm-dd',
+        clearBtn: true
+        });
+    }
 
     $scope.selectedCountry = function (selected) {
-
-        if (selected && typeof (selected.description) !== 'undefined') {
-            $scope.productObj.countryID = selected.description.CountryID;
-            $scope.productObj.countryCode = selected.description.CountryCode;
-            $scope.productObj.countryName = selected.description.CountryName;
-            $scope.productObj.countryStatus = selected.description.Status;
-
-        }
+        $scope.TravelObj = selected.description;
     };
 
-    $scope.continue = function (count) {
+    $('#datepickerFrom').on('changeDate', function() {
+        startDate = $('#datepickerFrom').datepicker('getFormattedDate');
+    });
 
-        if (angular.isUndefined($scope.productObj.countryID) || angular.isUndefined($scope.productObj.startDate)) {
+    $('#datepickerTo').on('changeDate', function() {
+        toDate = $('#datepickerTo').datepicker('getFormattedDate');
+    });
+
+    $scope.continue = function (count) {
+        $scope.TravelObj.startDate = startDate;
+        $scope.TravelObj.toDate = toDate;
+        $scope.TravelObj.profileId = $scope.profileId;
+
+        if (angular.isUndefined($scope.TravelObj)) {
             $scope.response = false;
-            if (angular.isUndefined($scope.productObj.startDate)) {
+            if (angular.isUndefined($scope.TravelObj.startDate)) {
                 $('#datepickerFrom').removeClass("dateRangePicker");
                 $('#datepickerFrom').addClass("dateRangePickerAfter");
             } else {
@@ -53,14 +52,16 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
                 $('#datepickerFrom').addClass("dateRangePicker");
             }
 
-            if (angular.isUndefined($scope.productObj.countryID)) {
+            if (angular.isUndefined($scope.TravelObj)) {
                 $('#autocomplete').removeClass("form-control-small");
                 $('#autocomplete').addClass("form-control-smallAfter");
             } else {
                 $('#autocomplete').removeClass("form-control-smallAfter");
                 $('#autocomplete').addClass("form-control-small");
             }
-        } else {
+        }
+        else {
+            var count = 2;
             $('#text' + count).css('display', 'none');
             $('#textStep' + count).css('display', 'block');
 
@@ -76,18 +77,14 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
                 $bar.children().first().addClass("is-current");
             }
 
-            if (count === 2) {
-                $scope.productObj.buyer = $scope.buyer;
-                $state.go('posttravel.product', {
-                    productObj: $scope.productObj
-                });
-            } else if (count === 3) {
-                $state.go('posttravel.review', {
-                    productObj: $scope.productObj
-                });
+            if (count == 2) {
+                //$scope.productObj.buyer = $scope.buyer;
+                $state.go('postproduct', { travelObj: $scope.TravelObj });
+            } else if (count == 3) {
+                $state.go('posttravel.review', { productObj: $scope.productObj });
             }
         }
-    };
+    }
 
     //Input Progress
     // function updateInputProgress() {
