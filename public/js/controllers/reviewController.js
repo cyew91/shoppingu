@@ -19,9 +19,13 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
         });
 
         createPost.$save(function (response) {
-            if (response.result === 'success') {
-                $('#myModal').modal('show');
-            }
+            //if (response.result === 'success') {
+                
+            //}
+        });
+        $('#myModal').modal('show');
+        $('#myModal').on('hidden.bs.modal', function (e) {
+            $state.go('userprofile');
         });
     };
 

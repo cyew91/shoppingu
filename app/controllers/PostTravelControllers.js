@@ -60,8 +60,8 @@ exports.createPostTravel = function (req, res, next) {
         startDate: req.body.startDate,
         endDate: req.body.toDate,
         travelStatus: req.body.status,
-        country_id: req.body.country_id,
-        profile_id: req.body.profile_id
+        country_id: req.body.countryID,
+        profile_id: req.body.profileId
     };
 
     var postTravelSave = db.post_travel.build(postTravel);
@@ -104,14 +104,14 @@ exports.createPostTravelProduct = function (req, res, next) {
     for (var i=0; i<req.body.productList.length; i++){
         var postTravelProduct = {
             productName: req.body.productList[i].productName,
-            description: req.body.productList[i].description,
+            description: req.body.productList[i].productDescription,
             amount: req.body.productList[i].amount,
             // PostType: 1,
             // IsActive: 1,
             createdDate: Date.now(),
-            post_travel_id: req.body.productList[i].post_travel_id,
-            product_category_id: req.body.productList[i].product_category_id,
-            product_sub_category_id: req.body.productList[i].product_sub_category_id
+            post_travel_id: req.body.post_travel_id,
+            product_category_id: req.body.productList[i].productCategoryId,
+            product_sub_category_id: req.body.productList[i].productSubCategoryId
         };
 
         var productSave = db.post_travel_product.build(postTravelProduct);

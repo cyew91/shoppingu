@@ -1,8 +1,8 @@
 'use strict'
 
-angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', function ($scope, $state, $stateParams, GetCountryList) {
+angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', '$rootScope', function ($scope, $state, $stateParams, GetCountryList, $rootScope) {
     $scope.buyer = $stateParams.buyer;
-    $scope.profileId = '0fc62662-2078-4b56-b753-4b72e557cc62'
+    $scope.profileId = $rootScope.currentUser.id;
     var startDate;
     var toDate;
 
