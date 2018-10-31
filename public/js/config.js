@@ -238,6 +238,8 @@ angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedI
             if (response.status === '0' && toState.name === 'travel') {
                 e.preventDefault(); 
                 $state.go('login'); 
+            }else{
+                $rootScope.currentUser = response;
             }
         });
     });
