@@ -22,7 +22,6 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
                 $rootScope.currentUser = null;
                 $window.location.reload();
                 $state.go('home');
-                //$window.location.reload();
             }
         });
     };
