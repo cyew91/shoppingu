@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('UserProfileController', ['$scope', 'Global', '$stateParams', '$state', 'GetUserProfileById', '$rootScope', 'fileReader', function($scope, Global, $stateParams, $state, GetUserProfileById, $rootScope, fileReader){
+  .controller('UserProfileController', ['$scope', 'Global', '$stateParams', '$state', 'GetUserProfileById', '$rootScope', 'fileReader', '$window', function($scope, Global, $stateParams, $state, GetUserProfileById, $rootScope, fileReader, $window){
     $scope.global = Global;
-    // $scope.profileId = $stateParams.profileId;
-    // $scope.profileId = $rootScope.currentUser.ProfileID;
+    var userId = $window.sessionStorage.getItem("id");
+
     $scope.initUserProfie = function() {
       GetUserProfileById.get({
         // profileId: $scope.profileId
-        id: $rootScope.currentUser.id
+        id: userId
       }, function(result) {
           $scope.profile = result;
           $scope.lastName = $scope.profile.lastName;
