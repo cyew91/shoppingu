@@ -227,7 +227,7 @@ angular.module('mean').config(['$locationProvider', function ($locationProvider)
     $locationProvider.html5Mode(true);
 }]);
 
-angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedIn) {
+angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedIn, $window) {
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
         var isLogin = toState.name === "login";
         if (isLogin) {
@@ -240,6 +240,7 @@ angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedI
                 $state.go('login'); 
             }else{
                 $rootScope.currentUser = response;
+                $window.sessionStorage.setItem("id", response.id);
             }
         });
     });

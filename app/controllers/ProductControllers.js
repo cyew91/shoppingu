@@ -178,18 +178,16 @@ exports.getProductDetailByProdId = function (req, res, next, ProductID) {
 // };
 
 exports.getProductDetailByProdName = function (req, res, next, ProductName) {
-    db.t_product_detail.findAll({
+    db.post_travel_product.findAll({
             where: {
-                ProductName: {
+                product_name: {
                     $like: '%' + ProductName + '%'
                 }
             },
             include: [
                 // {model: db.t_product, where: {PostType: 0}}
                 {
-                    model: db.t_product
-                }, {
-                    model: db.t_product_document
+                    model: db.post_travel_product_document
                 }
             ]
         })
@@ -252,15 +250,12 @@ exports.getProductDetailByProductID = function (req, res, next) {
 };
 
 exports.getProductDetailByProdSubCatID = function (req, res, next) {
-    db.t_product_detail.findAll({
+    db.post_travel_product.findAll({
             where: {
-                ProductSubCatID: req.params.productSubCatId
+                product_sub_category_id: req.params.productSubCatId
             },
             include: [{
-                    model: db.t_product_document
-                },
-                {
-                    model: db.t_product
+                    model: db.post_travel_product_document
                 }
             ]
         })
