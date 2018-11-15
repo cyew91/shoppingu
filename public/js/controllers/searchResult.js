@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', 'GetProductIDReq', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID', function($scope, Global, $stateParams, $state, GetProductIDReq, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
+  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID', function($scope, Global, $stateParams, $state, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
     

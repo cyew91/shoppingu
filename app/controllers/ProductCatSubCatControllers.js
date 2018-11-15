@@ -62,7 +62,9 @@ exports.getProductSubCatByProdCatId = function (req, res, next, product_category
     });
 };
 
-
+/**
+ * Use in search result site tree
+ */
 exports.getProductCatAndSubCat = function (req, res, next) {
     db.product_category.findAll({include: [
         {model: db.product_sub_category}

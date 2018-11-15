@@ -11,38 +11,37 @@
 //     });
 // }]);
 
-angular.module('mean.articles').service("GetProductResult", ['$resource', function($resource) {
-    return $resource('/productDetail/:productDetailID', {productDetailID: '@productDetailID'});
-}]);
+// angular.module('mean.articles').service("GetProductResult", ['$resource', function($resource) {
+//     return $resource('/productDetail/:productDetailID', {productDetailID: '@productDetailID'});
+// }]);
 
+//Use in search result page (travel)
 angular.module('mean.articles').service("GetProductID", ['$resource', function($resource) {
     return $resource('/productdetail/productdetailname/:productdetailname', {productdetailname: '@productdetailname'});
 }]);
 
-angular.module('mean.articles').service("GetProductIDReq", ['$resource', function($resource) {
-    return $resource('/productdetail/productdetailnamereq/:productdetailnamereq', {productdetailnamereq: '@productdetailnamereq'});
-}]);
+// angular.module('mean.articles').service("GetProductIDByProfileAndTravel", ['$resource', function($resource) {
+//     return $resource('/postproductdetail/:profileId/:travelId', {
+//         profileId: '@profileId',
+//         travelId: '@travelId'
+//     });
+// }]);
 
-angular.module('mean.articles').service("GetProductIDByProfileAndTravel", ['$resource', function($resource) {
-    return $resource('/postproductdetail/:profileId/:travelId', {
-        profileId: '@profileId',
-        travelId: '@travelId'
-    });
-}]);
+// angular.module('mean.articles').service("GetProductDetail", ['$resource', function($resource) {
+//     return $resource('/productdetaillisting/:productId', {productId: '@productId'});
+// }]);
 
-angular.module('mean.articles').service("GetProductDetail", ['$resource', function($resource) {
-    return $resource('/productdetaillisting/:productId', {productId: '@productId'});
-}]);
-
+//Use in search result site tree click on sub category
 angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$resource', function($resource) {
     return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'});
 }]);
 
-angular.module('mean.articles').service('GetOrderByProfileId', ['$resource', function($resource){
-    return $resource('/custorderwithproduct/:cprofileId', {cprofileId: '@cprofileId'});
-}]);
+// angular.module('mean.articles').service('GetOrderByProfileId', ['$resource', function($resource){
+//     return $resource('/custorderwithproduct/:cprofileId', {cprofileId: '@cprofileId'});
+// }]);
 
 // New service after revamp
+//Use in search result site tree 
 angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', function($resource){
     return $resource('/productcatandsubcat');
 }]);

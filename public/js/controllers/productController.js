@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$uibModal', 'GetProdCatAndSubCat', 'CreatePost', '$rootScope', function ($scope, $state, $stateParams, $uibModa, GetProdCatAndSubCat, CreatePost, $rootScope) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', 'GetProdCatAndSubCat', '$rootScope', function ($scope, $state, $stateParams, GetProdCatAndSubCat, $rootScope) {
     $scope.travelObj = $stateParams.travelObj;
     $scope.productImages = [];
     $scope.productList = [];

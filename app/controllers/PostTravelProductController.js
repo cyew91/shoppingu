@@ -128,3 +128,13 @@ exports.updateProduct = function(req, res){
         return res.jsonp(err);
     });
 };
+
+/**
+ * Upload product image on post travel product page
+ */
+exports.uploadProductImage = function (req, res) {
+    return res.render('201', {
+        Success: 'Yeah',
+        status: 201
+    });
+};

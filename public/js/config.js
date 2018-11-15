@@ -68,21 +68,21 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'ProductDetailsController',
             templateUrl: 'views/productDetails.html'
         })
-        .state('posttravel', {
-            abstract: true,
-            url: '/posttravel',
-            controller: 'travelController',
-            templateUrl: 'views/product/post/post.html'
-        })
-        .state('posttravel.travel', {
-            url: '',
-            params: {
-                productObj: null,
-                buyer: false
-            },
-            controller: 'TravelController',
-            templateUrl: 'views/product/post/travel.html'
-        })
+        // .state('posttravel', {
+        //     abstract: true,
+        //     url: '/posttravel',
+        //     controller: 'travelController',
+        //     templateUrl: 'views/product/post/post.html'
+        // })
+        // .state('posttravel.travel', {
+        //     url: '',
+        //     params: {
+        //         productObj: null,
+        //         buyer: false
+        //     },
+        //     controller: 'TravelController',
+        //     templateUrl: 'views/product/post/travel.html'
+        // })
         // .state('posttravel.product', {
         //     url: '',
         //     params: {
@@ -91,17 +91,17 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         //     controller: 'ProductController',
         //     templateUrl: 'views/product/post/product.html'
         // })
-        .state('posttravel.review', {
-            params: {
-                productObj: null
-            },
-            controller: 'ReviewController',
-            templateUrl: 'views/product/post/review.html'
-        })
+        // .state('posttravel.review', {
+        //     params: {
+        //         productObj: null
+        //     },
+        //     controller: 'ReviewController',
+        //     templateUrl: 'views/product/post/review.html'
+        // })
         .state('userprofile', {
             url: '/userprofile',
             params: {
-                profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
+                profileId: '',
             },
             controller: 'UserProfileController',
             templateUrl: 'views/users/userProfile.html'
@@ -109,7 +109,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('address', {
             url: '/address',
             params: {
-                profileId: '2e3da212-9953-11e7-b85b-5d64dd272c67',
+                profileId: '',
             },
             controller: 'AddressController',
             templateUrl: 'views/users/address.html'
@@ -129,11 +129,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'RequestController',
             templateUrl: 'views/users/request.html'
         })
-        .state('uploadimage', {
-            url: '/uploadimage',
-            controller: 'UploadImageController',
-            templateUrl: 'views/uploadImage.html'
-        })
+        // .state('uploadimage', {
+        //     url: '/uploadimage',
+        //     controller: 'UploadImageController',
+        //     templateUrl: 'views/uploadImage.html'
+        // })
         .state('404', {
             templateUrl: 'views/404.html'
         })

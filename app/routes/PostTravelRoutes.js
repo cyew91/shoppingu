@@ -17,4 +17,7 @@ module.exports = function (app) {
 
     app.param('postTravelId', postTravel.getPostTravelById);
     app.param('profileId', postTravel.getPostTravelByProfileId);
+
+    //Get country list in post travel page
+    app.get('/country', postTravel.all);
 };
