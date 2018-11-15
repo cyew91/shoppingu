@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('../../config/sequelize');
+// const db = require('../../config/sequelize');
 
 // //No use - moved to PostTravelController.js
 // exports.all = function(req, res){

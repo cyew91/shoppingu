@@ -9,7 +9,9 @@ exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
 
-//Use in search result page
+/**
+ * Use in search result page
+ */
 exports.getProductDetailByProdName = function (req, res, next, ProductName) {
     db.post_travel_product.findAll({
             where: {
@@ -35,7 +37,9 @@ exports.getProductDetailByProdName = function (req, res, next, ProductName) {
         });
 };
 
-//Use in search result site tree click on sub category
+/**
+ * Use in search result site tree click on sub category
+ */
 exports.getProductDetailByProdSubCatID = function (req, res, next) {
     db.post_travel_product.findAll({
             where: {

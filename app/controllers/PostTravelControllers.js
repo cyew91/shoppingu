@@ -147,7 +147,9 @@ exports.createPostTravelProduct = function (req, res, next) {
     };
 };
 
-//Get country list in post travel page
+/**
+ * Get country list in post travel page
+ */
 exports.all = function(req, res){
     db.country.findAll({
         where: {

@@ -129,7 +129,9 @@ exports.updateProduct = function(req, res){
     });
 };
 
-//Upload product image on post travel product page
+/**
+ * Upload product image on post travel product page
+ */
 exports.uploadProductImage = function (req, res) {
     return res.render('201', {
         Success: 'Yeah',

@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var db = require('../../config/sequelize');
+// var db = require('../../config/sequelize');
 
 //----------------------------------------Start----------------------------------------
 //Product
