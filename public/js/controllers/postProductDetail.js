@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('PostProductDetailController', ['$scope', 'Global', '$stateParams', '$state', 'GetProductDetail', function($scope, Global, $stateParams, $state, GetProductDetail){
+  .controller('PostProductDetailController', ['$scope', 'Global', '$stateParams', '$state', function($scope, Global, $stateParams, $state){
     $scope.global = Global;
     //$scope.profileId = $stateParams.profileId;
     $scope.productId = $stateParams.productID;
     //$scope.profile = $stateParams.ProfileID;
     //$scope.tripDate = $stateParams.TravelStartDate;
 
-    $scope.getProductDetailResult = function(){
-      GetProductDetail.query({
-        productId: $scope.productId
-      }, function (result){
-        $scope.productDetail = result;
-        //$state.go('postProductDetail', { productID: $scope.productDetail });
-      });
-    };
+    // $scope.getProductDetailResult = function(){
+    //   GetProductDetail.query({
+    //     productId: $scope.productId
+    //   }, function (result){
+    //     $scope.productDetail = result;
+    //     //$state.go('postProductDetail', { productID: $scope.productDetail });
+    //   });
+    // };
 
     $scope.open = function () {
       //$scope.seletedProduct = product;

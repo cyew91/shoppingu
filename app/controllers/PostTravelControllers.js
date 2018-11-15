@@ -147,5 +147,22 @@ exports.createPostTravelProduct = function (req, res, next) {
     };
 };
 
+//Get country list in post travel page
+exports.all = function(req, res){
+    db.country.findAll({
+        where: {
+            is_active: 1
+        }
+    })
+    .then(function(country){
+        return res.jsonp(country);
+    })
+    .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        });
+    });
+};
 //----------------------------------------End----------------------------------------
 

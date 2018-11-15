@@ -15,6 +15,7 @@ module.exports = function (app) {
     app.route('/productcat/productsubcat/:productsubcatbyid')
     .get(productCatSubCat.show);
 
+    //Use in search result site tree
     app.get('/productcatandsubcat', productCatSubCat.getProductCatAndSubCat);
 
     app.param('productcatid', productCatSubCat.getProdCatById);
