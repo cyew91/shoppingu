@@ -3,10 +3,25 @@
 angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window) {
     // $scope.showSearchBar = false;
     // $scope.isCollapsed = false;
+    //$scope.isLogin = true;
     $scope.productTravel = [];
     $scope.productRequest = [];
 
+    $scope.showPane = function() {
+        $scope.isPaneShown = true;
+      };
+    $scope.hidePane = function() {
+        $scope.isPaneShown = false;
+      };
+
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
+        
+        $scope.isLogin = true;
+        var userId = $window.sessionStorage.getItem("id");
+        if (userId == "undefined") {
+            $scope.isLogin = false;
+        }
+    
         if (response.status !== '0') {
             return response;
         } else {
@@ -25,10 +40,6 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
             }
         });
     };
-
-    // $scope.search = function () {
-    //     $state.go('searchResult');
-    // };
 
     // $scope.openSearch = function () {
     //     $('#mainSearchForm').addClass("fadeIn");
