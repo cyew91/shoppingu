@@ -1,5 +1,10 @@
 <!-- Navbar-->
+
 <header class="navbar navbar-sticky" ng-controller="HeaderController">
+    <div loading-pane="isPaneShown"></div>
+    <!-- <div class="three col"> -->
+    <!-- <div class="loader" id="loader-3"></div> -->
+    <!-- </div> -->
   <!-- Search-->
   <form class="site-search" method="get">
     <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()" placeholder="Type to search..." ng-model="inputSearch">
@@ -97,7 +102,7 @@
       </li>
       <li>
         <a href="#">
-          <span>Post Request</span>
+          <span ng-click="showPane()">Post Request</span>
         </a>
       </li>
       <li>
@@ -111,17 +116,17 @@
         </a>
       </li>
       <li>
-        <a ui-sref="login" ng-show="!currentUser">
+        <a ui-sref="login" ng-if="!isLogin">
           <span>Login</span>
         </a>
       </li>
       <li>
-        <a ui-sref="register" ng-show="!currentUser">
+        <a ui-sref="register" ng-if="!isLogin">
           <span>Register</span>
         </a>
       </li>
       <li>
-        <a ui-sref="userprofile" ng-show="currentUser">
+        <a ui-sref="userprofile" ng-if="isLogin">
           <span>Account</span>
         </a>
       </li>
@@ -134,7 +139,7 @@
         <div class="search">
           <i class="icon-search"></i>
         </div>
-        <div class="account" ng-show="currentUser">
+        <div class="account" ng-if="isLogin">
           <a href="#"></a>
           <i class="icon-head"></i>
           <ul class="toolbar-dropdown">
