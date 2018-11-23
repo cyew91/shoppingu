@@ -1,19 +1,26 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', 'GetProdCatAndSubCat', '$rootScope', function ($scope, $state, $stateParams, GetProdCatAndSubCat, $rootScope) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', 'GetProdCatAndSubCat', '$rootScope', '$anchorScroll', function ($scope, $state, $stateParams, GetProdCatAndSubCat, $rootScope, $anchorScroll) {
     $scope.travelObj = $stateParams.travelObj;
     $scope.productImages = [];
     $scope.productList = [];
     var count = 0;
     $scope.currency = "MYR";
+    var hasTravel = $rootScope.hasTravel;
     //Dropzone.autoDiscover = false;
 
     $scope.init = function () {
-        GetProdCatAndSubCat.query(function (list) {
-            $scope.productCategoryList = list;
-        });
-
-        initDropZone();
+        if (!hasTravel){
+            $state.go('travel');
+            $window.location.reload();
+        }
+        else{
+            GetProdCatAndSubCat.query(function (list) {
+                $scope.productCategoryList = list;
+            });
+    
+            initDropZone();
+        }
     }
 
     var initDropZone = function() {
@@ -24,15 +31,14 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
 
         init: function() {
-            console.log('init');
+            //console.log('init');
             this.on("maxfilesexceeded", function(file){
                  alert("No more files please!");
                  this.removeFile(file);
              });
         },
-
         sending: function(file, xhr, formdata){
-            console.log('Sending');
+            //console.log('Sending');
             file.myName = file.name.split('.')[0] + '-' + Date.now() + '.jpg';
 
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
@@ -47,7 +53,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
                 url: '/deleteProductImage',
                 data: {myName: myName},
                 success: function(data, response){
-                console.log('success: ' + data);
+                //console.log('success: ' + data);
                 for (var x = 0; x <= $scope.productImages.length; x++){
                     if ($scope.productImages[x].imageName == data.message){
                         $scope.productImages.splice(x, 1);
@@ -72,21 +78,86 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     };
 
     $scope.addToProductList = function () {
-        $scope.productList.push({
-            productName: $scope.productName,
-            productCategoryId: $scope.productCategoryName.id,
-            productCategoryName: $scope.productCategoryName.productCategoryName,
-            productSubCategoryId: $scope.productSubCategoryName.id,
-            productSubCategoryName: $scope.productSubCategoryName.productSubCategoryName,
-            quantity: $scope.quantity, 
-            currency: $scope.currency,
-            amount: $scope.amount,
-            productDescription: $scope.productDescription,
-            productImage: $scope.productImages
+        var valid = validation().result;
+        var msg = validation().msg;
+        if (!valid){
+            $scope.response = valid;
+            $scope.errorMsg = msg;
+            // Scroll to top
+            $anchorScroll();
+        }
+        else {
+            $scope.productList.push({
+                productName: $scope.productName,
+                productCategoryId: $scope.productCategoryName.id,
+                productCategoryName: $scope.productCategoryName.productCategoryName,
+                productSubCategoryId: $scope.productSubCategoryName.id,
+                productSubCategoryName: $scope.productSubCategoryName.productSubCategoryName,
+                quantity: $scope.quantity, 
+                currency: $scope.currency,
+                amount: $scope.amount,
+                productDescription: $scope.productDescription,
+                productImage: $scope.productImages
         });
         clearData();
         count++;
+        }  
     };
+
+    $scope.removeFromList = function (index) {
+        $scope.productList.splice(index, 1);
+    };
+      
+    $scope.continue = function (count) {
+        if ($scope.productList.length < 1){
+            $scope.response = false;
+            $scope.errorMsg = "Fill in all columns";
+        }
+        else{
+            $scope.productObj = $scope.travelObj;
+            $scope.productObj.productList = $scope.productList;
+            $state.go('postreview', { productObj: $scope.productObj });
+            // Scroll to top
+            $anchorScroll();
+        }
+        // $scope.productObj = $scope.travelObj;
+        // $scope.productObj.productList = $scope.productList;
+
+        // if (count == 2) {
+        // $state.go('postreview', { productObj: $scope.productObj });
+        // } else if (count == 3) {
+            // Temporary rhide Review page. For now direct save into DB.
+            // $state.go('posttravel.review', { productObj: $scope.productObj });
+            // Call the api here. To insert into DB. Should pass in '$scope.productObj' into the api to process.
+        // }
+    };
+
+    // $scope.back = function (count) {
+    //     var count = 1;
+    //     $('#text' + count).css('display', 'none');
+    //     $('#textStep' + count).css('display', 'block');
+
+    //     $('#text' + (count + 1)).css('display', 'block');
+    //     $('#textStep' + (count + 1)).css('display', 'none');
+
+    //     $('#check' + (count)).css('display', 'none');
+    //     $('#check' + (count + 1)).css('display', 'none');
+
+    //     var $bar = $(".ProgressBar");
+    //     if ($bar.children(".is-current").length > 0) {
+    //         $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
+    //     } else {
+    //         $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
+    //     }
+
+    //     if (count == 2) {
+    //         $state.go('posttravel.product', { productObj: $scope.productObj });
+    //     } else if (count == 3) {
+    //         $state.go('posttravel.review', { productObj: $scope.productObj });
+    //     } else if (count == 1) {
+    //         $state.go('posttravel.travel', { productObj: $scope.productObj });
+    //     }
+    // }
 
     var clearData = function (){
         $scope.productName = null;
@@ -108,64 +179,39 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         //Dropzone.forElement("div#dropzoneProductImage").removeAllFiles(true);
     };
 
-    $scope.removeFromList = function (index) {
-        $scope.productList.splice(index, 1);
+    var validation = function() {
+        var result = true;
+        var msg = null;
+        var returnObj = {};
+        if (angular.isUndefined($scope.productName) || $scope.productName == null || $scope.productName == ""){
+            result = false;
+            msg = "Fill in Product Name";
+        }
+        else if (angular.isUndefined($scope.productCategoryName || $scope.productCategoryName == null || $scope.productCategoryName == "")){
+            result = false;
+            msg = "Select Product Category";
+        }
+        else if (angular.isUndefined($scope.productSubCategoryName || $scope.productSubCategoryName == null || $scope.productSubCategoryName == "")){
+            result = false;
+            msg = "Select Product Sub Category";
+        }
+        else if (angular.isUndefined($scope.productDescription || $scope.productDescription == null || $scope.productDescription == "")){
+            result = false;
+            msg = "Fill in Description";
+        }
+        else if (angular.isUndefined($scope.quantity || $scope.quantity == null || $scope.quantity == "")){
+            result = false;
+            msg = "Fill in Quantity";
+        }
+        else if (angular.isUndefined($scope.amount || $scope.amount == null || $scope.amount == "")){
+            result = false;
+            msg = "Fill in Amount";
+        }
+        else if ($scope.productImages < 1){
+            result = false;
+            msg = "Upload at least one Product Image";
+        }
+        returnObj = {result, msg};
+        return returnObj;
     };
-      
-    $scope.continue = function (count) {
-        $scope.productObj = $scope.travelObj;
-        $scope.productObj.productList = $scope.productList;
-
-        // $('#text' + count).css('display', 'none');
-        // $('#textStep' + count).css('display', 'block');
-
-        // $('#text' + (count - 1)).css('display', 'none');
-        // $('#textStep' + (count - 1)).css('display', 'none');
-
-        // $('#check' + (count - 1)).css('display', 'block');
-
-        // var $bar = $(".ProgressBar");
-        // if ($bar.children(".is-current").length > 0) {
-        //     $bar.children(".is-current").removeClass("is-current").addClass("is-complete").next().addClass("is-current");
-        // } else {
-        //     $bar.children().first().addClass("is-current");
-        // }
-
-        //console.log($scope.productObj);
-
-        // if (count == 2) {
-        $state.go('postreview', { productObj: $scope.productObj });
-        // } else if (count == 3) {
-            // Temporary rhide Review page. For now direct save into DB.
-            // $state.go('posttravel.review', { productObj: $scope.productObj });
-            // Call the api here. To insert into DB. Should pass in '$scope.productObj' into the api to process.
-        // }
-    }
-
-    $scope.back = function (count) {
-        var count = 1;
-        $('#text' + count).css('display', 'none');
-        $('#textStep' + count).css('display', 'block');
-
-        $('#text' + (count + 1)).css('display', 'block');
-        $('#textStep' + (count + 1)).css('display', 'none');
-
-        $('#check' + (count)).css('display', 'none');
-        $('#check' + (count + 1)).css('display', 'none');
-
-        var $bar = $(".ProgressBar");
-        if ($bar.children(".is-current").length > 0) {
-            $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
-        } else {
-            $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
-        }
-
-        if (count == 2) {
-            $state.go('posttravel.product', { productObj: $scope.productObj });
-        } else if (count == 3) {
-            $state.go('posttravel.review', { productObj: $scope.productObj });
-        } else if (count == 1) {
-            $state.go('posttravel.travel', { productObj: $scope.productObj });
-        }
-    }
 }]);

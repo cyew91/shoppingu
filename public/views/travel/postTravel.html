@@ -12,7 +12,9 @@
             1. Post Travel
         </a>
     </div>
-
+    <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
+        {{errorMsg}}
+    </div>
     <div class="d-flex justify-content-center" name="myForm" ng-form ng-init="init()">
         <div angucomplete-alt id="autocomplete" maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
         local-data="countryList" search-fields="countryName" title-field="countryName" minlength="1" input-class="form-control form-control-small"
