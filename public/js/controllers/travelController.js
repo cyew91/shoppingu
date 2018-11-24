@@ -1,10 +1,11 @@
 'use strict'
 
-angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', '$rootScope', '$window', function ($scope, $state, $stateParams, GetCountryList, $rootScope, $window) {
+angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', '$rootScope', '$window', '$anchorScroll', function ($scope, $state, $stateParams, GetCountryList, $rootScope, $window, $anchorScroll) {
     $scope.buyer = $stateParams.buyer;
     $scope.profileId = $window.sessionStorage.getItem("id");
     var startDate;
     var toDate;
+    $rootScope.hasTravel = true;
 
     $scope.count = 1;
 
@@ -13,7 +14,8 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
             $scope.countryList = list;
         });
 
-        initDatePicker();
+        // initDatePicker();
+        initStartDate();
     };
 
     var initDatePicker = function () {
@@ -21,7 +23,31 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
         autoclose: true,
         keepEmptyValues: true,
         format: 'yyyy-mm-dd',
-        clearBtn: true
+        clearBtn: true,
+        startDate : new Date()
+        });
+    }
+
+    var initStartDate = function() {
+        $("#datepickerFrom").datepicker({
+            autoclose: true,
+            clearBtn: true,
+            format: 'yyyy-mm-dd',
+            startDate : new Date()
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#datepickerTo').datepicker('setStartDate', minDate);
+            $('#datepickerTo').datepicker('setDate', minDate);
+        });
+
+        $("#datepickerTo").datepicker({
+            autoclose: true,
+            clearBtn: true,
+            format: 'yyyy-mm-dd',
+            startDate : new Date()
+        // }).on('changeDate', function (selected) {
+        //         var minDate = new Date(selected.date.valueOf());
+        //         $('#datepickerFrom').datepicker('setStartDate', minDate);
         });
     }
 
@@ -35,54 +61,30 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
 
     $('#datepickerTo').on('changeDate', function() {
         toDate = $('#datepickerTo').datepicker('getFormattedDate');
+        $scope.toDate = startDate >= toDate ? startDate : toDate;
     });
 
     $scope.continue = function (count) {
-        $scope.TravelObj.startDate = startDate;
-        $scope.TravelObj.toDate = toDate;
-        $scope.TravelObj.profileId = $scope.profileId;
-
-        if (angular.isUndefined($scope.TravelObj)) {
+        if (angular.isUndefined($scope.TravelObj)){
             $scope.response = false;
-            if (angular.isUndefined($scope.TravelObj.startDate)) {
-                $('#datepickerFrom').removeClass("dateRangePicker");
-                $('#datepickerFrom').addClass("dateRangePickerAfter");
-            } else {
-                $('#datepickerFrom').removeClass("dateRangePickerAfter");
-                $('#datepickerFrom').addClass("dateRangePicker");
-            }
-
-            if (angular.isUndefined($scope.TravelObj)) {
-                $('#autocomplete').removeClass("form-control-small");
-                $('#autocomplete').addClass("form-control-smallAfter");
-            } else {
-                $('#autocomplete').removeClass("form-control-smallAfter");
-                $('#autocomplete').addClass("form-control-small");
-            }
+            $scope.errorMsg = "Select travel Country";
+        }
+        else if (angular.isUndefined(startDate))
+        {
+            $scope.response = false;
+            $scope.errorMsg = "Fill in Date From";
+        }
+        else if (angular.isUndefined(toDate)){
+            $scope.response = false;
+            $scope.errorMsg = "Fill in Date To";
         }
         else {
-            var count = 2;
-            $('#text' + count).css('display', 'none');
-            $('#textStep' + count).css('display', 'block');
-
-            $('#text' + (count - 1)).css('display', 'none');
-            $('#textStep' + (count - 1)).css('display', 'none');
-
-            $('#check' + (count - 1)).css('display', 'block');
-
-            var $bar = $(".ProgressBar");
-            if ($bar.children(".is-current").length > 0) {
-                $bar.children(".is-current").removeClass("is-current").addClass("is-complete").next().addClass("is-current");
-            } else {
-                $bar.children().first().addClass("is-current");
-            }
-
-            if (count == 2) {
-                //$scope.productObj.buyer = $scope.buyer;
-                $state.go('postproduct', { travelObj: $scope.TravelObj });
-            } else if (count == 3) {
-                $state.go('posttravel.review', { productObj: $scope.productObj });
-            }
+            $scope.TravelObj.startDate = startDate;
+            $scope.TravelObj.toDate = toDate;
+            $scope.TravelObj.profileId = $scope.profileId;
+            $state.go('postproduct', { travelObj: $scope.TravelObj });
+            // Scroll to top
+            $anchorScroll();
         }
     }
 
@@ -112,3 +114,5 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
     //     }
     // })
 }]);
+
+

@@ -12,7 +12,7 @@
         </a>
     </div>
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" ng-init="init()">
         <div class="col-lg-9 col-md-8 order-md-2">
             <h6 class="text-muted text-normal text-uppercase margin-top-2x">Review</h6>
             <br/>
@@ -67,7 +67,7 @@
     </div>
 
     <div style="text-align: right;">
-        <a class="btn btn-primary" href="postproduct">Back</a>
+        <!-- <a class="btn btn-primary" href="postproduct">Back</a> -->
         <a class="btn btn-primary" ng-click="savePostTravel()">Confirm</a>
     </div>
 </div>
@@ -82,7 +82,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Thanks for signing up!</p>
+                <p>Your product has been posted!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

@@ -12,7 +12,9 @@
       1. Post Travel
     </a>
   </div>
-
+  <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
+    {{errorMsg}}
+</div>
   <div class="d-flex justify-content-center">
     <div class="col-lg-9 col-md-8 order-md-2">
       <h6 class="text-muted text-normal text-uppercase margin-top-2x">Post Product</h6>
@@ -63,9 +65,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-2 col-form-label" for="text-input">Amount</label>
+        <label class="col-2 col-form-label" for="number-input">Amount</label>
         <div class="col-10">
-          <input class="form-control" type="text" id="text-input" ng-model="amount">
+          <input class="form-control" type="number" id="number-input" ng-model="amount">
         </div>
       </div>
       <div class="form-group row">
@@ -113,7 +115,7 @@
   </div>
 
   <div style="text-align: right;">
-    <a class="btn btn-primary" href="travel">Back</a>
+    <!-- <a class="btn btn-primary" href="travel">Back</a> -->
     <a class="btn btn-primary" ng-click="continue()">Next</a>
   </div>
 </div>
