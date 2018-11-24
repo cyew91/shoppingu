@@ -67,8 +67,8 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         success: function(file, response){
             $scope.productImages.push({
                 imageName: response.message[0].filename, 
-                imagePath: response.message[0].path,
-                imageURL: file.dataURL
+                imagePath: response.message[0].path
+                //imageURL: file.dataURL
             });
         },
         error: function(file, response){
