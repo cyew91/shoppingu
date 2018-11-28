@@ -1,27 +1,19 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window) {
+angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', 'GetProdCatAndSubCat',
+    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window, GetProdCatAndSubCat) {
     // $scope.showSearchBar = false;
     // $scope.isCollapsed = false;
-    //$scope.isLogin = true;
+    //$scope.isLoading = true;
     $scope.productTravel = [];
     $scope.productRequest = [];
 
-    $scope.showPane = function() {
-        $scope.isPaneShown = true;
-      };
-    $scope.hidePane = function() {
-        $scope.isPaneShown = false;
-      };
-
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
-        
         $scope.isLogin = true;
         var userId = $window.sessionStorage.getItem("id");
         if (userId == "undefined") {
             $scope.isLogin = false;
         }
-    
         if (response.status !== '0') {
             return response;
         } else {
@@ -31,6 +23,25 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
         }
     });
 
+    // $rootScope.currentUser = function () {
+    //     CheckLoggedIn.get(function (response) {
+    //             $scope.isLogin = true;
+    //             var userId = $window.sessionStorage.getItem("id");
+    //             if (userId == "undefined") {
+    //                 $scope.isLogin = false;
+    //             }
+    //             if (response.status !== '0') {
+    //                 return response;
+    //             } else {
+    //                 $scope.errorMessage = 'Not logged in';
+    //                 $rootScope.currentUser = null;
+    //                 return "";
+    //             }
+    //         });
+    //     //$scope.isLoading = false;
+            
+    // };
+    
     $scope.SignOut = function () {
         SignOut.get(function (response) {
             if (response.status === 'success') {
@@ -71,6 +82,13 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
         });
     };
 
+    // Category list
+    $scope.categoryList = function() {
+        GetProdCatAndSubCat.query(function (result) {
+          $scope.categoryListResult = result;
+        });
+    };
+
     // Sticky Navbar
     // //------------------------------------------------------------------------------
     // function stickyHeader() {
@@ -94,4 +112,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     // }
     // stickyHeader();
 
+    //Page Loading
+    // $(window).on('load', function(){
+    //     $('.loader').fadeOut();
+    // });
 }]);

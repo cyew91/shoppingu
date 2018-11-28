@@ -12,8 +12,15 @@ module.exports = function (app) {
     app.route('/productdetail/productsubcatid/:productSubCatId') //Use in search result site tree click on sub category
     .get(searchResult.show);
 
+    //Get Product By Product Category ID
+    app.route('/productdetail/productcategoryid/:productcategoryid') //Use in search result page after view product from home page
+    .get(searchResult.show);
+
     //Param
-    app.param('productdetailname', searchResult.getProductDetailByProdName); //Use in search result page
+    //Use in search result page
+    app.param('productdetailname', searchResult.getProductDetailByProdName); 
     //Use in search result site tree click on sub category
     app.param(['productSubCatId'], searchResult.getProductDetailByProdSubCatID);
+    //Use in search result page after view product from home page
+    app.param('productcategoryid', searchResult.getProductDetailByProdCatCode); 
 };

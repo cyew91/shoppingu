@@ -1,28 +1,30 @@
 'use strict';
 
 const db = require('../../config/sequelize');
-const sequelize = require('sequelize');
 
-exports.getTopCategories = (req, res) => {
-   db.post_travel_product.findAll({
-      raw: true,
-      attributes: ['product_category_id', 
-         [sequelize.fn('COUNT', 'product_category_id'), 'row_count']],
-      include: [{
-         model: db.product_category,
-         attributes: ['product_category_code', 'product_category_name']
-      }],
-      group: ['product_category_id'],
-      order: sequelize.literal('row_count DESC'),
-      limit: 3
+/**
+ * Use in home page Top Category
+ */
+exports.getProductIdByProdCatCode = function (req, res) {
+   db.product_category.find({
+      where: {
+          product_category_code: req.params.productcategorycode
+      }
    })
-   .then( (result) => {
+   .then(function (result) {
       return res.jsonp(result);
    })
-   .catch( (err) => {
+   .catch(function (err) {
       return res.render('error', {
-         error: err,
-         status: 500
-     });
+          error: err,
+          status: 500
+      });
    });
+};
+
+/**
+ * Show a product
+ */
+exports.show = function (req, res) {
+   return res.jsonp(req.product);
 };

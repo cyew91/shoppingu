@@ -49,3 +49,13 @@ angular.module('mean.articles').service('GetProdCatAndSubCat', ['$resource', fun
 angular.module('mean.articles').service('CreatePost', ['$resource', function($resource){
     return $resource('/posttravel');
 }]);
+
+// Use in home page view product
+angular.module('mean.articles').service('GetProdIdByProdCatCode', ['$resource', function($resource){
+    return $resource('/productcategory/:productcategorycode', {productcategorycode: '@productcategorycode'});
+}]);
+
+// Use in search result after view product
+angular.module('mean.articles').service('GetProdDetailByProdCatCode', ['$resource', function($resource){
+    return $resource('/productdetail/productcategoryid/:productcategoryid', {productcategoryid: '@productcategoryid'});
+}]);

@@ -1,7 +1,9 @@
 <!-- Navbar-->
 
 <header class="navbar navbar-sticky" ng-controller="HeaderController">
-    <div loading-pane="isPaneShown"></div>
+    <!-- <div class="loading-spiner-holder" data-loading > -->
+    <!-- <div class="loader"></div> -->
+    <!-- </div> -->
     <!-- <div class="three col"> -->
     <!-- <div class="loader" id="loader-3"></div> -->
     <!-- </div> -->
@@ -24,7 +26,7 @@
     </div>
   </div>
   <!-- Main Navigation-->
-  <nav class="site-menu">
+  <nav class="site-menu" ng-init="categoryList()">
     <ul>
       <li class="has-megamenu">
         <a href="#">
@@ -32,25 +34,10 @@
         </a>
         <ul class="mega-menu">
           <li>
-            <span class="mega-menu-title">Top Categories</span>
+            <span class="mega-menu-title">All Categories</span>
             <ul class="sub-menu">
-              <li>
-                <a href="#">Men's Shoes</a>
-              </li>
-              <li>
-                <a href="#">Women's Shoes</a>
-              </li>
-              <li>
-                <a href="#">Shirts and Tops</a>
-              </li>
-              <li>
-                <a href="#">Swimwear</a>
-              </li>
-              <li>
-                <a href="#">Shorts and Pants</a>
-              </li>
-              <li>
-                <a href="#">Accessories</a>
+              <li ng-repeat="item in categoryListResult">
+                <a href="#">{{item.productCategoryName}}</a>
               </li>
             </ul>
           </li>
@@ -102,7 +89,7 @@
       </li>
       <li>
         <a href="#">
-          <span ng-click="showPane()">Post Request</span>
+          <span>Post Request</span>
         </a>
       </li>
       <li>
