@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$state', '$anchorScroll', 'GetProdIdByProdCatCode', 'GetProdDetailByProdCatCode', 
-    function ($scope, Global, $state, $anchorScroll, GetProdIdByProdCatCode, GetProdDetailByProdCatCode) {
+  .controller('IndexController', ['$scope', 'Global', '$state', '$anchorScroll', 'GetProdIdByProdCatCode', 'GetProdDetailByProdCatCode', 'GetAllTravelProduct', 
+    function ($scope, Global, $state, $anchorScroll, GetProdIdByProdCatCode, GetProdDetailByProdCatCode, GetAllTravelProduct) {
     $scope.global = Global;
     var productCategoryId = '';
     var productCategory = [];
@@ -25,5 +25,14 @@ angular.module('mean.system')
             $anchorScroll();
         });
     };
-      
-  }]);
+
+    $scope.initFeatureProduct = function(){
+        GetAllTravelProduct.query(function (list) {
+            $scope.featuredProduct = list;
+            for (var i=0;i<list.length;i++){
+                $scope.featuredProduct[i].imageName = list[i].post_travel_product_documents[0].image_name;
+            }
+        });
+    };
+        
+}]);

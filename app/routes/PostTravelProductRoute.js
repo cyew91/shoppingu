@@ -24,9 +24,10 @@ module.exports = function (app) {
         .get(postTravelProduct.show)
         .put(postTravelProduct.updateProduct);
 
+    // Get features product in home page
     app.route('/posttravelproduct')
-        .get(postTravelProduct.all)
-        .post(postTravelProduct.createProduct, postTravelProduct.createProductDocument);
+        .get(postTravelProduct.all);
+        //.post(postTravelProduct.createProduct, postTravelProduct.createProductDocument);
 
     app.route('/posttravelproduct/productcategory')
         .get(postTravelProduct.getPostTravelProductByProductCategoryId);

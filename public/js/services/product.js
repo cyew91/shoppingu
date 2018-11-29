@@ -59,3 +59,10 @@ angular.module('mean.articles').service('GetProdIdByProdCatCode', ['$resource', 
 angular.module('mean.articles').service('GetProdDetailByProdCatCode', ['$resource', function($resource){
     return $resource('/productdetail/productcategoryid/:productcategoryid', {productcategoryid: '@productcategoryid'});
 }]);
+
+//Get features product in home page
+angular.module('mean.articles').service('GetAllTravelProduct', ['$resource', function($resource){
+    return $resource('/posttravelproduct');
+}]);
+
+
