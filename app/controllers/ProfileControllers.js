@@ -125,60 +125,60 @@ const saltRounds = 10;
 /**
  * Create profile account
  */
-exports.createProfileAccount = function (req, res, next) {
-    var message = null;
-    var profileAccountDetail = {
-        ProfileID: req.body.profileId,
-        LoginID: req.body.email,
-        RetryCount: 0,
-        IsActive: 1,
-        Remarks: "",
-        CreatedDate: Date.now(),
-        CreatedBy: "00000000-0000-0000-0000-000000000000",
-        LastUpdatedDate: Date.now(),
-        LastUpdatedBy: "00000000-0000-0000-0000-000000000000"
-    };
+// exports.createProfileAccount = function (req, res, next) {
+//     var message = null;
+//     var profileAccountDetail = {
+//         ProfileID: req.body.profileId,
+//         LoginID: req.body.email,
+//         RetryCount: 0,
+//         IsActive: 1,
+//         Remarks: "",
+//         CreatedDate: Date.now(),
+//         CreatedBy: "00000000-0000-0000-0000-000000000000",
+//         LastUpdatedDate: Date.now(),
+//         LastUpdatedBy: "00000000-0000-0000-0000-000000000000"
+//     };
 
-    var profileAccount = db.t_profile_account.build(profileAccountDetail);
-    profileAccount.SaltPass = profileAccount.makeSalt();
-    profileAccount.HashPass = profileAccount.encryptPassword(req.body.password, profileAccount.SaltPass);
+//     var profileAccount = db.t_profile_account.build(profileAccountDetail);
+//     profileAccount.SaltPass = profileAccount.makeSalt();
+//     profileAccount.HashPass = profileAccount.encryptPassword(req.body.password, profileAccount.SaltPass);
         
-    profileAccount.save().then(function () {
-        return res.jsonp({
-            "result": "success"
-        });
-    }).catch(function (err) {
-        res.send({
-            status: 'Exception',
-            message: err
-        });
-    });
-};
+//     profileAccount.save().then(function () {
+//         return res.jsonp({
+//             "result": "success"
+//         });
+//     }).catch(function (err) {
+//         res.send({
+//             status: 'Exception',
+//             message: err
+//         });
+//     });
+// };
 
-exports.getProfileAccount = function (req, res, next, ProfileAccountID) {
-    console.log('id => ' + ProfileAccountID);
-    db.T_Profile_Account.find({
-        where: {
-            ProfileAccountID: ProfileAccountID
-        }
-    }).then(function (profileAccount) {
-        if (!profileAccount) {
-            return next(new Error('Failed to load ProfileAccountID ' + ProfileAccountID));
-        } else {
-            req.profileAccount = profileAccount;
-            return next();
-        }
-    }).catch(function (err) {
-        return next(err);
-    });
-};
+// exports.getProfileAccount = function (req, res, next, ProfileAccountID) {
+//     console.log('id => ' + ProfileAccountID);
+//     db.T_Profile_Account.find({
+//         where: {
+//             ProfileAccountID: ProfileAccountID
+//         }
+//     }).then(function (profileAccount) {
+//         if (!profileAccount) {
+//             return next(new Error('Failed to load ProfileAccountID ' + ProfileAccountID));
+//         } else {
+//             req.profileAccount = profileAccount;
+//             return next();
+//         }
+//     }).catch(function (err) {
+//         return next(err);
+//     });
+// };
 
 /**
  * Show a profile account
  */
-exports.showProfileAccount = function (req, res) {
-    return res.jsonp(req.profileAccount);
-};
+// exports.showProfileAccount = function (req, res) {
+//     return res.jsonp(req.profileAccount);
+// };
 
 
 
