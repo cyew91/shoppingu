@@ -79,6 +79,10 @@ angular.module('mean.articles')
       });
     };
 
+    $scope.productdetails = function () {
+      $state.go('productdetails', {prodTravel: $stateParams.prodTravel});
+    };
+
     //Tab
     // $scope.selectedTab = function (number){
     //   if (number === 1){

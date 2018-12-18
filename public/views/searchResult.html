@@ -172,8 +172,8 @@
         <div class="grid-item" ng-repeat="item in tFilteredTodos">
           <div class="product-card">
             <div class="product-badge text-danger">50% Off</div>
-            <a class="product-thumb" href="shop-single.html">
-              <img src="uploads\{{item.imageName}}" alt="Product">
+            <a class="product-thumb">
+              <img src="uploads\{{item.imageName}}" alt="Product" ng-click="productdetails()">
             </a>
             <h3 class="product-title">
               <a href="shop-single.html">{{item.productName}}</a>
