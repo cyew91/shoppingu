@@ -3,23 +3,23 @@
     <div class="col-md-6">
       <div class="product-gallery">
 
-        <div class="gallery-wrappers" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-pswp-uid="1">
+        <!-- <div class="gallery-wrappers" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-pswp-uid="1">
           <div class="gallery-item" ng-class="{active : activeMenu==='01'}">
             <a href="../uploads/{{ prodTravelDoc.imageName }}" href="#one" data-size="1000x667"></a>
           </div>
-        </div>
+        </div> -->
 
-        <div class="product-carousel owl-carousel owl-loaded owl-drag">
-          <div class="lightgallery" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-hash="one" data-merge="5">
-            <a ng-href="../uploads/{{ prodTravelDoc.imageName }}">
-              <img ng-src="../uploads/{{ prodTravelDoc.imageName }}">
+        <data-owl-carousel class="product-carousel owl-carousel owl-loaded owl-drag" data-options="{items: 5,loop: false, margin: 10, merge: true,URLhashListener: true,startPosition: 'URLHash', responsive: {678: {mergeFit: true}, 1000: {mergeFit: false}}}">
+          <div class="lightgallery" owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-merge="5">
+            <a data-hash="{{prodTravelDoc.id}}">
+              <img ng-src="../uploads/{{prodTravelDoc.imageName}}">
             </a>
           </div>
-        </div>
-        <ul class="product-thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
-          <li ng-class="{active : activeMenu==='01'}">
-            <a href="#one">
-              <img src="../uploads/{{ prodTravelDoc.imageName }}" ng-click="activeMenu='01'" />
+        </data-owl-carousel>
+        <ul class="product-thumbnails">
+          <li ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
+            <a href="#{{prodTravelDoc.id}}" ng-click="thumbs($index)">
+              <img src="../uploads/{{ prodTravelDoc.imageName}}" ng-click="activeMenu='01'" />
             </a>
           </li>
           <!-- <li ng-class="{active : activeMenu==='02'}">
