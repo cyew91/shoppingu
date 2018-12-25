@@ -9,6 +9,10 @@ angular.module('mean.system')
           scope.initCarousel = function(element) {
             // provide any default options you want
               var defaultOptions = {
+                // items: 1,
+				// dots: true,
+				// nav: false
+				// mouseDrag: false
               };
               var customOptions = scope.$eval($(element).attr('data-options'));
               // combine the two options objects

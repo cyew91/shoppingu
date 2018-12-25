@@ -1,58 +1,31 @@
+
 <div class="page-content">
   <div class="row">
     <div class="col-md-6">
       <div class="product-gallery">
 
-        <!-- <div class="gallery-wrappers" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-pswp-uid="1">
-          <div class="gallery-item" ng-class="{active : activeMenu==='01'}">
-            <a href="../uploads/{{ prodTravelDoc.imageName }}" href="#one" data-size="1000x667"></a>
+        <div class="gallery-wrapper" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-pswp-uid="1">
+          <div class="gallery-item">
+            <a href="../uploads/{{prodTravelDoc.imageName}}" data-hash="{{prodTravelDoc.id}}" data-size="1000x667"></a>
           </div>
-        </div> -->
+        </div>
 
-        <data-owl-carousel class="product-carousel owl-carousel owl-loaded owl-drag" data-options="{items: 5,loop: false, margin: 10, merge: true,URLhashListener: true,startPosition: 'URLHash', responsive: {678: {mergeFit: true}, 1000: {mergeFit: false}}}">
-          <div class="lightgallery" owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-merge="5">
-            <a data-hash="{{prodTravelDoc.id}}">
-              <img ng-src="../uploads/{{prodTravelDoc.imageName}}">
-            </a>
+        <data-owl-carousel id="big" class="product-carousel owl-carousel" data-options="{items: 1, loop: false, dots: false, URLhashListener: true, startPosition: 'URLHash'}">
+          <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
+            <div data-hash="{{prodTravelDoc.id}}">
+              <img src="../uploads/{{prodTravelDoc.imageName}}"/>
+            </div>
           </div>
         </data-owl-carousel>
-        <ul class="product-thumbnails">
-          <li ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
-            <a href="#{{prodTravelDoc.id}}" ng-click="thumbs($index)">
-              <img src="../uploads/{{ prodTravelDoc.imageName}}" ng-click="activeMenu='01'" />
+        <data-owl-carousel id="thumbs" class="owl-carousel">
+        <ul owl-carousel-item="" class="product-thumbnails">
+          <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" >
+            <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
+              <img src="../uploads/{{prodTravelDoc.imageName}}"/>
             </a>
           </li>
-          <!-- <li ng-class="{active : activeMenu==='02'}">
-            <a href="#two">
-              <img src="/uploads/IMG_513964-1543046229951.jpg" ng-click="activeMenu='02'">
-            </a>
-          </li> -->
-          <!-- <li ng-class="{active : activeMenu==='03'}">
-            <a href="#three">
-              <img src="../uploads/abc-1543047632139.jpg" ng-click="activeMenu='03'">
-            </a>
-          </li>
-          <li ng-class="{active : activeMenu==='04'}">
-            <a href="#four">
-              <img src="../uploads/IMG_513964-1543046229951.jpg" ng-click="activeMenu='04'">
-            </a>
-          </li>
-          <li ng-class="{active : activeMenu==='05'}">
-            <a href="#five">
-              <img src="../uploads/abc-1543047632139.jpg" ng-click="activeMenu='05'">
-            </a>
-          </li>
-          <li ng-class="{active : activeMenu==='04'}">
-            <a href="#four">
-              <img src="../uploads/IMG_513964-1543046229951.jpg" ng-click="activeMenu='06'">
-            </a>
-          </li>
-          <li ng-class="{active : activeMenu==='05'}">
-            <a href="#five">
-              <img src="../uploads/abc-1543047632139.jpg" ng-click="activeMenu='07'">
-            </a>
-          </li> -->
         </ul>
+      </data-owl-carousel>
       </div>
     </div>
     <!-- Product Info-->
