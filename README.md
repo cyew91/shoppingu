@@ -14,3 +14,6 @@ To commit(Push) to master:
   3. git commit -m "*COMMIT MESSAGE*"
   4. git push -u origin master
 
+DB Setup:
+  1. After the database is ready and finish setup the <env>.json file, run below query in the database:
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your_password>'

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID', function($scope, Global, $stateParams, $state, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
+  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
+    function($scope, Global, $stateParams, $state, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
     
@@ -133,22 +134,6 @@ angular.module('mean.articles')
       $scope.tTotalItems = $scope.productTravel.length;
       // $scope.rTotalItems = $scope.productRequest.length;
     }
-
-    // Shop Categories Widget
-    //------------------------------------------------------------------------------
-    // var categoryToggle = $('.widget-categories .has-children > a');
-
-    // function closeCategorySubmenu() {
-    //   categoryToggle.parent().removeClass('expanded');
-    // }
-    // categoryToggle.on('click', function(e) {
-    //   if($(e.target).parent().is('.expanded')) {
-    //     closeCategorySubmenu();
-    //   } else {
-    //     closeCategorySubmenu();
-    //     $(this).parent().addClass('expanded');
-    //   }
-    // });
 
   }]);
 

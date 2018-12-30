@@ -3,8 +3,15 @@
 const db = require('../../config/sequelize');
 const StandardError = require('standard-error');
 
+/**
+ * Get features product in home page
+ */
 exports.all = function(req, res){
-    db.post_travel_product.findAll({include: [{model:db.post_travel_product_document, attributes: ['image_name', 'image_path']}]}).then(
+    db.post_travel_product.findAll({
+        include: [{
+            model:db.post_travel_product_document, attributes: ['image_name', 'image_path']
+        }]
+    }).then(
         function(product){
             return res.jsonp(product);
         }).catch(function(err){

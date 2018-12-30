@@ -60,3 +60,28 @@ exports.getProductDetailByProdSubCatID = function (req, res, next) {
             });
         });
 };
+
+/**
+ * Use in search result page after view product from home page
+ */
+exports.getProductDetailByProdCatCode = function (req, res) {
+    db.post_travel_product.findAll({
+            where: {
+                product_category_id: req.params.productcategoryid
+            },
+            include: [
+                {
+                    model: db.post_travel_product_document
+                }
+            ]
+        })
+        .then(function (result) {
+            return res.jsonp(result);
+        })
+        .catch(function (err) {
+            return res.render('error', {
+                error: err,
+                status: 500
+            });
+        });
+};
