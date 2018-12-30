@@ -109,22 +109,32 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             url: '/address',
             params: {
                 profileId: '',
+                profile: ''
             },
             controller: 'AddressController',
             templateUrl: 'views/users/address.html'
         })
         .state('order', {
             url: '/order',
+            params: {
+                profile: ''
+            },
             controller: 'OrderController',
             templateUrl: 'views/users/order.html'
         })
         .state('post', {
             url: '/post',
+            params: {
+                profile: ''
+            },
             controller: 'PostController',
             templateUrl: 'views/users/post.html'
         })
         .state('request', {
             url: '/request',
+            params: {
+                profile: ''
+            },
             controller: 'RequestController',
             templateUrl: 'views/users/request.html'
         })

@@ -22,23 +22,23 @@
                 </div>
             </aside>
             <nav class="list-group">
-                <a class="list-group-item with-badge" ui-sref="order">
+                <a class="list-group-item with-badge" href="#" ng-click="goToMyOrder()">
                     <i class="icon-bag"></i>My Orders
                     <span class="badge badge-primary badge-pill">6</span>
                 </a>
                 <a class="list-group-item active" ui-sref="userprofile">
                     <i class="icon-head"></i>Profile</a>
-                <a class="list-group-item" ui-sref="address">
+                <a class="list-group-item" ng-click="goToMyAddress()">
                     <i class="icon-map"></i>Addresses</a>
                 <!-- <a class="list-group-item with-badge" href="account-wishlist.html">
                     <i class="icon-heart"></i>Wishlist
                     <span class="badge badge-primary badge-pill">3</span>
                 </a> -->
-                <a class="list-group-item with-badge" ui-sref="request">
+                <a class="list-group-item with-badge" ng-click="goToMyRequest()">
                     <i class="icon-tag"></i>My Requests
                     <span class="badge badge-primary badge-pill">4</span>
                 </a>
-                <a class="list-group-item" ui-sref="post">
+                <a class="list-group-item" ng-click="goToMyPost()">
                     <i class="icon-bag"></i>My Trips
                 </a>
             </nav>

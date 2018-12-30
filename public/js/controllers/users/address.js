@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('mean.system')
-  .controller('AddressController', ['$scope', 'Global', '$stateParams', '$rootScope', 'GetUserAddressById', function($scope, Global, $stateParams, $rootScope, GetUserAddressById){
+  .controller('AddressController', ['$scope', 'Global', '$stateParams', '$rootScope', '$state', 'GetUserAddressById', function($scope, Global, $stateParams, $rootScope, $state, GetUserAddressById){
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
+    $scope.profile = $stateParams.profile;
 
     $scope.a = $stateParams.a;
     $scope.b = $stateParams.b;
@@ -26,6 +27,22 @@ angular.module('mean.system')
           //$state.go('home');
         profile.$update();
         //});
+    };
+
+    $scope.goToMyOrder = function () {
+      $state.go('order', {profile: $scope.profile});
+    };
+
+    $scope.goToMyRequest = function () {
+      $state.go('request', {profile: $scope.profile});
+    };
+
+    $scope.goToMyProfile = function () {
+      $state.go('userprofile');
+    };
+
+    $scope.goToMyPost = function () {
+      $state.go('post', {profile: $scope.profile});
     };
 
     // $scope.findOne = function() {
