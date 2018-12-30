@@ -62,8 +62,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('productdetails', {
             url: '/productdetails',
             params: {
-                'a': null,
-                'b': null
+                prodTravel: null
             },
             controller: 'ProductDetailsController',
             templateUrl: 'views/productDetails.html'

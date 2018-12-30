@@ -1,24 +1,67 @@
 'use strict';
 
-angular.module('mean.system')
-  .controller('ProductDetailsController', ['$scope', 'Global', '$stateParams', function($scope, Global, $stateParams){
-    $scope.global = Global;
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', function ($scope, $stateParams, Global) {
+  $scope.global = Global;
+  $scope.prodTravel = $stateParams.prodTravel;
 
-    $scope.a = $stateParams.a;
-    $scope.b = $stateParams.b;
+  // $scope.productName = $scope.productObj.id;
+  // $scope.productName = "testing"
+  // $(".lightgallery").lightGallery();
 
-  //   $('.owl-carousel').owlCarousel({
-  //      items:5,
-  //      width:2000,
-  //      loop:false,
-  //      center:true,
-  //      URLhashListener:true,
-  //      autoplayHoverPause:true,
-  //      startPosition: 'URLHash'
-  //  })
-   
-   $(".lightgallery").lightGallery();
+  // $('.owl-carousel').owlCarousel({
+  //   items: 5,
+  //   loop: true,
+  //   margin: 10,
+  //   merge: true,
+  //   responsive: {
+  //     678: {
+  //       mergeFit: true
+  //     },
+  //     1000: {
+  //       mergeFit: false
+  //     }
+  //   }
+  // });
 
-   
+	$scope.owlC = function activeHash(e) {
+		var i = e;
+		var $activeHash = $('.owl-item').eq(i).find('[data-hash]').attr('data-hash');
+		$('.product-thumbnails li').removeClass('active');
+		$('[href="#' + $activeHash + '"]').parent().addClass('active');
+		$('.gallery-wrapper .gallery-item').removeClass('active');
+		$('[data-hash="' + $activeHash + '"]').parent().addClass('active');
+	}
+
+	$(document).ready(function() {
+		var bigimage = $("#big");
+		var thumbs = $("#thumbs");
+		var syncedSecondary = true;
+	  
+		thumbs.on("initialized.owl.carousel", function() {
+		  thumbs
+			.find(".thumbnails")
+			.eq(0)
+			.addClass("current");
+		}).owlCarousel({
+			mouseDrag: false
+		}).on("changed.owl.carousel", syncPosition2);
+	  
+		function syncPosition2(el) {
+		  if (syncedSecondary) {
+			var number = el.item.index;
+			bigimage.data("owl.carousel").to(number, 100, true);
+		  }
+		}
+	  
+		thumbs.on("click", ".thumbnails", function(e) {
+		  e.preventDefault();
+		  var number = $(this).index();
+		  bigimage.data("owl.carousel").to(number, 300, true);
+		});
+	
+	});
+	
+	  
+
 }]);
 

@@ -16,7 +16,6 @@ angular.module('mean.articles')
     //     //$state.go('postProductDetail', { productID: $scope.productDetail });
     //   });
     // };
-
     $scope.open = function () {
       //$scope.seletedProduct = product;
       //console.log($scope.seletedProduct);
