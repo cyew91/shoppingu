@@ -79,8 +79,8 @@ angular.module('mean.articles')
       });
     };
 
-    $scope.productdetails = function () {
-      $state.go('productdetails', {prodTravel: $stateParams.prodTravel});
+    $scope.goToProductDetails = function (index) {
+      $state.go('productdetails', {prodTravel: $stateParams.prodTravel[index]});
     };
 
     //Tab

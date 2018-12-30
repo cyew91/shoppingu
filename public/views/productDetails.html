@@ -1,15 +1,12 @@
-
 <div class="page-content">
   <div class="row">
     <div class="col-md-6">
       <div class="product-gallery">
-
-        <div class="gallery-wrapper" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" data-pswp-uid="1">
+        <!-- <div class="gallery-wrapper" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
           <div class="gallery-item">
             <a href="../uploads/{{prodTravelDoc.imageName}}" data-hash="{{prodTravelDoc.id}}" data-size="1000x667"></a>
           </div>
-        </div>
-
+        </div> -->
         <data-owl-carousel id="big" class="product-carousel owl-carousel" data-options="{items: 1, loop: false, dots: false, URLhashListener: true, startPosition: 'URLHash'}">
           <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
             <div data-hash="{{prodTravelDoc.id}}">
@@ -18,14 +15,14 @@
           </div>
         </data-owl-carousel>
         <data-owl-carousel id="thumbs" class="owl-carousel">
-        <ul owl-carousel-item="" class="product-thumbnails">
-          <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" >
-            <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
-              <img src="../uploads/{{prodTravelDoc.imageName}}"/>
-            </a>
-          </li>
-        </ul>
-      </data-owl-carousel>
+          <ul owl-carousel-item="" class="product-thumbnails">
+            <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" >
+              <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
+                <img src="../uploads/{{prodTravelDoc.imageName}}"/>
+              </a>
+            </li>
+          </ul>
+        </data-owl-carousel>
       </div>
     </div>
     <!-- Product Info-->
@@ -40,7 +37,7 @@
       </div>
       <span class="text-muted align-middle">&nbsp;&nbsp;4.2 | 3 customer reviews</span>
       <h2 class="padding-top-1x text-normal">{{prodTravel.productName}}</h2>
-      <span class="h2 d-block">${{prodTravel.amount}}</span>
+      <span class="h2 d-block">RM {{prodTravel.amount}}</span>
       <p>{{prodTravel.description}}</p>
 
       <div class="pt-1 mb-2">
@@ -230,3 +227,38 @@
     </div>
   </div>
 </div>
+<!-- Photoswipe container-->
+<!-- <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="pswp__bg"></div>
+  <div class="pswp__scroll-wrap">
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <div class="pswp__counter"></div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div> -->
