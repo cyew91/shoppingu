@@ -200,17 +200,17 @@
                             <img src="img/account/user-ava.jpg" alt="User">
                         </div>
                         <div class="user-data">
-                            <h4>Daniel Adams</h4>
-                            <span>Joined February 06, 2017</span>
+                            <h4>{{profile.lastName}} {{profile.firstName}}</h4>
+                            <span>Joined {{profile.created_date | date: "MMMM dd, yyyy"}}</span>
                         </div>
                     </div>
                 </aside>
                 <nav class="list-group">
-                    <a class="list-group-item with-badge" ui-sref="order">
+                    <a class="list-group-item with-badge" ng-click="goToMyOrder()">
                         <i class="icon-bag"></i>My Orders
                         <span class="badge badge-primary badge-pill">6</span>
                     </a>
-                    <a class="list-group-item" ui-sref="userprofile">
+                    <a class="list-group-item" ng-click="goToMyProfile()">
                         <i class="icon-head"></i>Profile</a>
                     <a class="list-group-item active" ui-sref="address">
                         <i class="icon-map"></i>Addresses</a>
@@ -218,11 +218,11 @@
                         <i class="icon-heart"></i>Wishlist
                         <span class="badge badge-primary badge-pill">3</span>
                     </a> -->
-                    <a class="list-group-item with-badge" ui-sref="request">
+                    <a class="list-group-item with-badge" ng-click="goToMyRequest()">
                         <i class="icon-tag"></i>My Requests
                         <span class="badge badge-primary badge-pill">4</span>
                     </a> 
-                    <a class="list-group-item" ui-sref="post">
+                    <a class="list-group-item" ng-click="goToMyPost()">
                         <i class="icon-bag"></i>My Trips
                     </a>
                 </nav>

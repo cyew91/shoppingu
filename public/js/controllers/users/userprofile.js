@@ -13,15 +13,6 @@ angular.module('mean.articles')
           $scope.profile = result;
           $scope.lastName = $scope.profile.lastName;
           $scope.firstName = $scope.profile.firstName;
-          // if ($scope.profile.Gender == 0){
-          //   $scope.checkFemale = "active";
-          //   $scope.checkMale = "inactive";
-          // }
-          // else{
-          //   $scope.checkMale = "active";
-          //   $scope.checkFemale = "inactive";
-          // }
-
       });
     };
 
@@ -35,6 +26,22 @@ angular.module('mean.articles')
         //$state.go('home');
       profile.$update();
       //});
+    };
+
+    $scope.goToMyOrder = function () {
+      $state.go('order', {profile: $scope.profile});
+    };
+
+    $scope.goToMyRequest = function () {
+      $state.go('request', {profile: $scope.profile});
+    };
+
+    $scope.goToMyAddress = function () {
+      $state.go('address', {profile: $scope.profile});
+    };
+
+    $scope.goToMyPost = function () {
+      $state.go('post', {profile: $scope.profile});
     };
 
     // $scope.updateUserProfilePicture = function() {

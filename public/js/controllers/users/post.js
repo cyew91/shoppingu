@@ -5,6 +5,7 @@ angular.module('mean.articles')
     $scope.global = Global;
     // $scope.profileId = $rootScope.currentUser.ProfileID;
     var userId = $window.sessionStorage.getItem("id");
+    $scope.profile = $stateParams.profile;
 
     $scope.initMyTrips = function() {
       GetTravelByProfileId.query({
@@ -13,6 +14,22 @@ angular.module('mean.articles')
       },function(result) {
           $scope.travel = result;
       });
+    };
+
+    $scope.goToMyOrder = function () {
+      $state.go('order', {profile: $scope.profile});
+    };
+
+    $scope.goToMyRequest = function () {
+      $state.go('request', {profile: $scope.profile});
+    };
+
+    $scope.goToMyAddress = function () {
+      $state.go('address', {profile: $scope.profile});
+    };
+
+    $scope.goToMyProfile = function () {
+      $state.go('userprofile');
     };
 
     // $scope.getProductId = function(travelId) {
