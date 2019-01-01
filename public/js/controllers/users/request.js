@@ -5,6 +5,10 @@ angular.module('mean.system')
     // $scope.global = Global;
     $scope.profile = $stateParams.profile;
 
+    if (angular.isUndefined($stateParams.profile) || $stateParams.profile == ""){
+      $state.go('userprofile');
+    }
+    
     $scope.goToMyOrder = function () {
       $state.go('order', {profile: $scope.profile});
     };

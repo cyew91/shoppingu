@@ -6,8 +6,9 @@ angular.module('mean.system')
     $scope.profileId = $stateParams.profileId;
     $scope.profile = $stateParams.profile;
 
-    $scope.a = $stateParams.a;
-    $scope.b = $stateParams.b;
+    if (angular.isUndefined($stateParams.profile) || $stateParams.profile == ""){
+      $state.go('userprofile');
+    }
 
     $scope.initAddress = function() {
       GetUserAddressById.get({

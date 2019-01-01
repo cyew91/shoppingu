@@ -5,12 +5,9 @@ angular.module('mean.system')
     $scope.global = Global;
     $scope.profile = $stateParams.profile;
 
-    $scope.a = $stateParams.a;
-    $scope.b = $stateParams.b;
-
-    $scope.fooOnClick = function(id) {
-      alert(id);
-    };
+    if (angular.isUndefined($stateParams.profile) || $stateParams.profile == ""){
+      $state.go('userprofile');
+    }
 
     $scope.goToMyProfile = function () {
       $state.go('userprofile');
