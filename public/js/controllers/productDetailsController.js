@@ -4,10 +4,6 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
   $scope.global = Global;
   $scope.prodTravel = $stateParams.prodTravel;
 
-  // $scope.productName = $scope.productObj.id;
-  // $scope.productName = "testing"
-  // $(".lightgallery").lightGallery();
-
   // $('.owl-carousel').owlCarousel({
   //   items: 5,
   //   loop: true,

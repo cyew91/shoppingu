@@ -9,7 +9,7 @@ const StandardError = require('standard-error');
 exports.all = function(req, res){
     db.post_travel_product.findAll({
         include: [{
-            model:db.post_travel_product_document, attributes: ['image_name', 'image_path']
+            model:db.post_travel_product_document
         }]
     }).then(
         function(product){

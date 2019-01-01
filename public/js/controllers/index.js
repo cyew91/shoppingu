@@ -30,9 +30,14 @@ angular.module('mean.system')
         GetAllTravelProduct.query(function (list) {
             $scope.featuredProduct = list;
             for (var i=0;i<list.length;i++){
-                $scope.featuredProduct[i].imageName = list[i].post_travel_product_documents[0].image_name;
+                $scope.featuredProduct[i].imageName = list[i].post_travel_product_documents[0].imageName;
             }
         });
+    };
+
+    $scope.goToProductDetails = function (index) {
+        $state.go('productdetails', {prodTravel: $scope.featuredProduct[index]});
+        $anchorScroll();
     };
         
 }]);

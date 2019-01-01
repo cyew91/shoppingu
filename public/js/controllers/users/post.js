@@ -7,6 +7,10 @@ angular.module('mean.articles')
     var userId = $window.sessionStorage.getItem("id");
     $scope.profile = $stateParams.profile;
 
+    if (angular.isUndefined($stateParams.profile) || $stateParams.profile == ""){
+      $state.go('userprofile');
+    }
+
     $scope.initMyTrips = function() {
       GetTravelByProfileId.query({
         // tprofileId: $scope.profileId
@@ -16,6 +20,7 @@ angular.module('mean.articles')
       });
     };
 
+    
     $scope.goToMyOrder = function () {
       $state.go('order', {profile: $scope.profile});
     };
