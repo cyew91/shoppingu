@@ -1,40 +1,9 @@
-
-
-<!-- <div class="containerUser padding-bottom-3x mb-2" data-ng-controller="PostController" ng-init="getTrip()">
-    <div class="row" ng-controller="UserProfileMainController">
-        <div ng-include="'../views/users/userprofilemain.html'" class="col-lg-4"></div>
-        <div class="col-lg-8">
-            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-            <div class="table-responsive">
-                <table class="table table-hover margin-right-none">
-                    <thead>
-                        <tr>
-                            <th>Trip</th>
-                            <th>Trip Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="trposts" ng-repeat="item in travel" ng-click="getProductId(item.TravelID)" >
-                            <td>
-                                <a class="text-medium">{{item.t_country.CountryName}}</a>
-                            </td>
-                            <td>{{item.TravelStartDate | date:'MM/dd/yyyy'}}</td>
-                            <td>Expired</td>
-                        </tr>                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <!-- Open Ticket Modal-->
 <div class="modal fade" id="orderDetails" tabindex="-1">
     <div class="modal-dialog modal-lg padding-top-2x">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Destination - Taiwan</h4>
+                <h4 class="modal-title">Destination - {{countryName}}</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,15 +18,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in travelProduct">
                                 <td>
                                     <div class="product-item">
-                                        <a class="product-thumb" href="shop-single.html">
-                                            <img src="img/shop/cart/01.jpg" alt="Product">
+                                        <a class="product-thumb">
+                                            <img src="uploads\{{item.imageName}}" alt="Product">
                                         </a>
                                         <div class="product-info">
                                             <h4 class="product-title">
-                                                <a href="shop-single.html">Unionbay Park
+                                                <a>{{item.productName}}
                                                     <small>x 1</small>
                                                 </a>
                                             </h4>
@@ -68,49 +37,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center text-lg text-medium">$43.90</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-item">
-                                        <a class="product-thumb" href="shop-single.html">
-                                            <img src="img/shop/cart/02.jpg" alt="Product">
-                                        </a>
-                                        <div class="product-info">
-                                            <h4 class="product-title">
-                                                <a href="shop-single.html">Daily Fabric Cap
-                                                    <small>x 2</small>
-                                                </a>
-                                            </h4>
-                                            <span>
-                                                <em>Size:</em> XL</span>
-                                            <span>
-                                                <em>Color:</em> Black</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center text-lg text-medium">$24.89</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-item">
-                                        <a class="product-thumb" href="shop-single.html">
-                                            <img src="img/shop/cart/03.jpg" alt="Product">
-                                        </a>
-                                        <div class="product-info">
-                                            <h4 class="product-title">
-                                                <a href="shop-single.html">Cole Haan Crossbody
-                                                    <small>x 1</small>
-                                                </a>
-                                            </h4>
-                                            <span>
-                                                <em>Size:</em> -</span>
-                                            <span>
-                                                <em>Color:</em> Turquoise</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center text-lg text-medium">$200.00</td>
+                                <td class="text-center text-lg text-medium">{{item.amount}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -215,7 +142,7 @@
                     <tbody>
                         <tr ng-repeat="item in travel">
                             <td>
-                                <a class="text-medium navi-link" href="#" data-toggle="modal" data-target="#orderDetails">{{item.country.countryName}}</a>
+                                <a class="text-medium navi-link" ng-click="getTravelProduct($index)" href="#" data-toggle="modal" data-target="#orderDetails">{{item.country.countryName}}</a>
                             </td>
                             <td>{{item.startDate| date: "MMMM dd, yyyy"}}</td>
                             <td>

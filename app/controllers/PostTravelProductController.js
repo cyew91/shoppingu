@@ -145,3 +145,24 @@ exports.uploadProductImage = function (req, res) {
         status: 201
     });
 };
+
+/**
+ * Get posted product in Account - My Trips
+ */
+exports.getPostTravelProductByTravelId = function (req, res, next) {
+    db.post_travel_product.findAll({
+        where: { post_travel_id: req.params.postTravelId },
+        include: [{
+            model: db.post_travel_product_document
+        }]
+    }).then(function (product) {
+        if (!product) {
+            return res.jsonp(new Error('Failed to load postTraveProductlId ' + product.id));
+        } else {
+            req.product = product;
+            return next();
+        }
+    }).catch(function (err) {
+        return res.jsonp(err);
+    });
+};
