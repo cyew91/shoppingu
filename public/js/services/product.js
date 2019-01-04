@@ -60,9 +60,13 @@ angular.module('mean.articles').service('GetProdDetailByProdCatCode', ['$resourc
     return $resource('/productdetail/productcategoryid/:productcategoryid', {productcategoryid: '@productcategoryid'});
 }]);
 
-//Get features product in home page
+// Get features product in home page
 angular.module('mean.articles').service('GetAllTravelProduct', ['$resource', function($resource){
     return $resource('/posttravelproduct');
 }]);
 
+// Get posted product in Account - My Trips
+angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resource', function($resource){
+    return $resource('/posttravelproduct/:postTravelId');
+}]);
 

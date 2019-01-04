@@ -20,6 +20,11 @@ module.exports = function (app) {
 
     app.param('postTravelProductId', postTravelProduct.getPostTravelProductById);
 
+    // Get posted product in Account - My Trips
+    app.param('postTravelId', postTravelProduct.getPostTravelProductByTravelId);
+    app.route('/posttravelproduct/:postTravelId')
+    .get(postTravelProduct.show)
+
     app.route('/posttravelproduct/:postTravelProductId')
         .get(postTravelProduct.show)
         .put(postTravelProduct.updateProduct);

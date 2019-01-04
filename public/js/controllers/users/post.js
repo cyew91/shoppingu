@@ -1,22 +1,33 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('PostController', ['$scope', 'Global', '$stateParams', '$state', 'GetTravelByProfileId', '$window', function($scope, Global, $stateParams, $state, GetTravelByProfileId, $window){
+  .controller('PostController', ['$scope', 'Global', '$stateParams', '$state', 'GetTravelByProfileId', '$window', 'GetTravelProductByTravelId', function($scope, Global, $stateParams, $state, GetTravelByProfileId, $window, GetTravelProductByTravelId){
     $scope.global = Global;
-    // $scope.profileId = $rootScope.currentUser.ProfileID;
     var userId = $window.sessionStorage.getItem("id");
     $scope.profile = $stateParams.profile;
 
     if (angular.isUndefined($stateParams.profile) || $stateParams.profile == ""){
       $state.go('userprofile');
     }
+    else{
+      $scope.initMyTrips = function() {
+        GetTravelByProfileId.query({
+          profileId: userId
+        },function(result) {
+            $scope.travel = result;
+        });
+      };
+    }
 
-    $scope.initMyTrips = function() {
-      GetTravelByProfileId.query({
-        // tprofileId: $scope.profileId
-        profileId: userId
+    $scope.getTravelProduct = function(index) {
+      GetTravelProductByTravelId.query({
+        postTravelId: $scope.travel[index].id
       },function(result) {
-          $scope.travel = result;
+          $scope.travelProduct = result;
+          for (var i=0;i<result.length;i++){
+              $scope.travelProduct[i].imageName = result[i].post_travel_product_documents[0].imageName;
+          }
+          $scope.countryName = $scope.travel[index].country.countryName;
       });
     };
 
