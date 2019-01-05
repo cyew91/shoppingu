@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', 'GetProdCatAndSubCat',
-    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window, GetProdCatAndSubCat) {
+angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
+    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
     // $scope.showSearchBar = false;
     // $scope.isCollapsed = false;
     //$scope.isLoading = true;
     $scope.productTravel = [];
     $scope.productRequest = [];
+    var productCategory = [];
+    var productCategoryId = '';
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
         $scope.isLogin = true;
@@ -86,6 +88,18 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     $scope.categoryList = function() {
         GetProdCatAndSubCat.query(function (result) {
           $scope.categoryListResult = result;
+          productCategoryId = result;
+        });
+    };
+
+    // Click on Category
+    $scope.clickOnCategory = function(index){
+        GetProdDetailByProdCatCode.query({
+            productcategoryid: productCategoryId[index].id
+        }, function(result){
+            productCategory = result;
+            $state.go('searchResult', {prodTravel: productCategory});
+            $anchorScroll();
         });
     };
 

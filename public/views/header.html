@@ -37,7 +37,7 @@
             <span class="mega-menu-title">All Categories</span>
             <ul class="sub-menu">
               <li ng-repeat="item in categoryListResult">
-                <a href="#">{{item.productCategoryName}}</a>
+                <a ng-click="clickOnCategory($index)">{{item.productCategoryName}}</a>
               </li>
             </ul>
           </li>
