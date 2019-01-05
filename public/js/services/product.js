@@ -55,7 +55,7 @@ angular.module('mean.articles').service('GetProdIdByProdCatCode', ['$resource', 
     return $resource('/productcategory/:productcategorycode', {productcategorycode: '@productcategorycode'});
 }]);
 
-// Use in search result after view product
+// Use in search result after view product - Top Category, Header Category
 angular.module('mean.articles').service('GetProdDetailByProdCatCode', ['$resource', function($resource){
     return $resource('/productdetail/productcategoryid/:productcategoryid', {productcategoryid: '@productcategoryid'});
 }]);
@@ -69,4 +69,5 @@ angular.module('mean.articles').service('GetAllTravelProduct', ['$resource', fun
 angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resource', function($resource){
     return $resource('/posttravelproduct/:postTravelId');
 }]);
+
 

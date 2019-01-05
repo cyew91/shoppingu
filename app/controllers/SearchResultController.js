@@ -62,7 +62,7 @@ exports.getProductDetailByProdSubCatID = function (req, res, next) {
 };
 
 /**
- * Use in search result page after view product from home page
+ * Use in search result after view product - Top Category, Header Category
  */
 exports.getProductDetailByProdCatCode = function (req, res) {
     db.post_travel_product.findAll({
