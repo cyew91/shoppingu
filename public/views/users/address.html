@@ -1,166 +1,4 @@
-<!-- 
 
-<div class="containerUser padding-bottom-3x mb-2" data-ng-controller="AddressController" ng-init="findOne()">
-    <div class="row" ng-controller="UserProfileMainController">
-            <div ng-include="'../views/users/userprofilemain.html'" class="col-lg-4"></div>
-        <div class="col-lg-8">
-            <div class="padding-top-2x mt-2 hidden-lg-up">
-            </div>
-            <h4>Contact Address</h4>
-            <hr class="padding-bottom-1x">
-            <form class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-fn">Address 1</label> 
-                        <input class="form-control" type="text" id="account-fn" value="{{profile.Address}}" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-ln">Address 2</label> 
-                        <input class="form-control" type="text" id="account-ln" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-ln">City</label> 
-                        <select class="form-control" id="account-ln">
-                            <option>Kuala Lumpur</option>
-                            <option>Selangor</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-ln">ZIP Code</label> 
-                        <input class="form-control" type="text" id="account-ln" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-ln">Country</label> 
-                        <select class="form-control" id="account-ln">
-                            <option>Malaysia</option>
-                            <option>Thailand</option>
-                            <option>Singapore</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <hr class="mt-2 mb-3">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <label class="custom-control custom-checkbox d-block"></label>
-                        <button class="btn btn-secondary margin-right-none" type="button" data-toast data-toast-postion="topRight" ng-click="updateAddress()">
-                            Update Address
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
- -->
-
-<!-- Toolbar-->
-<div class="toolbar">
-    <div class="inner">
-        <div class="tools">
-            <div class="search">
-                <i class="icon-search"></i>
-            </div>
-            <div class="account">
-                <a href="account-orders.html"></a>
-                <i class="icon-head"></i>
-                <ul class="toolbar-dropdown">
-                    <li class="sub-menu-user">
-                        <div class="user-ava">
-                            <img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
-                        </div>
-                        <div class="user-info">
-                            <h6 class="user-name">Daniel Adams</h6>
-                            <span class="text-xs text-muted">290 Reward points</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="account-profile.html">My Profile</a>
-                    </li>
-                    <li>
-                        <a href="account-orders.html">Orders List</a>
-                    </li>
-                    <li>
-                        <a href="account-wishlist.html">Wishlist</a>
-                    </li>
-                    <li class="sub-menu-separator"></li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-unlock"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart">
-                <a href="cart.html"></a>
-                <i class="icon-bag"></i>
-                <span class="count">3</span>
-                <span class="subtotal">$289.68</span>
-                <div class="toolbar-dropdown">
-                    <div class="dropdown-product-item">
-                        <span class="dropdown-product-remove">
-                            <i class="icon-cross"></i>
-                        </span>
-                        <a class="dropdown-product-thumb" href="shop-single.html">
-                            <img src="img/cart-dropdown/01.jpg" alt="Product">
-                        </a>
-                        <div class="dropdown-product-info">
-                            <a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a>
-                            <span class="dropdown-product-details">1 x $43.90</span>
-                        </div>
-                    </div>
-                    <div class="dropdown-product-item">
-                        <span class="dropdown-product-remove">
-                            <i class="icon-cross"></i>
-                        </span>
-                        <a class="dropdown-product-thumb" href="shop-single.html">
-                            <img src="img/cart-dropdown/02.jpg" alt="Product">
-                        </a>
-                        <div class="dropdown-product-info">
-                            <a class="dropdown-product-title" href="shop-single.html">Daily Fabric Cap</a>
-                            <span class="dropdown-product-details">2 x $24.89</span>
-                        </div>
-                    </div>
-                    <div class="dropdown-product-item">
-                        <span class="dropdown-product-remove">
-                            <i class="icon-cross"></i>
-                        </span>
-                        <a class="dropdown-product-thumb" href="shop-single.html">
-                            <img src="img/cart-dropdown/03.jpg" alt="Product">
-                        </a>
-                        <div class="dropdown-product-info">
-                            <a class="dropdown-product-title" href="shop-single.html">Haan Crossbody</a>
-                            <span class="dropdown-product-details">1 x $200.00</span>
-                        </div>
-                    </div>
-                    <div class="toolbar-dropdown-group">
-                        <div class="column">
-                            <span class="text-lg">Total:</span>
-                        </div>
-                        <div class="column text-right">
-                            <span class="text-lg text-medium">$289.68&nbsp;</span>
-                        </div>
-                    </div>
-                    <div class="toolbar-dropdown-group">
-                        <div class="column">
-                            <a class="btn btn-sm btn-block btn-secondary" href="cart.html">View Cart</a>
-                        </div>
-                        <div class="column">
-                            <a class="btn btn-sm btn-block btn-success" href="checkout-address.html">Checkout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</header>
 <!-- Off-Canvas Wrapper-->
 <div class="offcanvas-wrapper">
     <!-- Page Title-->
@@ -208,7 +46,7 @@
                 <nav class="list-group">
                     <a class="list-group-item with-badge" ng-click="goToMyOrder()">
                         <i class="icon-bag"></i>My Orders
-                        <span class="badge badge-primary badge-pill">6</span>
+                        <!-- <span class="badge badge-primary badge-pill">6</span> -->
                     </a>
                     <a class="list-group-item" ng-click="goToMyProfile()">
                         <i class="icon-head"></i>Profile</a>
@@ -220,7 +58,7 @@
                     </a> -->
                     <a class="list-group-item with-badge" ng-click="goToMyRequest()">
                         <i class="icon-tag"></i>My Requests
-                        <span class="badge badge-primary badge-pill">4</span>
+                        <!-- <span class="badge badge-primary badge-pill">4</span> -->
                     </a> 
                     <a class="list-group-item" ng-click="goToMyPost()">
                         <i class="icon-bag"></i>My Trips
@@ -235,7 +73,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-company">Company</label>
-                            <input class="form-control" type="text" id="account-company" value="Bets Company Ltd.">
+                            <input class="form-control" type="text" id="account-company" value="">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -245,10 +83,6 @@
                                 <option>Choose country</option>
                                 <option>Australia</option>
                                 <option>Canada</option>
-                                <option>France</option>
-                                <option>Germany</option>
-                                <option>Switzerland</option>
-                                <option selected>United States</option>
                             </select>
                         </div>
                     </div>
@@ -258,10 +92,6 @@
                             <select class="form-control" id="account-city">
                                 <option>Choose city</option>
                                 <option>Amsterdam</option>
-                                <option>Berlin</option>
-                                <option>Geneve</option>
-                                <option selected>New York</option>
-                                <option>Paris</option>
                             </select>
                         </div>
                     </div>
@@ -284,12 +114,12 @@
                         </div>
                     </div>
                     <div class="col-12 padding-top-1x">
-                        <h4>Shipping Address</h4>
+                        <!-- <h4>Shipping Address</h4>
                         <hr class="padding-bottom-1x">
                         <div class="custom-control custom-checkbox d-block">
                             <input class="custom-control-input" type="checkbox" id="same_address" checked>
                             <label class="custom-control-label" for="same_address">Same as Contact Address</label>
-                        </div>
+                        </div> -->
                         <hr class="margin-top-1x margin-bottom-1x">
                         <div class="text-right">
                             <button class="btn btn-primary margin-bottom-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success"

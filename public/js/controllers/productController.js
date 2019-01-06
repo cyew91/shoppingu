@@ -120,44 +120,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
             // Scroll to top
             $anchorScroll();
         }
-        // $scope.productObj = $scope.travelObj;
-        // $scope.productObj.productList = $scope.productList;
-
-        // if (count == 2) {
-        // $state.go('postreview', { productObj: $scope.productObj });
-        // } else if (count == 3) {
-            // Temporary rhide Review page. For now direct save into DB.
-            // $state.go('posttravel.review', { productObj: $scope.productObj });
-            // Call the api here. To insert into DB. Should pass in '$scope.productObj' into the api to process.
-        // }
     };
-
-    // $scope.back = function (count) {
-    //     var count = 1;
-    //     $('#text' + count).css('display', 'none');
-    //     $('#textStep' + count).css('display', 'block');
-
-    //     $('#text' + (count + 1)).css('display', 'block');
-    //     $('#textStep' + (count + 1)).css('display', 'none');
-
-    //     $('#check' + (count)).css('display', 'none');
-    //     $('#check' + (count + 1)).css('display', 'none');
-
-    //     var $bar = $(".ProgressBar");
-    //     if ($bar.children(".is-current").length > 0) {
-    //         $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
-    //     } else {
-    //         $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
-    //     }
-
-    //     if (count == 2) {
-    //         $state.go('posttravel.product', { productObj: $scope.productObj });
-    //     } else if (count == 3) {
-    //         $state.go('posttravel.review', { productObj: $scope.productObj });
-    //     } else if (count == 1) {
-    //         $state.go('posttravel.travel', { productObj: $scope.productObj });
-    //     }
-    // }
 
     var clearData = function (){
         $scope.productName = null;
