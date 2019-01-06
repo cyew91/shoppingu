@@ -48,16 +48,14 @@ app.get('/', function (req, res) {
 
 var connectedSockets={};
 io.on('connection',function(socket){
-
     socket.on('addUser',function(data){ //有新用户进入聊天室
-        if(connectedSockets[data.email]){//昵称已被占用
-          socket.emit('userAddingResult',{result:false});
+        if(connectedSockets[data.username]){//昵称已被占用
+            socket.emit('userAddingResult',{result:false});
         }else{
             //socket.emit('userAddingResult',{result:true});
-            socket.nickname=data.email;
-            connectedSockets[socket.nickname]=socket;//保存每个socket实例,发私信需要用
+            socket.username=data.username;
+            connectedSockets[socket.username]=socket;//保存每个socket实例,发私信需要用
         }
-
     });
 
     socket.on('addMessage',function(data){ //有用户发送新消息
@@ -66,14 +64,14 @@ io.on('connection',function(socket){
                 connectedSockets[data.to].emit('messageAdded',data);
             }
             else{
-                socket.nickname="111@111";
-                connectedSockets[socket.nickname].emit('messageAdded',data);
+                socket.username="111@111";
+                connectedSockets[socket.username].emit('messageAdded',data);
             }
             //INSERT MESSAGE INTO DATABASE
         }else{//群发
             socket.broadcast.emit('messageAdded',data);//广播消息,除原发送者外都可看到
         }
-         });
+    });
 
     // socket.on('disconnect', function () {  //有用户退出聊天室
     //         socket.broadcast.emit('userRemoved', {  //广播有用户退出
