@@ -10,7 +10,11 @@ exports.all = function(req, res){
     db.post_travel_product.findAll({
         include: [{
             model:db.post_travel_product_document
-        }]
+        },
+        {
+            model:db.product_category
+        }
+        ]
     }).then(
         function(product){
             return res.jsonp(product);

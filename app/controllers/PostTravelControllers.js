@@ -21,7 +21,10 @@ exports.getPostTravelById = function (req, res, next, id) {
     db.post_travel.find({
         where: {
             id: id
-        }
+        },
+        include: [{
+            model: db.country
+        }]
     }).then(function (postTravel) {
         if (!postTravel) {
             return next(new Error('Failed to load postTravelId ' + id));
