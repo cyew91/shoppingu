@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
-    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
+angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', '$anchorScroll', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
+    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, $anchorScroll, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
     // $scope.showSearchBar = false;
     // $scope.isCollapsed = false;
     //$scope.isLoading = true;
