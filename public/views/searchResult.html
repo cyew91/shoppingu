@@ -137,16 +137,16 @@
         <div class="column">
           <div class="shop-sorting">
             <label for="sorting">Sort by:</label>
-            <select class="form-control" id="sorting">
-              <option>Popularity</option>
-              <option>Low - High Price</option>
-              <option>High - Low Price</option>
-              <option>Avarage Rating</option>
-              <option>A - Z Order</option>
-              <option>Z - A Order</option>
+            <select class="form-control" id="sorting" ng-model="productSortField" ng-change="productFilter(productSortField)">
+              <!-- <option>Popularity</option> -->
+              <option value="lowToHigh">Low - High Price</option>
+              <option value="highToLow">High - Low Price</option>
+              <!-- <option>Avarage Rating</option> -->
+              <!-- <option value="productName">A - Z Order</option>
+              <option value="-productName">Z - A Order</option> -->
             </select>
             <span class="text-muted">Showing:&nbsp;</span>
-            <span>1 - 12 items</span>
+            <span>{{showBegin}} - {{showEnd}} items</span>
           </div>
         </div>
         <div class="column">
@@ -179,7 +179,8 @@
               <a href="shop-single.html">{{item.productName}}</a>
             </h3>
             <h4 class="product-price">
-              <del>$99.99</del>RM {{item.amount}}
+              <!-- <del>$99.99</del> -->
+              RM {{item.amount}}
             </h4>
             <div class="product-buttons">
               <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
@@ -193,9 +194,9 @@
         
       </div>
       <!-- Pagination-->
-      <h4>{{todos.length}} total</h4>
+      <h4>{{tTotalItems}} total</h4>
       <ul uib-pagination total-items="tTotalItems" ng-model="tCurrentPage" max-size="tMaxSize" 
-          boundary-links="true" items-per-page="12" ng-click="isTravel(1)"></ul>
+          boundary-links="true" items-per-page="tNumPerPage" ng-click="isTravel(1)"></ul>
       <!-- <nav class="pagination">
         <div class="column">
           <ul class="pages">
@@ -224,11 +225,11 @@
           <ul>
             <li class="has-children" id="{{item.id}}" ng-repeat="item in menuTreeResult">
               <a href="#" ng-click="openFirst($index)">{{item.productCategoryName}}</a>
-              <span>(1138)</span>
+              <!-- <span>(1138)</span> -->
               <ul>
                 <li ng-repeat="subItem in item.product_sub_categories">
                   <a href="#" ng-click="getProductDetail($index)">{{subItem.productSubCategoryName}}</a>
-                  <span>(508)</span>
+                  <!-- <span>(508)</span> -->
                   <!-- <ul>
                     <li>
                       <a href="#">Sneakers</a>
@@ -242,7 +243,7 @@
         </section>
 
         <!-- Widget Brand Filter-->
-        <section class="widget">
+        <!-- <section class="widget">
           <h3 class="widget-title">Filter by Brand</h3>
           <div class="custom-control custom-checkbox">
             <input class="custom-control-input" type="checkbox" id="adidas">
@@ -274,9 +275,9 @@
               <span class="text-muted">(42)</span>
             </label>
           </div>
-        </section>
+        </section> -->
         <!-- Widget Size Filter-->
-        <section class="widget">
+        <!-- <section class="widget">
           <h3 class="widget-title">Filter by Size</h3>
           <div class="custom-control custom-checkbox">
             <input class="custom-control-input" type="checkbox" id="xl">
@@ -302,7 +303,7 @@
               <span class="text-muted">(213)</span>
             </label>
           </div>
-        </section>
+        </section> -->
         <!-- Promo Banner-->
         <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
           <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->

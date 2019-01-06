@@ -1,23 +1,25 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
-    function($scope, Global, $stateParams, $state, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
+  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', '$anchorScroll', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
+    function($scope, Global, $stateParams, $state, $anchorScroll, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
     $scope.global = Global;
     $scope.profileId = $stateParams.profileId;
     
     $scope.productTravel = $stateParams.prodTravel;
     // $scope.productRequest = $stateParams.prodRequest;
     
+    // Travel product
     $scope.tFilteredTodos = [];
     $scope.tCurrentPage = 1;
-    $scope.tNumPerPage = 12;
+    $scope.tNumPerPage = 9;
     $scope.tMaxSize = 5;
 
-    $scope.rFilteredTodos = [];
-    $scope.rCurrentPage = 1;
-    $scope.rNumPerPage = 12;
-    $scope.rMaxSize = 5;
+    // Request product
+    // $scope.rFilteredTodos = [];
+    // $scope.rCurrentPage = 1;
+    // $scope.rNumPerPage = 12;
+    // $scope.rMaxSize = 5;
 
     $scope.menuTree = function() {
       GetProdCatAndSubCat.query(function (result) {
@@ -41,13 +43,14 @@ angular.module('mean.articles')
       $scope.count = index;
     };
 
+    // Get product from menu tree
     $scope.getProductDetail = function (index) {
       GetProductDetailByProdSubCatID.query({
         productSubCatId: $scope.menuTreeResult[$scope.count].product_sub_categories[index].id
       },function(result) {
         $scope.product = result;
         $scope.productTravel = [];
-        $scope.productRequest = [];
+        // $scope.productRequest = [];
         $scope.todos = [];
         $scope.tFilteredTodos = [];
         // $scope.rTodos = [];
@@ -55,7 +58,7 @@ angular.module('mean.articles')
         $scope.tCurrentPage = 1;
         // $scope.rCurrentPage = 1;
         var begin = (($scope.tCurrentPage - 1) * $scope.tNumPerPage);
-        var end = begin + $scope.tNumPerPage;
+        var end = $scope.tCurrentPage * $scope.tNumPerPage;
         // var rBegin = (($scope.rCurrentPage - 1) * $scope.rNumPerPage);
         // var rEnd = rBegin + $scope.rNumPerPage;
         
@@ -76,6 +79,11 @@ angular.module('mean.articles')
           //   $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
           //   $scope.rTotalItems = $scope.productRequest.length;
           // }
+        }
+        $scope.showBegin = begin + 1;
+        $scope.showEnd = begin + $scope.tFilteredTodos.length;
+        if ($scope.tFilteredTodos.length < 1){
+          $scope.showBegin = 0;
         }
       });
     };
@@ -116,10 +124,15 @@ angular.module('mean.articles')
       $scope.isTravel = function (number){
         if (number === 0)
         {
-          $scope.$watch("tCurrentPage + tNumPerPage", function() {
+          $scope.$watch("tCurrentPage", function() {
             var begin = (($scope.tCurrentPage - 1) * $scope.tNumPerPage);
-            var end = begin + $scope.tNumPerPage;
+            var end = $scope.tCurrentPage * $scope.tNumPerPage;
             $scope.tFilteredTodos = $scope.todos.slice(begin, end);
+            $scope.showBegin = begin + 1;
+            $scope.showEnd = begin + $scope.tFilteredTodos.length;
+            if ($scope.tFilteredTodos.length < 1){
+              $scope.showBegin = 0;
+            }
           });
         }
         else
@@ -130,10 +143,58 @@ angular.module('mean.articles')
           //   $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
           // });
         }
+        $anchorScroll();
       };
       $scope.tTotalItems = $scope.productTravel.length;
       // $scope.rTotalItems = $scope.productRequest.length;
-    }
+    };
 
-  }]);
+    // Sort By Filtering
+    $scope.productFilter = function(selected) {
+      // make sure it a valid column
+      var selectItem = "";
+      if (selected == "lowToHigh"){
+        var cols = [{
+          name: 'amount',
+          orderDesc: false
+        }];
+      }
+      else{
+        var cols = [{
+          name: 'amount',
+          orderDesc: true
+        }];
+      }
+      selectItem = cols[0].name;
+      var column = cols.find(function(col) {
+        return col.name === selectItem;
+      });
+  
+      if (!column) return;
+      
+      // orderDesc = true
+      column.orderDesc = !column.orderDesc;
+  
+      //if false = 1, true = -1
+      var order = !column.orderDesc ? 1 : -1;
+      
+      $scope.todos.sort(function(a, b) {
+        if (a[column.name] < b[column.name])
+          return 1 * order;
+        if (a[column.name] > b[column.name])
+          return -1 * order;
+        return 0;
+      });
+      
+      var begin = (($scope.tCurrentPage - 1) * $scope.tNumPerPage);
+      var end = $scope.tCurrentPage * $scope.tNumPerPage;
+      $scope.tFilteredTodos = $scope.todos.slice(begin, end);
+      $scope.showBegin = begin + 1;
+      $scope.showEnd = begin + $scope.tFilteredTodos.length;
+      if ($scope.tFilteredTodos.length < 1){
+        $scope.showBegin = 0;
+      }
+    };
+
+}]);
 
