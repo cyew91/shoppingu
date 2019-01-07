@@ -46,26 +46,26 @@ app.get('/', function (req, res) {
     res.sendfile('chat.html');
 });
 
-var connectedSockets={};
+var connectedSocket={};
 io.on('connection',function(socket){
     socket.on('addUser',function(data){ //有新用户进入聊天室
-        if(connectedSockets[data.username]){//昵称已被占用
+        if(connectedSocket[data.username]){//昵称已被占用
             socket.emit('userAddingResult',{result:false});
         }else{
             //socket.emit('userAddingResult',{result:true});
             socket.username=data.username;
-            connectedSockets[socket.username]=socket;//保存每个socket实例,发私信需要用
+            connectedSocket[socket.username]=socket;//保存每个socket实例,发私信需要用
         }
     });
 
     socket.on('addMessage',function(data){ //有用户发送新消息
         if(data.to){//发给特定用户
-            if (typeof connectedSockets[data.to] !== 'undefined' && connectedSockets[data.to] !== null){
-                connectedSockets[data.to].emit('messageAdded',data);
+            if (typeof connectedSocket[data.to] !== 'undefined' && connectedSocket[data.to] !== null){
+                connectedSocket[data.to].emit('messageAdded',data);
             }
             else{
                 socket.username="111@111";
-                connectedSockets[socket.username].emit('messageAdded',data);
+                connectedSocket[socket.username].emit('messageAdded',data);
             }
             //INSERT MESSAGE INTO DATABASE
         }else{//群发
@@ -74,15 +74,15 @@ io.on('connection',function(socket){
     });
 
     // socket.on('disconnect', function () {  //有用户退出聊天室
-    //         socket.broadcast.emit('userRemoved', {  //广播有用户退出
-    //             nickname: socket.nickname
-    //         });
+    //         // socket.broadcast.emit('userRemoved', {  //广播有用户退出
+    //         //     nickname: socket.nickname
+    //         // });
     //         for(var i=0;i<allUsers.length;i++){
     //             if(allUsers[i].nickname==socket.nickname){
     //                 allUsers.splice(i,1);
     //             }
     //         }
-    //         delete connectedSockets[socket.nickname]; //删除对应的socket实例
+    //         delete connectedSocket[socket.nickname]; //删除对应的socket实例
 
     //     }
     // );
