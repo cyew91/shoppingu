@@ -39,8 +39,17 @@ exports.getPostTravelById = function (req, res, next, id) {
 
 //Retrieve Post Travel Information By profileId
 exports.getPostTravelByProfileId = function (req, res, next) {
-    db.post_travel.findAll({ where: { profile_id: req.params.profileId }, include: [{model: db.country}] })
-        .then(function (postTravel) {
+    db.post_travel.findAll({
+            where: {
+                profile_id: req.params.profileId,
+                travelStatus: {
+                    $ne: 'Cancelled'
+                }
+            },
+            include: [{
+                model: db.country
+            }]
+        }).then(function (postTravel) {
             return res.jsonp(postTravel);
         })
         .catch(function (err) {
@@ -87,13 +96,9 @@ exports.updatePostTravel = function (req, res) {
     var postTravel = req.postTravel;
 
     postTravel.updateAttributes({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
         travelStatus: req.body.travelStatus
     }).then(function (a) {
-        return res.jsonp({
-            "result": "success"
-        });
+        return res.jsonp(a);
     }).catch(function (err) {
         return res.send({ status: 'Exception', message: err });
     });

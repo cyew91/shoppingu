@@ -155,7 +155,9 @@ exports.uploadProductImage = function (req, res) {
  */
 exports.getPostTravelProductByTravelId = function (req, res, next) {
     db.post_travel_product.findAll({
-        where: { post_travel_id: req.params.postTravelId },
+        where: { 
+            post_travel_id: req.params.postTravelId 
+        },
         include: [{
             model: db.post_travel_product_document
         }]
