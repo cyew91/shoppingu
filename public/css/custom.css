@@ -86,3 +86,17 @@
     height: 145px;
     
 }
+
+.main-img img{
+    object-fit: cover;
+    width: 100%;
+    height: 179px;
+    
+}
+
+.thumblist img{
+    object-fit: cover;
+    width: 100%;
+    height: 83px;
+    
+}
