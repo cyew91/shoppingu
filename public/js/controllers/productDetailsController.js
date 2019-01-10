@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelCountryByTravelId', 
-		function ($scope, $stateParams, Global, GetTravelCountryByTravelId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 
+		function ($scope, $stateParams, Global, GetTravelByTravelId) {
 		$scope.global = Global;
 		$scope.prodTravel = $stateParams.prodTravel;
 
@@ -22,7 +22,7 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 
 		// Get country name
 		$scope.initCountryName = function() {
-			GetTravelCountryByTravelId.get({
+			GetTravelByTravelId.get({
 					postTravelId: $scope.prodTravel.post_travel_id
 			}, function(result){
 					$scope.countryName = result.country.countryName;
