@@ -47,13 +47,15 @@
             <a class="product-thumb">
               <img src="uploads\{{item.imageName}}" alt="Product" ng-click="goToProductDetails($index)">
             </a>
+            <div ng-repeat="postTravelProduct in item.post_travel_products">
             <h3 class="product-title">
-              <a ng-click="goToProductDetails($index)">{{item.post_travel_products.productName}}</a>
+              <a ng-click="goToProductDetails($index)">{{postTravelProduct.productName}}</a>
             </h3>
             <h4 class="product-price">
               <!-- <del>$99.99</del> -->
-              RM {{item.amount}}
+              RM {{postTravelProduct.amount}}
             </h4>
+          </div>
             <div class="product-buttons">
               <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
                 <i class="icon-heart"></i>

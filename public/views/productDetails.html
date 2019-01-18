@@ -8,7 +8,7 @@
           </div>
         </div> -->
         <data-owl-carousel id="big" class="product-carousel owl-carousel" data-options="{items: 1, loop: false, dots: false, URLhashListener: true, startPosition: 'URLHash'}">
-          <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
+          <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_products[0].post_travel_product_documents">
             <div data-hash="{{prodTravelDoc.id}}">
               <img src="../uploads/{{prodTravelDoc.imageName}}"/>
             </div>
@@ -16,7 +16,7 @@
         </data-owl-carousel>
         <data-owl-carousel id="thumbs" class="owl-carousel">
           <ul owl-carousel-item="" class="product-thumbnails">
-            <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents" >
+            <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_products[0].post_travel_product_documents" >
               <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
                 <img src="../uploads/{{prodTravelDoc.imageName}}"/>
               </a>
