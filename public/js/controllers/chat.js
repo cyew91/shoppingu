@@ -21,7 +21,7 @@ angular.module('mean').factory('userService', function ($rootScope) {
     };
 });
 
-angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userService', 'chat', function ($scope, socket, userService, chat) {
+angular.module('mean').controller('CreateChatController', ['$scope', '$stateParams', 'socket', 'userService', 'chat', function ($scope, $stateParams, socket, userService, chat) {
     var messageWrapper = $('.message-wrapper');
     $scope.hasLogined = false;
     //$scope.receiver="";//默认是群聊
@@ -36,7 +36,7 @@ angular.module('mean').controller("CreateChat", ['$scope', 'socket', 'userServic
 
     $scope.postMessage = function () {
         $scope.nickname = "david@123";
-        $scope.receiver = "john@123";
+        $scope.receiver = $stateParams.prodTravel.post_travel.profile.loginId;
         var msg = { text: $scope.words, type: "normal", from: $scope.nickname, to: $scope.receiver };
         var rec = $scope.receiver;
         if (rec) {  //私信

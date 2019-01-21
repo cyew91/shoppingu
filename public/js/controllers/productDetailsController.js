@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelCountryByTravelId', 
-		function ($scope, $stateParams, Global, GetTravelCountryByTravelId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelCountryByTravelId', 
+		function ($scope, $state, $stateParams, Global, GetTravelCountryByTravelId) {
 		$scope.global = Global;
 		$scope.prodTravel = $stateParams.prodTravel;
 
@@ -67,7 +67,9 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 				});
 		});
 	
-	  
+		$scope.goToChat = function (index) {
+			$state.go('chat', {prodTravel: $stateParams.prodTravel[index]});
+		};
 
 }]);
 
