@@ -111,7 +111,7 @@ angular.module('mean.articles')
         $scope.todos = [];
         for (var i=0;i<$scope.productTravel.length;i++) {
           // $scope.todos.push($scope.productTravel[i]);
-          $scope.productTravel[i].imageName = $scope.productTravel[i].post_travel_products[0].post_travel_product_documents[0].imageName;
+          $scope.productTravel[i].imageName = $scope.productTravel[i].post_travel_product_documents[0].imageName;
           $scope.todos.push($scope.productTravel[i]);
         }
         // $scope.rTodos = [];

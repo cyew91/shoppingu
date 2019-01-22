@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelCountryByTravelId', 
-		function ($scope, $stateParams, Global, GetTravelCountryByTravelId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', '$state', 'Global', 'GetTravelCountryByTravelId', 
+		function ($scope, $stateParams, $state, Global, GetTravelCountryByTravelId) {
 		$scope.global = Global;
 		$scope.prodTravel = $stateParams.prodTravel;
 
@@ -19,6 +19,11 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		//     }
 		//   }
 		// });
+
+		// Go to Chat page
+		$scope.goToChat = function(){
+			$state.go('chat', {sellerInfo: $stateParams.prodTravel});
+		};
 
 		// Get country name
 		$scope.initCountryName = function() {

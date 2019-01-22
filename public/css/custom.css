@@ -181,3 +181,36 @@
         }
     
     /* Chat end */
+
+    .user-wrapper{
+        background: RGB(238, 238, 238);
+        overflow: scroll;
+        position: absolute;
+        width: 100%;
+        top: 38px;
+        bottom: 0;
+        padding: 0;
+    }
+    .user-wrapper .user{
+        text-align: left;
+        border-bottom: solid 1px #ccc;
+        padding: 10px 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .user-wrapper .user:hover{
+        background-color: RGB(245, 250, 255);
+    }
+    .user-wrapper .user .avatar{
+        vertical-align: middle;
+    }
+    .user-wrapper .user .nickname{
+        margin-left: 20px;
+        vertical-align: middle;
+        color: rgba(0,0,0,.7);
+    }
+    .user-wrapper .user .unread{
+        vertical-align: middle;
+        margin-right: 5px;
+        color: red;
+    }

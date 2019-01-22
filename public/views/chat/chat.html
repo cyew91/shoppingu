@@ -1,6 +1,18 @@
-<div class="container padding-top-2x padding-bottom-3x mb-2">
+<script src="/socket.io/socket.io.js"></script>
+<div class="container padding-top-2x padding-bottom-3x mb-2" ng-init="initUserProfile()">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-4">
+            <div class="panel-heading">
+                <h3 class="panel-title">在线<span class="user-number">{{users.length-1}}</span></h3>
+            </div>
+            <div class="user-wrapper panel-body">
+                <div class="user" ng-repeat="user in users" ng-click="setReceiver(user.username)">
+                    <span class="avatar"></span><span class="nickname">{{user.username}}</span>
+                    <span class="unread" ng-show="info.hasNewMessage&&!iscurrentreceiver">[未读]</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
             <div class="jumbotron m-0 p-0 bg-transparent">
                 <div class="row m-0 p-0 position-relative">
                     <div class="col-12 p-0 m-0" style="right: 0px;">
@@ -8,10 +20,10 @@
                             <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
                                 style="color: rgba(96, 125, 139,1.0);">
                                 <img class="rounded float-left" style="width: 50px; height: 50px;" src="https://i.pinimg.com/736x/5c/24/69/5c24695df36eee73abfbdd8274085ecd--cute-anime-guys-anime-boys.jpg" />
-                                <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> Yusuf Bulgurcu <i class="fa fa-check text-primary"
-                                        title="Onaylanmış Hesap!" aria-hidden="true"></i> </br><small> İstanbul, TR
+                                <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{receiver}} <i class="fa fa-check text-primary"
+                                        title="Onaylanmış Hesap!" aria-hidden="true"></i> </br><small> Malaysia
                                     </small></h6>
-                                <div class="dropdown show">
+                                <!-- <div class="dropdown show">
                                     <a id="dropdownMenuLink" data-toggle="dropdown" class="btn btn-sm float-right text-secondary"
                                         role="button">
                                         <h5><i class="fa fa-ellipsis-h" title="Ayarlar!" aria-hidden="true"></i>&nbsp;</h5>
@@ -24,17 +36,18 @@
                                         <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-trash m-1"
                                                 aria-hidden="true"></i> Delete </a>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="card bg-sohbet border-0 m-0 p-0" style="height: 100vh;">
-                                <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
-                                    <div class="balon1 p-2 m-0 position-relative" data-is="You - 3:20 pm">
-                                        <a class="float-right"> Hey there! What's up? </a>
+                                <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto;">
+                                    <div class="balon1 p-2 m-0 position-relative" ng-class="nickname===message.from ? 'balon1' : 'balon2'" ng-repeat="message in messages" data-is="{{message.from}} - {{message.time | date: 'HH:mm:ss'}}">
+                                        <a ng-class="nickname===message.from ? 'float-right' : 'float-left'">{{message.text}}</a>
+                                        <!-- <message self="nickname" scrolltothis="scrollToBottom()" info="message" ng-repeat="message in publicMessages"></message> -->
                                     </div>
-                                    <div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:22 pm">
-                                        <a class="float-left sohbet2"> Checking out iOS7 you know.. </a>
-                                    </div>
-                                    <div class="balon1 p-2 m-0 position-relative" data-is="You - 3:23 pm">
+                                    <!-- <div class="balon2 p-2 m-0 position-relative" ng-repeat="message in messages" ng-if="message.to == nickname" data-is="{{nickname}} - {{message.time | date: 'HH:mm:ss'}}">
+                                        <a class="float-left">{{message.text}}</a>
+                                    </div> -->
+                                    <!-- <div class="balon1 p-2 m-0 position-relative" data-is="You - 3:23 pm">
                                         <a class="float-right"> Check out this bubble! </a>
                                     </div>
                                     <div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:26 pm">
@@ -46,23 +59,26 @@
                                     <div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:33 pm">
                                         <a class="float-left sohbet2"> Wow that's impressive. But what's even more
                                             impressive is that this bubble is really high. </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="w-100 card-footer p-0 bg-light border border-bottom-0 border-left-0 border-right-0">
-                                <form class="m-0 p-0" action="" method="POST" autocomplete="off">
+                                <!-- <form class="m-0 p-0" action="" method="POST" autocomplete="off"> -->
                                     <div class="row m-0 p-0">
                                         <div class="col-9 m-0 p-1">
-                                            <input id="text" class="mw-100 border rounded form-control" type="text"
+                                            <input id="text" class="mw-100 border rounded form-control" type="text" ng-model="words"
                                                 name="text" title="Type a message..." placeholder="Type a message..."
                                                 required>
                                         </div>
                                         <div class="col-3 m-0 p-1">
-                                            <button class="btn btn-outline-secondary rounded border w-100" title="Gönder!"
-                                                style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                            <button class="btn btn-outline-secondary rounded border w-100" ng-click="postMessage()">
+                                                Send
+                                            </button>
+                                            <!-- <button class="btn btn-outline-secondary rounded border w-100" title="Gönder!"
+                                                style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send</button> -->
                                         </div>
                                     </div>
-                                </form>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
