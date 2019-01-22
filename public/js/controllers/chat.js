@@ -3,6 +3,7 @@
 angular.module('mean')
   .controller("ChatController", ['$scope', '$stateParams', '$window', 'GetUserProfileById', 'userService', 'chat', 'socket', 
     function ($scope, $stateParams, $window, GetUserProfileById, userService, chat, socket) {
+
     var messageWrapper = $('.message-wrapper');
     $scope.hasLogined = false;
     //$scope.receiver="";//默认是群聊

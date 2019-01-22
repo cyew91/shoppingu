@@ -26,7 +26,7 @@
       </div>
     </div>
     <!-- Product Info-->
-    <div class="col-md-6" ng-init="initCountryName()">
+    <div class="col-md-6" ng-init="initCountryName()" ng-click="goToChat($index)">
       <div class="padding-top-2x mt-2 hidden-md-up"></div>
       <div class="rating-stars">
         <i class="icon-star filled"></i>
@@ -46,6 +46,10 @@
       <div class="padding-bottom-1x mb-2">
         <span class="text-medium">Categories:&nbsp;</span>
         <a class="navi-link" href="#">{{prodTravel.product_category.productCategoryName}}</a>
+      </div>
+      <div class="padding-bottom-1x mb-2">
+        <span class="text-medium">Posted By:&nbsp;</span>
+        <a class="navi-link" href="#" ng-model="user.loginid">{{prodTravel.post_travel.profile.loginId}}</a>
       </div>
       <hr class="mb-3">
       <div class="d-flex flex-wrap justify-content-between">
@@ -77,6 +81,9 @@
           <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
             data-toast-title="Product" data-toast-message="successfuly added to cart!">
             <i class="icon-bag"></i> Request Now</button>
+          <button name="btnChat">
+            chat
+          </button>
         </div>
       </div>
     </div>

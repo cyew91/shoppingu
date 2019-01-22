@@ -72,7 +72,9 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 				});
 		});
 	
-	  
+		$scope.goToChat = function (index) {
+			$state.go('chat', {prodTravel: $stateParams.prodTravel[index]});
+		};
 
 }]);
 
