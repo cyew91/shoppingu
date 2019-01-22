@@ -140,7 +140,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in travel">
+                        <tr ng-repeat="item in travel | orderBy:'-created_date'">
                             <td>
                                 <a class="text-medium navi-link" ng-click="getTravelProduct($index)" href="#" data-toggle="modal" data-target="#orderDetails">{{item.country.countryName}}</a>
                             </td>
@@ -149,7 +149,7 @@
                                 <span ng-class="item.travelStatusClass">{{item.travelStatus}}</span>
                             </td>
                             <td>
-                                <a class="btn btn-danger margin-bottom-none" ng-click="deletePost($index)">Delete</a>
+                                <a class="btn btn-danger btn-sm margin-bottom-none margin-top-none" ng-click="deletePost($index)">Delete</a>
                             </td>
                         </tr>
                     </tbody>
