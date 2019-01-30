@@ -77,6 +77,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
                 //   $scope.productRequest.push($scope.product[i]);
             }
             $state.go('searchResult', { prodTravel: $scope.productTravel });
+            $('#searchBar').removeClass('search-visible');
             $scope.inputSearch = "";
             // $state.go('searchResult', { prodTravel: $scope.productTravel, prodRequest: $scope.productRequest });
             $scope.productTravel = [];
@@ -102,6 +103,14 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
             $anchorScroll();
         });
     };
+
+    $scope.goToPostTravel = function(){
+        $state.go('travel', { buyer: false });
+    }
+
+    $scope.goToPostRequest = function(){
+        $state.go('travel', { buyer: true });
+    }
 
     // Sticky Navbar
     // //------------------------------------------------------------------------------

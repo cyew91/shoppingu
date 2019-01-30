@@ -70,4 +70,7 @@ angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resourc
     return $resource('/posttravelproduct/:postTravelId');
 }]);
 
-
+// Create request product
+angular.module('mean.articles').service('CreateRequest', ['$resource', function($resource){
+    return $resource('/postrequest');
+}]);

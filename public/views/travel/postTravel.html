@@ -5,11 +5,11 @@
         <a class="progress-steps" href="#">
             <!-- <span class="step-indicator icon-circle-check"></span> -->
             <span class="angle"></span>
-            2. Post Product
+            {{secondProgressBar}}
         </a>
         <a class="progress-steps active" href="#">
             <span class="angle"></span>
-            1. Post Travel
+            {{firstProgressBar}}
         </a>
     </div>
     <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
@@ -22,10 +22,10 @@
         required>
         </div>
 
-        <input class="form-control date dateRangePicker" id="datepickerFrom" type="text" name="startDate" placeholder="Date From.."
+        <input class="form-control date dateRangePicker" id="datepickerFrom" type="text" name="startDate" placeholder="Date From.." ng-show="!buyer"
             style="width: 350px; float: left; margin-right: 3px;" ng-model="startDate" required>
 
-        <input class="form-control date dateRangePicker" id="datepickerTo" type="text" name="endDate" placeholder="Date To.." 
+        <input class="form-control date dateRangePicker" id="datepickerTo" type="text" name="endDate" placeholder="Date To.." ng-show="!buyer"
             style="width: 350px; float: left; margin-right: 3px;" ng-model="toDate" required>
     </div>
     

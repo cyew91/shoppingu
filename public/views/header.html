@@ -8,7 +8,7 @@
     <!-- <div class="loader" id="loader-3"></div> -->
     <!-- </div> -->
   <!-- Search-->
-  <form class="site-search" method="get">
+  <form id='searchBar' class="site-search" method="get">
     <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()" placeholder="Type to search..." ng-model="inputSearch">
     <div class="search-tools">
       <span class="clear-search">Clear</span>
@@ -88,12 +88,12 @@
         </ul>
       </li>
       <li>
-        <a href="#">
+        <a ng-click="goToPostRequest()">
           <span>Post Request</span>
         </a>
       </li>
       <li>
-        <a ui-sref="travel">
+        <a ng-click="goToPostTravel()">
           <span>Post Travel</span>
         </a>
       </li>
