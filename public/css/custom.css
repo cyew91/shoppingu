@@ -227,11 +227,12 @@
     margin-top:0px;
     font-size: 54px; 
     margin-bottom: 1px;
-    margin-left: -0px;
+    margin-left: 10px;
 }
 
 .progress { 
     margin-bottom: 5px;
+    width: 160%;
 }
 
 .progress-bar { 
@@ -249,5 +250,9 @@
 }
 
 .container-star {
-    padding-left: 50px;
+    padding-left: -30px;
+}
+
+.row_rating {
+    margin-left: 220px;
 }
