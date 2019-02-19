@@ -19,12 +19,14 @@ exports.show = function (req, res) {
     return res.jsonp(req.rate);
 };
 
-exports.getSellerRateById = function (req, res, next) {
+exports.getSellerRateById = function (req, res, next, id) {
     db.seller_rate.find({
-        where: { id: req.params.sellerRateId }
+        where: {
+            id: id
+        }
     }).then(function (rate) {
         if (!rate) {
-            return res.jsonp(new Error('Failed to load sekkerRateId ' + rate.id));
+            return res.jsonp(new Error('Failed to load sellerRateId ' + rate.id));
         } else {
             req.rate = rate;
             return next();
@@ -37,17 +39,22 @@ exports.getSellerRateById = function (req, res, next) {
 exports.createSellerRate = function (req, res, next) {
     const msg = '';
     const rate = {
+        sellerId: req.body.sellerId,
         subject: req.body.subject,
         rating: req.body.rating,
-        comment: req.body.comment
+        comment: req.body.comment,
+        profile_id: req.body.profile_id,
+        post_travel_product_id: req.body.post_travel_product_id
     };
 
-    const rateSave = db.post_travel_product.build(rate);
+    const rateSave = db.seller_rate.build(rate);
 
-    req.body.postProductId = rateSave.id;
+    req.body.sellerRateId = rateSave.id;
 
     rateSave.save().then(function(){
-        return next();
+        return res.jsonp({
+            "result": "success"
+        });
     }).catch(function(err){
         return res.jsonp(err);
     });
@@ -59,11 +66,16 @@ exports.updateSellerRate= function(req, res){
     console.log(rate);
 
     rate.updateAttributes({
+        sellerId: req.body.sellerId,
         subject: req.body.subject,
         rating: req.body.rating,
-        comment: req.body.comment
+        comment: req.body.comment,
+        profile_id: req.body.profile_id,
+        post_travel_product_id: req.body.post_travel_product_id
     }).then(function(result){
-        return res.jsonp(result);
+        return res.jsonp({
+            "result": "success"
+        });
     }).catch(function(err){
         return res.jsonp(err);
     });

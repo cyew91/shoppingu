@@ -7,7 +7,7 @@ var sellerRate = require('../../app/controllers/SellerRateControllers');
 
 module.exports = function (app) {
     // User Profile Routes
-    app.route('/sellerrate/:id')
+    app.route('/sellerrate/:sellerRateId')
     .get(sellerRate.show)
     .put(sellerRate.updateSellerRate);
 
@@ -15,5 +15,5 @@ module.exports = function (app) {
     .post(sellerRate.createSellerRate)
     .get(sellerRate.all);
 
-    app.param('id', sellerRate.getSellerRateById);
+    app.param('sellerRateId', sellerRate.getSellerRateById);
 };
