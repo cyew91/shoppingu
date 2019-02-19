@@ -34,96 +34,37 @@ exports.getSellerRateById = function (req, res, next) {
     });
 };
 
-exports.createProduct = function (req, res, next) {
+exports.createSellerRate = function (req, res, next) {
     const msg = '';
-    const product = {
-        productName: req.body.productName,
-        description: req.body.description,
-        amount: req.body.amount
+    const rate = {
+        subject: req.body.subject,
+        rating: req.body.rating,
+        comment: req.body.comment
     };
 
-    const productSave = db.post_travel_product.build(product);
+    const rateSave = db.post_travel_product.build(rate);
 
-    req.body.postProductId = productSave.id;
+    req.body.postProductId = rateSave.id;
 
-    productSave.save().then(function(){
+    rateSave.save().then(function(){
         return next();
     }).catch(function(err){
         return res.jsonp(err);
     });
 };
 
-exports.createProductDocument = function (req, res) {
-    const msg = '';
-    const productDocument = {
-        imageName: req.body.imageName,
-        imagePath: req.body.imagePath,
-        post_travel_product_id: req.body.postProductId
-    };
+exports.updateSellerRate= function(req, res){
+    var rate = req.rate;
 
-    const productDocumentSave = db.post_travel_product_document.build(productDocument);
-    productDocumentSave.save().then(
-        function(){
-            return res.jsonp(req.body);
-        }
-    ).catch(function(err){
-        return res.jsonp(err);
-    });
-};
+    console.log(rate);
 
-exports.updateProduct = function(req, res){
-    var product = req.product;
-
-    console.log(product);
-
-    product.updateAttributes({
-        product_name:   req.body.productName,
-        description:    req.body.description,
-        amount:         req.body.amount
-
-    }).then(function(result){
-        return result.post_travel_product_documents[0].updateAttributes({
-            imageName: req.body.imageName,
-            imagePath: req.body.imagePath
-        });
-
+    rate.updateAttributes({
+        subject: req.body.subject,
+        rating: req.body.rating,
+        comment: req.body.comment
     }).then(function(result){
         return res.jsonp(result);
-
     }).catch(function(err){
-        return res.jsonp(err);
-    });
-};
-
-/**
- * Upload product image on post travel product page
- */
-exports.uploadProductImage = function (req, res) {
-    return res.render('201', {
-        Success: 'Yeah',
-        status: 201
-    });
-};
-
-/**
- * Get posted product in Account - My Trips
- */
-exports.getPostTravelProductByTravelId = function (req, res, next) {
-    db.post_travel_product.findAll({
-        where: { 
-            post_travel_id: req.params.postTravelId 
-        },
-        include: [{
-            model: db.post_travel_product_document
-        }]
-    }).then(function (product) {
-        if (!product) {
-            return res.jsonp(new Error('Failed to load postTraveProductlId ' + product.id));
-        } else {
-            req.product = product;
-            return next();
-        }
-    }).catch(function (err) {
         return res.jsonp(err);
     });
 };
