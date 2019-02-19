@@ -13,10 +13,6 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             field: 'seller_id'
         },
-        rating: {
-            type: DataTypes.DECIMAL(10, 3),
-            allowNull: false
-        },
         reply: {
             type: DataTypes.STRING(500),
             allowNull: false
