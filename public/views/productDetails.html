@@ -280,20 +280,21 @@
           </div>
         </div>
         <!-- Review Form-->
-        <h5 class="mb-30 padding-top-1x">Leave Review</h5>
-        <form class="row" method="post">
-          <div class="col-sm-6">
+        <div ng-controller="HeaderController" > 
+        <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
+        <form class="row" method="post" ng-if="isLogin">
+          <!-- <div class="col-sm-6">
             <div class="form-group">
               <label for="review_name">Your Name</label>
               <input class="form-control form-control-rounded" type="text" id="review_name" required="">
             </div>
-          </div>
-          <div class="col-sm-6">
+          </div> -->
+          <!-- <div class="col-sm-6">
             <div class="form-group">
               <label for="review_email">Your Email</label>
               <input class="form-control form-control-rounded" type="email" id="review_email" required="">
             </div>
-          </div>
+          </div> -->
           <div class="col-sm-6">
             <div class="form-group">
               <label for="review_subject">Subject</label>
