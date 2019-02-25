@@ -32,9 +32,10 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
             //}
         });
         $('#myModal').modal('show');
-        $('#myModal').on('hidden.bs.modal', function (e) {
-            $state.go('userprofile');
-        });
+        $scope.reloadPage = function()                                                
+        {
+          $window.location.reload();
+        }
     };
 
 }]);

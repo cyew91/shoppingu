@@ -319,8 +319,9 @@
               <textarea class="form-control form-control-rounded" id="review_text" rows="8" required=""></textarea>
             </div>
           </div>
-          <div class="col-12 text-right">
-            <button class="btn btn-outline-primary" type="submit">Submit Review</button>
+          <div style="text-align: right; margin-left: 85%;">
+              <!-- <a class="btn btn-primary" href="postproduct">Back</a> -->
+              <a class="btn btn-primary" ng-click="saveSellerRate()">Submit Review</a>
           </div>
         </form>
       </div>
@@ -363,3 +364,22 @@
     </div>
   </div>
 </div> -->
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Your Review Has Been Submitted!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
