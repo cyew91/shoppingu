@@ -282,7 +282,7 @@
         <!-- Review Form-->
         <div ng-controller="HeaderController" > 
         <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
-        <form class="row" method="post" ng-if="isLogin">
+        <form class="row" method="post" ng-if="isLogin" name="sellerReviewForm">
           <!-- <div class="col-sm-6">
             <div class="form-group">
               <label for="review_name">Your Name</label>
@@ -298,24 +298,25 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="review_subject">Subject</label>
-              <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" required>
+              <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" ng-required="true">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="review_rating">Rating</label>
-              <input class="form-control form-control-rounded" type="number" ng-model="reviewRating" min="1" max="5" required>
+              <select class="form-control form-control-rounded" ng-init="reviewRating = ratings[0]" ng-model="reviewRating" ng-options="rating as rating.label for rating in ratings" ng-required="true">
+              </select>
             </div>
           </div>
           <div class="col-12">
             <div class="form-group">
               <label for="review_text">Review </label>
-              <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" required></textarea>
+              <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" ng-required="true"></textarea>
             </div>
           </div>
           <div style="text-align: right; margin-left: 85%;">
               <!-- <a class="btn btn-primary" href="postproduct">Back</a> -->
-              <a class="btn btn-primary" ng-click="saveSellerRate()">Submit Review</a>
+              <button class="btn btn-primary" ng-click="sellerReviewForm.$valid && saveSellerRate()">Submit Review</button>
           </div>
         </form>
       </div>
