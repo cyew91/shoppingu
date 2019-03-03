@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate',
-	function ($scope, $stateParams, Global, GetTravelByTravelId, CreateSellerRate) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
+	function ($scope, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
 	$scope.global = Global;
+	$scope.profileId = $window.sessionStorage.getItem("id");
 	$scope.prodTravel = $stateParams.prodTravel;
-
+	$scope.onlyNumbers = /^\d+$/;
 	// $('.owl-carousel').owlCarousel({
 	//   items: 5,
 	//   loop: true,
@@ -69,20 +70,18 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 	//Seller rating and comments
 	$scope.saveSellerRate = function(){   
         var createSellerRate = new CreateSellerRate({
-            sellerId: 'fac6816c-0434-4581-995e-4a6d574679ff',
-            subject: 'Friendly Seller Ever, GOOD!',
-            rating: 4,
-            comment: 'Seller response very fast and very friendly to answer all the question, patients to explain the products.',
-			profile_id: '85bd649b-ae24-4246-893e-1a5607877a76',
-			post_travel_product_id: '616d6e73-4a78-4ddd-9eaa-f05c454aecf1',
+            subject: this.reviewSubject,
+            rating: this.reviewRating,
+            comment: this.reviewComment,
+			profile_id: $scope.profileId,
+			post_travel_product_id: $scope.prodTravel.id,
         });
 
         createSellerRate.$save(function (response) {
-		});
-		
-		$('#myModal').modal('show');
-		$('#myModal').on('hidden.bs.modal', function () {
-			location.reload();
+			$('#myModal').modal('show');
+			$('#myModal').on('hidden.bs.modal', function () {
+				location.reload();
+			});
 		});
     };
 

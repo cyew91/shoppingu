@@ -298,25 +298,19 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="review_subject">Subject</label>
-              <input class="form-control form-control-rounded" type="text" id="review_subject" required="">
+              <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" required>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="review_rating">Rating</label>
-              <select class="form-control form-control-rounded" id="review_rating">
-                <option>5 Stars</option>
-                <option>4 Stars</option>
-                <option>3 Stars</option>
-                <option>2 Stars</option>
-                <option>1 Star</option>
-              </select>
+              <input class="form-control form-control-rounded" type="number" ng-model="reviewRating" min="1" max="5" required>
             </div>
           </div>
           <div class="col-12">
             <div class="form-group">
               <label for="review_text">Review </label>
-              <textarea class="form-control form-control-rounded" id="review_text" rows="8" required=""></textarea>
+              <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" required></textarea>
             </div>
           </div>
           <div style="text-align: right; margin-left: 85%;">

@@ -8,11 +8,6 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        sellerId: {
-            type: DataTypes.STRING(36),
-            allowNull: false,
-            field: 'seller_id'
-        },
         reply: {
             type: DataTypes.STRING(500),
             allowNull: false

@@ -39,7 +39,6 @@ exports.getSellerRateById = function (req, res, next, id) {
 exports.createSellerRate = function (req, res, next) {
     const msg = '';
     const rate = {
-        sellerId: req.body.sellerId,
         subject: req.body.subject,
         rating: req.body.rating,
         comment: req.body.comment,
@@ -66,7 +65,6 @@ exports.updateSellerRate= function(req, res){
     console.log(rate);
 
     rate.updateAttributes({
-        sellerId: req.body.sellerId,
         subject: req.body.subject,
         rating: req.body.rating,
         comment: req.body.comment,

@@ -39,7 +39,6 @@ exports.getSellerReplyById = function (req, res, next, id) {
 exports.createSellerReply = function (req, res, next) {
     const msg = '';
     const reply = {
-        sellerId: req.body.sellerId,
         reply: req.body.reply,
         seller_rate_id: req.body.seller_rate_id,
         profile_id: req.body.profile_id
@@ -64,7 +63,6 @@ exports.updateSellerReply= function(req, res){
     console.log(reply);
 
     reply.updateAttributes({
-        sellerId: req.body.sellerId,
         reply: req.body.reply,
         seller_rate_id: req.body.seller_rate_id,
         profile_id: req.body.profile_id
