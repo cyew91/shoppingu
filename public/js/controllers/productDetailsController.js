@@ -1,9 +1,27 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 
-	function ($scope, $stateParams, Global, GetTravelByTravelId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
+	function ($scope, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
 	$scope.global = Global;
+	$scope.profileId = $window.sessionStorage.getItem("id");
 	$scope.prodTravel = $stateParams.prodTravel;
+	$scope.ratings = [{
+		value: '1',
+		label: '1'
+	}, {
+		value: '2',
+		label: '2'
+	}, {
+		value: '3',
+		label: '3'
+	}, {
+		value: '4',
+		label: '4'
+	}, {
+		value: '5',
+		label: '5'
+	}];   
+
 
 	// $('.owl-carousel').owlCarousel({
 	//   items: 5,
@@ -65,8 +83,40 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 			bigimage.data("owl.carousel").to(number, 300, true);
 		});
 	});
-	
-	  
+
+	//Seller rating and comments
+	$scope.saveSellerRate = function(){   
+        var createSellerRate = new CreateSellerRate({
+            subject: this.reviewSubject,
+            rating: this.reviewRating.label,
+            comment: this.reviewComment,
+			profile_id: $scope.profileId,
+			post_travel_product_id: $scope.prodTravel.id,
+        });
+
+        createSellerRate.$save(function (response) {
+			$('#myModal').modal('show');
+			$('#myModal').on('hidden.bs.modal', function () {
+				location.reload();
+			});
+		});
+    };
 
 }]);
 
+
+// angular.module('mean').directive('restrictTo', function() {
+//     return {
+//         restrict: 'A',
+//         link: function (scope, element, attrs) {
+//             var re = RegExp(attrs.restrictTo);
+//             var exclude = /Backspace|Enter|Tab|Delete|Del|ArrowUp|Up|ArrowDown|Down|ArrowLeft|Left|ArrowRight|Right/;
+
+//             element[0].addEventListener('keydown', function(event) {
+//                 if (!exclude.test(event.key) && !re.test(event.key)) {
+//                     event.preventDefault();
+//                 }
+//             });
+//         }
+//     }
+// });

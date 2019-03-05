@@ -70,4 +70,7 @@ angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resourc
     return $resource('/posttravelproduct/:postTravelId');
 }]);
 
-
+// Create seller rate
+angular.module('mean.articles').service('CreateSellerRate', ['$resource', function($resource){
+    return $resource('/sellerrate');
+}]);
