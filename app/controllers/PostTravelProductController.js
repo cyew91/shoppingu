@@ -8,12 +8,21 @@ const StandardError = require('standard-error');
  */
 exports.all = function(req, res){
     db.post_travel_product.findAll({
-        include: [{
-            model:db.post_travel_product_document
-        },
-        {
-            model:db.product_category
-        }
+        include: [
+            {
+                model: db.post_travel,
+                include: [
+                    {
+                        model: db.profile
+                    }
+                ]
+            },
+            {
+                model:db.post_travel_product_document
+            },
+            {
+                model:db.product_category
+            }
         ]
     }).then(
         function(product){

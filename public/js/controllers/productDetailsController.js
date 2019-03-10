@@ -21,9 +21,9 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		// });
 
 		// Go to Chat page
-		$scope.goToChat = function(){
-			$state.go('chat', {sellerInfo: $stateParams.prodTravel});
-		};
+		// $scope.goToChat = function(){
+		// 	$state.go('chat', {sellerInfo: $stateParams.prodTravel});
+		// };
 
 		// Get country name
 		$scope.initCountryName = function() {
@@ -73,7 +73,7 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		});
 	
 		$scope.goToChat = function (index) {
-			$state.go('chat', {prodTravel: $stateParams.prodTravel[index]});
+			$state.go('chat', {prodTravel: $stateParams.prodTravel});
 		};
 
 }]);

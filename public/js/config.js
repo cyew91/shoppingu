@@ -202,7 +202,8 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         .state('chat', {
             url: '/chat',
             params: {
-                sellerInfo: ''
+                sellerInfo: '',
+                prodTravel: null
             },
             controller: 'ChatController',
             templateUrl: 'views/chat/chat.html'

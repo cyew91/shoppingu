@@ -19,6 +19,9 @@ angular.module('mean.auth').factory('socket', function($rootScope) {
                     }
                 });
             });
+        },
+        getSocket: function () {
+            return socket;
         }
     };
 });

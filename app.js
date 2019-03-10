@@ -42,6 +42,8 @@ var io = require('socket.io')(http, pingTimeout);
 
 // app.use(express.static(__dirname + '/public/views'));
 
+var user_controller = require('./app/controllers/ChatControllers');
+user_controller.get_io(io);
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');
@@ -73,6 +75,24 @@ io.on('connection',function(socket){
         }
         socket.emit('allUser',allUsers);
     });
+
+    socket.on('getUserFriendList', function (data) {
+        console.log('Get user friend list');
+        user_controller.getUserFriendList(data, socket);
+    });
+
+    socket.on('inbox_id',function(data){
+        user_controller.inbox_id(data,socket);
+    });
+
+    socket.on('get_messages', function(data){
+        user_controller.get_messages(data.inbox_id,socket);
+    });
+
+    // Send messages
+    socket.on('message',function(data){
+        user_controller.message(data,socket)  
+    });  
 
     socket.on('addMessage', function (data) {
         if (!(data.to in connectedSocket)){
