@@ -66,8 +66,11 @@ angular.module('mean.articles').service('GetAllTravelProduct', ['$resource', fun
 }]);
 
 // Get posted product in Account - My Trips
-angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resource', function($resource){
+angular.module('mean.articles').service('GetTravelProductByTravelId', ['$resource', function ($resource) {
     return $resource('/posttravelproduct/:postTravelId');
 }]);
 
-
+// Create seller rate
+angular.module('mean.articles').service('CreateSellerRate', ['$resource', function($resource){
+    return $resource('/sellerrate');
+}]);

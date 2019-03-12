@@ -79,9 +79,8 @@ exports.getProductDetailByProdSubCatID = function (req, res, next) {
                 product_sub_category_id: req.params.productSubCatId
             },
             include: [{
-                    model: db.post_travel_product_document
-                }
-            ]
+                model: db.post_travel_product_document
+            }]
         })
         .then(function (result) {
             return res.jsonp(result);

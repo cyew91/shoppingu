@@ -89,7 +89,7 @@ angular.module('mean.articles')
     };
 
     $scope.goToProductDetails = function (index) {
-      $state.go('productdetails', {prodTravel: $stateParams.prodTravel[index]});
+      $state.go('productdetails', {prodTravel: $scope.productTravel[index]});
     };
 
     //Tab

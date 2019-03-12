@@ -5,10 +5,10 @@ angular.module('mean.auth').factory("SocialAuth", ['$http', function ($http) {
         FbLogin: function (token) {
             return $http.post('/auth/facebook/token', {
                     "access_token": token.accessToken
-                })
-                .then(function (res) {
-                    return res;
-                });
+            })
+            .then(function (res) {
+                return res;
+            });
         }
     };
 }]);

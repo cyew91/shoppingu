@@ -136,7 +136,7 @@
                             <th>Destination</th>
                             <th>Travel Date</th>
                             <th>Status</th>
-                            <!-- <th>Total</th> -->
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,20 +146,16 @@
                             </td>
                             <td>{{item.startDate| date: "MMMM dd, yyyy"}}</td>
                             <td>
-                                <span class="text-danger">{{item.travelStatus}}</span>
+                                <span ng-class="item.travelStatusClass">{{item.travelStatus}}</span>
                             </td>
-                            <!-- <td>
-                                <span class="text-medium">$760.50</span>
-                            </td> -->
+                            <td>
+                                <a class="btn btn-danger btn-sm margin-bottom-none margin-top-none" ng-click="deletePost($index)">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <hr>
-            <!-- <div class="text-right">
-                <a class="btn btn-link-primary margin-bottom-none" href="#">
-                    <i class="icon-download"></i>&nbsp;Order Details</a>
-            </div> -->
         </div>
     </div>
 </div>
