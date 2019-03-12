@@ -30,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
         underscored: true,
         associate: function (models) {
+            PostTravel.belongsTo(models.profile);
             PostTravel.belongsTo(models.country);
             PostTravel.hasMany(models.post_travel_product);
         }
