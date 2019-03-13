@@ -26,14 +26,14 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		// 	$state.go('chat', {sellerInfo: $stateParams.prodTravel});
 		// };
 
-		// Get country name
-		$scope.initCountryName = function() {
-			GetTravelCountryByTravelId.get({
-					postTravelId: $scope.prodTravel.post_travel_id
-			}, function(result){
-					$scope.countryName = result.country.countryName;
-			});
-		};
+	// Get country name
+	$scope.initCountryName = function() {
+		GetTravelCountryByTravelId.get({
+				postTravelId: $scope.prodTravel.post_travel_id
+		}, function(result){
+				$scope.countryName = result.country.countryName;
+		});
+	};
 
 	// $('.owl-carousel').owlCarousel({
 	//   items: 5,
@@ -116,6 +116,8 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		$scope.goToChat = function (index) {
 			$state.go('chat', {prodTravel: $stateParams.prodTravel});
 		};
+
+	};
 
 }]);
 
