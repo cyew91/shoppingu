@@ -1,5 +1,5 @@
 <!-- Navbar-->
-
+<script src="/socket.io/socket.io.js"></script>
 <header class="navbar navbar-sticky" ng-controller="HeaderController">
     <!-- <div class="loading-spiner-holder" data-loading > -->
     <!-- <div class="loader"></div> -->
@@ -129,6 +129,7 @@
         <div class="account" ng-if="isLogin">
           <a ui-sref="chat"></a>
           <i class="icon-mail"></i>
+          <span ng-class="msgCount > 0 ? 'num' : ''"></span>
         </div>
         <div class="account" ng-if="isLogin">
           <a href="#"></a>

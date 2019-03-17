@@ -25,28 +25,3 @@ angular.module('mean.auth').factory('socket', function($rootScope) {
         }
     };
 });
-
-angular.module('mean').service('chat', ['$resource', function ($resource) {
-    return $resource('/chat');
-}]);
-
-angular.module('mean').factory('userService', function ($rootScope) {
-    return {
-        get: function (users, nickname) {
-            if (users instanceof Array) {
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].nickname === nickname) {
-                        return users[i];
-                    }
-                }
-            } else {
-                return null;
-            }
-        }
-    };
-});
-
-
-angular.module('mean').service('chat', ['$resource', function($resource){
-    return $resource('/chat');
-}]);

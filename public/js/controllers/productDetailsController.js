@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
-	function ($scope, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
+	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
 	$scope.global = Global;
 	$scope.profileId = $window.sessionStorage.getItem("id");
 	$scope.prodTravel = $stateParams.prodTravel;
+	$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
 	$scope.ratings = [{
 		value: '1',
 		label: '1'
@@ -21,10 +22,6 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		value: '5',
 		label: '5'
 	}];   
-		// Go to Chat page
-		// $scope.goToChat = function(){
-		// 	$state.go('chat', {sellerInfo: $stateParams.prodTravel});
-		// };
 
 	// Get country name
 	$scope.initCountryName = function() {
@@ -112,28 +109,10 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 				location.reload();
 			});
 		});
-	
-		$scope.goToChat = function (index) {
-			$state.go('chat', {prodTravel: $stateParams.prodTravel});
-		};
+	};
 
+	$scope.goToChat = function () {
+		$state.go('chat', {prodTravel: $stateParams.prodTravel});
 	};
 
 }]);
-
-
-// angular.module('mean').directive('restrictTo', function() {
-//     return {
-//         restrict: 'A',
-//         link: function (scope, element, attrs) {
-//             var re = RegExp(attrs.restrictTo);
-//             var exclude = /Backspace|Enter|Tab|Delete|Del|ArrowUp|Up|ArrowDown|Down|ArrowLeft|Left|ArrowRight|Right/;
-
-//             element[0].addEventListener('keydown', function(event) {
-//                 if (!exclude.test(event.key) && !re.test(event.key)) {
-//                     event.preventDefault();
-//                 }
-//             });
-//         }
-//     }
-// });

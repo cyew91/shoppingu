@@ -10,10 +10,6 @@ angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 
 
         logIn.$save(function (response) {
             if (response.status === 'success') {
-                // socket.on('connect', function(data) {
-                    // socket.emit("addUser",{username: user.username});
-                // });
-                
                 $window.location.href = '/';
             } else {
                 $scope.response = false;

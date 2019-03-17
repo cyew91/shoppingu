@@ -30,7 +30,6 @@ exports.getUserFriendList = function(data, socket){
         attributes: ['user_1', 'user_2']
     })
     .then(function(data){
-        //return res.jsonp(chat);
         if (data.length > 0){
             socket.emit("returnFriendList", data);
         }
@@ -147,15 +146,18 @@ exports.message = function (data, socket) {
              time:data.dataValues.time,
              date:data.dataValues.date,
              status:data.dataValues.status
-             });
-        //console.log("Success");
-        // return res.jsonp({
-        //     "result": "success"
-        // });
+        });
+    }).then(function(data){
+        db.replies.findAndCount({
+            where: {
+                inbox_id: inbox_id,
+                user_name: user_name,
+                status: "unread"
+            }
+        }).then(function(data){
+            io.emit('notifications_1', {name: name, count:data.count, inbox_id: inbox_id});
+        })
     })
-    // .then(function (data){
-
-    // })
     .catch(function (err) {
         console.log("Error: " + err);
         // res.send({
@@ -163,6 +165,74 @@ exports.message = function (data, socket) {
         //     message: err
         // });
     });
+};
+
+exports.read_msg = function(data, socket){
+    var now = new Date();
+    var inbox_id = data.inbox_id;
+    var seen_time = dateFormat(now,"fullDate").toString()+ "   "+dateFormat(now,"shortTime").toString();
+
+    db.replies.update({
+        status: 'read',
+        seen_time: seen_time},
+        {
+            where: {
+                status: 'unread',
+                inbox_id: data.inbox_id,
+                user_name: data.user_name
+            },
+    }).then(function(data){
+        db.replies.findAll({
+            where: {
+                inbox_id: inbox_id,
+                seen_time: seen_time
+            }
+        }).then(function(data){
+            io.emit('seen_notification', data);
+        });
+    });
+
+};
+
+exports.get_notification = function(data, socket){
+    var inbox_id = data.inbox_id;
+
+    db.replies.findAndCount({
+        where: {
+            inbox_id: data.inbox_id,
+            user_name: data.user_name,
+            status: "unread"
+        }
+    }).then(function(data){
+        socket.emit('notifications', {count: data.count, inbox_id: inbox_id});
+    });
+};
+
+exports.checkUserMsgNull = function(data){
+    var inbox_id = data.inbox_id;
+
+    db.replies.findAndCount({
+        where: {
+            inbox_id: data.inbox_id
+        }
+    }).then(function(data){
+        if(data.count == 0){
+            db.inboxes.destroy({
+                where: {
+                    id: inbox_id
+                }
+            });
+        }
+    });
+};
+
+exports.setHomePageCountToZero = function (data, socket){
+    if(data.setCount > 0){
+        socket.emit('returnHomePageCountToZero', {setCount: 1});
+    }
+    else{
+        socket.emit('returnHomePageCountToZero', {setCount: 0});
+    }
 };
 
 // chat end

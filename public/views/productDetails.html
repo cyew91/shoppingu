@@ -49,7 +49,7 @@
       </div>
       <div class="padding-bottom-1x mb-2">
         <span class="text-medium">Posted By:&nbsp;</span>
-        <a class="navi-link" href="#" ng-model="user.loginid">{{prodTravel.post_travel.profile.loginId}}</a>
+        <a class="navi-link" href="#">{{prodTravel.post_travel.profile.loginId}}</a>
       </div>
       <hr class="mb-3">
       <div class="d-flex flex-wrap justify-content-between">
@@ -75,11 +75,11 @@
             <i class="icon-heart"></i>
           </button> -->
         
-        <button class="btn btn-secondary" ng-click="goToChat()">
+        <button class="btn btn-secondary" ng-show="profileId !== prodProfileId" ng-click="goToChat()">
           Chat
         </button>
         <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
-          data-toast-title="Product" data-toast-message="successfuly added to cart!">
+          data-toast-title="Product" data-toast-message="successfuly added to cart!"  ng-if="profileId !== prodProfileId">
           <i class="icon-bag"></i> Request Now</button>
         </div>
       </div>
