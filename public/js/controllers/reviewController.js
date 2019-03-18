@@ -63,6 +63,4 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
         };
     }
 
-    
-
 }]);

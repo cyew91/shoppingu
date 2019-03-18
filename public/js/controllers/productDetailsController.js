@@ -1,9 +1,36 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$stateParams', 'Global', 'GetTravelByTravelId', 
-	function ($scope, $stateParams, Global, GetTravelByTravelId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
+	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
 	$scope.global = Global;
+	$scope.profileId = $window.sessionStorage.getItem("id");
 	$scope.prodTravel = $stateParams.prodTravel;
+	$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+	$scope.ratings = [{
+		value: '1',
+		label: '1'
+	}, {
+		value: '2',
+		label: '2'
+	}, {
+		value: '3',
+		label: '3'
+	}, {
+		value: '4',
+		label: '4'
+	}, {
+		value: '5',
+		label: '5'
+	}];   
+
+	// Get country name
+	$scope.initCountryName = function() {
+		GetTravelCountryByTravelId.get({
+				postTravelId: $scope.prodTravel.post_travel_id
+		}, function(result){
+				$scope.countryName = result.country.countryName;
+		});
+	};
 
 	// $('.owl-carousel').owlCarousel({
 	//   items: 5,
@@ -65,8 +92,27 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 			bigimage.data("owl.carousel").to(number, 300, true);
 		});
 	});
-	
-	  
+
+	//Seller rating and comments
+	$scope.saveSellerRate = function(){   
+        var createSellerRate = new CreateSellerRate({
+            subject: this.reviewSubject,
+            rating: this.reviewRating.label,
+            comment: this.reviewComment,
+			profile_id: $scope.profileId,
+			post_travel_product_id: $scope.prodTravel.id,
+        });
+
+        createSellerRate.$save(function (response) {
+			$('#myModal').modal('show');
+			$('#myModal').on('hidden.bs.modal', function () {
+				location.reload();
+			});
+		});
+	};
+
+	$scope.goToChat = function () {
+		$state.go('chat', {prodTravel: $stateParams.prodTravel});
+	};
 
 }]);
-

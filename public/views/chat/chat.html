@@ -1,15 +1,64 @@
-<div id="chat_wrapper" ng-controller="CreateChat">
-    <div id="chat_content_left">damn left</div>
-
-    <div id="chat_content_right">
-        <div id="chat_content_right_title">
-            <div id="chat_content_right_title_left"><h3>Country: </h3></div>
-            <div id="chat_content_right_title_right"><h3>Travel Period: </h3></div>
+<script src="/socket.io/socket.io.js"></script>
+<div class="container padding-top-2x padding-bottom-3x mb-2" ng-init="initUserProfile()">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-heading">
+                <h3 class="panel-title">Inbox <span class="user-number"></span></h3>
+            </div>
+            <div class="user-wrapper panel-body">
+                <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)">
+                    <span class="avatar"></span><span class="nickname">{{key}}</span>
+                    <span class="unread" ng-show="get_count(value) > 0">{{get_count(value)}}</span>
+                </div>
+            </div>
         </div>
-        <div id="chat_content_right_chat"></div>
-        <form id="chat_content_right_tpye_box" ng-submit="postMessage()">
-           <div id="chat_box_wrapper"><input id="chat_box" type="text" name="fname" ng-model="words"></div>
-            <button id="chat_box_send" type="submit" ng-disabled="postform.$invalid">Send</button>
-        </form>
+        <div class="col-lg-8">
+            <div class="jumbotron m-0 p-0 bg-transparent">
+                <div class="row m-0 p-0 position-relative">
+                    <div class="col-12 p-0 m-0" style="right: 0px;">
+                        <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;">
+                            <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
+                                style="color: rgba(96, 125, 139,1.0);">
+                                <img class="rounded float-left" style="width: 50px; height: 50px;" src="https://i.pinimg.com/736x/5c/24/69/5c24695df36eee73abfbdd8274085ecd--cute-anime-guys-anime-boys.jpg" />
+                                <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary"
+                                        aria-hidden="true"></i> </br><small> 
+                                    </small></h6>
+                            </div>
+                            <div class="card-body" style="height: 100vh; overflow-y: auto;" scroll-bottom="messages">
+                                <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent">
+                                    <div class="balon1 p-2 m-0 position-relative" ng-class="loginId===message.user_name ? 'balon1' : 'balon2'" 
+                                        ng-repeat="message in messages | orderBy: 'createdAt'" data-is="{{message.time}}" 
+                                        data-isseen="{{message.seen_time && loginId===message.user_name ? ' seen' : ''}}" >
+                                        <a ng-class="loginId===message.user_name ? 'float-right' : 'float-left'">{{message.Message}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 card-footer p-0 ">
+                                <div class="row m-0 p-0">
+                                    <div class="col-9 m-0 p-2">
+                                        <input id="text" class="form-control" type="text" ng-model="user_message"
+                                            name="text" placeholder="Type a message...">
+                                    </div>
+                                    <div class="col-3 m-0 p-1">
+                                        <button id="send_btn" class="btn btn-outline-secondary rounded border w-100" ng-click="postMessage()">
+                                            Send
+                                        </button>
+                                        <!-- <button class="btn btn-outline-secondary rounded border w-100" title="Gönder!"
+                                            style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> -->

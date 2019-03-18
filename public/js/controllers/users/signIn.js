@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', function ($scope, $window, LogIn) {
+angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 'socket', function ($scope, $window, LogIn, socket) {
 
     $scope.signIn = function (user) {
         var logIn = new LogIn({

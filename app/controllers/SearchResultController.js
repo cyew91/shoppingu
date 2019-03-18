@@ -13,14 +13,47 @@ exports.show = function (req, res) {
  * Use in search result page
  */
 exports.getProductDetailByProdName = function (req, res, next, ProductName) {
+    // db.post_travel.findAll({
+    //         include: [
+    //             {
+    //                 model: db.post_travel_product,
+    //                 where: {
+    //                     product_name: {
+    //                         $like: '%' + ProductName + '%'
+    //                     }
+    //                 },
+    //                 include: [
+    //                     {
+    //                         model: db.post_travel_product_document
+    //                     },
+    //                     {
+    //                         model: db.product_category
+    //                     },
+    //                     {
+    //                         model: db.product_sub_category
+    //                     }
+    //                 ]
+    //             },
+    //             {
+    //                 model: db.profile
+    //             }
+    //         ]
+    //     })
     db.post_travel_product.findAll({
-            where: {
-                product_name: {
-                    $like: '%' + ProductName + '%'
-                }
-            },
+        where: {
+            product_name: {
+                $like: '%' + ProductName + '%'
+            }
+        },
             include: [
-                // {model: db.t_product, where: {PostType: 0}}
+                {
+                    model: db.post_travel,
+                    include: [
+                        {
+                            model: db.profile
+                        }
+                    ]
+                },
                 {
                     model: db.post_travel_product_document
                 }
@@ -46,9 +79,8 @@ exports.getProductDetailByProdSubCatID = function (req, res, next) {
                 product_sub_category_id: req.params.productSubCatId
             },
             include: [{
-                    model: db.post_travel_product_document
-                }
-            ]
+                model: db.post_travel_product_document
+            }]
         })
         .then(function (result) {
             return res.jsonp(result);

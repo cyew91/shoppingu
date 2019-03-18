@@ -3,7 +3,240 @@
 /**
  * Module dependencies.
  */
+var sequelize = require('../../config/sequelize');
 var db = require('../../config/sequelize');
+var io='';
+var dateFormat = require('dateformat');
+
+// chat start
+exports.get_io = function(data) {
+    io=data; 
+}
+
+exports.getUserFriendList = function(data, socket){
+    var name = data.username;
+    var user_2 = data.user_2;
+    db.inboxes.findAll({
+        where: { 
+            $or: [
+                {
+                    user_1: name
+                },
+                {
+                    user_2: name
+                }
+            ]
+        },
+        attributes: ['user_1', 'user_2']
+    })
+    .then(function(data){
+        if (data.length > 0){
+            socket.emit("returnFriendList", data);
+        }
+        else{
+            db.inboxes.create({
+                user_1: name,
+                user_2: user_2
+            })
+            .then(function(data){
+                socket.emit("inbox_id",{inbox_id:data.id,user_2})
+            });
+        }
+    })
+    .catch(function(err){
+        // return res.render('error', {
+        //     error: err,
+        //     status: 500
+        // });
+    });
+};
+
+exports.inbox_id = function(data, socket){
+    var user_1=data.user_1;
+    var user_2=data.user_2;
+    db.inboxes.find({
+        where: {
+            user_1: {
+                $or:[
+                    user_1, 
+                    user_2
+                ]
+            },
+            user_2: {
+                $or:[
+                    user_1,
+                    user_2
+                ]
+            },
+        },
+        attributes: ['id','user_1','user_2']
+    })
+    .then(function(data){
+        //console.log(data.dataValues);
+        if (data){
+            socket.emit('inbox_id2',{inbox_id:data.id,user_2}); 
+        }
+        // else{
+        //     db.inboxes.create({
+        //         user_1: user_1,
+        //         user_2: user_2
+        //     })
+        //     .then(function(data){
+        //         socket.emit("inbox_id",{inbox_id:data.id,user_2})
+        //     });
+        // }
+        
+    })
+    .catch(function(err){
+        // return res.render('error', {
+        //     error: err,
+        //     status: 500
+        // });
+    });
+};
+
+exports.get_messages = function (data, socket) {
+    db.replies.findAll({
+        where: {
+            inbox_id: data
+        },
+        attributes: ['id','Message','user_name','inbox_id','time','date','seen_time','status','createdAt']
+    })
+    .then(function(data){
+        //console.log(data.dataValues);
+        if (data.length > 0)
+            socket.emit('all_messages',data);  
+    })
+    .catch(function(err){
+        // return res.render('error', {
+        //     error: err,
+        //     status: 500
+        // });
+    });
+};
+
+exports.message = function (data, socket) {
+    var user_name;
+    var message;
+    var inbox_id;
+    var dateNow = new Date();
+    var name = data.frnd_name;
+    var time = dateFormat(dateNow,"shortTime").toString();
+    var date = dateFormat(dateNow,"fullDate").toString();
+    
+    var chat = {
+        inbox_id: data.inbox_id,
+        Message: data.msg,
+        user_name: data.name,
+        time: time,
+        status: 'unread',
+        date: date
+    };
+    var saveProfile = db.replies.build(chat);
+
+    saveProfile.save().then(function (data) {
+        user_name = data.dataValues.user_name;
+        message=data.dataValues.Message;
+        inbox_id=data.dataValues.inbox_id;
+
+        io.emit('new_message',{id:data.dataValues.id,
+            user_name:user_name, 
+            message:message, 
+            inbox_id:inbox_id,
+             time:data.dataValues.time,
+             date:data.dataValues.date,
+             status:data.dataValues.status
+        });
+    }).then(function(data){
+        db.replies.findAndCount({
+            where: {
+                inbox_id: inbox_id,
+                user_name: user_name,
+                status: "unread"
+            }
+        }).then(function(data){
+            io.emit('notifications_1', {name: name, count:data.count, inbox_id: inbox_id});
+        })
+    })
+    .catch(function (err) {
+        console.log("Error: " + err);
+        // res.send({
+        //     status: 500,
+        //     message: err
+        // });
+    });
+};
+
+exports.read_msg = function(data, socket){
+    var now = new Date();
+    var inbox_id = data.inbox_id;
+    var seen_time = dateFormat(now,"fullDate").toString()+ "   "+dateFormat(now,"shortTime").toString();
+
+    db.replies.update({
+        status: 'read',
+        seen_time: seen_time},
+        {
+            where: {
+                status: 'unread',
+                inbox_id: data.inbox_id,
+                user_name: data.user_name
+            },
+    }).then(function(data){
+        db.replies.findAll({
+            where: {
+                inbox_id: inbox_id,
+                seen_time: seen_time
+            }
+        }).then(function(data){
+            io.emit('seen_notification', data);
+        });
+    });
+
+};
+
+exports.get_notification = function(data, socket){
+    var inbox_id = data.inbox_id;
+
+    db.replies.findAndCount({
+        where: {
+            inbox_id: data.inbox_id,
+            user_name: data.user_name,
+            status: "unread"
+        }
+    }).then(function(data){
+        socket.emit('notifications', {count: data.count, inbox_id: inbox_id});
+    });
+};
+
+exports.checkUserMsgNull = function(data){
+    var inbox_id = data.inbox_id;
+
+    db.replies.findAndCount({
+        where: {
+            inbox_id: data.inbox_id
+        }
+    }).then(function(data){
+        if(data.count == 0){
+            db.inboxes.destroy({
+                where: {
+                    id: inbox_id
+                }
+            });
+        }
+    });
+};
+
+exports.setHomePageCountToZero = function (data, socket){
+    if(data.setCount > 0){
+        socket.emit('returnHomePageCountToZero', {setCount: 1});
+    }
+    else{
+        socket.emit('returnHomePageCountToZero', {setCount: 0});
+    }
+};
+
+// chat end
+
 
 //----------------------------------------Start----------------------------------------
 //Chat

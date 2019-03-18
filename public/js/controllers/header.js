@@ -1,48 +1,35 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', '$anchorScroll', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
-    function ($scope, SignOut, CheckLoggedIn, $state, $rootScope, $anchorScroll, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
-    // $scope.showSearchBar = false;
-    // $scope.isCollapsed = false;
+angular.module('mean.system')
+    .controller('HeaderController', ['$scope', 'socket', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', '$anchorScroll', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
+    function ($scope, socket, SignOut, CheckLoggedIn, $state, $rootScope, $anchorScroll, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
+        
     //$scope.isLoading = true;
     $scope.productTravel = [];
     $scope.productRequest = [];
     var productCategory = [];
     var productCategoryId = '';
+    $scope.msgCount = 0;
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
         $scope.isLogin = true;
+        $scope.loginId = $rootScope.currentUser.loginId;
+        $window.localStorage.setItem("usernameHeader", $scope.loginId);
         var userId = $window.sessionStorage.getItem("id");
+        
         if (userId == "undefined") {
             $scope.isLogin = false;
         }
         if (response.status !== '0') {
+            $scope.initChatNotification();
             return response;
         } else {
             $scope.errorMessage = 'Not logged in';
             $rootScope.currentUser = null;
             return "";
         }
+        
     });
-
-    // $rootScope.currentUser = function () {
-    //     CheckLoggedIn.get(function (response) {
-    //             $scope.isLogin = true;
-    //             var userId = $window.sessionStorage.getItem("id");
-    //             if (userId == "undefined") {
-    //                 $scope.isLogin = false;
-    //             }
-    //             if (response.status !== '0') {
-    //                 return response;
-    //             } else {
-    //                 $scope.errorMessage = 'Not logged in';
-    //                 $rootScope.currentUser = null;
-    //                 return "";
-    //             }
-    //         });
-    //     //$scope.isLoading = false;
-            
-    // };
     
     $scope.SignOut = function () {
         SignOut.get(function (response) {
@@ -53,17 +40,6 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
             }
         });
     };
-
-    // $scope.openSearch = function () {
-    //     $('#mainSearchForm').addClass("fadeIn");
-    //     $scope.showSearchBar = true;
-    // };
-
-    // $scope.closeSearch = function () {
-    //     $('#mainSearchForm').removeClass('fadeIn');
-    //     $('#mainSearchForm').addClass('fadeOut');
-    //     $scope.showSearchBar = false;
-    // };
 
     $scope.search = function () {
         GetProductID.query({
@@ -111,6 +87,47 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'SignOut
     $scope.goToPostRequest = function(){
         $state.go('travel', { buyer: true });
     }
+
+    // Return notification while push msg
+    socket.on('notifications_1', function(data){
+        if(data.name == $window.localStorage.getItem("usernameHeader")){
+            $scope.msgCount = data.count;
+        }
+    });
+
+    // Return notification when init page
+    socket.on('notifications', function(data){
+        $scope.msgCount = data.count;
+
+    });
+
+    // Update notification inbox in home page
+    socket.on('returnHomePageCountToZero', function(data){
+        $scope.msgCount = data.setCount;
+    });
+
+    // Init chat notification
+    $scope.initChatNotification = function(){
+        socket.emit("getUserFriendList", {username: $window.localStorage.getItem("usernameHeader"), user_2: "null"});
+
+        socket.on('returnFriendList', function (data) {
+            $scope.users_temp = data;
+
+            //Get all users inbox id
+            angular.forEach($scope.users_temp, function(value, key){
+                console.log("value: " + value + "key: " + key);
+                if (value.user_2 == $window.localStorage.getItem("usernameHeader")){
+                    value.user_2 = value.user_1;
+                }
+                socket.emit("inbox_id", {user_1: $window.localStorage.getItem("usernameHeader"), user_2: value.user_2}); 
+            });
+            
+            socket.on('inbox_id2', function(data){
+                socket.emit('get_notification', {inbox_id: data.inbox_id, user_name: data.user_2, name: $window.localStorage.getItem("usernameHeader")}); 
+            });
+        });
+    };
+
 
     // Sticky Navbar
     // //------------------------------------------------------------------------------

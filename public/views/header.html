@@ -1,5 +1,5 @@
 <!-- Navbar-->
-
+<script src="/socket.io/socket.io.js"></script>
 <header class="navbar navbar-sticky" ng-controller="HeaderController">
     <!-- <div class="loading-spiner-holder" data-loading > -->
     <!-- <div class="loader"></div> -->
@@ -8,7 +8,7 @@
     <!-- <div class="loader" id="loader-3"></div> -->
     <!-- </div> -->
   <!-- Search-->
-  <form id='searchBar' class="site-search" method="get">
+  <form id="searchBar" class="site-search" method="get">
     <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()" placeholder="Type to search..." ng-model="inputSearch">
     <div class="search-tools">
       <span class="clear-search">Clear</span>
@@ -98,7 +98,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a ui-sref="chat">
           <span>How it works</span>
         </a>
       </li>
@@ -127,6 +127,11 @@
           <i class="icon-search"></i>
         </div>
         <div class="account" ng-if="isLogin">
+          <a ui-sref="chat"></a>
+          <i class="icon-mail"></i>
+          <span ng-class="msgCount > 0 ? 'num' : ''"></span>
+        </div>
+        <div class="account" ng-if="isLogin">
           <a href="#"></a>
           <i class="icon-head"></i>
           <ul class="toolbar-dropdown">
@@ -145,9 +150,9 @@
             <li>
               <a ui-sref="order">Orders List</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#">Wishlist</a>
-            </li>
+            </li> -->
             <li class="sub-menu-separator"></li>
             <li>
               <a href="#" ng-click="SignOut()"><i class="icon-unlock"></i>Logout</a>
