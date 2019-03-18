@@ -80,6 +80,14 @@ angular.module('mean.system')
         });
     };
 
+    $scope.goToPostTravel = function(){
+        $state.go('travel', { buyer: false });
+    }
+
+    $scope.goToPostRequest = function(){
+        $state.go('travel', { buyer: true });
+    }
+
     // Return notification while push msg
     socket.on('notifications_1', function(data){
         if(data.name == $window.localStorage.getItem("usernameHeader")){
@@ -119,6 +127,7 @@ angular.module('mean.system')
             });
         });
     };
+
 
     // Sticky Navbar
     // //------------------------------------------------------------------------------

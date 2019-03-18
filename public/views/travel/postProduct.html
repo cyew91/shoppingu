@@ -5,11 +5,11 @@
     <a class="progress-steps active" href="#">
       <!-- <span class="step-indicator icon-circle-check"></span> -->
       <span class="angle"></span>
-      2. Post Product
+      {{secondProgressBar}}
     </a>
     <a class="progress-steps" href="#">
       <span class="angle"></span>
-      1. Post Travel
+      {{firstProgressBar}}
     </a>
   </div>
   <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
@@ -76,12 +76,12 @@
             <div id="dropzoneProductImage" class="dropzone"></div>
         </div>
       </div>
-      <div style="text-align: left;">
+      <div style="text-align: left;" ng-show="!travelObj.buyer">
         <button class="btn btn-primary margin-top-none" type="submit" ng-click="addToProductList()">Add</button>
       </div>
       <br/>
       <br/>
-      <div class="table-responsive">
+      <div class="table-responsive" ng-show="!travelObj.buyer">
         <table class="table">
           <thead>
             <tr>

@@ -97,6 +97,7 @@ module.exports = function (sequelize, DataTypes) {
             Profile.belongsTo(models.country);
             Profile.hasMany(models.post_travel);
             Profile.hasMany(models.product_order);
+            Profile.hasMany(models.post_request_product);
         }
     });
 

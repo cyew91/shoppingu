@@ -109,16 +109,39 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     };
       
     $scope.continue = function (count) {
-        if ($scope.productList.length < 1){
-            $scope.response = false;
-            $scope.errorMsg = "Fill in all columns";
-        }
-        else{
+        // Buyer
+        if ($scope.travelObj.buyer){
+            $scope.productList.push({
+                productName: $scope.productName,
+                productCategoryId: $scope.productCategoryName.id,
+                productCategoryName: $scope.productCategoryName.productCategoryName,
+                productSubCategoryId: $scope.productSubCategoryName.id,
+                productSubCategoryName: $scope.productSubCategoryName.productSubCategoryName,
+                quantity: $scope.quantity, 
+                currency: $scope.currency,
+                amount: $scope.amount,
+                productDescription: $scope.productDescription,
+                productImage: $scope.productImages
+            });
             $scope.productObj = $scope.travelObj;
             $scope.productObj.productList = $scope.productList;
             $state.go('postreview', { productObj: $scope.productObj });
             // Scroll to top
             $anchorScroll();
+        }
+        // Traveller
+        else{
+            if ($scope.productList.length < 1){
+                $scope.response = false;
+                $scope.errorMsg = "Fill in all columns";
+            }
+            else{
+                $scope.productObj = $scope.travelObj;
+                $scope.productObj.productList = $scope.productList;
+                $state.go('postreview', { productObj: $scope.productObj });
+                // Scroll to top
+                $anchorScroll();
+            }
         }
     };
 
@@ -148,33 +171,43 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         var returnObj = {};
         if (angular.isUndefined($scope.productName) || $scope.productName == null || $scope.productName == ""){
             result = false;
-            msg = "Fill in Product Name";
+            msg = ERRORMSG.productNameEmpty;
         }
         else if (angular.isUndefined($scope.productCategoryName || $scope.productCategoryName == null || $scope.productCategoryName == "")){
             result = false;
-            msg = "Select Product Category";
+            msg = ERRORMSG.productCategoryNameEmpty;
         }
         else if (angular.isUndefined($scope.productSubCategoryName || $scope.productSubCategoryName == null || $scope.productSubCategoryName == "")){
             result = false;
-            msg = "Select Product Sub Category";
+            msg = ERRORMSG.productSubCategoryNameEmpty;
         }
         else if (angular.isUndefined($scope.productDescription || $scope.productDescription == null || $scope.productDescription == "")){
             result = false;
-            msg = "Fill in Description";
+            msg = ERRORMSG.productDescriptionEmpty;
         }
         else if (angular.isUndefined($scope.quantity || $scope.quantity == null || $scope.quantity == "")){
             result = false;
-            msg = "Fill in Quantity";
+            msg = ERRORMSG.quantityEmpty;
         }
         else if (angular.isUndefined($scope.amount || $scope.amount == null || $scope.amount == "")){
             result = false;
-            msg = "Fill in Amount";
+            msg = ERRORMSG.amountEmpty;
         }
         else if ($scope.productImages < 1){
             result = false;
-            msg = "Upload at least one Product Image";
+            msg = ERRORMSG.productImagesEmpty;
         }
         returnObj = {result, msg};
         return returnObj;
     };
+
+    const ERRORMSG = {
+        productNameEmpty: "Fill in Product Name",
+        productCategoryNameEmpty: "Select Product Category",
+        productSubCategoryNameEmpty: "Select Product Sub Category",
+        productDescriptionEmpty: "Fill in Description",
+        quantityEmpty: "Fill in Quantity",
+        amountEmpty: "Fill in Amount",
+        productImagesEmpty: "Upload at least one Product Image"
+      };
 }]);

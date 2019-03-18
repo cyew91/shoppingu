@@ -1,6 +1,7 @@
 'use strict'
 
-angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', '$rootScope', '$window', '$anchorScroll', function ($scope, $state, $stateParams, GetCountryList, $rootScope, $window, $anchorScroll) {
+angular.module('mean').controller('TravelController', ['$scope', '$state', '$stateParams', 'GetCountryList', '$rootScope', '$window', '$anchorScroll', 
+function ($scope, $state, $stateParams, GetCountryList, $rootScope, $window, $anchorScroll) {
     $scope.buyer = $stateParams.buyer;
     $scope.profileId = $window.sessionStorage.getItem("id");
     var startDate;
@@ -9,24 +10,33 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
 
     $scope.count = 1;
 
+    if (!$scope.buyer){
+        $rootScope.firstProgressBar = "1. Post Travel";
+        $rootScope.secondProgressBar = "2. Post Product";
+    }
+    else{
+        $rootScope.firstProgressBar = "1. Select Item Country";
+        $rootScope.secondProgressBar = "2. Request Product";
+    }
+    
+
     $scope.init = function () {
         GetCountryList.query(function (list) {
             $scope.countryList = list;
         });
 
-        // initDatePicker();
         initStartDate();
     };
 
-    var initDatePicker = function () {
-        $('.date').datepicker({
-        autoclose: true,
-        keepEmptyValues: true,
-        format: 'yyyy-mm-dd',
-        clearBtn: true,
-        startDate : new Date()
-        });
-    }
+    // var initDatePicker = function () {
+    //     $('.date').datepicker({
+    //     autoclose: true,
+    //     keepEmptyValues: true,
+    //     format: 'yyyy-mm-dd',
+    //     clearBtn: true,
+    //     startDate : new Date()
+    //     });
+    // }
 
     var initStartDate = function() {
         $("#datepickerFrom").datepicker({
@@ -69,50 +79,39 @@ angular.module('mean').controller('TravelController', ['$scope', '$state', '$sta
             $scope.response = false;
             $scope.errorMsg = "Select travel Country";
         }
-        else if (angular.isUndefined(startDate))
-        {
-            $scope.response = false;
-            $scope.errorMsg = "Fill in Date From";
+        else{
+            if (!$scope.buyer){
+                if (angular.isUndefined(startDate))
+                {
+                    $scope.response = false;
+                    $scope.errorMsg = "Fill in Date From";
+                }
+                else if (angular.isUndefined(toDate)){
+                    $scope.response = false;
+                    $scope.errorMsg = "Fill in Date To";
+                }
+                else {
+                    $scope.TravelObj.startDate = startDate;
+                    $scope.TravelObj.toDate = toDate;
+                    $scope.TravelObj.profileId = $scope.profileId;
+                    $scope.TravelObj.buyer = $scope.buyer;
+                    $state.go('postproduct', { travelObj: $scope.TravelObj });
+                    // Scroll to top
+                    $anchorScroll();
+                }
+            }
+            else{
+                $scope.TravelObj.profileId = $scope.profileId;
+                $scope.TravelObj.buyer = $scope.buyer;
+                $state.go('postproduct', { travelObj: $scope.TravelObj });
+                // Scroll to top
+                $anchorScroll();
+            }
         }
-        else if (angular.isUndefined(toDate)){
-            $scope.response = false;
-            $scope.errorMsg = "Fill in Date To";
-        }
-        else {
-            $scope.TravelObj.startDate = startDate;
-            $scope.TravelObj.toDate = toDate;
-            $scope.TravelObj.profileId = $scope.profileId;
-            $state.go('postproduct', { travelObj: $scope.TravelObj });
-            // Scroll to top
-            $anchorScroll();
-        }
+        
+        
     }
 
-    //Input Progress
-    // function updateInputProgress() {
-    //     var filledFields = 0;
-    //     $("#input-progress").find("input, select").each(function () {
-    //         if ($(this).val() != "") {
-    //             filledFields++;
-    //         }
-    //     });
-
-    //     var percent = Math.ceil(100 * filledFields / totalFields);
-    //     $("#progress-inputs .progress-bar").attr("aria-valuenow", percent).width(percent + "%").find(".sr-only").html(percent + "% Complete");
-
-    //     return percent;
-    // }
-
-
-    // $("#input-progress").click(function () {
-    //     updateInputProgress();
-    // });
-    // $("#input-progress .btn-success").click(function () {
-    //     var percent = updateInputProgress();
-    //     if (percent == 100) {
-    //         alert("Finished inputs successfully!");
-    //     }
-    // })
 }]);
 
 
