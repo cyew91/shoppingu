@@ -186,14 +186,6 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'EditProductDetailController',
             templateUrl: 'views/editProductDetail.html'
         })
-        // .state('posttravelproduct', {
-        //     url: '/posttravelproduct',
-        //     params: {
-        //         productObj: null
-        //     },
-        //     controller: 'ProductController',
-        //     templateUrl: 'views/product/post/product.html'
-        // })
         .state('userprofilemain', {
             url: '/userprofilemain',
             controller: 'UserProfileMainController',

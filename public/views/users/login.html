@@ -4,13 +4,25 @@
     <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
         Invalid username or password.
     </div>
-
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=219745928654021&autoLogAppEvents=1"></script>
+    <!-- <script id="facebook-jssdk" async="" src="//connect.facebook.net/en_US/sdk.js"></script> -->
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form class="login-box" ng-submit="signIn(user)">
                 <h4 class="margin-bottom-1x">Login</h4>
+                <button class="loginBtn loginBtn--facebook" ng-click="fbAuth();">
+                    Login with Facebook
+                </button>
+                <!-- <div class="fb-login-button" style="margin-bottom: 15px;" data-size="large" data-button-type="continue_with"
+                    ng-click="fbAuth()" data-auto-logout-link="false" data-use-continue-as="false"> -->
+
+                <!-- </div>
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button> -->
+
                 <div class="form-group input-group">
-                    <input class="form-control" type="username" placeholder="Username" ng-model="user.username" required>
+                    <input class="form-control" type="username" placeholder="Email" ng-model="user.email" required>
                     <span class="input-group-addon">
                         <i class="icon-head"></i>
                     </span>

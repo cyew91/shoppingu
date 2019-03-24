@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system')
-    .controller('HeaderController', ['$scope', 'socket', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', '$anchorScroll', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode',
-    function ($scope, socket, SignOut, CheckLoggedIn, $state, $rootScope, $anchorScroll, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode) {
+    .controller('HeaderController', ['$scope', 'socket', 'SignOut', 'CheckLoggedIn', '$state', '$rootScope', '$anchorScroll', 'GetProductID', '$window', 'GetProdCatAndSubCat', 'GetProdDetailByProdCatCode', 'SocialAuth',
+    function ($scope, socket, SignOut, CheckLoggedIn, $state, $rootScope, $anchorScroll, GetProductID, $window, GetProdCatAndSubCat, GetProdDetailByProdCatCode, SocialAuth) {
         
     //$scope.isLoading = true;
     $scope.productTravel = [];
@@ -31,12 +31,25 @@ angular.module('mean.system')
         
     });
     
+    // Load the SDK asynchronously
+    (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+    }(document));
+
     $scope.SignOut = function () {
         SignOut.get(function (response) {
             if (response.status === 'success') {
                 $rootScope.currentUser = null;
                 $window.location.reload();
                 $state.go('home');
+
+                FB.logout(function(response) {
+                    // user is now logged out
+                });
             }
         });
     };
@@ -88,6 +101,11 @@ angular.module('mean.system')
         $state.go('travel', { buyer: true });
     }
 
+    $scope.goToLogin = function(){
+        //$window.location.reload();
+        $state.go('login');
+    }
+
     // Return notification while push msg
     socket.on('notifications_1', function(data){
         if(data.name == $window.localStorage.getItem("usernameHeader")){
@@ -108,7 +126,7 @@ angular.module('mean.system')
 
     // Init chat notification
     $scope.initChatNotification = function(){
-        socket.emit("getUserFriendList", {username: $window.localStorage.getItem("usernameHeader"), user_2: "null"});
+        socket.emit("getUserFriendList", {username: $window.localStorage.getItem("usernameHeader"), user_2: "null", fromHeader: 1});
 
         socket.on('returnFriendList', function (data) {
             $scope.users_temp = data;
@@ -119,10 +137,10 @@ angular.module('mean.system')
                 if (value.user_2 == $window.localStorage.getItem("usernameHeader")){
                     value.user_2 = value.user_1;
                 }
-                socket.emit("inbox_id", {user_1: $window.localStorage.getItem("usernameHeader"), user_2: value.user_2}); 
+                socket.emit("inbox_id", {user_1: $window.localStorage.getItem("usernameHeader"), user_2: value.user_2, fromHeader: 1}); 
             });
             
-            socket.on('inbox_id2', function(data){
+            socket.on('inbox_id2Header', function(data){
                 socket.emit('get_notification', {inbox_id: data.inbox_id, user_name: data.user_2, name: $window.localStorage.getItem("usernameHeader")}); 
             });
         });

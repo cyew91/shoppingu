@@ -16,7 +16,10 @@ angular.module('mean.auth').controller('signUp', ['$scope', 'Global', '$state', 
 
         signUp.$save(function (response) {
             if (response.result === 'success') {
-                $('#myModal').modal('show');
+                $('#myModal').modal("show");
+            }
+            else{
+                $scope.errorMsg = response.message;
             }
         });
     };

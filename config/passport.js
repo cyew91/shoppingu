@@ -29,17 +29,21 @@ passport.deserializeUser(function(id, done) {
 
 //Use local strategy
 passport.use(new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password'
   },
-  function(username, password, done) {
-    db.profile.find({ where: { loginId: username }}).then(function(user) {
+  function(email, password, done) {
+    db.profile.find({ 
+      where: { 
+        email: email 
+      }
+    }).then(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else if (!user.authenticate(password)) {
         done(null, false, { message: 'Invalid password'});
       } else {
-        winston.info('Login (local) : { profileId: ' + user.id + ', loginId: ' + user.loginId + ' }');
+        //winston.info('Login (local) : { profileId: ' + user.id + ', loginId: ' + user.loginId + ' }');
         done(null, user);
       }
     }).catch(function(err){
@@ -53,21 +57,25 @@ passport.use(new FacebookTokenStrategy({
         clientSecret: config.facebook.clientSecret,
         profileFields: ['id', 'first_name', 'last_name', 'email', 'photos']
     }, function (accessToken, refreshToken, profile, done) {
-
-        db.User.find({where : {email: profile.emails[0].value}}).then(function(user){
+        db.profile.find({
+          where : {
+            email: profile.emails[0].value
+          }
+        }).then(function(user){
             if(!user){
-                db.User.create({
-                    name: profile.name.givenName || '',
-                    email: profile.emails[0].value,
-                    username: profile.name.givenName || '',
-                    provider: 'facebook',
-                    facebookUserId: profile.id
+                db.profile.create({
+                  firstName: profile.name.givenName || '',
+                  email: profile.emails[0].value,
+                  lastName: profile.name.familyName || '',
+                  loginId: profile.name.familyName + ' ' + profile.name.givenName,
+                  provider: 'facebook',
+                  facebookUserId: profile.id
                 }).then(function(u){
-                    winston.info('New User (facebook) : { id: ' + u.id + ', username: ' + u.username + ' }');
+                    //winston.info('New User (facebook) : { id: ' + u.id + ', username: ' + u.username + ' }');
                     done(null, u);
                 })
             } else {
-                winston.info('Login (facebook) : { id: ' + user.id + ', username: ' + user.username + ' }');
+                //winston.info('Login (facebook) : { id: ' + user.id + ', username: ' + user.username + ' }');
                 done(null, user);
             }
         }).catch(function(err){

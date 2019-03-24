@@ -45,19 +45,6 @@ angular.module('mean.articles')
       $state.go('post', {profile: $scope.profile});
     };
 
-    // $scope.updateUserProfilePicture = function() {
-    //   var profile = $scope.profile;
-    //   if (!profile.updated) {
-    //       profile.updated = [];
-    //   }
-    //   profile.updated.push(new Date().getTime());
-    //   //profile.$update(function() {
-    //     //$state.go('home');
-    //   profile.$update();
-    //   //});
-    // };
-
-    
 
     // $scope.$on("fileProgress", function(e, progress) {
     //   $scope.progress = progress.loaded / progress.total;

@@ -98,12 +98,12 @@
         </a>
       </li>
       <li>
-        <a ui-sref="chat">
+        <a ui-sref="#">
           <span>How it works</span>
         </a>
       </li>
       <li>
-        <a ui-sref="login" ng-if="!isLogin">
+        <a ng-click="goToLogin()" ng-if="!isLogin">
           <span>Login</span>
         </a>
       </li>
