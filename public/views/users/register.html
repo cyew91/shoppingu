@@ -1,9 +1,15 @@
+
+
+
 <div class="container padding-top-2x padding-bottom-3x mb-2" ng-controller="signUp">
     <div class="row justify-content-center">     
         <div class="col-md-6">
             <div class="padding-top-3x hidden-md-up"></div>
             <h3 class="margin-bottom-1x">No Account? Register</h3>
             <p>Registration takes less than a minute but gives you full control over your orders.</p>
+            <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="errorMsg">
+                {{errorMsg}}
+            </div>
             <form class="row" ng-submit="signUp()">
                 <div class="col-sm-6">
                     <div class="form-group">

@@ -261,39 +261,108 @@ exports.show = function (req, res) {
 
 /**
  * Create profile
+ * 1. Check duplicate email
+ * 2. Check duplicate loginId
+ * 3. Check password and confirm password must be equal
  */
 exports.create = function (req, res) {
+    
+    //if(typeof req.body.facebookLogin == 'undefined'){ // Register from web
+        db.profile.findAndCount({
+            where: {
+                email: req.body.email
+            }
+        }).then(function (data){
+            if(data.count == 0){ // No duplicate email
+                db.profile.findAndCount({
+                    where: {
+                        loginId: req.body.loginId
+                    }
+                }).then(function (data){
+                    if(data.count == 0){ // No duplicate LoginId
+                        var profileDetail = {
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            email: req.body.email,
+                            contactNo: req.body.contactNo,
+                            loginId: req.body.loginId,
+                            password: req.body.password,
+                            confirmPassword: req.body.confirmPassword
+                        };
 
-    var profileDetail = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        contactNo: req.body.contactNo,
-        loginId: req.body.loginId,
-        password: req.body.password,
-        confirmPassword: req.body.confirmPassword
-    };
-
-    if (req.body.password === req.body.confirmPassword) {
-        var profile = db.profile.build(profileDetail);
-        req.body.id = profile.id;
-        profile.saltPassword = profile.makeSalt();
-        profile.hashPassword = profile.encryptPassword(req.body.password, profile.saltPassword);
-
-        profile.save().then(function () {
-            return res.jsonp({
-                "result": "success"
-            });
-        }).catch(function (err) {
-            res.send({
-                status: 'Exception',
-                message: err
-            });
+                        if (req.body.password === req.body.confirmPassword) {
+                            var profile = db.profile.build(profileDetail);
+                            req.body.id = profile.id;
+                            profile.saltPassword = profile.makeSalt();
+                            profile.hashPassword = profile.encryptPassword(req.body.password, profile.saltPassword);
+                    
+                            profile.save().then(function () {
+                                return res.jsonp({
+                                    "result": "success"
+                                });
+                            }).catch(function (err) {
+                                res.send({
+                                    status: 'Exception',
+                                    message: err
+                                });
+                            });
+                        } else {
+                            res.send({
+                                status: 'Error',
+                                message: 'Password and confirm password must be match'
+                            });
+                        }
+                    }
+                    else{ // Return duplicate loginId error message
+                        res.send({
+                            status: 'Error',
+                            message: 'User Name already exists'
+                        });
+                    }
+                })
+            }
+            else{ // Return duplicate email error message
+                res.send({
+                    status: 'Error',
+                    message: 'Email already exists'
+                });
+            }
         });
-    } else {
-        res.send({
-            status: 'Error',
-            message: 'Password is not same with confirm password'
-        });
-    }
+    //}
+    // else{ // Login and register from facebook API
+    //     db.profile.findAndCount({
+    //         where: {
+    //             email: req.body.facebookLogin.email
+    //         }
+    //     }).then(function (data){
+    //         if(data.count == 0){ // If not yet register to db
+    //             var profileDetail = {
+    //                 firstName: req.body.facebookLogin.first_name,
+    //                 lastName: req.body.facebookLogin.last_name,
+    //                 email: req.body.facebookLogin.email,
+    //                 facebookUserId: req.body.facebookLogin.id
+    //             };
+
+    //             var profile = db.profile.build(profileDetail);
+    //             req.body.id = profile.id;
+
+    //             profile.save().then(function () {
+    //                 return res.jsonp({
+    //                     "result": "success"
+    //                 });
+    //             }).catch(function (err) {
+    //                 res.send({
+    //                     status: 'Exception',
+    //                     message: err
+    //                 });
+    //             });
+
+    //         }
+    //     }).then(function(){
+    //         return res.jsonp({
+    //             "result": "success"
+    //         });
+    //     });
+    // }
+    
 };

@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         contactNo: {
             type: DataTypes.STRING(45),
-            allowNull: false,
+            allowNull: true,
             field: 'contact_no'
         },
         gender: {
@@ -54,7 +54,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         hashPassword: {
             type: DataTypes.STRING(1000),
-            allowNull: false,
+            allowNull: true,
             field: 'hash_password'
         },
         saltPassword: {
@@ -65,6 +65,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             field: 'is_active',
             defaultValue: true,
+        },
+        facebookUserId: {
+            type: DataTypes.STRING(45),
+            field: 'facebook_user_id'
         }
     }, {
         timestamps: true,

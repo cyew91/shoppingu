@@ -185,7 +185,7 @@ exports.facebookUser = function (req, res, next) {
         });
     }
 
-    passport.authenticate('facebook-token', {scope: ['email', 'user_about_me', 'phone']}, sendResponse)(req, res, next);
+    passport.authenticate('facebook-token', sendResponse)(req, res, next);
 };
 
 exports.twitterSocialUser = function (req, res) {

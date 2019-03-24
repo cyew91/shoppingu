@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
 io.on('connection',function(socket){
     // Return User Friend list
     socket.on('getUserFriendList', function (data) {
-        console.log('Get user friend list');
+        //console.log('Get user friend list');
         user_controller.getUserFriendList(data, socket);
     });
 

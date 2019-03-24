@@ -16,6 +16,7 @@ exports.get_io = function(data) {
 exports.getUserFriendList = function(data, socket){
     var name = data.username;
     var user_2 = data.user_2;
+    var fromHeader = data.fromHeader;
     db.inboxes.findAll({
         where: { 
             $or: [
@@ -34,13 +35,17 @@ exports.getUserFriendList = function(data, socket){
             socket.emit("returnFriendList", data);
         }
         else{
-            db.inboxes.create({
-                user_1: name,
-                user_2: user_2
-            })
-            .then(function(data){
-                socket.emit("inbox_id",{inbox_id:data.id,user_2})
-            });
+            if(fromHeader == 0){
+                if(user_2 != "null"){
+                    db.inboxes.create({
+                        user_1: name,
+                        user_2: user_2
+                    })
+                    .then(function(data){
+                        socket.emit("returnFriendList",[{user_1: data.user_1,user_2}])
+                    });
+                }
+            }
         }
     })
     .catch(function(err){
@@ -52,8 +57,9 @@ exports.getUserFriendList = function(data, socket){
 };
 
 exports.inbox_id = function(data, socket){
-    var user_1=data.user_1;
-    var user_2=data.user_2;
+    var user_1 = data.user_1;
+    var user_2 = data.user_2;
+    var fromHeader = data.fromHeader;
     db.inboxes.find({
         where: {
             user_1: {
@@ -72,9 +78,14 @@ exports.inbox_id = function(data, socket){
         attributes: ['id','user_1','user_2']
     })
     .then(function(data){
-        //console.log(data.dataValues);
         if (data){
-            socket.emit('inbox_id2',{inbox_id:data.id,user_2}); 
+            if(fromHeader == 0){
+                socket.emit('inbox_id2',{inbox_id:data.id,user_2});
+            }
+            else{
+                socket.emit('inbox_id2Header',{inbox_id:data.id,user_2});
+            }
+            
         }
         // else{
         //     db.inboxes.create({
@@ -139,13 +150,14 @@ exports.message = function (data, socket) {
         message=data.dataValues.Message;
         inbox_id=data.dataValues.inbox_id;
 
-        io.emit('new_message',{id:data.dataValues.id,
+        io.emit('new_message',{
+            id:data.dataValues.id,
             user_name:user_name, 
             message:message, 
             inbox_id:inbox_id,
-             time:data.dataValues.time,
-             date:data.dataValues.date,
-             status:data.dataValues.status
+            time:data.dataValues.time,
+            date:data.dataValues.date,
+            status:data.dataValues.status
         });
     }).then(function(data){
         db.replies.findAndCount({
