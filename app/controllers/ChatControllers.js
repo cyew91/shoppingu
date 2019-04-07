@@ -17,6 +17,7 @@ exports.getUserFriendList = function(data, socket){
     var name = data.username;
     var user_2 = data.user_2;
     var fromHeader = data.fromHeader;
+    var product_id = data.product_id;
     db.inboxes.findAll({
         where: { 
             $or: [
@@ -26,25 +27,90 @@ exports.getUserFriendList = function(data, socket){
                 {
                     user_2: name
                 }
-            ]
+            ],
         },
-        attributes: ['user_1', 'user_2']
+        attributes: ['user_1', 'user_2', 'post_travel_product_id']
     })
     .then(function(data){
-        if (data.length > 0){
-            socket.emit("returnFriendList", data);
-        }
-        else{
-            if(fromHeader == 0){
-                if(user_2 != "null"){
-                    db.inboxes.create({
-                        user_1: name,
-                        user_2: user_2
+        if(fromHeader == 0){ // is not from header
+            if(user_2 === "null"){ // route from home
+                if (data.length > 0){ // return all friends
+                    socket.emit("returnFriendList", data);
+                }
+            }
+            else{ // route from product detail page
+                if(data.length > 0){
+                    db.inboxes.findAll({
+                        where: {
+                            $or: [
+                                {
+                                    user_1: name
+                                },
+                                {
+                                    user_2: name
+                                }
+                            ],
+                            $and: {
+                                post_travel_product_id: product_id
+                            }
+                        }
                     })
                     .then(function(data){
-                        socket.emit("returnFriendList",[{user_1: data.user_1,user_2}])
-                    });
+                        if(data.length > 0){ // if can found select all friend from db
+                            db.inboxes.findAll({
+                                where: { 
+                                    $or: [
+                                        {
+                                            user_1: name
+                                        },
+                                        {
+                                            user_2: name
+                                        }
+                                    ],
+                                },
+                                // include: [{
+                                //     model: db.post_travel_product
+                                // }],
+                                attributes: ['user_1', 'user_2', 'post_travel_product_id']
+                            })
+                            .then(function(data){
+                                socket.emit("returnFriendList", data);
+                            });
+                        }
+                        else{ // if cannot found create new record
+                            db.inboxes.create({
+                                user_1: name,
+                                user_2: user_2,
+                                post_travel_product_id: product_id
+                            })
+                            .then(function(data){
+                                db.inboxes.findAll({ // select all friend from db
+                                    where: { 
+                                        $or: [
+                                            {
+                                                user_1: name
+                                            },
+                                            {
+                                                user_2: name
+                                            }
+                                        ],
+                                    },
+                                    attributes: ['user_1', 'user_2', 'post_travel_product_id']
+                                })
+                                .then(function(data){
+                                    socket.emit("returnFriendList", data);
+                                    // socket.emit("returnFriendList",[{user_1: data.user_1,user_2,post_travel_product_id: data.post_travel_product_id}])
+                                });
+                                
+                            });
+                        }
+                    })
                 }
+            }
+        }
+        else{
+            if (data.length > 0){ // return all from header to get notification
+                socket.emit("returnFriendListHeader", data);
             }
         }
     })
@@ -60,6 +126,7 @@ exports.inbox_id = function(data, socket){
     var user_1 = data.user_1;
     var user_2 = data.user_2;
     var fromHeader = data.fromHeader;
+    var product_id = data.product_id;
     db.inboxes.find({
         where: {
             user_1: {
@@ -74,29 +141,25 @@ exports.inbox_id = function(data, socket){
                     user_2
                 ]
             },
+            post_travel_product_id:{
+                $and: [product_id]
+            },
         },
-        attributes: ['id','user_1','user_2']
+        include: [{
+            model: db.post_travel_product
+        }],
+        attributes: ['id','user_1','user_2', 'post_travel_product_id']
     })
     .then(function(data){
         if (data){
             if(fromHeader == 0){
-                socket.emit('inbox_id2',{inbox_id:data.id,user_2});
+                //socket.emit('inbox_id2', data);
+                socket.emit('inbox_id2',{inbox_id:data.id,user_2,product_id: data.post_travel_product_id, post_travel_product: data.post_travel_product});
             }
             else{
                 socket.emit('inbox_id2Header',{inbox_id:data.id,user_2});
             }
-            
         }
-        // else{
-        //     db.inboxes.create({
-        //         user_1: user_1,
-        //         user_2: user_2
-        //     })
-        //     .then(function(data){
-        //         socket.emit("inbox_id",{inbox_id:data.id,user_2})
-        //     });
-        // }
-        
     })
     .catch(function(err){
         // return res.render('error', {
@@ -182,7 +245,7 @@ exports.message = function (data, socket) {
 exports.read_msg = function(data, socket){
     var now = new Date();
     var inbox_id = data.inbox_id;
-    var seen_time = dateFormat(now,"fullDate").toString()+ "   "+dateFormat(now,"shortTime").toString();
+    var seen_time = dateFormat(now,"fullDate").toString()+ " " +dateFormat(now,"shortTime").toString();
 
     db.replies.update({
         status: 'read',

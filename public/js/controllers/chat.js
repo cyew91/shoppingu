@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean')
-  .controller("ChatController", ['$scope', '$stateParams', '$window', 'GetUserProfileById', 'socket', 
-    function ($scope, $stateParams, $window, GetUserProfileById, socket) {
+  .controller("ChatController", ['$scope', '$stateParams', '$window', 'GetUserProfileById', 'socket', 'CreateProductOrder',
+    function ($scope, $stateParams, $window, GetUserProfileById, socket, CreateProductOrder) {
 
     $scope.hasLogined = false;
     $scope.users = {};
@@ -25,6 +25,7 @@ angular.module('mean')
         socket.getSocket().removeListener("all_messages");
         socket.getSocket().removeListener("seen_notification");
         socket.getSocket().removeListener("new_message");
+        socket.getSocket().removeListener("inbox_id");
     });
 
     $scope.initUserProfile = function() {
@@ -32,18 +33,33 @@ angular.module('mean')
             id: userId
         }, function(result) {
             $scope.loginId = result.loginId;
-
+            
+            socket.getSocket().removeListener("returnFriendList");
+            socket.getSocket().removeListener("inbox_id2Header");
+            socket.getSocket().removeListener("inbox_id");
             // Inactive send button
             $('#send_btn').attr('disabled','disabled');
 
             $window.localStorage.setItem("username", $scope.loginId);
             
-            // To check route from index or productDetail page
+            // (fromHeader) To check route from index or productDetail page
             if($scope.productTravel == null){
-                socket.emit("getUserFriendList", {username: $window.localStorage.getItem("username"), user_2: "null", fromHeader: 0});
+                socket.emit("getUserFriendList", {
+                    username: $window.localStorage.getItem("username"), 
+                    user_2: "null", 
+                    fromHeader: 0,
+                    //product_id: 0
+                });
             }
             else{
-                socket.emit("getUserFriendList", {username: $window.localStorage.getItem("username"), user_2: $scope.productTravel.post_travel.profile.loginId, fromHeader: 0});   
+                $scope.offerPrice = $scope.productTravel.amount;
+                $window.localStorage.setItem("product_id", $scope.productTravel.id);
+                socket.emit("getUserFriendList", {
+                    username: $window.localStorage.getItem("username"), 
+                    user_2: $scope.productTravel.post_travel.profile.loginId, 
+                    fromHeader: 0,
+                    product_id: $scope.productTravel.id
+                });   
             }
             
             socket.on('returnFriendList', function (data) {
@@ -55,13 +71,20 @@ angular.module('mean')
                     if (value.user_2 == $window.localStorage.getItem("username")){
                         value.user_2 = value.user_1;
                     }
-                    socket.emit("inbox_id", {user_1: $window.localStorage.getItem("username"), user_2: value.user_2, fromHeader: 0}); 
+                    socket.emit("inbox_id", {
+                        user_1: $window.localStorage.getItem("username"), 
+                        user_2: value.user_2, 
+                        fromHeader: 0,
+                        product_id: value.post_travel_product_id
+                    }); 
                 });
                 var i = 0;
                 socket.on('inbox_id2', function(data){
                     socket.emit('get_notification', {inbox_id: data.inbox_id, user_name: data.user_2, name: $window.localStorage.getItem("username")});
-                    $scope.users[data.user_2] = data.inbox_id;
+                    // $scope.users[data.user_2] = data.inbox_id;
+                    // $scope.users[i] = data;
                     listUsers[i] = data;
+                    $scope.users[i] = listUsers[i];
                     i++;
 
                     listUsers.forEach(element => {
@@ -106,7 +129,7 @@ angular.module('mean')
         $window.localStorage.setItem("frnd_name", name);
         $window.localStorage.setItem("inbox_id", id);
         $scope.friendName = name;
-        
+        $scope.messages = [];
         // Inactive send button
         $('#send_btn').removeAttr('disabled');
 
@@ -121,9 +144,10 @@ angular.module('mean')
         });
 
         // Read notification
-        socket.emit("read_notification", {inbox_id: $window.localStorage.getItem("inbox_id"), user_name: $window.localStorage.getItem("frnd_name")});
-
-        
+        socket.emit("read_notification", {
+            inbox_id: $window.localStorage.getItem("inbox_id"), 
+            user_name: $window.localStorage.getItem("frnd_name")
+        });
 
         // Update user read msg in inbox list to 0
         $scope.inbox_id[$window.localStorage.getItem("inbox_id")] = 0;
@@ -172,6 +196,20 @@ angular.module('mean')
 
     $scope.get_count = function(id){
         return $scope.inbox_id[id];
+    };
+
+    $scope.makeOffer = function(){
+        if(angular.isUndefined($scope.offerPrice)){
+            $scope.offerPrice = '';
+        }else if($scope.offerPrice != "" || $scope.offerPrice != ''){
+            socket.emit('message', {
+                name: $scope.loginId, 
+                msg: $scope.offerPrice, 
+                frnd_name: $window.localStorage.getItem("frnd_name"),
+                inbox_id: $window.localStorage.getItem("inbox_id")
+            });
+            $scope.offerPrice = '';
+        }
     };
 
 }]);

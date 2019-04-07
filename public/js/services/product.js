@@ -79,3 +79,8 @@ angular.module('mean.articles').service('CreateRequest', ['$resource', function(
 angular.module('mean.articles').service('CreateSellerRate', ['$resource', function($resource){
     return $resource('/sellerrate');
 }]);
+
+// Create product order
+angular.module('mean.articles').service('CreateProductOrder', ['$resource', function($resource){
+    return $resource('/productorder');
+}]);

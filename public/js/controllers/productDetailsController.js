@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window',
-	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window', '$anchorScroll',
+	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll) {
 	$scope.global = Global;
 	$scope.profileId = $window.sessionStorage.getItem("id");
 	$scope.prodTravel = $stateParams.prodTravel;
@@ -112,7 +112,14 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 	};
 
 	$scope.goToChat = function () {
-		$state.go('chat', {prodTravel: $stateParams.prodTravel});
+		if($scope.profileId === "undefined"){
+
+		}
+		else{
+			$state.go('chat', {prodTravel: $stateParams.prodTravel});
+			$anchorScroll();
+		}
+		
 	};
 
 }]);

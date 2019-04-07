@@ -30,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
             PostTravelProduct.belongsTo(models.product_sub_category);
             PostTravelProduct.hasMany(models.post_travel_product_document);
             PostTravelProduct.belongsTo(models.post_travel);
+            PostTravelProduct.hasMany(models.inboxes);
         }
     });
 

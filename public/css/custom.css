@@ -94,20 +94,10 @@
 /* ng-click pointer end */
 
 /* Chat start */
-
-/* body{
-
-    background: #ddd;
-    
-    } */
     
 a{
     text-decoration: none !important;
 }
-
-/* label{
-    color: rgba(120, 144, 156,1.0) !important;
-} */
 
 .btn:focus, .btn:active:focus, .btn.active:focus{
     outline: none !important;
@@ -343,3 +333,19 @@ textarea:focus,
   }
 /* facebook login button end */
 
+/* make offer button start */
+/* .make-offer{
+    vertical-align: middle;
+} */
+/* .make-offer .inner{
+    display: table;
+    height: 100%;
+    min-height: 100%;
+} */
+
+/* .make-offer .tools{
+    display: table-cell;
+    vertical-align: middle;
+} */
+
+/* make offer button end */

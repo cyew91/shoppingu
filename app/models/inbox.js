@@ -23,6 +23,9 @@ module.exports = function (sequelize, DataTypes) {
       updatedAt: 'updatedAt',
       freezeTableName: true,
       underscored: true,
+      associate: function (models) {
+        inbox.belongsTo(models.post_travel_product);
+      }
   });
 
   return inbox;

@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'date'
         },
         seen_time:{
-            type:DataTypes.STRING(30),
+            type:DataTypes.STRING(50),
             allowNull:true,
             field: 'seen_time'
         }

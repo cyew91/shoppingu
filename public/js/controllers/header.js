@@ -10,6 +10,8 @@ angular.module('mean.system')
     var productCategory = [];
     var productCategoryId = '';
     $scope.msgCount = 0;
+    var allMsgCount = 0;
+    $scope.allMsgCount = 0;
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
         $scope.isLogin = true;
@@ -44,12 +46,11 @@ angular.module('mean.system')
         SignOut.get(function (response) {
             if (response.status === 'success') {
                 $rootScope.currentUser = null;
-                $window.location.reload();
-                $state.go('home');
 
                 FB.logout(function(response) {
                     // user is now logged out
                 });
+                $window.location.href = '/';
             }
         });
     };
@@ -102,7 +103,6 @@ angular.module('mean.system')
     }
 
     $scope.goToLogin = function(){
-        //$window.location.reload();
         $state.go('login');
     }
 
@@ -116,28 +116,43 @@ angular.module('mean.system')
     // Return notification when init page
     socket.on('notifications', function(data){
         $scope.msgCount = data.count;
-
+        //allMsgCount += data.count;
+        //$scope.allMsgCount = allMsgCount;
     });
 
     // Update notification inbox in home page
     socket.on('returnHomePageCountToZero', function(data){
-        $scope.msgCount = data.setCount;
+        //$scope.msgCount = data.setCount;
+        //$scope.initChatNotification();
     });
+
+    // Triggered when leave the page
+    // $scope.$on("$destroy", function() {        
+    //     socket.getSocket().removeListener("returnFriendList");
+    //     socket.getSocket().removeListener("inbox_id2Header");
+    //     socket.getSocket().removeListener("inbox_id");
+    // });
 
     // Init chat notification
     $scope.initChatNotification = function(){
+        //$scope.allMsgCount = 0;
         socket.emit("getUserFriendList", {username: $window.localStorage.getItem("usernameHeader"), user_2: "null", fromHeader: 1});
 
-        socket.on('returnFriendList', function (data) {
-            $scope.users_temp = data;
+        socket.on('returnFriendListHeader', function (data) {
+            $scope.users_temps = data;
 
             //Get all users inbox id
-            angular.forEach($scope.users_temp, function(value, key){
+            angular.forEach($scope.users_temps, function(value, key){
                 console.log("value: " + value + "key: " + key);
                 if (value.user_2 == $window.localStorage.getItem("usernameHeader")){
                     value.user_2 = value.user_1;
                 }
-                socket.emit("inbox_id", {user_1: $window.localStorage.getItem("usernameHeader"), user_2: value.user_2, fromHeader: 1}); 
+                socket.emit("inbox_id_header", {
+                    user_1: $window.localStorage.getItem("usernameHeader"), 
+                    user_2: value.user_2, 
+                    fromHeader: 1,
+                    product_id: value.post_travel_product_id
+                }); 
             });
             
             socket.on('inbox_id2Header', function(data){
