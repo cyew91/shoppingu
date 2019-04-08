@@ -17,7 +17,11 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(30),
         allowNull: false,
         field: 'user_2'
-    }
+      },
+      offer_price: {
+        type: DataTypes.DECIMAL(10, 3),
+        field: 'offer_price'
+      }
   }, {
       createdAt: 'createdAt',
       updatedAt: 'updatedAt',

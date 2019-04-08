@@ -18,6 +18,7 @@ exports.getUserFriendList = function(data, socket){
     var user_2 = data.user_2;
     var fromHeader = data.fromHeader;
     var product_id = data.product_id;
+    var offer_price = data.offer_price;
     db.inboxes.findAll({
         where: { 
             $or: [
@@ -29,7 +30,7 @@ exports.getUserFriendList = function(data, socket){
                 }
             ],
         },
-        attributes: ['user_1', 'user_2', 'post_travel_product_id']
+        attributes: ['user_1', 'user_2', 'post_travel_product_id', 'offer_price']
     })
     .then(function(data){
         if(fromHeader == 0){ // is not from header
@@ -71,7 +72,7 @@ exports.getUserFriendList = function(data, socket){
                                 // include: [{
                                 //     model: db.post_travel_product
                                 // }],
-                                attributes: ['user_1', 'user_2', 'post_travel_product_id']
+                                attributes: ['user_1', 'user_2', 'post_travel_product_id', 'offer_price']
                             })
                             .then(function(data){
                                 socket.emit("returnFriendList", data);
@@ -81,7 +82,8 @@ exports.getUserFriendList = function(data, socket){
                             db.inboxes.create({
                                 user_1: name,
                                 user_2: user_2,
-                                post_travel_product_id: product_id
+                                post_travel_product_id: product_id,
+                                offer_price: offer_price,
                             })
                             .then(function(data){
                                 db.inboxes.findAll({ // select all friend from db
@@ -95,7 +97,7 @@ exports.getUserFriendList = function(data, socket){
                                             }
                                         ],
                                     },
-                                    attributes: ['user_1', 'user_2', 'post_travel_product_id']
+                                    attributes: ['user_1', 'user_2', 'post_travel_product_id', 'offer_price']
                                 })
                                 .then(function(data){
                                     socket.emit("returnFriendList", data);
@@ -148,13 +150,18 @@ exports.inbox_id = function(data, socket){
         include: [{
             model: db.post_travel_product
         }],
-        attributes: ['id','user_1','user_2', 'post_travel_product_id']
+        attributes: ['id','user_1','user_2', 'post_travel_product_id', 'offer_price']
     })
     .then(function(data){
         if (data){
             if(fromHeader == 0){
                 //socket.emit('inbox_id2', data);
-                socket.emit('inbox_id2',{inbox_id:data.id,user_2,product_id: data.post_travel_product_id, post_travel_product: data.post_travel_product});
+                socket.emit('inbox_id2',{
+                    inbox_id:data.id,user_2,
+                    product_id: data.post_travel_product_id, 
+                    post_travel_product: data.post_travel_product,
+                    offer_price: data.offer_price
+                });
             }
             else{
                 socket.emit('inbox_id2Header',{inbox_id:data.id,user_2});
@@ -177,7 +184,6 @@ exports.get_messages = function (data, socket) {
         attributes: ['id','Message','user_name','inbox_id','time','date','seen_time','status','createdAt']
     })
     .then(function(data){
-        //console.log(data.dataValues);
         if (data.length > 0)
             socket.emit('all_messages',data);  
     })
@@ -266,7 +272,6 @@ exports.read_msg = function(data, socket){
             io.emit('seen_notification', data);
         });
     });
-
 };
 
 exports.get_notification = function(data, socket){
@@ -308,6 +313,25 @@ exports.setHomePageCountToZero = function (data, socket){
     else{
         socket.emit('returnHomePageCountToZero', {setCount: 0});
     }
+};
+
+exports.editOfferPrice = function(data){
+    var inbox_id = data.inbox_id;
+    var offer_price = data.offer_price;
+
+    db.inboxes.update({
+        offer_price: offer_price,
+    },
+    {
+        where: {
+            id: inbox_id
+        },
+    }).then(function(data){
+        if(data.count > 0){
+            // return success
+        }
+    });
+
 };
 
 // chat end

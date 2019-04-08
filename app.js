@@ -99,6 +99,11 @@ io.on('connection',function(socket){
         user_controller.setHomePageCountToZero(data, socket);
     });
 
+    // Update offer price
+    socket.on('edit_offer_price', function(data){
+        user_controller.editOfferPrice(data, socket);
+    });
+
     socket.on('disconnect', function (data) { 
         console.log('Socket ${socket.id} disconnected.');
     });

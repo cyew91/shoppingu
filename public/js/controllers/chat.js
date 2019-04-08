@@ -53,12 +53,14 @@ angular.module('mean')
             }
             else{
                 $scope.offerPrice = $scope.productTravel.amount;
+                $window.localStorage.setItem("offer_price", $scope.offerPrice);
                 $window.localStorage.setItem("product_id", $scope.productTravel.id);
                 socket.emit("getUserFriendList", {
                     username: $window.localStorage.getItem("username"), 
                     user_2: $scope.productTravel.post_travel.profile.loginId, 
                     fromHeader: 0,
-                    product_id: $scope.productTravel.id
+                    product_id: $scope.productTravel.id,
+                    offer_price: $window.localStorage.getItem("offer_price")
                 });   
             }
             
@@ -125,11 +127,14 @@ angular.module('mean')
         }
     };
 
-    $scope.clickOnUserList = function (name, id){
+    $scope.clickOnUserList = function (name, id, index){
         $window.localStorage.setItem("frnd_name", name);
         $window.localStorage.setItem("inbox_id", id);
         $scope.friendName = name;
         $scope.messages = [];
+        $scope.offerPrice = $scope.users[index].offer_price;
+        $scope.indexFromUserList = index;
+
         // Inactive send button
         $('#send_btn').removeAttr('disabled');
 
@@ -208,9 +213,18 @@ angular.module('mean')
                 frnd_name: $window.localStorage.getItem("frnd_name"),
                 inbox_id: $window.localStorage.getItem("inbox_id")
             });
-            $scope.offerPrice = '';
+
+            socket.emit('edit_offer_price', {
+                inbox_id: $window.localStorage.getItem("inbox_id"),
+                offer_price: $scope.offerPrice, 
+            });
+
+            // Update offer price in the users list
+            var indexFromUserList = $scope.indexFromUserList;
+            $scope.users[indexFromUserList].offer_price = $scope.offerPrice;
         }
     };
+
 
 }]);
 

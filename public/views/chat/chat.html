@@ -7,7 +7,7 @@
             </div>
             <div class="user-wrapper panel-body">
                 <!-- <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)"> -->
-                <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id)">
+                <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id, $index)">
                     <span class="avatar"></span><span class="nickname">{{user.user_2}} - {{user.post_travel_product.productName}}</span>
                     <span class="unread" ng-show="get_count(user.inbox_id) > 0">{{get_count(user.inbox_id)}}</span>
                 </div>
@@ -25,10 +25,13 @@
                                     </small></h6>
                                 <div class="d-flex float-right">
                                     <div class="make-offer row">
+                                        <div class="col-md-1 p-3">
+                                            <label class="col-form-label">RM</label>
+                                        </div>
                                         <div class="col-md-6 p-3">
                                             <input class="form-control form-control-rounded form-control-sm" type="number" id="number-input" ng-model="offerPrice">
                                         </div>
-                                        <div class="col-md-6 p-1">
+                                        <div class="col-md-5 p-1">
                                             <button class="btn btn-rounded btn-secondary" ng-click="makeOffer()">Make Offer</button>
                                         </div>
                                     </div>
