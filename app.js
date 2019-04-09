@@ -104,9 +104,9 @@ io.on('connection',function(socket){
         user_controller.editOfferPrice(data, socket);
     });
 
-    socket.on('disconnect', function (data) { 
-        console.log('Socket ${socket.id} disconnected.');
-    });
+    // socket.on('disconnect', function (data) { 
+    //     console.log('Socket ${socket.id} disconnected.');
+    // });
 });
 
 http.listen(config.PORT, function () {
