@@ -80,6 +80,7 @@ angular.module('mean')
                         product_id: value.post_travel_product_id
                     }); 
                 });
+                
                 var i = 0;
                 socket.on('inbox_id2', function(data){
                     socket.emit('get_notification', {inbox_id: data.inbox_id, user_name: data.user_2, name: $window.localStorage.getItem("username")});
@@ -88,11 +89,11 @@ angular.module('mean')
                     listUsers[i] = data;
                     $scope.users[i] = listUsers[i];
                     i++;
-
-                    listUsers.forEach(element => {
+                    
+                    listUsers.forEach(function (element, index){
                         if($scope.productTravel != null){
-                            if($scope.productTravel.post_travel.profile.loginId == element.user_2){
-                                $scope.clickOnUserList(element.user_2, element.inbox_id);
+                            if($scope.productTravel.post_travel.profile.loginId == element.user_2 && $scope.productTravel.id == element.product_id){
+                                $scope.clickOnUserList(element.user_2, element.inbox_id, index);
                             }
                         }
                     });

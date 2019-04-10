@@ -40,7 +40,7 @@ exports.getUserFriendList = function(data, socket){
                 }
             }
             else{ // route from product detail page
-                if(data.length > 0){
+                // if(data.length > 0){
                     db.inboxes.findAll({
                         where: {
                             $or: [
@@ -107,7 +107,10 @@ exports.getUserFriendList = function(data, socket){
                             });
                         }
                     })
-                }
+                // }
+                // else{
+                    
+                // }
             }
         }
         else{
