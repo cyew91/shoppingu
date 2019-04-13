@@ -61,6 +61,11 @@ io.on('connection',function(socket){
         user_controller.inbox_id(data,socket);
     });
 
+    // Get inbox_id header
+    socket.on('inbox_id_header',function(data){
+        user_controller.inbox_id(data,socket);
+    });
+
     socket.on('get_messages', function(data){
         user_controller.get_messages(data.inbox_id,socket);
     });
@@ -94,9 +99,14 @@ io.on('connection',function(socket){
         user_controller.setHomePageCountToZero(data, socket);
     });
 
-    socket.on('disconnect', function (data) { 
-        console.log('Socket ${socket.id} disconnected.');
+    // Update offer price
+    socket.on('edit_offer_price', function(data){
+        user_controller.editOfferPrice(data, socket);
     });
+
+    // socket.on('disconnect', function (data) { 
+    //     console.log('Socket ${socket.id} disconnected.');
+    // });
 });
 
 http.listen(config.PORT, function () {

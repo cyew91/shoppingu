@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(500)
         },
         amount: {
-            type: DataTypes.DECIMAL(10, 3)
+            type: DataTypes.DECIMAL(10, 2)
         }
     }, {
         timestamps: true,
@@ -30,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
             PostTravelProduct.belongsTo(models.product_sub_category);
             PostTravelProduct.hasMany(models.post_travel_product_document);
             PostTravelProduct.belongsTo(models.post_travel);
+            PostTravelProduct.hasMany(models.inboxes);
         }
     });
 

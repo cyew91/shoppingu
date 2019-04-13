@@ -6,9 +6,10 @@
                 <h3 class="panel-title">Inbox <span class="user-number"></span></h3>
             </div>
             <div class="user-wrapper panel-body">
-                <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)">
-                    <span class="avatar"></span><span class="nickname">{{key}}</span>
-                    <span class="unread" ng-show="get_count(value) > 0">{{get_count(value)}}</span>
+                <!-- <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)"> -->
+                <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id, $index)">
+                    <span class="avatar"></span><span class="nickname">{{user.user_2}} - {{user.post_travel_product.productName}}</span>
+                    <span class="unread" ng-show="get_count(user.inbox_id) > 0">{{get_count(user.inbox_id)}}</span>
                 </div>
             </div>
         </div>
@@ -20,9 +21,21 @@
                             <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
                                 style="color: rgba(96, 125, 139,1.0);">
                                 <img class="rounded float-left" style="width: 50px; height: 50px;" src="https://i.pinimg.com/736x/5c/24/69/5c24695df36eee73abfbdd8274085ecd--cute-anime-guys-anime-boys.jpg" />
-                                <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary"
-                                        aria-hidden="true"></i> </br><small> 
+                                <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary" aria-hidden="true"></i> </br><small> 
                                     </small></h6>
+                                <div class="d-flex float-right">
+                                    <div class="make-offer row">
+                                        <div class="col-md-1 p-3">
+                                            <label class="col-form-label">RM</label>
+                                        </div>
+                                        <div class="col-md-6 p-3">
+                                            <input class="form-control form-control-rounded form-control-sm" type="number" id="number-input" ng-model="offerPrice">
+                                        </div>
+                                        <div class="col-md-5 p-1">
+                                            <button class="btn btn-rounded btn-secondary" ng-click="makeOffer()">Make Offer</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body" style="height: 100vh; overflow-y: auto;" scroll-bottom="messages">
                                 <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent">
