@@ -126,13 +126,6 @@ angular.module('mean.system')
         //$scope.initChatNotification();
     });
 
-    // Triggered when leave the page
-    // $scope.$on("$destroy", function() {        
-    //     socket.getSocket().removeListener("returnFriendList");
-    //     socket.getSocket().removeListener("inbox_id2Header");
-    //     socket.getSocket().removeListener("inbox_id");
-    // });
-
     // Init chat notification
     $scope.initChatNotification = function(){
         //$scope.allMsgCount = 0;

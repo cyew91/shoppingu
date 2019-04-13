@@ -1,14 +1,18 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', '$anchorScroll', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
-    function($scope, Global, $stateParams, $state, $anchorScroll, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
+  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', '$anchorScroll', '$window', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
+    function($scope, Global, $stateParams, $state, $anchorScroll, $window, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
     $scope.global = Global;
-    $scope.profileId = $stateParams.profileId;
+    //$scope.profileId = $stateParams.profileId;
     
-    $scope.productTravel = $stateParams.prodTravel;
-    // $scope.productRequest = $stateParams.prodRequest;
-    
+    if ($stateParams.prodTravel !== null){
+      $window.localStorage.setItem("productTravel", JSON.stringify($stateParams.prodTravel));
+      $scope.productTravel = $stateParams.prodTravel;
+    }else{
+      $scope.productTravel = JSON.parse($window.localStorage.getItem("productTravel"));
+    }
+
     // Travel product
     $scope.tFilteredTodos = [];
     $scope.tCurrentPage = 1;
