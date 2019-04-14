@@ -4,8 +4,18 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll) {
 	$scope.global = Global;
 	$scope.profileId = $window.sessionStorage.getItem("id");
-	$scope.prodTravel = $stateParams.prodTravel;
-	$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+	
+	if ($stateParams.prodTravel !== null){
+		$scope.prodTravel = $stateParams.prodTravel;
+		$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+		$window.localStorage.setItem("prodTravel", JSON.stringify($scope.prodTravel));
+		$window.localStorage.setItem("post_travel_id", $scope.prodTravel.post_travel_id);
+	}
+	else{
+		$scope.prodTravel = JSON.parse($window.localStorage.getItem("prodTravel"));
+		$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+	}
+	
 	$scope.ratings = [{
 		value: '1',
 		label: '1'
@@ -22,15 +32,6 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		value: '5',
 		label: '5'
 	}];   
-
-	// Get country name
-	$scope.initCountryName = function() {
-		GetTravelCountryByTravelId.get({
-				postTravelId: $scope.prodTravel.post_travel_id
-		}, function(result){
-				$scope.countryName = result.country.countryName;
-		});
-	};
 
 	// $('.owl-carousel').owlCarousel({
 	//   items: 5,
@@ -50,7 +51,7 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 	// Get country name
 	$scope.initCountryName = function() {
 		GetTravelByTravelId.get({
-				postTravelId: $scope.prodTravel.post_travel_id
+				postTravelId: $window.localStorage.getItem("post_travel_id")
 		}, function(result){
 				$scope.countryName = result.country.countryName;
 		});
