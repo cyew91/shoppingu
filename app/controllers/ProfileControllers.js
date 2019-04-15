@@ -3,12 +3,10 @@
 /**
  * Module dependencies.
  */
-var db = require("../../config/sequelize"),
-  config = require("../../config/config");
-
+const db = require("../../config/sequelize");
+const config = require("../../config/config");
 const postmark = require("postmark");
-
-//var bcrypt = require('bcrypt');
+const WelcomeEmailService = require("../services/email/WelcomeEmailService");
 const saltRounds = 10;
 
 /**
@@ -315,30 +313,10 @@ exports.create = function(req, res) {
                 profile
                   .save()
                   .then(function() {
-
-                    let client = new postmark.ServerClient(config.POSTMARK.TOKEN);
-                    let templateModel = {
+                    WelcomeEmailService({
                       name: req.body.firstName + req.body.lastName,
-                      username: req.body.loginId,
-                    }
-
-                    client.sendEmailWithTemplate(
-                      {
-                        TemplateAlias: config.POSTMARK.WELCOME_TEMPLATE_ALIAS,
-                        TemplateModel: templateModel,
-                        InlineCss: true,
-                        From: config.POSTMARK.DEVELOPMENT_EMAIL,
-                        To: config.POSTMARK.DEVELOPMENT_EMAIL // In production should update to use user's email instead.
-                      },
-                      (err, data) => {
-                        if (err) {
-                          console.log(err);
-                        }
-                        console.log("<=== POSTMARK Welcome Email Sent ===> ");
-                        console.log(data)
-                        console.log("<=== POSTMARK Welcome Email Sent ===> ");
-                      }
-                    );
+                      username: req.body.loginId
+                    });
 
                     return res.jsonp({
                       result: "success"

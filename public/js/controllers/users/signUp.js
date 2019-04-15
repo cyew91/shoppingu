@@ -1,30 +1,35 @@
-'use strict';
+"use strict";
 
-angular.module('mean.auth').controller('signUp', ['$scope', 'Global', '$state', 'SignUp', function ($scope, Global, $state, SignUp) {
+angular.module("mean.auth").controller("signUp", [
+  "$scope",
+  "Global",
+  "$state",
+  "SignUp",
+  function($scope, Global, $state, SignUp) {
     $scope.global = Global;
 
-    $scope.signUp = function () {
-        var signUp = new SignUp({
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            contactNo: this.phoneNumber,
-            loginId: this.userName,
-            password: this.password,
-            confirmPassword: this.confirmPassword
-        });
+    $scope.signUp = function() {
+      var signUp = new SignUp({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        contactNo: this.phoneNumber,
+        loginId: this.userName,
+        password: this.password,
+        confirmPassword: this.confirmPassword
+      });
 
-        signUp.$save(function (response) {
-            if (response.result === 'success') {
-                $('#myModal').modal("show");
-            }
-            else{
-                $scope.errorMsg = response.message;
-            }
-        });
+      signUp.$save(function(response) {
+        if (response.result === "success") {
+          $("#myModal").modal("show");
+        } else {
+          $scope.errorMsg = response.message;
+        }
+      });
     };
 
-    $('#myModal').on('hidden.bs.modal', function (e) {
-        $state.go('login');
+    $("#myModal").on("hidden.bs.modal", function(e) {
+      $state.go("login");
     });
-}]);
+  }
+]);
