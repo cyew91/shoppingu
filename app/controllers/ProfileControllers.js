@@ -328,7 +328,7 @@ exports.create = function(req, res) {
                         TemplateModel: templateModel,
                         InlineCss: true,
                         From: config.POSTMARK.DEVELOPMENT_EMAIL,
-                        To: config.POSTMARK.DEVELOPMENT_EMAIL
+                        To: config.POSTMARK.DEVELOPMENT_EMAIL // In production should update to use user's email instead.
                       },
                       (err, data) => {
                         if (err) {
