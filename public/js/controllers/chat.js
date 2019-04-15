@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean')
-  .controller("ChatController", ['$scope', '$stateParams', '$window', 'GetUserProfileById', 'socket', 'CreateProductOrder',
-    function ($scope, $stateParams, $window, GetUserProfileById, socket, CreateProductOrder) {
+  .controller("ChatController", ['$scope', '$stateParams', '$window', 'GetUserProfileById', 'socket',
+    function ($scope, $stateParams, $window, GetUserProfileById, socket) {
 
     $scope.hasLogined = false;
     $scope.users = {};
