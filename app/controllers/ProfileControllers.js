@@ -1,17 +1,18 @@
-'use strict';
+"use strict";
 
 /**
  * Module dependencies.
  */
-var db = require('../../config/sequelize'),
-    config = require('../../config/config');
- //var bcrypt = require('bcrypt');
+const db = require("../../config/sequelize");
+const config = require("../../config/config");
+const postmark = require("postmark");
+const WelcomeEmailService = require("../services/email/WelcomeEmailService");
 const saltRounds = 10;
 
 /**
  * Find profile by id
- * Note: This is called every time that the parameter :profileId is used in a URL. 
- * Its purpose is to preload the profile on the req object then call the next function. 
+ * Note: This is called every time that the parameter :profileId is used in a URL.
+ * Its purpose is to preload the profile on the req object then call the next function.
  */
 // exports.getProfileId = function (req, res, next, ProfileID) {
 //     console.log('id => ' + ProfileID);
@@ -142,7 +143,7 @@ const saltRounds = 10;
 //     var profileAccount = db.t_profile_account.build(profileAccountDetail);
 //     profileAccount.SaltPass = profileAccount.makeSalt();
 //     profileAccount.HashPass = profileAccount.encryptPassword(req.body.password, profileAccount.SaltPass);
-        
+
 //     profileAccount.save().then(function () {
 //         return res.jsonp({
 //             "result": "success"
@@ -180,83 +181,88 @@ const saltRounds = 10;
 //     return res.jsonp(req.profileAccount);
 // };
 
-
-
 /**
  * New version 2.0
  */
 
 /**
  * Find profile by id
- * Note: This is called every time that the parameter :profileId is used in a URL. 
- * Its purpose is to preload the profile on the req object then call the next function. 
+ * Note: This is called every time that the parameter :profileId is used in a URL.
+ * Its purpose is to preload the profile on the req object then call the next function.
  */
-exports.getProfileById = function (req, res, next, id) {
-    //console.log('id => ' + ProfileID);
-    db.profile.find({
-        where: {
-            id: id
-        }
-    }).then(function (profile) {
-        if (!profile) {
-            return next(new Error('Failed to load ProfileId ' + id));
-        } else {
-            req.profile = profile;
-            return next();
-        }
-    }).catch(function (err) {
-        return next(err);
+exports.getProfileById = function(req, res, next, id) {
+  //console.log('id => ' + ProfileID);
+  db.profile
+    .find({
+      where: {
+        id: id
+      }
+    })
+    .then(function(profile) {
+      if (!profile) {
+        return next(new Error("Failed to load ProfileId " + id));
+      } else {
+        req.profile = profile;
+        return next();
+      }
+    })
+    .catch(function(err) {
+      return next(err);
     });
 };
 
 // Update Profile
-exports.updateProfile = function (req, res) {
+exports.updateProfile = function(req, res) {
+  // create a new variable to hold the article that was placed on the req object.
+  var profile = req.profile;
 
-    // create a new variable to hold the article that was placed on the req object.
-    var profile = req.profile;
-
-    profile.updateAttributes({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        // email: req.body.email,
-        contactNo: req.body.contactNo,
-        // gender: req.body.gender,
-        // dateOfBirth: req.body.dateOfBirth
-    }).then(function (a) {
-        return res.jsonp(a);
-    }).catch(function (err) {
-        return res.send({
-            status: 'Exception',
-            message: err
-        });
+  profile
+    .updateAttributes({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      // email: req.body.email,
+      contactNo: req.body.contactNo
+      // gender: req.body.gender,
+      // dateOfBirth: req.body.dateOfBirth
+    })
+    .then(function(a) {
+      return res.jsonp(a);
+    })
+    .catch(function(err) {
+      return res.send({
+        status: "Exception",
+        message: err
+      });
     });
 };
 
 // Update Address
-exports.updateAddress = function (req, res) {
+exports.updateAddress = function(req, res) {
+  // create a new variable to hold the article that was placed on the req object.
+  var profile = req.profile;
 
-    // create a new variable to hold the article that was placed on the req object.
-    var profile = req.profile;
-
-    profile.updateAttributes({
-        address: req.body.address
-    }).then(function (a) {
-        return res.jsonp(a);
-    }).catch(function (err) {
-        return res.send({
-            status: 'Exception',
-            message: err
-        });
+  profile
+    .updateAttributes({
+      address: req.body.address
+    })
+    .then(function(a) {
+      return res.jsonp(a);
+    })
+    .catch(function(err) {
+      return res.send({
+        status: "Exception",
+        message: err
+      });
     });
 };
 
 /**
  * Show a profile
  */
-exports.show = function (req, res) {
-    // Sending down the profile that was just preloaded by the profiles.getProfileId function
-    // and saves profile on the req object.
-    return res.jsonp(req.profile);
+exports.show = function(req, res) {
+  // Sending down the profile that was just preloaded by the profiles.getProfileId function
+  // and saves profile on the req object.
+  return res.jsonp(req.profile);
 };
 
 /**
@@ -265,104 +271,119 @@ exports.show = function (req, res) {
  * 2. Check duplicate loginId
  * 3. Check password and confirm password must be equal
  */
-exports.create = function (req, res) {
-    
-    //if(typeof req.body.facebookLogin == 'undefined'){ // Register from web
-        db.profile.findAndCount({
+exports.create = function(req, res) {
+  //if(typeof req.body.facebookLogin == 'undefined'){ // Register from web
+  db.profile
+    .findAndCount({
+      where: {
+        email: req.body.email
+      }
+    })
+    .then(function(data) {
+      if (data.count == 0) {
+        // No duplicate email
+        db.profile
+          .findAndCount({
             where: {
-                email: req.body.email
+              loginId: req.body.loginId
             }
-        }).then(function (data){
-            if(data.count == 0){ // No duplicate email
-                db.profile.findAndCount({
-                    where: {
-                        loginId: req.body.loginId
-                    }
-                }).then(function (data){
-                    if(data.count == 0){ // No duplicate LoginId
-                        var profileDetail = {
-                            firstName: req.body.firstName,
-                            lastName: req.body.lastName,
-                            email: req.body.email,
-                            contactNo: req.body.contactNo,
-                            loginId: req.body.loginId,
-                            password: req.body.password,
-                            confirmPassword: req.body.confirmPassword
-                        };
+          })
+          .then(function(data) {
+            if (data.count == 0) {
+              // No duplicate LoginId
+              var profileDetail = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                contactNo: req.body.contactNo,
+                loginId: req.body.loginId,
+                password: req.body.password,
+                confirmPassword: req.body.confirmPassword
+              };
 
-                        if (req.body.password === req.body.confirmPassword) {
-                            var profile = db.profile.build(profileDetail);
-                            req.body.id = profile.id;
-                            profile.saltPassword = profile.makeSalt();
-                            profile.hashPassword = profile.encryptPassword(req.body.password, profile.saltPassword);
-                    
-                            profile.save().then(function () {
-                                return res.jsonp({
-                                    "result": "success"
-                                });
-                            }).catch(function (err) {
-                                res.send({
-                                    status: 'Exception',
-                                    message: err
-                                });
-                            });
-                        } else {
-                            res.send({
-                                status: 'Error',
-                                message: 'Password and confirm password must be match'
-                            });
-                        }
-                    }
-                    else{ // Return duplicate loginId error message
-                        res.send({
-                            status: 'Error',
-                            message: 'User Name already exists'
-                        });
-                    }
-                })
-            }
-            else{ // Return duplicate email error message
+              if (req.body.password === req.body.confirmPassword) {
+                var profile = db.profile.build(profileDetail);
+                req.body.id = profile.id;
+                profile.saltPassword = profile.makeSalt();
+                profile.hashPassword = profile.encryptPassword(
+                  req.body.password,
+                  profile.saltPassword
+                );
+
+                profile
+                  .save()
+                  .then(function() {
+                    WelcomeEmailService({
+                      name: req.body.firstName + req.body.lastName,
+                      username: req.body.loginId
+                    });
+
+                    return res.jsonp({
+                      result: "success"
+                    });
+                  })
+                  .catch(function(err) {
+                    res.send({
+                      status: "Exception",
+                      message: err
+                    });
+                  });
+              } else {
                 res.send({
-                    status: 'Error',
-                    message: 'Email already exists'
+                  status: "Error",
+                  message: "Password and confirm password must be match"
                 });
+              }
+            } else {
+              // Return duplicate loginId error message
+              res.send({
+                status: "Error",
+                message: "User Name already exists"
+              });
             }
+          });
+      } else {
+        // Return duplicate email error message
+        res.send({
+          status: "Error",
+          message: "Email already exists"
         });
-    //}
-    // else{ // Login and register from facebook API
-    //     db.profile.findAndCount({
-    //         where: {
-    //             email: req.body.facebookLogin.email
-    //         }
-    //     }).then(function (data){
-    //         if(data.count == 0){ // If not yet register to db
-    //             var profileDetail = {
-    //                 firstName: req.body.facebookLogin.first_name,
-    //                 lastName: req.body.facebookLogin.last_name,
-    //                 email: req.body.facebookLogin.email,
-    //                 facebookUserId: req.body.facebookLogin.id
-    //             };
+      }
+    });
+  //}
+  // else{ // Login and register from facebook API
+  //     db.profile.findAndCount({
+  //         where: {
+  //             email: req.body.facebookLogin.email
+  //         }
+  //     }).then(function (data){
+  //         if(data.count == 0){ // If not yet register to db
+  //             var profileDetail = {
+  //                 firstName: req.body.facebookLogin.first_name,
+  //                 lastName: req.body.facebookLogin.last_name,
+  //                 email: req.body.facebookLogin.email,
+  //                 facebookUserId: req.body.facebookLogin.id
+  //             };
 
-    //             var profile = db.profile.build(profileDetail);
-    //             req.body.id = profile.id;
+  //             var profile = db.profile.build(profileDetail);
+  //             req.body.id = profile.id;
 
-    //             profile.save().then(function () {
-    //                 return res.jsonp({
-    //                     "result": "success"
-    //                 });
-    //             }).catch(function (err) {
-    //                 res.send({
-    //                     status: 'Exception',
-    //                     message: err
-    //                 });
-    //             });
+  //             profile.save().then(function () {
+  //                 return res.jsonp({
+  //                     "result": "success"
+  //                 });
+  //             }).catch(function (err) {
+  //                 res.send({
+  //                     status: 'Exception',
+  //                     message: err
+  //                 });
+  //             });
 
-    //         }
-    //     }).then(function(){
-    //         return res.jsonp({
-    //             "result": "success"
-    //         });
-    //     });
-    // }
-    
+  //         }
+  //     }).then(function(){
+  //         return res.jsonp({
+  //             "result": "success"
+  //         });
+  //     });
+  // }
 };
