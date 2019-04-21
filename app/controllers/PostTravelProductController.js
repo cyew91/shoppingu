@@ -22,6 +22,9 @@ exports.all = function(req, res){
             },
             {
                 model:db.product_category
+            },
+            {
+                model:db.seller_rate
             }
         ]
     }).then(

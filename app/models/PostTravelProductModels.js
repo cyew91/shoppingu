@@ -31,6 +31,7 @@ module.exports = function (sequelize, DataTypes) {
             PostTravelProduct.hasMany(models.post_travel_product_document);
             PostTravelProduct.belongsTo(models.post_travel);
             PostTravelProduct.hasMany(models.inboxes);
+            PostTravelProduct.hasMany(models.seller_rate);
         }
     });
 
