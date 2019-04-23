@@ -5,8 +5,11 @@
  */
 const db = require("../../config/sequelize");
 const config = require("../../config/config");
-const postmark = require("postmark");
-const WelcomeEmailService = require("../services/email/WelcomeEmailService");
+const crypto = require("crypto");
+const async = require("async");
+const isNull = require("lodash/isNull");
+const WelcomeEmailService = require("../utils/email/WelcomeEmailService");
+const ForgetPasswordEmailService = require("../utils/email/ForgetPasswordEmailService");
 const saltRounds = 10;
 
 /**
@@ -211,6 +214,106 @@ exports.getProfileById = function(req, res, next, id) {
     });
 };
 
+exports.triggerForgetPasswordEmail = function(req, res) {
+  const profile = req.profile;
+
+  if (!isNull(profile)) {
+    async.waterfall(
+      [
+        cb => {
+          crypto.randomBytes(20, (err, buffer) => {
+            let token = buffer.toString("hex");
+
+            if (err) {
+              cb(err, null);
+            } else {
+              cb(null, token);
+            }
+          });
+        },
+        (token, cb) => {
+
+          profile
+            .updateAttributes({
+              token: token
+            })
+            .then(function(result) {
+              cb(null, token);
+            })
+            .catch(function(err) {
+              console.log("triggerForgetPasswordEmail: ", err)
+              // cb(err, null);
+            });
+        },
+        (token, cb) => {
+          //Send forget password email to user.
+          ForgetPasswordEmailService({
+            name: profile.firstName + " " + profile.lastName,
+            token: token
+          });
+
+          cb(null, token);
+        }
+      ],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send({ status: 500, error: err });
+        } else {
+          res.send({ status: 200, data: profile });
+        }
+      }
+    );
+  } else {
+    res.send({ status: 200, data: null });
+  }
+};
+
+/**
+ * Find profile by email
+ * Note: This is called every time that the parameter :email is used in a URL.
+ * Its purpose is to preload the profile on the req object then call the next function(Forget Password).
+ */
+exports.getProfileByEmail = function(req, res, next, email) {
+  //console.log('id => ' + ProfileID);
+  db.profile
+    .find({
+      where: {
+        email: email
+      }
+    })
+    .then(function(profile) {
+      req.profile = profile;
+      return next();
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
+/**
+ * Find profile by token (for reset password)
+ * Note: This is called every time that the parameter :email is used in a URL.
+ * Its purpose is to preload the profile on the req object then call the next function(Forget Password).
+ */
+exports.getProfileByToken = function(req, res, next, token) {
+  //console.log('id => ' + ProfileID);
+  db.profile
+    .find({
+      where: {
+        token: token
+      }
+    })
+    .then(function(profile) {
+      req.profile = profile;
+      // console.log("getProfileByToken ---> ", profile)
+      return next();
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+};
+
 // Update Profile
 exports.updateProfile = function(req, res) {
   // create a new variable to hold the article that was placed on the req object.
@@ -227,6 +330,28 @@ exports.updateProfile = function(req, res) {
     })
     .then(function(a) {
       return res.jsonp(a);
+    })
+    .catch(function(err) {
+      return res.send({
+        status: "Exception",
+        message: err
+      });
+    });
+};
+
+exports.resetPassword = function(req, res) {
+  const profile = req.profile;
+  let saltPassword = profile.makeSalt();
+  let hashPassword = profile.encryptPassword(req.body.password, saltPassword);
+
+  profile
+    .update({
+      saltPassword: saltPassword,
+      hashPassword: hashPassword,
+      token: null
+    })
+    .then(function(result) {
+      return res.jsonp(result);
     })
     .catch(function(err) {
       return res.send({
@@ -305,10 +430,7 @@ exports.create = function(req, res) {
                 var profile = db.profile.build(profileDetail);
                 req.body.id = profile.id;
                 profile.saltPassword = profile.makeSalt();
-                profile.hashPassword = profile.encryptPassword(
-                  req.body.password,
-                  profile.saltPassword
-                );
+                profile.hashPassword = profile.encryptPassword(req.body.password, profile.saltPassword);
 
                 profile
                   .save()

@@ -3,18 +3,16 @@
 const postmark = require("postmark");
 const config = require("../../../config/config");
 
-const WelcomeEmailService = ({ name, username }) => {
-   console.log("WelcomeEmailService ===> ", name, username);
-
+const ForgetPasswordEmailService = ({ name, token }) => {
   let client = new postmark.ServerClient(config.POSTMARK.TOKEN);
   let templateModel = {
     name: name,
-    username: username
+    action_url: `${config.app.rootURL}/resetpassword/token=${token}/verify`
   };
 
   client.sendEmailWithTemplate(
     {
-      TemplateAlias: config.POSTMARK.WELCOME_TEMPLATE_ALIAS,
+      TemplateAlias: config.POSTMARK.FORGET_PASSWORD_TEMPLATE_ALIAS,
       TemplateModel: templateModel,
       InlineCss: true,
       From: config.POSTMARK.DEVELOPMENT_EMAIL,
@@ -24,11 +22,11 @@ const WelcomeEmailService = ({ name, username }) => {
       if (err) {
         console.log(err);
       }
-      console.log("<=== POSTMARK Welcome Email Sent ===> ");
+      console.log("<=== Postmark: Forget Password Email Sent ===> ");
       console.log(data);
-      console.log("<=== POSTMARK Welcome Email Sent ===> ");
+      console.log("<=== Postmark: Forget Password Email Sent ===> ");
     }
   );
 };
 
-module.exports = WelcomeEmailService;
+module.exports = ForgetPasswordEmailService;

@@ -66,6 +66,10 @@ module.exports = function (sequelize, DataTypes) {
             field: 'is_active',
             defaultValue: true,
         },
+        token: {
+            type: DataTypes.STRING(1000),
+            field: 'token',
+        },
         facebookUserId: {
             type: DataTypes.STRING(45),
             field: 'facebook_user_id'
@@ -74,7 +78,7 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: true,
         createdAt: 'created_date',
         updatedAt: 'updated_date',
-        freezeTableName: true,       
+        freezeTableName: true,
         instanceMethods: {
             toJSON: function () {
                 var values = this.get();
