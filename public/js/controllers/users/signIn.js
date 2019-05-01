@@ -1,11 +1,9 @@
 'use strict';
 
-angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 'SignUp', 'SocialAuth',
-    function ($scope, $window, LogIn, SignUp, SocialAuth) {
-
+angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 'SignUp', 'SocialAuth', function ($scope, $window, LogIn, SignUp, SocialAuth) {
     $scope.signIn = function (user) {
         var logIn = new LogIn({
-            email: user.email,
+            username: user.username,
             password: user.password
         });
 
@@ -14,16 +12,17 @@ angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 
                 $window.location.href = '/';
             } else {
                 $scope.response = false;
-                user.email = null;
+                user.username = null;
                 user.password = null;
             }
         });
     };
-    
-    (function(d, s, id) {
+
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        js = d.createElement(s);
+        js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -44,49 +43,49 @@ angular.module('mean.auth').controller('signIn', ['$scope', '$window', 'LogIn', 
             document.getElementById('status').innerHTML = 'Please log ' +
                 'into this app.';
         }
-    };
+    }
 
     // This function is called when someone finishes with the Login
     // Button.  See the onlogin handler attached to it in the sample
     // code below.
-    $scope.checkLoginState = function() {
-        FB.getLoginStatus(function(response) {
+    $scope.checkLoginState = function () {
+        FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
-    }
+    };
 
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', {fields: 'first_name, last_name, email, picture'}, function(response) {
+        FB.api('/me', {
+            fields: 'first_name, last_name, email, picture'
+        }, function (response) {
             SocialAuth.FbLogin(FB.getAuthResponse()).then(function (response) {
-                if(response.status === 'success' || 200){
+                if (response.status === 'success' || 200) {
                     $window.location.href = '/';
                 }
             });
             console.log('Successful login for: ' + response.name);
         });
-    };
+    }
 
     // Facebook login
-    $scope.fbAuth = function(){
-        FB.init({ 
+    $scope.fbAuth = function () {
+        FB.init({
             appId: '219745928654021',
-            status: true, 
-            cookie: true, 
+            status: true,
+            cookie: true,
             xfbml: true,
             version: 'v2.4'
         });
 
-        FB.login(function(response) {
+        FB.login(function (response) {
             if (response.status === 'connected') {
-              // Logged into your app and Facebook.
-              statusChangeCallback(response);
-            } else {
-              // The person is not logged into this app or we are unable to tell. 
+                // Logged into your app and Facebook.
+                statusChangeCallback(response);
             }
-          });
+        });
     };
 
 }]);
