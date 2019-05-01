@@ -25,7 +25,13 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
         })
         .state('forgetpassword', {
             url: '/forgetpassword',
+            controller: 'ForgetPasswordController',
             templateUrl: 'views/users/forgetPassword.html'
+        })
+        .state('resetpassword', {
+            url: '/resetpassword/token={token}/verify',
+            controller: 'ResetPasswordController',
+            templateUrl: 'views/users/resetPassword.html'
         })
         .state('aboutus', {
             url: '/aboutus',
@@ -241,8 +247,8 @@ angular.module('mean').run(function ($rootScope, $location, $state, CheckLoggedI
 
         CheckLoggedIn.get(function (response) {
             if (response.status === '0' && toState.name === 'travel') {
-                e.preventDefault(); 
-                $state.go('login'); 
+                e.preventDefault();
+                $state.go('login');
             }else{
                 $rootScope.currentUser = response;
                 $window.sessionStorage.setItem("id", response.id);
