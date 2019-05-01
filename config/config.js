@@ -1,12 +1,12 @@
 'use strict';
 
-var nconf = require('nconf'),
-    json5 = require('json5'),
-    _ = require('lodash'),
-    glob = require('glob'),
-    path = require('path'),
-    fs = require('fs'),
-    StandardError = require('standard-error');
+var nconf = require('nconf');
+var json5 = require('json5');
+var _ = require('lodash');
+var glob = require('glob');
+var path = require('path');
+var fs = require('fs');
+var StandardError = require('standard-error');
 
 
 var rootPath = path.normalize(__dirname + '/..');
@@ -14,7 +14,8 @@ var rootPath = path.normalize(__dirname + '/..');
 // Load app configuration
 var computedConfig = {
     root: rootPath,
-    modelsDir : rootPath + '/app/models'
+    modelsDir: rootPath + '/app/models',
+    databaseDir: rootPath + '/config/database'
 };
 
 //
@@ -27,83 +28,100 @@ var computedConfig = {
 //   6. Shared config file located at './env/all.json'
 //
 nconf.argv()
-    .env(['PORT','NODE_ENV','FORCE_DB_SYNC','forceSequelizeSync'])// Load select environment variables
-    .defaults({store:{
-            NODE_ENV:'development'
-    }});
-var envConfigPath = rootPath + '/config/env/'+nconf.get('NODE_ENV')+'.json5';
-try{
-    if(!fs.statSync(envConfigPath).isFile()){
+    .env(['PORT', 'NODE_ENV', 'FORCE_DB_SYNC', 'forceSequelizeSync']) // Load select environment variables
+    .defaults({
+        store: {
+            NODE_ENV: 'development'
+        }
+    });
+var envConfigPath = rootPath + '/config/env/' + nconf.get('NODE_ENV') + '.json5';
+try {
+    if (!fs.statSync(envConfigPath).isFile()) {
         throw new Error(); // throw error to trigger catch
     }
+} catch (err) {
+    throw new StandardError('Environment specific config file not found! Throwing up! (NODE_ENV=' +
+        nconf.get('NODE_ENV') + ')');
 }
-catch(err){
-    throw new StandardError('Environment specific config file not found! Throwing up! (NODE_ENV='
-        +nconf.get('NODE_ENV')+')');
-}
-nconf.file(nconf.get('NODE_ENV'),{ file: envConfigPath, type:'file', format:json5 })
-    .file('shared',{ file: rootPath+ '/config/env/all.json5', type:'file', format:json5 })
-    .add('base-defaults',{type:'literal', store:{
-        PORT:5555
-    }})
-    .overrides({store:computedConfig});
+nconf.file(nconf.get('NODE_ENV'), {
+        file: envConfigPath,
+        type: 'file',
+        format: json5
+    })
+    .file('shared', {
+        file: rootPath + '/config/env/all.json5',
+        type: 'file',
+        format: json5
+    })
+    .add('base-defaults', {
+        type: 'literal',
+        store: {
+            PORT: 5555
+        }
+    })
+    .overrides({
+        store: computedConfig
+    });
 
 module.exports = nconf.get();
+
 /**
  * Get files by glob patterns
  */
-module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
-	// For context switching
-	var _this = this;
+module.exports.getGlobbedFiles = function (globPatterns, removeRoot) {
+    // For context switching
+    var _this = this;
 
-	// URL paths regex
-	var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
+    // URL paths regex
+    var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
 
-	// The output array
-	var output = [];
+    // The output array
+    var output = [];
 
-	// If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob 
-	if (_.isArray(globPatterns)) {
-		globPatterns.forEach(function(globPattern) {
-			output = _.union(output, _this.getGlobbedFiles(globPattern, removeRoot));
-		});
-	} else if (_.isString(globPatterns)) {
-		if (urlRegex.test(globPatterns)) {
-			output.push(globPatterns);
-		} else {
-			var files = glob(globPatterns, { sync: true });
+    // If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob 
+    if (_.isArray(globPatterns)) {
+        globPatterns.forEach(function (globPattern) {
+            output = _.union(output, _this.getGlobbedFiles(globPattern, removeRoot));
+        });
+    } else if (_.isString(globPatterns)) {
+        if (urlRegex.test(globPatterns)) {
+            output.push(globPatterns);
+        } else {
+            var files = glob(globPatterns, {
+                sync: true
+            });
 
-			if (removeRoot) {
-				files = files.map(function(file) {
-					return file.replace(removeRoot, '');
-				});
-			}
+            if (removeRoot) {
+                files = files.map(function (file) {
+                    return file.replace(removeRoot, '');
+                });
+            }
 
-			output = _.union(output, files);
-		}
-	}
+            output = _.union(output, files);
+        }
+    }
 
-	return output;
+    return output;
 };
 
 /**
  * Get the modules JavaScript files
  */
-module.exports.getJavaScriptAssets = function(includeTests) {
-	var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public/');
+module.exports.getJavaScriptAssets = function (includeTests) {
+    var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public/');
 
-	// To include tests
-	if (includeTests) {
-		output = _.union(output, this.getGlobbedFiles(this.assets.tests));
-	}
+    // To include tests
+    if (includeTests) {
+        output = _.union(output, this.getGlobbedFiles(this.assets.tests));
+    }
 
-	return output;
+    return output;
 };
 
 /**
  * Get the modules CSS files
  */
-module.exports.getCSSAssets = function() {
-	var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public/');
-	return output;
+module.exports.getCSSAssets = function () {
+    var output = this.getGlobbedFiles(this.assets.lib.css.concat(this.assets.css), 'public/');
+    return output;
 };
