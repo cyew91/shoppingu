@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', '$anchorScroll', '$timeout', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
-    function($scope, Global, $stateParams, $state, $anchorScroll, $timeout, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
+  .controller('SearchResultController', ['$scope', 'Global', '$stateParams', '$state', '$anchorScroll', '$timeout', '$window', 'GetProdCatAndSubCat', 'GetProductDetailByProdSubCatID',
+    function($scope, Global, $stateParams, $state, $anchorScroll, $timeout, $window, GetProdCatAndSubCat, GetProductDetailByProdSubCatID){
     $scope.global = Global;
-    //$scope.profileId = $stateParams.profileId;
     
     if ($stateParams.prodTravel !== null){
-      $window.localStorage.setItem("productTravel", JSON.stringify($stateParams.prodTravel));
-      $scope.productTravel = $stateParams.prodTravel;
+        $window.localStorage.setItem("productTravel", JSON.stringify($stateParams.prodTravel));
+        $scope.productTravel = $stateParams.prodTravel;
     }else{
-      $scope.productTravel = JSON.parse($window.localStorage.getItem("productTravel"));
+        $scope.productTravel = JSON.parse($window.localStorage.getItem("productTravel"));
     }
+
+    if ($stateParams.prodRequest !== null){
+        $window.localStorage.setItem("productRequest", JSON.stringify($stateParams.prodRequest));
+        $scope.productRequest = $stateParams.prodRequest;
+    }else{
+        $scope.productRequest = JSON.parse($window.localStorage.getItem("productRequest"));
+    }
+    
 
     // Travel product
     $scope.tFilteredTodos = [];
@@ -20,10 +27,10 @@ angular.module('mean.articles')
     $scope.tMaxSize = 5;
 
     // Request product
-    // $scope.rFilteredTodos = [];
-    // $scope.rCurrentPage = 1;
-    // $scope.rNumPerPage = 12;
-    // $scope.rMaxSize = 5;
+    $scope.rFilteredTodos = [];
+    $scope.rCurrentPage = 1;
+    $scope.rNumPerPage = 9;
+    $scope.rMaxSize = 5;
 
     $scope.menuTree = function() {
         GetProdCatAndSubCat.query(function (result) {
@@ -53,40 +60,42 @@ angular.module('mean.articles')
         },
         $('.container').addClass('blur'));
         $('.navbar').addClass('blur');
+        var menuTreeSubCatId = $scope.menuTreeResult[$scope.count].product_sub_categories[index].id;
         GetProductDetailByProdSubCatID.query({
-            productSubCatId: $scope.menuTreeResult[$scope.count].product_sub_categories[index].id
+            productSubCatId: menuTreeSubCatId
         }, function(result) {
             $scope.product = result;
             $scope.productTravel = [];
-            // $scope.productRequest = [];
+            $scope.productRequest = [];
             $scope.todos = [];
             $scope.tFilteredTodos = [];
-            // $scope.rTodos = [];
-            // $scope.rFilteredTodos = [];
+            $scope.rTodos = [];
+            $scope.rFilteredTodos = [];
             $scope.tCurrentPage = 1;
-            // $scope.rCurrentPage = 1;
+            $scope.rCurrentPage = 1;
+            $scope.tTotalItems = 0;
+            $scope.rTotalItems = 0;
             var begin = (($scope.tCurrentPage - 1) * $scope.tNumPerPage);
             var end = $scope.tCurrentPage * $scope.tNumPerPage;
-            // var rBegin = (($scope.rCurrentPage - 1) * $scope.rNumPerPage);
-            // var rEnd = rBegin + $scope.rNumPerPage;
+            var rBegin = (($scope.rCurrentPage - 1) * $scope.rNumPerPage);
+            var rEnd = $scope.rCurrentPage + $scope.rNumPerPage;
             
-            for(var i=0;i<$scope.product.length;i++){
-              // if ($scope.product[i].t_product.PostType === 0)
-              // {
-                //$scope.product[i].post_travel_product_documents[0].imagePath = $scope.product[i].post_travel_product_documents[0].imagePath.substring(6, 10);
-                $scope.product[i].imageName = $scope.product[i].post_travel_product_documents[0].imageName;
-                $scope.productTravel.push($scope.product[i]);
-                $scope.todos.push($scope.product[i]);
+            // Posted Product
+            for(var i=0;i<$scope.product.Post.length;i++){
+                $scope.product.Post[i].imageName = $scope.product.Post[i].post_travel_product_documents[0].imageName;
+                $scope.productTravel.push($scope.product.Post[i]);
+                $scope.todos.push($scope.product.Post[i]);
                 $scope.tFilteredTodos = $scope.todos.slice(begin, end);
                 $scope.tTotalItems = $scope.productTravel.length;
-              // }
-              // else
-              // {
-              //   $scope.productRequest.push($scope.product[i]);
-              //   $scope.rTodos.push($scope.product[i]);
-              //   $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
-              //   $scope.rTotalItems = $scope.productRequest.length;
-              // }
+            }
+
+            // Requested Product
+            for(var i=0;i<$scope.product.Request.length;i++){
+                $scope.product.Request[i].imageName = $scope.product.Request[i].post_request_product_documents[0].imageName;
+                $scope.productRequest.push($scope.product.Request[i]);
+                $scope.rTodos.push($scope.product.Request[i]);
+                $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
+                $scope.rTotalItems = $scope.productRequest.length;
             }
 
             $scope.showBegin = begin + 1;
@@ -105,39 +114,40 @@ angular.module('mean.articles')
         });
     };
 
-    // $scope.finishLoading = function() {
-
-    // }
-
-    $scope.goToProductDetails = function (index) {
+    $scope.goToProductDetailsProduct = function (index) {
         $state.go('productdetails', {prodTravel: $scope.productTravel[index]});
     };
 
+    $scope.goToProductDetailsRequest = function (index) {
+        $state.go('productdetails', {prodTravel: $scope.productRequest[index]});
+    };
+
     //Tab
-    // $scope.selectedTab = function (number){
-    //   if (number === 1){
-    //     $('#profile1').addClass("active");
-    //     $('#request').removeClass("active");
-    //   }
-    //   else{
-    //     $('#profile1').removeClass("active");
-    //     $('#request').addClass("active");
-    //   }
-    // };
+    $scope.selectedTab = function (number){
+      if (number === 1){
+        $('#post').addClass("active");
+        $('#request').removeClass("active");
+      }
+      else{
+        $('#post').removeClass("active");
+        $('#request').addClass("active");
+      }
+    };
 
     // Pagination setup
-    if ($scope.productTravel != null){
+    if ($scope.productRequest.length > 0 || $scope.productTravel.length > 0){
         $scope.makeTodos = function() {
             $scope.todos = [];
             for (var i=0;i<$scope.productTravel.length;i++) {
-                // $scope.todos.push($scope.productTravel[i]);
                 $scope.productTravel[i].imageName = $scope.productTravel[i].post_travel_product_documents[0].imageName;
                 $scope.todos.push($scope.productTravel[i]);
             }
-            // $scope.rTodos = [];
-            // for (var j=0;j<$scope.productRequest.length;j++) {
-            //   $scope.rTodos.push($scope.productRequest[j]);
-            // }
+
+            $scope.rTodos = [];
+            for (var j=0;j<$scope.productRequest.length;j++) {
+                $scope.productRequest[j].imageName = $scope.productRequest[j].post_request_product_documents[0].imageName;
+                $scope.rTodos.push($scope.productRequest[j]);
+            }
         };
         $scope.makeTodos(); 
         
@@ -155,16 +165,16 @@ angular.module('mean.articles')
                 });
             }
             else{
-              // $scope.$watch("rCurrentPage + rNumPerPage", function() {
-              //   var rBegin = (($scope.rCurrentPage - 1) * $scope.rNumPerPage);
-              //   var rEnd = rBegin + $scope.rNumPerPage;
-              //   $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
-              // });
+                $scope.$watch("rCurrentPage + rNumPerPage", function() {
+                    var rBegin = (($scope.rCurrentPage - 1) * $scope.rNumPerPage);
+                    var rEnd = $scope.rCurrentPage * $scope.rNumPerPage;
+                    $scope.rFilteredTodos = $scope.rTodos.slice(rBegin, rEnd);
+                });
             }
             $anchorScroll();
         };
         $scope.tTotalItems = $scope.productTravel.length;
-        // $scope.rTotalItems = $scope.productRequest.length;
+        $scope.rTotalItems = $scope.productRequest.length;
     };
 
     // Sort By Filtering

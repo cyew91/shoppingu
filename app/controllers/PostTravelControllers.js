@@ -17,7 +17,7 @@ exports.getPostTravel = function (req, res) {
 
 //Retrieve All Post Travel Information By postTravelId
 exports.getPostTravelById = function (req, res, next, id) {
-    console.log('id => ' + id);
+    //console.log('id => ' + id);
     db.post_travel.find({
         where: {
             id: id
@@ -168,6 +168,24 @@ exports.all = function(req, res){
         return res.jsonp(country);
     })
     .catch(function(err){
+        return res.render('error', {
+            error: err,
+            status: 500
+        });
+    });
+};
+
+/**
+ * Get product request country in product details page
+ */
+exports.getPostRequestTravelByCountryId = function (req, res) {
+    db.country.find({
+        where: {
+            id: req.params.postCountryId
+        }
+    }).then(function (postRequest) {
+        return res.jsonp(postRequest);
+    }).catch(function (err) {
         return res.render('error', {
             error: err,
             status: 500

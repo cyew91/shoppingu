@@ -67,36 +67,6 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider', function 
             controller: 'ProductDetailsController',
             templateUrl: 'views/productDetails.html'
         })
-        // .state('posttravel', {
-        //     abstract: true,
-        //     url: '/posttravel',
-        //     controller: 'travelController',
-        //     templateUrl: 'views/product/post/post.html'
-        // })
-        // .state('posttravel.travel', {
-        //     url: '',
-        //     params: {
-        //         productObj: null,
-        //         buyer: false
-        //     },
-        //     controller: 'TravelController',
-        //     templateUrl: 'views/product/post/travel.html'
-        // })
-        // .state('posttravel.product', {
-        //     url: '',
-        //     params: {
-        //         productObj: null
-        //     },
-        //     controller: 'ProductController',
-        //     templateUrl: 'views/product/post/product.html'
-        // })
-        // .state('posttravel.review', {
-        //     params: {
-        //         productObj: null
-        //     },
-        //     controller: 'ReviewController',
-        //     templateUrl: 'views/product/post/review.html'
-        // })
         .state('userprofile', {
             url: '/userprofile',
             params: {

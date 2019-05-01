@@ -30,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
             PostRequestProduct.belongsTo(models.product_sub_category);
             PostRequestProduct.belongsTo(models.country);
             PostRequestProduct.hasMany(models.post_request_product_document);
+            PostRequestProduct.belongsTo(models.profile);
         }
     });
 

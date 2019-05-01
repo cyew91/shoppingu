@@ -17,23 +17,16 @@
 
 //Use in search result page (travel)
 angular.module('mean.articles').service("GetProductID", ['$resource', function($resource) {
-    return $resource('/productdetail/productdetailname/:productdetailname', {productdetailname: '@productdetailname'});
+    return $resource('/productdetail/productdetailname/:productdetailname', {productdetailname: '@productdetailname'},{
+        query: {isArray: false}
+    });
 }]);
-
-// angular.module('mean.articles').service("GetProductIDByProfileAndTravel", ['$resource', function($resource) {
-//     return $resource('/postproductdetail/:profileId/:travelId', {
-//         profileId: '@profileId',
-//         travelId: '@travelId'
-//     });
-// }]);
-
-// angular.module('mean.articles').service("GetProductDetail", ['$resource', function($resource) {
-//     return $resource('/productdetaillisting/:productId', {productId: '@productId'});
-// }]);
 
 //Use in search result site tree click on sub category
 angular.module('mean.articles').service("GetProductDetailByProdSubCatID", ['$resource', function($resource) {
-    return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'});
+    return $resource('/productdetail/productsubcatid/:productSubCatId', {productSubCatId: '@productSubCatId'},{
+        query: {isArray: false}
+    });
 }]);
 
 // angular.module('mean.articles').service('GetOrderByProfileId', ['$resource', function($resource){

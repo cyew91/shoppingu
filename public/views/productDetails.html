@@ -8,7 +8,7 @@
           </div>
         </div> -->
         <data-owl-carousel id="big" class="product-carousel owl-carousel" data-options="{items: 1, loop: false, dots: false, URLhashListener: true, startPosition: 'URLHash'}">
-          <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
+          <div owl-carousel-item="" ng-repeat="prodTravelDoc in productDoc">
             <div data-hash="{{prodTravelDoc.id}}">
               <img src="../uploads/{{prodTravelDoc.imageName}}" />
             </div>
@@ -16,7 +16,7 @@
         </data-owl-carousel>
         <data-owl-carousel id="thumbs" class="product-carousel owl-carousel">
           <ul id="productdetailmenu" owl-carousel-item="" class="product-thumbnails">
-            <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
+            <li class="thumbnails" ng-repeat="prodTravelDoc in productDoc">
               <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
                 <img src="../uploads/{{prodTravelDoc.imageName}}" />
               </a>
@@ -49,7 +49,7 @@
       </div>
       <div class="padding-bottom-1x mb-2">
         <span class="text-medium">Posted By:&nbsp;</span>
-        <a class="navi-link" href="#">{{prodTravel.post_travel.profile.loginId}}</a>
+        <a class="navi-link" href="#">{{productLoginId}}</a>
       </div>
       <hr class="mb-3">
       <div class="d-flex flex-wrap justify-content-between">

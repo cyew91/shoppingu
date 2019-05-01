@@ -17,6 +17,11 @@ module.exports = function (app) {
     .get(postTravel.getPostTravel)
     .post(postTravel.createPostTravel, postTravel.createPostTravelProduct);
 
+    // Get product request country in product details page
+    app.route('/posttravelcountry/:postCountryId')
+    .get(postTravel.show);
+    app.param('postCountryId', postTravel.getPostRequestTravelByCountryId);
+
     app.param('profileId', postTravel.getPostTravelByProfileId);
 
     //Get country list in post travel page
