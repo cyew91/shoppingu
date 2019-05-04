@@ -74,13 +74,13 @@
           <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="" data-original-title="Whishlist">
             <i class="icon-heart"></i>
           </button> -->
-        
-        <button class="btn btn-secondary" ng-show="profileId !== prodProfileId" ng-click="goToChat()">
-          Chat
-        </button>
-        <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
-          data-toast-title="Product" data-toast-message="successfuly added to cart!"  ng-if="profileId !== prodProfileId">
-          <i class="icon-bag"></i> Request Now</button>
+
+          <button class="btn btn-secondary" ng-show="profileId !== prodProfileId" ng-click="goToChat()">
+            Chat
+          </button>
+          <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
+            data-toast-title="Product" data-toast-message="successfuly added to cart!" ng-if="profileId !== prodProfileId">
+            <i class="icon-bag"></i> Request Now</button>
         </div>
       </div>
     </div>
@@ -192,25 +192,20 @@
             </div>
           </div>
         </div>
-        <br><br>
+        <br>
+        <br>
         <!-- Review -->
         <div class="comment" ng-repeat="prodTravelRate in prodTravel.seller_rates">
           <div class="comment-author-ava">
             <img src="img/reviews/01.jpg" alt="Review author">
           </div>
+
           <div class="comment-body">
+            <div class="rating-stars icon-star filled" ng-repeat="n in range(prodTravelRate.rating)" style="color: #ffb74f;width: 20px;
+              display: inline-block;">
+            </div>
             <div class="comment-header d-flex flex-wrap justify-content-between">
               <h4 class="comment-title">{{prodTravelRate.subject}}</h4>
-              <!-- <div class="mb-2"> -->
-                <div class="rating-stars">
-                  {{prodTravelRate.rating}}
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star"></i>
-                  <i class="icon-star"></i>
-                </div>
-              <!-- </div> -->
             </div>
             <p class="comment-text">{{prodTravelRate.comment}}</p>
             <div class="comment-footer">
@@ -220,53 +215,54 @@
         </div>
         <!-- Review-->
         <!-- Review Form-->
-        <div ng-controller="HeaderController" > 
-        <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
-        <form class="row" method="post" ng-if="isLogin" name="sellerReviewForm">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_subject">Subject</label>
-              <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" ng-required="true">
+        <div ng-controller="HeaderController">
+          <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
+          <form class="row" method="post" ng-if="isLogin" name="sellerReviewForm">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review_subject">Subject</label>
+                <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" ng-required="true">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_rating">Rating</label>
-              <select class="form-control form-control-rounded" ng-init="reviewRating = ratings[0]" ng-model="reviewRating" ng-options="rating as rating.label for rating in ratings" ng-required="true">
-              </select>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review_rating">Rating</label>
+                <select class="form-control form-control-rounded" ng-init="reviewRating = ratings[0]" ng-model="reviewRating" ng-options="rating as rating.label for rating in ratings"
+                  ng-required="true">
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="form-group">
-              <label for="review_text">Review </label>
-              <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" ng-required="true"></textarea>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="review_text">Review </label>
+                <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" ng-required="true"></textarea>
+              </div>
             </div>
-          </div>
-          <div style="text-align: right; margin-left: 85%;">
+            <div style="text-align: right; margin-left: 85%;">
               <!-- <a class="btn btn-primary" href="postproduct">Back</a> -->
               <button class="btn btn-primary" ng-click="sellerReviewForm.$valid && saveSellerRate()">Submit Review</button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 <div class="modal" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Your Review Has Been Submitted!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Your Review Has Been Submitted!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
