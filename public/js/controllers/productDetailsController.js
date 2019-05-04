@@ -123,4 +123,11 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 		
 	};
 
+	$scope.range = function(rating, step){
+		step = step || 1;
+		var input = [];
+		for (var i = 1; i <= rating; i += step) input.push(i);
+		return input;
+	};
+
 }]);
