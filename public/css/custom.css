@@ -373,7 +373,6 @@ textarea:focus,
 
 .error-text-color {
     color: #dc3545;
-    display: none;
 }
 
 .succeed-text-color {

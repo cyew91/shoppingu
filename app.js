@@ -72,7 +72,7 @@ io.on('connection',function(socket){
 
     // Send messages
     socket.on('message',function(data){
-        user_controller.message(data,socket)  
+        user_controller.message(data,socket);
     });
 
     // Read notification

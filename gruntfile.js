@@ -92,8 +92,8 @@ module.exports = function(grunt) {
                     {cwd: 'bower_components/angucomplete-alt',                           src: ['**/*.*'], dest: 'public/lib/angucomplete', expand: true},
                     {cwd: 'bower_components/socket.io/lib',                              src: ['**/*.*'], dest: 'public/lib/socket.io', expand: true},
                     {cwd: 'bower_components/socket.io-client/dist',                       src: ['**/*.*'], dest: 'public/lib/socket.io-client/dist', expand: true},
-                    {cwd: 'bower_components/socket.io-client/lib',                       src: ['**/*.*'], dest: 'public/lib/socket.io-client/lib', expand: true}
-                    
+                    {cwd: 'bower_components/socket.io-client/lib',                       src: ['**/*.*'], dest: 'public/lib/socket.io-client/lib', expand: true},
+                    {cwd: 'bower_components/angular-messages',                           src: ['**/*.*'], dest: 'public/lib/angular-messages', expand: true}
                 ]
             }
         },
