@@ -15,3 +15,8 @@ angular.module('mean.articles').service("GetTravelByTravelId", ['$resource', fun
         }
     });
 }]);
+
+// Retrieve All Post Travel Information By postCountryId
+angular.module('mean.articles').service("GetTravelByCountryId", ['$resource', function($resource) {
+    return $resource('/posttravelcountry/:postCountryId', {postCountryId: '@postCountryId'});
+}]);

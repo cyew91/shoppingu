@@ -1,28 +1,28 @@
-
 <!-- Page Content-->
 <div class="container padding-top-2x padding-bottom-3x mb-1" ng-init="isTravel(0)">
-  <div class="row">
-    <!-- Products-->
-    <div class="col-xl-9 col-lg-8 order-lg-2">
-      <!-- Shop Toolbar-->
-      <div class="shop-toolbar padding-bottom-1x mb-2">
-        <div class="column">
-          <div class="shop-sorting">
-            <label for="sorting">Sort by:</label>
-            <select class="form-control" id="sorting" ng-model="productSortField" ng-change="productFilter(productSortField)">
-              <!-- <option>Popularity</option> -->
-              <option value="lowToHigh">Low - High Price</option>
-              <option value="highToLow">High - Low Price</option>
-              <!-- <option>Avarage Rating</option> -->
-              <!-- <option value="productName">A - Z Order</option>
+    <div class="row">
+        <!-- Products-->
+        <div class="col-xl-9 col-lg-8 order-lg-2">
+            <!-- Shop Toolbar-->
+            <div class="shop-toolbar padding-bottom-1x mb-2">
+                <div class="column">
+                    <div class="shop-sorting">
+                        <label for="sorting">Sort by:</label>
+                        <select class="form-control" id="sorting" ng-model="productSortField"
+                            ng-change="productFilter(productSortField)">
+                            <!-- <option>Popularity</option> -->
+                            <option value="lowToHigh">Low - High Price</option>
+                            <option value="highToLow">High - Low Price</option>
+                            <!-- <option>Avarage Rating</option> -->
+                            <!-- <option value="productName">A - Z Order</option>
               <option value="-productName">Z - A Order</option> -->
-            </select>
-            <span class="text-muted">Showing:&nbsp;</span>
-            <span>{{showBegin}} - {{showEnd}} items</span>
-          </div>
-        </div>
-        <div class="column">
-          <!-- <div class="shop-view">
+                        </select>
+                        <span class="text-muted">Showing:&nbsp;</span>
+                        <span>{{showBegin}} - {{showEnd}} items</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <!-- <div class="shop-view">
             <a class="grid-view active" href="shop-grid-ls.html">
               <span></span>
               <span></span>
@@ -34,82 +34,144 @@
               <span></span>
             </a>
           </div> -->
-        </div>
-      </div>
-      <!-- Products Grid-->
-      <div class="isotope-grid cols-3 mb-2" style="position: relative;" >
-        <div class="gutter-sizer"></div>
-        <div class="grid-sizer"></div>
-        <!-- Product-->
-        <div class="grid-item" ng-repeat="item in tFilteredTodos" style="margin: 13px">
-          <div class="product-card">
-            <!-- <div class="product-badge text-danger">50% Off</div> -->
-            <a class="product-thumb">
-              <img src="uploads\{{item.imageName}}" alt="Product" ng-click="goToProductDetails($index)">
-            </a>
-            <h3 class="product-title">
-              <a ng-click="goToProductDetails($index)">{{item.productName}}</a>
-            </h3>
-            <h4 class="product-price">
-              <!-- <del>$99.99</del> -->
-              RM {{item.amount}}
-            </h4>
-            <div class="product-buttons">
-              <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
-                <i class="icon-heart"></i>
-              </button>
-              <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
-                data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+                </div>
             </div>
-          </div>
-        </div>
-        
-      </div>
-      <!-- Pagination-->
-      <h4>{{tTotalItems}} total</h4>
-      <ul uib-pagination total-items="tTotalItems" ng-model="tCurrentPage" max-size="tMaxSize" 
-          boundary-links="true" items-per-page="tNumPerPage" ng-click="isTravel(1)"></ul>
-    </div>
-    <!-- Sidebar          -->
-    <div class="col-xl-3 col-lg-4 order-lg-1" ng-init="menuTree()">
-      <button class="sidebar-toggle position-left" data-toggle="modal" data-target="#modalShopFilters">
-        <i class="icon-layout"></i>
-      </button>
-      <aside class="sidebar sidebar-offcanvas">
-        <!-- Widget Categories-->
-        <section class="widget widget-categories">
-          <h3 class="widget-title">Shop Categories</h3>
-          <ul>
-            <li class="has-children" id="{{item.id}}" ng-repeat="item in menuTreeResult">
-              <a href="#" ng-click="openFirst($index)">{{item.productCategoryName}}</a>
-              <!-- <span>(1138)</span> -->
-              <ul>
-                <li ng-repeat="subItem in item.product_sub_categories">
-                  <a href="#" ng-click="getProductDetail($index)">{{subItem.productSubCategoryName}}</a>
+            <!-- Tab -->
+            <ul class="nav nav-tabs" role="tablist" id="myTab" ng-init="type = 0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#post" ng-click="selectedTab(1); isTravel(0)" data-toggle="tab"
+                        role="tab" aria-selected="true">Traveller</a>
                 </li>
-                
-              </ul>
-            
-          </ul>
-        </section>
-        <!-- Promo Banner-->
-        <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
-          <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->
-          <span class="overlay-dark" style="opacity: .45;"></span>
-          <div class="promo-box-content text-center padding-top-3x padding-bottom-2x">
-            <h4 class="text-light text-thin text-shadow">New Collection of</h4>
-            <h3 class="text-bold text-light text-shadow">Sunglassess</h3>
-            <a class="btn btn-sm btn-primary" href="#">Shop Now</a>
-          </div>
-        </section>
-      </aside>
+                <li class="nav-item">
+                    <a class="nav-link" href="#request" ng-click="selectedTab(2); isTravel(1)" data-toggle="tab"
+                        role="tab" aria-selected="false">Request</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content" ng-init="selectedTab(1); isTravel(0)">
+                <div class="tab-pane" id="post" role="tabpanel">
+                    <!-- Products Grid Travel-->
+                    <div class="isotope-grid cols-3 mb-2" style="position: relative;">
+                        <div class="gutter-sizer"></div>
+                        <div class="grid-sizer"></div>
+                        <!-- Product-->
+                        <div class="grid-item" ng-repeat="item in tFilteredTodos" style="margin: 10px">
+                            <div class="product-card">
+                                <!-- <div class="product-badge text-danger">50% Off</div> -->
+                                <a class="product-thumb">
+                                    <img src="uploads\{{item.imageName}}" alt="Product"
+                                        ng-click="goToProductDetailsProduct($index)">
+                                </a>
+                                <h3 class="product-title">
+                                    <a ng-click="goToProductDetailsProduct($index)">{{item.productName}}</a>
+                                </h3>
+                                <h4 class="product-price">
+                                    <!-- <del>$99.99</del> -->
+                                    RM {{item.amount}}
+                                </h4>
+                                <div class="product-buttons">
+                                    <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                        title="Whishlist">
+                                        <i class="icon-heart"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                        data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                        data-toast-title="Product" data-toast-message="successfuly added to cart!">Add
+                                        to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Pagination-->
+                    <h4>{{tTotalItems}} total</h4>
+                    <ul uib-pagination total-items="tTotalItems" ng-model="tCurrentPage" max-size="tMaxSize"
+                        boundary-links="true" items-per-page="tNumPerPage" ng-click="isTravel(1)">
+                    </ul>
+                </div>
+               
+                <div class="tab-pane" id="request" role="tabpanel">
+                    <!-- Products Grid Request-->
+                    <div class="isotope-grid cols-3 mb-2" style="position: relative;">
+                        <div class="gutter-sizer"></div>
+                        <div class="grid-sizer"></div>
+                        <!-- Product-->
+                        <div class="grid-item" ng-repeat="item in rFilteredTodos" style="margin: 10px">
+                            <div class="product-card">
+                                <!-- <div class="product-badge text-danger">50% Off</div> -->
+                                <a class="product-thumb">
+                                    <img src="uploads\{{item.imageName}}" alt="Product"
+                                        ng-click="goToProductDetailsRequest($index)">
+                                </a>
+                                <h3 class="product-title">
+                                    <a ng-click="goToProductDetailsRequest($index)">{{item.productName}}</a>
+                                </h3>
+                                <h4 class="product-price">
+                                    <!-- <del>$99.99</del> -->
+                                    RM {{item.amount}}
+                                </h4>
+                                <div class="product-buttons">
+                                    <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip"
+                                        title="Whishlist">
+                                        <i class="icon-heart"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success"
+                                        data-toast-position="topRight" data-toast-icon="icon-circle-check"
+                                        data-toast-title="Product" data-toast-message="successfuly added to cart!">Add
+                                        to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination-->
+                    <h4>{{rTotalItems}} total</h4>
+                    <ul uib-pagination total-items="rTotalItems" ng-model="rCurrentPage" max-size="rMaxSize"
+                        boundary-links="true" items-per-page="rNumPerPage" ng-click="isTravel(0)">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-xl-3 col-lg-4 order-lg-1" ng-init="menuTree()">
+            <button class="sidebar-toggle position-left" data-toggle="modal" data-target="#modalShopFilters">
+                <i class="icon-layout"></i>
+            </button>
+            <aside class="sidebar sidebar-offcanvas">
+                <!-- Widget Categories-->
+                <section class="widget widget-categories">
+                    <h3 class="widget-title">Shop Categories</h3>
+                    <ul>
+                        <li class="has-children" id="{{item.id}}" ng-repeat="item in menuTreeResult">
+                            <a href="#" ng-click="openFirst($index)">{{item.productCategoryName}}</a>
+                            <!-- <span>(1138)</span> -->
+                            <ul>
+                                <li ng-repeat="subItem in item.product_sub_categories">
+                                    <a href="#"
+                                        ng-click="getProductDetail($index)">{{subItem.productSubCategoryName}}</a>
+                                </li>
+
+                            </ul>
+
+                    </ul>
+                </section>
+                <!-- Promo Banner-->
+                <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
+                    <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->
+                    <span class="overlay-dark" style="opacity: .45;"></span>
+                    <div class="promo-box-content text-center padding-top-3x padding-bottom-2x">
+                        <h4 class="text-light text-thin text-shadow">New Collection of</h4>
+                        <h3 class="text-bold text-light text-shadow">Sunglassess</h3>
+                        <a class="btn btn-sm btn-primary" href="#">Shop Now</a>
+                    </div>
+                </section>
+            </aside>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Loading -->
 <div class="modal" id="indexModal" tabindex="-1" role="dialog">
-  <div class="spinner-border text-primary" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>

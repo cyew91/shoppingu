@@ -60,18 +60,21 @@ angular.module('mean.system')
             productdetailname: $scope.inputSearch
         }, function (result) {
             $scope.product = result;
-             for(var i=0;i<$scope.product.length;i++){
-                //if ($scope.product[i].t_product.PostType == 0)
-                  $scope.productTravel.push($scope.product[i]);
-                // else
-                //   $scope.productRequest.push($scope.product[i]);
+            // Posted Product
+            for(var i=0;i<$scope.product.Post.length;i++){
+                  $scope.productTravel.push($scope.product.Post[i]);
             }
-            $state.go('searchResult', { prodTravel: $scope.productTravel });
+
+            // Requested Product
+            for(var i=0;i<$scope.product.Request.length;i++){
+                $scope.productRequest.push($scope.product.Request[i]);
+            } 
+            $state.go('searchResult', { prodTravel: $scope.productTravel, prodRequest: $scope.productRequest });
             $('#searchBar').removeClass('search-visible');
             $scope.inputSearch = "";
             // $state.go('searchResult', { prodTravel: $scope.productTravel, prodRequest: $scope.productRequest });
             $scope.productTravel = [];
-            //$scope.productRequest = [];
+            $scope.productRequest = [];
         });
     };
 

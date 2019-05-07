@@ -1,15 +1,26 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window', '$anchorScroll',
-	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window', '$anchorScroll', 'GetTravelByCountryId',
+	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll, GetTravelByCountryId) {
 	$scope.global = Global;
 	$scope.profileId = $window.sessionStorage.getItem("id");
 	
 	if ($stateParams.prodTravel !== null){
 		$scope.prodTravel = $stateParams.prodTravel;
-		$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+		if($scope.prodTravel.post_travel === undefined){
+			$scope.prodProfileId = $scope.prodTravel.profile_id;
+			$scope.productDoc = $scope.prodTravel.post_request_product_documents;
+			$scope.productLoginId = $scope.prodTravel.profile.loginId;
+			$window.localStorage.setItem("post_country_id", $scope.prodTravel.country_id);
+		}
+		else{
+			$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
+			$scope.productDoc = $scope.prodTravel.post_travel_product_documents;
+			$scope.productLoginId = $scope.prodTravel.post_travel.profile.loginId;
+			$window.localStorage.setItem("post_travel_id", $scope.prodTravel.post_travel_id);
+		}
+		
 		$window.localStorage.setItem("prodTravel", JSON.stringify($scope.prodTravel));
-		$window.localStorage.setItem("post_travel_id", $scope.prodTravel.post_travel_id);
 	}
 	else{
 		$scope.prodTravel = JSON.parse($window.localStorage.getItem("prodTravel"));
@@ -50,11 +61,23 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 
 	// Get country name
 	$scope.initCountryName = function() {
-		GetTravelByTravelId.get({
-				postTravelId: $window.localStorage.getItem("post_travel_id")
-		}, function(result){
+		var postCountryIdFromLocal = $window.localStorage.getItem("post_country_id");
+		var postTravelIdFromLocal = $window.localStorage.getItem("post_travel_id");
+		if($scope.prodTravel.post_travel === undefined){
+			GetTravelByCountryId.get({
+				postCountryId: postCountryIdFromLocal
+			}, function(result){
+				$scope.countryName = result.countryName;
+			});
+		}
+		else{
+			GetTravelByTravelId.get({
+				postTravelId: postTravelIdFromLocal
+			}, function(result){
 				$scope.countryName = result.country.countryName;
-		});
+			});
+		}
+		
 	};
 
 	$scope.owlC = function activeHash(e) {
