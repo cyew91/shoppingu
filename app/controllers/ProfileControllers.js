@@ -329,7 +329,7 @@ exports.updateProfile = function(req, res) {
       // dateOfBirth: req.body.dateOfBirth
     })
     .then(function(a) {
-      return res.jsonp(a);
+      return res.jsonp({result: "success"})
     })
     .catch(function(err) {
       return res.send({
