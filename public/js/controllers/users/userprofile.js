@@ -18,16 +18,24 @@ angular.module('mean.articles')
     };
 
     $scope.updateUserProfile = function() {
-      var profile = $scope.profile;
-      if (!profile.updated) {
-          profile.updated = [];
-      }
-      profile.updated.push(new Date().getTime());
-      //profile.$update(function() {
-        //$state.go('home');
-      profile.$update();
-      //});
+        var profile = $scope.profile;
+        if (!profile.updated) {
+            profile.updated = [];
+        }
+        profile.updated.push(new Date().getTime());
+
+        profile.$update(function(response){
+            if (response.result === "success") {
+                $("#myModal").modal("show");
+            } else {
+                $scope.errorMsg = response.message;
+            }
+        });
     };
+    
+    $("#myModal").on("hidden.bs.modal", function (e) {
+        location.reload();
+    });
 
     $scope.goToMyOrder = function () {
       $state.go('order', {profile: $scope.profile});
