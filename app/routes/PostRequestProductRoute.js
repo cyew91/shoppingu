@@ -29,7 +29,7 @@ module.exports = function (app) {
     app.post('/uploadProductImage', function (req, res) {
         upload(req, res, function (err) {
           if (err) {
-            return res.json({ success: false , message: 'Great'});
+            return res.json({ success: false , message: 'Failed'});
           }
           return res.json({ success: true, message: req.files});
           // Everything OK
@@ -40,7 +40,7 @@ module.exports = function (app) {
         //filePath = filePath + fileNameDateNow;
         fs.unlink(filePath + req.body.myName, function (err) {
             if (err) {
-                return res.json({ success: false , message: 'Great'});
+                return res.json({ success: false , message: 'Failed'});
             }
             return res.json({ success: true, message: req.body.myName});
             // Everything OK

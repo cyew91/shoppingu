@@ -1,6 +1,7 @@
 'use strict'
 
-angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', 'GetProdCatAndSubCat', '$rootScope', '$anchorScroll', function ($scope, $state, $stateParams, GetProdCatAndSubCat, $rootScope, $anchorScroll) {
+angular.module('mean').controller('ProductController', ['$scope', '$state', '$stateParams', '$window', 'GetProdCatAndSubCat', '$rootScope', '$anchorScroll', 
+    function ($scope, $state, $stateParams, $window, GetProdCatAndSubCat, $rootScope, $anchorScroll) {
     $scope.travelObj = $stateParams.travelObj;
     $scope.productImages = [];
     $scope.productList = [];
@@ -12,7 +13,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
     $scope.init = function () {
         if (!hasTravel){
             $state.go('travel');
-            $window.location.reload();
+            //$window.location.reload();
         }
         else{
             GetProdCatAndSubCat.query(function (list) {
@@ -39,22 +40,22 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         },
         sending: function(file, xhr, formdata){
             //console.log('Sending');
-            file.myName = file.name.split('.')[0] + '-' + Date.now() + '.jpg';
+            file.imageName = file.name.split('.')[0] + '-' + Date.now() + '.jpg';
 
             var csrftoken = document.head.querySelector("[name=csrf-token]").content;
             formdata.append('_csrf', csrftoken);
-            formdata.append('myFileName', file.myName);
+            formdata.append('myFileName', file.imageName);
         },
          // remove uploaded image after clicked remove
         removedfile: function(file) {
-            var myName = file.myName; 
+            var imageName = file.imageName; 
             $.ajax({
                 type: 'POST',
                 url: '/deleteProductImage',
-                data: {myName: myName},
+                data: {myName: imageName},
                 success: function(data, response){
                 //console.log('success: ' + data);
-                for (var x = 0; x <= $scope.productImages.length; x++){
+                for (var x = 0; x < $scope.productImages.length; x++){
                     if ($scope.productImages[x].imageName == data.message){
                         $scope.productImages.splice(x, 1);
                     }
@@ -76,6 +77,14 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         }
         });
     };
+
+    // Triggered when leave the page
+    $scope.$on("$destroy", function() {
+        // Remove incomplete post image from folder
+        for(var i=0;i<$scope.productImages.length;i++){
+            Dropzone.forElement("div#dropzoneProductImage").removeFile($scope.productImages[i]);
+        }
+    });
 
     $scope.addToProductList = function () {
         var valid = validation().result;
