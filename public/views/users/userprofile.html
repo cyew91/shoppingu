@@ -10,10 +10,13 @@
                 <div class="user-info">
                     <div class="user-avatar">
                         <label for="file-upload" class="edit-avatar"></label>
-                        <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)"
-                            ng-model="imageSrc" ng-file-name="fileName">{{fileName}}
+                        <form action="/uploadProfileImage" method="post" enctype="multipart/form-data">
+                            <input id="file-upload" class="edit-avatar" type="file" ng-file-select="onFileSelect($files)"
+                            ng-model="imageSrc" ng-file-name="fileName" onchange="angular.element(this).scope().onChanges(this)">
+                          </form>
                         <!-- <a class="edit-avatar" href="#"></a> -->
-                        <img src="img/account/user-ava.jpg" alt="User">
+                        <img src="img/account/user-ava.jpg" alt="User" ng-if="!checkImageName">
+                        <img src="profile-image\{{profile.imageName}}" alt="User" ng-if="checkImageName">
                     </div>
                     <div class="user-data">
                         <h4>{{lastName}} {{firstName}}</h4>

@@ -319,12 +319,13 @@ exports.updateProfile = function(req, res) {
   // create a new variable to hold the article that was placed on the req object.
   var profile = req.profile;
 
-  profile
-    .updateAttributes({
+  profile.updateAttributes({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       // email: req.body.email,
-      contactNo: req.body.contactNo
+      contactNo: req.body.contactNo,
+      imageName: req.body.imageName,
+      imagePath: req.body.imagePath
       // gender: req.body.gender,
       // dateOfBirth: req.body.dateOfBirth
     })
