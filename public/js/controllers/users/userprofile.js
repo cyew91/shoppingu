@@ -7,13 +7,19 @@ angular.module('mean.articles')
     var userId = $window.sessionStorage.getItem("id");
 
     $scope.initUserProfie = function() {
-      GetUserProfileById.get({
+        GetUserProfileById.get({
         id: userId
-      }, function(result) {
-          $scope.profile = result;
-          $scope.lastName = $scope.profile.lastName;
-          $scope.firstName = $scope.profile.firstName;
-      });
+        }, function(result) {
+            $scope.profile = result;
+            $scope.lastName = $scope.profile.lastName;
+            $scope.firstName = $scope.profile.firstName;
+            if($scope.profile.imageName === null){
+                $rootScope.checkImageName = false;
+            }
+            else{
+                $rootScope.checkImageName = true;
+            }
+        });
     };
 
     $scope.updateUserProfile = function() {

@@ -137,7 +137,8 @@
                 <div class="user-info">
                     <div class="user-avatar">
                         <!-- <a class="edit-avatar" href="#"></a> -->
-                        <img src="img/account/user-ava.jpg" alt="User">
+                        <img src="img/account/user-ava.jpg" alt="User" ng-if="!checkImageName">
+                        <img src="profile-image\{{profile.imageName}}" alt="User" ng-if="checkImageName">
                     </div>
                     <div class="user-data">
                         <h4>{{profile.lastName}} {{profile.firstName}}</h4>
