@@ -1,26 +1,27 @@
 'use strict';
 
-angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window', '$anchorScroll', 'GetTravelByCountryId',
-	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll, GetTravelByCountryId) {
+angular.module('mean').controller('ProductDetailsController', ['$scope', '$state', '$stateParams', 'Global', 'GetTravelByTravelId', 'CreateSellerRate', '$window', '$anchorScroll',
+	function ($scope, $state, $stateParams, Global, GetTravelByTravelId, CreateSellerRate, $window, $anchorScroll) {
 	$scope.global = Global;
 	$scope.profileId = $window.sessionStorage.getItem("id");
 	
 	if ($stateParams.prodTravel !== null){
 		$scope.prodTravel = $stateParams.prodTravel;
-		if($scope.prodTravel.post_travel === undefined){
-			$scope.prodProfileId = $scope.prodTravel.profile_id;
-			$scope.productDoc = $scope.prodTravel.post_request_product_documents;
-			$scope.productLoginId = $scope.prodTravel.profile.loginId;
-			$window.localStorage.setItem("post_country_id", $scope.prodTravel.country_id);
-		}
-		else{
-			$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
-			$scope.productDoc = $scope.prodTravel.post_travel_product_documents;
-			$scope.productLoginId = $scope.prodTravel.post_travel.profile.loginId;
-			$window.localStorage.setItem("post_travel_id", $scope.prodTravel.post_travel_id);
-		}
-		
+		$scope.prodProfileId = $scope.prodTravel.post_travel.profile.id;
 		$window.localStorage.setItem("prodTravel", JSON.stringify($scope.prodTravel));
+		$window.localStorage.setItem("post_travel_id", $scope.prodTravel.post_travel_id);
+
+		// $scope.getOverallRate = function(){
+		var totalRate=0;
+		var totalReviews=$scope.prodTravel.seller_rates.length;
+
+		for (let i=0;i<totalReviews;i++){
+			totalRate+=parseInt($scope.prodTravel.seller_rates[i].rating);
+		}
+
+		$scope.totalReview=totalReviews;
+		$scope.overallRate=(totalRate/totalReviews).toFixed(1);
+		// };
 	}
 	else{
 		$scope.prodTravel = JSON.parse($window.localStorage.getItem("prodTravel"));
@@ -61,23 +62,11 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 
 	// Get country name
 	$scope.initCountryName = function() {
-		var postCountryIdFromLocal = $window.localStorage.getItem("post_country_id");
-		var postTravelIdFromLocal = $window.localStorage.getItem("post_travel_id");
-		if($scope.prodTravel.post_travel === undefined){
-			GetTravelByCountryId.get({
-				postCountryId: postCountryIdFromLocal
-			}, function(result){
-				$scope.countryName = result.countryName;
-			});
-		}
-		else{
-			GetTravelByTravelId.get({
-				postTravelId: postTravelIdFromLocal
-			}, function(result){
+		GetTravelByTravelId.get({
+				postTravelId: $window.localStorage.getItem("post_travel_id")
+		}, function(result){
 				$scope.countryName = result.country.countryName;
-			});
-		}
-		
+		});
 	};
 
 	$scope.owlC = function activeHash(e) {
@@ -144,6 +133,13 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 			$anchorScroll();
 		}
 		
+	};
+
+	$scope.range = function(rating, step){
+		step = step || 1;
+		var input = [];
+		for (var i = 1; i <= rating; i += step) input.push(i);
+		return input;
 	};
 
 }]);
