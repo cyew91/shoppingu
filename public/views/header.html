@@ -7,41 +7,42 @@
     <!-- <div class="three col"> -->
     <!-- <div class="loader" id="loader-3"></div> -->
     <!-- </div> -->
-  <!-- Search-->
-  <form id="searchBar" class="site-search" method="get">
-    <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()" placeholder="Type to search..." ng-model="inputSearch">
-    <div class="search-tools">
-      <span class="clear-search">Clear</span>
-      <span class="close-search">
-        <i class="icon-cross"></i>
-      </span>
+    <!-- Search-->
+    <form id="searchBar" class="site-search" method="get">
+        <input type="text" name="site_search" ng-keypress="$event.keyCode == 13 && search()"
+            placeholder="Type to search..." ng-model="inputSearch">
+        <div class="search-tools">
+            <span class="clear-search">Clear</span>
+            <span class="close-search">
+                <i class="icon-cross"></i>
+            </span>
+        </div>
+    </form>
+    <div class="site-branding">
+        <div class="inner">
+            <!-- Site Logo-->
+            <a class="site-logo" ui-sref="home">
+                <img src="img/original/shoppingu-logo.png" alt="Shoppingu">
+            </a>
+        </div>
     </div>
-  </form>
-  <div class="site-branding">
-    <div class="inner">
-      <!-- Site Logo-->
-      <a class="site-logo" ui-sref="home">
-        <img src="img/original/shoppingu-logo.png" alt="Shoppingu">
-      </a>
-    </div>
-  </div>
-  <!-- Main Navigation-->
-  <nav class="site-menu" ng-init="categoryList()">
-    <ul>
-      <li class="has-megamenu">
-        <a href="#">
-          <span>Category</span>
-        </a>
-        <ul class="mega-menu">
-          <li>
-            <span class="mega-menu-title">All Categories</span>
-            <ul class="sub-menu">
-              <li ng-repeat="item in categoryListResult">
-                <a ng-click="clickOnCategory($index)">{{item.productCategoryName}}</a>
-              </li>
-            </ul>
-          </li>
-          <!-- <li>
+    <!-- Main Navigation-->
+    <nav class="site-menu" ng-init="categoryList()">
+        <ul>
+            <li class="has-megamenu">
+                <a href="#">
+                    <span>Category</span>
+                </a>
+                <ul class="mega-menu">
+                    <li>
+                        <span class="mega-menu-title">All Categories</span>
+                        <ul class="sub-menu">
+                            <li ng-repeat="item in categoryListResult">
+                                <a ng-click="clickOnCategory($index)">{{item.productCategoryName}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <li>
             <span class="mega-menu-title">Specialty Shops</span>
             <ul class="sub-menu">
               <li>
@@ -64,102 +65,103 @@
               </li>
             </ul>
           </li> -->
-          <li>
-            <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
-              <span class="overlay-dark" style="opacity: .4;"></span>
-              <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
-                <h4 class="text-light text-thin text-shadow">New Collection of</h4>
-                <h3 class="text-bold text-light text-shadow">Sunglasses</h3>
-                <a class="btn btn-sm btn-primary" href="#">Shop Now</a>
-              </div>
-            </section>
-          </li>
-          <li>
-            <section class="promo-box" style="background-image: url(img/banners/03.jpg);">
-              <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->
-              <span class="overlay-dark" style="opacity: .45;"></span>
-              <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
-                <h3 class="text-bold text-light text-shadow">Limited Offer</h3>
-                <h4 class="text-light text-thin text-shadow">save up to 50%!</h4>
-                <a class="btn btn-sm btn-primary" href="#">Learn More</a>
-              </div>
-            </section>
-          </li>
+                    <li>
+                        <section class="promo-box" style="background-image: url(img/banners/02.jpg);">
+                            <span class="overlay-dark" style="opacity: .4;"></span>
+                            <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
+                                <h4 class="text-light text-thin text-shadow">New Collection of</h4>
+                                <h3 class="text-bold text-light text-shadow">Sunglasses</h3>
+                                <a class="btn btn-sm btn-primary" href="#">Shop Now</a>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="promo-box" style="background-image: url(img/banners/03.jpg);">
+                            <!-- Choose between .overlay-dark (#000) or .overlay-light (#fff) with default opacity of 50%. You can overrride default color and opacity values via 'style' attribute.-->
+                            <span class="overlay-dark" style="opacity: .45;"></span>
+                            <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
+                                <h3 class="text-bold text-light text-shadow">Limited Offer</h3>
+                                <h4 class="text-light text-thin text-shadow">save up to 50%!</h4>
+                                <a class="btn btn-sm btn-primary" href="#">Learn More</a>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a ng-click="goToPostRequest()">
+                    <span>Post Request</span>
+                </a>
+            </li>
+            <li>
+                <a ng-click="goToPostTravel()">
+                    <span>Post Travel</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="#">
+                    <span>How it works</span>
+                </a>
+            </li>
+            <li>
+                <a ng-click="goToLogin()" ng-if="!isLogin">
+                    <span>Login</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="register" ng-if="!isLogin">
+                    <span>Register</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="userprofile" ng-if="isLogin">
+                    <span>Account</span>
+                </a>
+            </li>
         </ul>
-      </li>
-      <li>
-        <a ng-click="goToPostRequest()">
-          <span>Post Request</span>
-        </a>
-      </li>
-      <li>
-        <a ng-click="goToPostTravel()">
-          <span>Post Travel</span>
-        </a>
-      </li>
-      <li>
-        <a ui-sref="#">
-          <span>How it works</span>
-        </a>
-      </li>
-      <li>
-        <a ng-click="goToLogin()" ng-if="!isLogin">
-          <span>Login</span>
-        </a>
-      </li>
-      <li>
-        <a ui-sref="register" ng-if="!isLogin">
-          <span>Register</span>
-        </a>
-      </li>
-      <li>
-        <a ui-sref="userprofile" ng-if="isLogin">
-          <span>Account</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- Toolbar-->
-  <div class="toolbar">
-    <div class="inner">
-      <div class="tools">
-        <div class="search">
-          <i class="icon-search"></i>
+    </nav>
+    <!-- Toolbar-->
+    <div class="toolbar">
+        <div class="inner">
+            <div class="tools">
+                <div class="search">
+                    <i class="icon-search"></i>
+                </div>
+                <div class="account" ng-if="isLogin">
+                    <a ui-sref="chat"></a>
+                    <i class="icon-mail"></i>
+                    <span ng-class="msgCount > 0 ? 'num' : ''"></span>
+                </div>
+                <div class="account" ng-if="isLogin">
+                    <a href="#"></a>
+                    <i class="icon-head"></i>
+                    <ul class="toolbar-dropdown">
+                        <li class="sub-menu-user">
+                            <div class="user-ava">
+                                <img src="img/account/default-avatar.png" alt="User" ng-if="!checkImageName">
+                                <img src="profile-image\{{imageName}}" alt="User" ng-if="checkImageName">
+                            </div>
+                            <div class="user-info">
+                                <h6 class="user-name">{{currentUser.loginId}}</h6>
+                                <!-- <span class="text-xs text-muted">290 Reward points</span> -->
+                            </div>
+                        </li>
+                        <li>
+                            <a ui-sref="userprofile">My Profile</a>
+                        </li>
+                        <li>
+                            <a ui-sref="order">Orders List</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#">Wishlist</a>
+                        </li> -->
+                        <li class="sub-menu-separator"></li>
+                        <li>
+                            <a href="#" ng-click="SignOut()"><i class="icon-unlock"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="account" ng-if="isLogin">
-          <a ui-sref="chat"></a>
-          <i class="icon-mail"></i>
-          <span ng-class="msgCount > 0 ? 'num' : ''"></span>
-        </div>
-        <div class="account" ng-if="isLogin">
-          <a href="#"></a>
-          <i class="icon-head"></i>
-          <ul class="toolbar-dropdown">
-            <li class="sub-menu-user">
-              <div class="user-ava">
-                <img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
-              </div>
-              <div class="user-info">
-                <h6 class="user-name">{{currentUser.loginId}}</h6>
-                <!-- <span class="text-xs text-muted">290 Reward points</span> -->
-              </div>
-            </li>
-            <li>
-              <a ui-sref="userprofile">My Profile</a>
-            </li>
-            <li>
-              <a ui-sref="order">Orders List</a>
-            </li>
-            <!-- <li>
-              <a href="#">Wishlist</a>
-            </li> -->
-            <li class="sub-menu-separator"></li>
-            <li>
-              <a href="#" ng-click="SignOut()"><i class="icon-unlock"></i>Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </header>

@@ -10,12 +10,12 @@ angular.module('mean.system')
     var productCategory = [];
     var productCategoryId = '';
     $scope.msgCount = 0;
-    var allMsgCount = 0;
     $scope.allMsgCount = 0;
 
     $rootScope.currentUser = CheckLoggedIn.get(function (response) {
         $scope.isLogin = true;
         $scope.loginId = $rootScope.currentUser.loginId;
+        $scope.imageName = response.imageName;
         $window.localStorage.setItem("usernameHeader", $scope.loginId);
         var userId = $window.sessionStorage.getItem("id");
         
