@@ -8,7 +8,7 @@
           </div>
         </div> -->
         <data-owl-carousel id="big" class="product-carousel owl-carousel" data-options="{items: 1, loop: false, dots: false, URLhashListener: true, startPosition: 'URLHash'}">
-          <div owl-carousel-item="" ng-repeat="prodTravelDoc in productDoc">
+          <div owl-carousel-item="" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
             <div data-hash="{{prodTravelDoc.id}}">
               <img src="../uploads/{{prodTravelDoc.imageName}}" />
             </div>
@@ -16,7 +16,7 @@
         </data-owl-carousel>
         <data-owl-carousel id="thumbs" class="product-carousel owl-carousel">
           <ul id="productdetailmenu" owl-carousel-item="" class="product-thumbnails">
-            <li class="thumbnails" ng-repeat="prodTravelDoc in productDoc">
+            <li class="thumbnails" ng-repeat="prodTravelDoc in prodTravel.post_travel_product_documents">
               <a href="#{{prodTravelDoc.id}}" ng-click="owlC($index)">
                 <img src="../uploads/{{prodTravelDoc.imageName}}" />
               </a>
@@ -35,7 +35,7 @@
         <i class="icon-star filled"></i>
         <i class="icon-star"></i>
       </div>
-      <span class="text-muted align-middle">&nbsp;&nbsp;4.2 | 3 customer reviews</span>
+      <span class="text-muted align-middle">&nbsp;&nbsp;{{overallRate}} | {{totalReview}} customer reviews</span>
       <h2 class="padding-top-1x text-normal">{{prodTravel.productName}}</h2>
       <span class="h2 d-block">RM {{prodTravel.amount}}</span>
       <p>{{prodTravel.description}}</p>
@@ -49,7 +49,7 @@
       </div>
       <div class="padding-bottom-1x mb-2">
         <span class="text-medium">Posted By:&nbsp;</span>
-        <a class="navi-link" href="#">{{productLoginId}}</a>
+        <a class="navi-link" href="#">{{prodTravel.post_travel.profile.loginId}}</a>
       </div>
       <hr class="mb-3">
       <div class="d-flex flex-wrap justify-content-between">
@@ -74,13 +74,13 @@
           <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="" data-original-title="Whishlist">
             <i class="icon-heart"></i>
           </button> -->
-        
-        <button class="btn btn-secondary" ng-show="profileId !== prodProfileId" ng-click="goToChat()">
-          Chat
-        </button>
-        <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
-          data-toast-title="Product" data-toast-message="successfuly added to cart!"  ng-if="profileId !== prodProfileId">
-          <i class="icon-bag"></i> Request Now</button>
+
+          <button class="btn btn-secondary" ng-show="profileId !== prodProfileId" ng-click="goToChat()">
+            Chat
+          </button>
+          <button class="btn btn-secondary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
+            data-toast-title="Product" data-toast-message="successfuly added to cart!" ng-if="profileId !== prodProfileId">
+            <i class="icon-bag"></i> Request Now</button>
         </div>
       </div>
     </div>
@@ -95,16 +95,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#reviews" data-toggle="tab" role="tab" aria-expanded="false">Reviews (3)</a>
+        <a class="nav-link" href="#reviews" data-toggle="tab" role="tab" aria-expanded="false">Reviews ({{totalReview}})</a>
       </li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane fade active show" id="description" role="tabpanel" aria-expanded="true">
         <p>{{prodTravel.description}}</p>
-        <!-- <p class="mb-30">Iste assumenda, vitae, aliquam excepturi libero quia ullam quisquam tenetur id sint labore. Pariatur praesentium velit, fugit facere maxime voluptates optio qui? Quidem obcaecati necessitatibus rem aspernatur, mollitia, assumenda explicabo numquam minus eos sapiente totam dicta, laborum dolorum! Vitae distinctio quos non ut fugiat.</p> -->
-        <!-- <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/B81qd2v6alw?rel=0" allowfullscreen=""></iframe>
-          </div> -->
       </div>
       <br>
       <div class="tab-pane fade" id="reviews" role="tabpanel" aria-expanded="false">
@@ -114,7 +110,7 @@
               <div class="well well-sm">
                 <div class="row">
                   <div class="col-xs-12 col-md-6 text-center" style="padding-left: 60px;">
-                    <h3 class="rating-num">4.2</h3>
+                    <h3 class="rating-num">{{overallRate}}</h3>
                     <div class="rating">
                       <div class="container-star " style="width:166.25px; height:33.25px;">
                         <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width:18.25px;height:18.25px">
@@ -196,183 +192,77 @@
             </div>
           </div>
         </div>
-        <br><br>
-        <!-- Review-->
-        <div class="comment">
+        <br>
+        <br>
+        <!-- Review -->
+        <div class="comment" ng-repeat="prodTravelRate in prodTravel.seller_rates">
           <div class="comment-author-ava">
             <img src="img/reviews/01.jpg" alt="Review author">
           </div>
+
           <div class="comment-body">
-            <div class="comment-header d-flex flex-wrap justify-content-between">
-              <h4 class="comment-title">Average quality for the price</h4>
-              <div class="mb-2">
-                <div class="rating-stars">
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star"></i>
-                  <i class="icon-star"></i>
-                </div>
-              </div>
+            <div class="rating-stars icon-star filled" ng-repeat="n in range(prodTravelRate.rating)" style="color: #ffb74f;width: 20px;
+              display: inline-block;">
             </div>
-            <p class="comment-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-              corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
-              culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+            <div class="comment-header d-flex flex-wrap justify-content-between">
+              <h4 class="comment-title">{{prodTravelRate.subject}}</h4>
+            </div>
+            <p class="comment-text">{{prodTravelRate.comment}}</p>
             <div class="comment-footer">
-              <span class="comment-meta">Francis Burton</span>
+              <span class="comment-meta">{{prodTravelRate.profile.loginId}}</span>
             </div>
           </div>
         </div>
         <!-- Review-->
-        <div class="comment">
-          <div class="comment-author-ava">
-            <img src="img/reviews/02.jpg" alt="Review author">
-          </div>
-          <div class="comment-body">
-            <div class="comment-header d-flex flex-wrap justify-content-between">
-              <h4 class="comment-title">My husband love his new...</h4>
-              <div class="mb-2">
-                <div class="rating-stars">
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                </div>
-              </div>
-            </div>
-            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
-            </p>
-            <div class="comment-footer">
-              <span class="comment-meta">Maggie Scott</span>
-            </div>
-          </div>
-        </div>
-        <!-- Review-->
-        <div class="comment">
-          <div class="comment-author-ava">
-            <img src="img/reviews/03.jpg" alt="Review author">
-          </div>
-          <div class="comment-body">
-            <div class="comment-header d-flex flex-wrap justify-content-between">
-              <h4 class="comment-title">Soft, comfortable, quite durable...</h4>
-              <div class="mb-2">
-                <div class="rating-stars">
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star filled"></i>
-                  <i class="icon-star"></i>
-                </div>
-              </div>
-            </div>
-            <p class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-              eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-              ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-              ratione voluptatem sequi nesciunt.</p>
-            <div class="comment-footer">
-              <span class="comment-meta">Jacob Hammond</span>
-            </div>
-          </div>
-        </div>
         <!-- Review Form-->
-        <div ng-controller="HeaderController" > 
-        <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
-        <form class="row" method="post" ng-if="isLogin" name="sellerReviewForm">
-          <!-- <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_name">Your Name</label>
-              <input class="form-control form-control-rounded" type="text" id="review_name" required="">
+        <div ng-controller="HeaderController">
+          <h5 class="mb-30 padding-top-1x" ng-if="isLogin">Buyer Review</h5>
+          <form class="row" method="post" ng-if="isLogin" name="sellerReviewForm">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review_subject">Subject</label>
+                <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" ng-required="true">
+              </div>
             </div>
-          </div> -->
-          <!-- <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_email">Your Email</label>
-              <input class="form-control form-control-rounded" type="email" id="review_email" required="">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review_rating">Rating</label>
+                <select class="form-control form-control-rounded" ng-init="reviewRating = ratings[0]" ng-model="reviewRating" ng-options="rating as rating.label for rating in ratings"
+                  ng-required="true">
+                </select>
+              </div>
             </div>
-          </div> -->
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_subject">Subject</label>
-              <input class="form-control form-control-rounded" type="text" ng-model="reviewSubject" ng-required="true">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="review_text">Review </label>
+                <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" ng-required="true"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review_rating">Rating</label>
-              <select class="form-control form-control-rounded" ng-init="reviewRating = ratings[0]" ng-model="reviewRating" ng-options="rating as rating.label for rating in ratings" ng-required="true">
-              </select>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="form-group">
-              <label for="review_text">Review </label>
-              <textarea class="form-control form-control-rounded" ng-model="reviewComment" rows="8" ng-required="true"></textarea>
-            </div>
-          </div>
-          <div style="text-align: right; margin-left: 85%;">
+            <div style="text-align: right; margin-left: 85%;">
               <!-- <a class="btn btn-primary" href="postproduct">Back</a> -->
               <button class="btn btn-primary" ng-click="sellerReviewForm.$valid && saveSellerRate()">Submit Review</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- Photoswipe container-->
-<!-- <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="pswp__bg"></div>
-  <div class="pswp__scroll-wrap">
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <div class="pswp__counter"></div>
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        <button class="pswp__button pswp__button--share" title="Share"></button>
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut"></div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
-      </div>
     </div>
   </div>
-</div> -->
-
+</div>
 <div class="modal" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Your Review Has Been Submitted!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Your Review Has Been Submitted!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>

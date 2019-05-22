@@ -11,17 +11,21 @@ exports.all = function(req, res){
         include: [
             {
                 model: db.post_travel,
-                include: [
-                    {
+                include: [{
                         model: db.profile
-                    }
-                ]
+                }]
             },
             {
                 model:db.post_travel_product_document
             },
             {
                 model:db.product_category
+            },
+            {
+                model:db.seller_rate,
+                include: [{
+                    model: db.profile
+                }]
             }
         ]
     }).then(
