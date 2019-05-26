@@ -2,14 +2,26 @@
 <div class="container padding-top-2x padding-bottom-3x mb-2" ng-init="initUserProfile()">
     <div class="row">
         <div class="col-lg-4">
-            <div class="panel-heading">
-                <h3 class="panel-title">Inbox <span class="user-number"></span></h3>
-            </div>
-            <div class="user-wrapper panel-body">
-                <!-- <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)"> -->
-                <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id, $index)">
-                    <span class="avatar"></span><span class="nickname">{{user.user_2}} - {{user.post_travel_product.productName}}</span>
-                    <span class="unread" ng-show="get_count(user.inbox_id) > 0">{{get_count(user.inbox_id)}}</span>
+            <div class="panel panel-primary">
+                <div class="panel-header">Inbox
+                    <!-- <h3 class="panel-title">Inbox  -->
+                        <!-- <span class="user-number"></span> -->
+                    <!-- </h3> -->
+                </div>
+                <div class="user-wrapper panel-body">
+                    <!-- <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)"> -->
+                    <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id, $index)" ng-class="{active_chat : $index === indexFromUserList}">
+                        <div class="avatar">
+                            <img src="uploads\{{user.product_image_name}}" alt="User">
+                        </div>  
+                        <span class="avatar"></span>
+                        <div>
+                            <div class="nickname">{{user.user_2}}</div>
+                            <div class="productname">{{user.post_travel_product.productName}}
+                                <span class="unread" ng-show="get_count(user.inbox_id) > 0">{{get_count(user.inbox_id)}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,7 +32,8 @@
                         <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;">
                             <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
                                 style="color: rgba(96, 125, 139,1.0);">
-                                <img class="rounded float-left" style="width: 50px; height: 50px;" src="https://i.pinimg.com/736x/5c/24/69/5c24695df36eee73abfbdd8274085ecd--cute-anime-guys-anime-boys.jpg" />
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="img/account/default-avatar.png" ng-if="!checkImageName"/>
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="profile-image/{{imageName}}" ng-if="checkImageName"/>
                                 <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary" aria-hidden="true"></i> </br><small> 
                                     </small></h6>
                                 <div class="d-flex float-right">

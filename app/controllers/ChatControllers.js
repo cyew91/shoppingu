@@ -150,9 +150,14 @@ exports.inbox_id = function(data, socket){
                 $and: [product_id]
             },
         },
-        include: [{
-            model: db.post_travel_product
-        }],
+        include: [
+            {
+                model: db.post_travel_product,
+                include: [{
+                    model:db.post_travel_product_document
+                }]
+            }
+        ],
         attributes: ['id','user_1','user_2', 'post_travel_product_id', 'offer_price']
     })
     .then(function(data){
@@ -163,7 +168,8 @@ exports.inbox_id = function(data, socket){
                     inbox_id:data.id,user_2,
                     product_id: data.post_travel_product_id, 
                     post_travel_product: data.post_travel_product,
-                    offer_price: data.offer_price
+                    offer_price: data.offer_price,
+                    product_image_name: data.post_travel_product.post_travel_product_documents[0].imageName
                 });
             }
             else{

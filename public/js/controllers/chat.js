@@ -33,7 +33,8 @@ angular.module('mean')
             id: userId
         }, function(result) {
             $scope.loginId = result.loginId;
-            
+            $scope.imageName = result.imageName;
+            $scope.checkImageName = $window.localStorage.getItem("checkImageName");
             socket.getSocket().removeListener("returnFriendList");
             socket.getSocket().removeListener("inbox_id2Header");
             socket.getSocket().removeListener("inbox_id");

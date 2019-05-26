@@ -16,6 +16,14 @@ angular.module('mean.system')
         $scope.isLogin = true;
         $scope.loginId = $rootScope.currentUser.loginId;
         $scope.imageName = response.imageName;
+        if($scope.imageName === null){
+            $window.localStorage.setItem("checkImageName", false);
+            $scope.checkImageName = $window.localStorage.getItem("checkImageName");
+        }
+        else{
+            $window.localStorage.setItem("checkImageName", true);
+            $scope.checkImageName = $window.localStorage.getItem("checkImageName");
+        }
         $window.localStorage.setItem("usernameHeader", $scope.loginId);
         var userId = $window.sessionStorage.getItem("id");
         
