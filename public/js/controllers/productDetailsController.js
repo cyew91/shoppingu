@@ -18,21 +18,21 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 
 		for (let i=0;i<totalReviews;i++){
 			totalRate+=parseInt($scope.prodTravel.seller_rates[i].rating);
-			if ($scope.prodTravel.seller_rates[i].rating=5){
-				$scope.totalFive+=1;
-			}
-			else if ($scope.prodTravel.seller_rates[i].rating=4){
-				$scope.totalFour+=1;
-			}
-			else if ($scope.prodTravel.seller_rates[i].rating=3){
-				$scope.totalThree+=1;
-			}
-			else if ($scope.prodTravel.seller_rates[i].rating=2){
-				$scope.totalTwo+=1;
-			}
-			else{
-				$scope.totalOne+=1;
-			}
+			// if ($scope.prodTravel.seller_rates[i].rating=5){
+			// 	$scope.totalFive+=1;
+			// }
+			// else if ($scope.prodTravel.seller_rates[i].rating=4){
+			// 	$scope.totalFour+=1;
+			// }
+			// else if ($scope.prodTravel.seller_rates[i].rating=3){
+			// 	$scope.totalThree+=1;
+			// }
+			// else if ($scope.prodTravel.seller_rates[i].rating=2){
+			// 	$scope.totalTwo+=1;
+			// }
+			// else{
+			// 	$scope.totalOne+=1;
+			// }
 		}
 
 		$scope.totalReview=totalReviews;
