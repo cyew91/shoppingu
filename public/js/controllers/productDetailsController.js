@@ -14,25 +14,36 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 
 		//For Rating
 		var totalRate=0;
+		var totalFive=0;
+		var totalFour=0;
+		var totalThree=0;
+		var totalTwo=0;
+		var totalOne=0;
 		var totalReviews=$scope.prodTravel.seller_rates.length;
 
 		for (let i=0;i<totalReviews;i++){
+			if ($scope.prodTravel.seller_rates[i].rating==5){
+				totalFive+=1;
+				$scope.fiveDatabar=(totalFive*10).toString() + "%";
+			}
+			else if ($scope.prodTravel.seller_rates[i].rating==4){
+				totalFour+=1;
+				$scope.fourDatabar=(totalFour*10).toString() + "%";
+			}
+			else if ($scope.prodTravel.seller_rates[i].rating==3){
+				totalThree+=1;
+				$scope.threeDatabar=(totalThree*10).toString() + "%";
+			}
+			else if ($scope.prodTravel.seller_rates[i].rating==2){
+				totalTwo+=1;
+				$scope.twoDatabar=(totalTwo*10).toString() + "%";
+			}
+			else{
+				totalOne+=1;
+				$scope.oneDatabar=(totalOne*10).toString() + "%";
+			}
+
 			totalRate+=parseInt($scope.prodTravel.seller_rates[i].rating);
-			// if ($scope.prodTravel.seller_rates[i].rating=5){
-			// 	$scope.totalFive+=1;
-			// }
-			// else if ($scope.prodTravel.seller_rates[i].rating=4){
-			// 	$scope.totalFour+=1;
-			// }
-			// else if ($scope.prodTravel.seller_rates[i].rating=3){
-			// 	$scope.totalThree+=1;
-			// }
-			// else if ($scope.prodTravel.seller_rates[i].rating=2){
-			// 	$scope.totalTwo+=1;
-			// }
-			// else{
-			// 	$scope.totalOne+=1;
-			// }
 		}
 
 		$scope.totalReview=totalReviews;
