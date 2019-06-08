@@ -13,7 +13,7 @@ angular.module('mean.articles')
             $scope.profile = result;
             $scope.lastName = $scope.profile.lastName;
             $scope.firstName = $scope.profile.firstName;
-            $scope.checkImageName = $window.localStorage.getItem("checkImageName");
+            //$rootScope.checkImageName = $window.localStorage.getItem("checkImageName");
         });
     };
 

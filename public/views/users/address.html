@@ -35,8 +35,8 @@
                     <div class="user-info">
                         <div class="user-avatar">
                             <!-- <a class="edit-avatar" href="#"></a> -->
-                            <img src="img/account/default-avatar.png" alt="User" ng-if="!checkImageName">
-                            <img src="profile-image\{{profile.imageName}}" alt="User" ng-if="checkImageName">
+                            <img src="img/account/default-avatar.png" alt="User" ng-if="checkImageName == 0">
+                            <img src="profile-image\{{profile.imageName}}" alt="User" ng-if="checkImageName == 1">
                         </div>
                         <div class="user-data">
                             <h4>{{profile.lastName}} {{profile.firstName}}</h4>

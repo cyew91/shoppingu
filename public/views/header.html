@@ -138,8 +138,8 @@
                     <ul class="toolbar-dropdown">
                         <li class="sub-menu-user">
                             <div class="user-ava">
-                                <img src="img/account/default-avatar.png" alt="User" ng-if="!checkImageName">
-                                <img src="profile-image\{{imageName}}" alt="User" ng-if="checkImageName">
+                                <img src="img/account/default-avatar.png" alt="User" ng-if="checkImageName == 0">
+                                <img src="profile-image\{{imageName}}" alt="User" ng-if="checkImageName == 1">
                             </div>
                             <div class="user-info">
                                 <h6 class="user-name">{{currentUser.loginId}}</h6>

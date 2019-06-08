@@ -32,8 +32,8 @@
                         <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;">
                             <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
                                 style="color: rgba(96, 125, 139,1.0);">
-                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="img/account/default-avatar.png" ng-if="!checkImageName"/>
-                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="profile-image/{{imageName}}" ng-if="checkImageName"/>
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="img/account/default-avatar.png" ng-if="checkImageName == 0"/>
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="profile-image/{{imageName}}" ng-if="checkImageName == 1"/>
                                 <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary" aria-hidden="true"></i> </br><small> 
                                     </small></h6>
                                 <div class="d-flex float-right">
