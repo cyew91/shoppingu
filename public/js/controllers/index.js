@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$state', '$anchorScroll', 'GetProdIdByProdCatCode', 'GetProdDetailByProdCatCode', 'GetAllTravelProduct', 
-    function ($scope, Global, $state, $anchorScroll, GetProdIdByProdCatCode, GetProdDetailByProdCatCode, GetAllTravelProduct) {
+  .controller('IndexController', ['$scope', 'Global', '$state', '$anchorScroll', 'GetProdIdByProdCatCode', 'GetProdDetailByProdCatCode', 'GetAllTravelProduct', 'GetNewPosts',
+    function ($scope, Global, $state, $anchorScroll, GetProdIdByProdCatCode, GetProdDetailByProdCatCode, GetAllTravelProduct, GetNewPosts) {
     $scope.global = Global;
     var productCategoryId = '';
     var productCategory = [];
@@ -23,6 +23,25 @@ angular.module('mean.system')
             productCategory = result2;
             $state.go('searchResult', {prodTravel: productCategory});
             $anchorScroll();
+        });
+    };
+
+    $scope.initNewPosts = function(){
+        //$('#indexModal').modal("show");
+        $('#indexModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        },
+        $('.container').addClass('blur'));
+        $('.navbar').addClass('blur');
+        GetNewPosts.query(function (list) {
+            $scope.newPosts = list;
+            for (var i=0;i<list.length;i++){
+                $scope.newPosts[i].imageName = list[i].post_travel_product_documents[0].imageName;
+            }
+            $('#indexModal').modal("hide");
+            $('.container').removeClass('blur');
+            $('.navbar').removeClass('blur');
         });
     };
 

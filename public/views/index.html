@@ -134,8 +134,37 @@
 		<a class="btn btn-outline-secondary margin-top-none" href="#">All Categories</a>
 	</div>
 </section>
+<!-- New Products Carousel-->
+<section class="container padding-top-2x padding-bottom-2x" ng-init="initNewPosts()">
+	<h3 class="text-center mb-30">New Posts</h3>
+	<data-owl-carousel class="owl-carousel" data-options="{ nav: false, dots: true, margin: 30, responsive: {0:{items:1},576:{items:2},768:{items:3},991:{items:4},1200:{items:4}} }">
+		<!-- Product-->
+		<div class="grid-item" owl-carousel-item="" ng-repeat="item in newPosts | limitTo:6">
+			<div class="product-card">
+				<!-- <div class="product-badge text-danger">22% Off</div> -->
+				<a class="product-thumb" ng-click="goToProductDetails($index)">
+					<img src="uploads\{{item.imageName}}" alt="Product">
+				</a>
+				<h3 class="product-title">
+					<a>{{item.productName}}</a>
+				</h3>
+				<h4 class="product-price">
+					<!-- <del>$44.95</del> -->
+					RM {{item.amount}}
+				</h4>
+				<div class="product-buttons">
+					<button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+						<i class="icon-heart"></i>
+					</button>
+					<button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
+					 data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+				</div>
+			</div>
+		</div>
+	</data-owl-carousel>
+</section>
 <!-- Featured Products Carousel-->
-<section class="container padding-top-3x padding-bottom-3x" ng-init="initFeatureProduct()">
+<section class="container padding-top-2x padding-bottom-2x" ng-init="initFeatureProduct()">
 	<h3 class="text-center mb-30">Featured Products</h3>
 	<data-owl-carousel class="owl-carousel" data-options="{ nav: false, dots: true, margin: 30, responsive: {0:{items:1},576:{items:2},768:{items:3},991:{items:4},1200:{items:4}} }">
 		<!-- Product-->

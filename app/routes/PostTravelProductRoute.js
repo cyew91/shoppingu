@@ -29,6 +29,10 @@ module.exports = function (app) {
         .get(postTravelProduct.show)
         .put(postTravelProduct.updateProduct);
 
+    // Get new posts in home page
+    app.route('/newposttravelproduct')
+        .get(postTravelProduct.getNewPosts);
+
     // Get features product in home page
     app.route('/posttravelproduct')
         .get(postTravelProduct.all);

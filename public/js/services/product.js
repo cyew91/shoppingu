@@ -53,6 +53,11 @@ angular.module('mean.articles').service('GetProdDetailByProdCatCode', ['$resourc
     return $resource('/productdetail/productcategoryid/:productcategoryid', {productcategoryid: '@productcategoryid'});
 }]);
 
+// Get new posts in home page
+angular.module('mean.articles').service('GetNewPosts', ['$resource', function($resource){
+    return $resource('/newposttravelproduct');
+}]);
+
 // Get features product in home page
 angular.module('mean.articles').service('GetAllTravelProduct', ['$resource', function($resource){
     return $resource('/posttravelproduct');

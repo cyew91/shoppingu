@@ -36,6 +36,41 @@ exports.all = function(req, res){
         });
 };
 
+/**
+ * Get new posts in home page
+ */
+exports.getNewPosts = function(req, res){
+    db.post_travel_product.findAll({
+        order: [
+            ['created_date', 'DESC']
+        ],
+        include: [
+            {
+                model: db.post_travel,
+                include: [{
+                        model: db.profile
+                }]
+            },
+            {
+                model:db.post_travel_product_document
+            },
+            {
+                model:db.product_category
+            },
+            {
+                model:db.seller_rate,
+                include: [{
+                    model: db.profile
+                }]
+            }
+        ]
+    }).then(function(product){
+            return res.jsonp(product);
+        }).catch(function(err){
+            return res.jsonp(err);
+        });
+};
+
 exports.show = function (req, res) {
     return res.jsonp(req.product);
 };
