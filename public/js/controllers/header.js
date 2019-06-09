@@ -16,7 +16,7 @@ angular.module('mean.system')
         $scope.isLogin = true;
         $scope.loginId = $rootScope.currentUser.loginId;
         $scope.imageName = response.imageName;
-        if($scope.imageName === null){
+        if($scope.imageName === null || $scope.imageName === ""){
             $window.localStorage.setItem("checkImageName", 0);
             $rootScope.checkImageName = $window.localStorage.getItem("checkImageName");
         }
