@@ -64,7 +64,12 @@ angular.module('mean.system')
         });
     };
 
-    $scope.goToProductDetails = function (index) {
+    $scope.goToNewPostsDetails = function (index) {
+        $state.go('productdetails', {prodTravel: $scope.newPosts[index]});
+        $anchorScroll();
+    };
+
+    $scope.goToFeatureProductDetails = function (index) {
         $state.go('productdetails', {prodTravel: $scope.featuredProduct[index]});
         $anchorScroll();
     };
