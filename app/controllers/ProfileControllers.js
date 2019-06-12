@@ -367,12 +367,12 @@ exports.updateAddress = function(req, res) {
   // create a new variable to hold the article that was placed on the req object.
   var profile = req.profile;
 
-  profile
-    .updateAttributes({
-      address: req.body.address
+  profile.updateAttributes({
+      address: req.body.address,
+      country_id: req.body.country_id
     })
-    .then(function(a) {
-      return res.jsonp(a);
+    .then(function() {
+      return res.jsonp({result: "success"})
     })
     .catch(function(err) {
       return res.send({

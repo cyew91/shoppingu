@@ -70,24 +70,24 @@
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 <h4>Contact Address</h4>
                 <hr class="padding-bottom-1x">
-                <form class="row" ng-init="initAddress()">
-                    <div class="col-md-6">
+                <form class="row" ng-init="initAddress(); initCountry()">
+                    <!-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-company">Company</label>
                             <input class="form-control" type="text" id="account-company" value="">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-country">Country</label>
-                            <select class="form-control" id="account-country">
-                                <option>Choose country</option>
-                                <option>Australia</option>
-                                <option>Canada</option>
+                            <select class="form-control" id="account-country" ng-model="selectedOption">
+                                <option ng-repeat="item in countryList" ng-value="item.id" ng-selected="profile.country_id == item.id">
+                                    {{item.countryName}}
+                                </option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-city">City</label>
                             <select class="form-control" id="account-city">
@@ -95,25 +95,25 @@
                                 <option>Amsterdam</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <!-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-zip">ZIP Code</label>
                             <input class="form-control" type="text" id="account-zip" required>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-address1">Address 1</label>
+                            <label for="account-address1">Address</label>
                             <input class="form-control" type="text" id="account-address1" ng-model="profile.address" value="{{profile.address}}" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-address2">Address 2</label>
                             <input class="form-control" type="text" id="account-address2">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-12 padding-top-1x">
                         <!-- <h4>Shipping Address</h4>
                         <hr class="padding-bottom-1x">
@@ -122,6 +122,9 @@
                             <label class="custom-control-label" for="same_address">Same as Contact Address</label>
                         </div> -->
                         <hr class="margin-top-1x margin-bottom-1x">
+                        <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="errorMsg">
+                            {{errorMsg}}
+                        </div>
                         <div class="text-right">
                             <button class="btn btn-primary margin-bottom-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success"
                                 data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your address updated successfuly." ng-click="updateAddress()">Update Address</button>
@@ -131,4 +134,23 @@
             </div>
         </div>
     </div>
+</div>
        
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Update success!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
