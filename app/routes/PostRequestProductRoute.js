@@ -23,6 +23,10 @@ module.exports = function (app) {
     //.get(postTravel.getPostTravel)
     .post(postRequestProduct.createPostRequestProduct);
 
+    // Get posted request product in Account - My Requests
+    app.param('requestprofileId', postRequestProduct.getPostRequestProductByProfileId);
+    app.route('/postrequestproduct/myrequest/:requestprofileId')
+    .get(postRequestProduct.show)
 
     //Dropzone: Upload product image
     // app.post('/uploadProductImage', product.uploadProductImage);

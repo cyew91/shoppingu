@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('mean.articles')
-  .controller('PostController', ['$scope', '$stateParams', '$state', '$timeout', 'GetTravelByProfileId', 'GetTravelByTravelId', '$window', 'GetTravelProductByTravelId', function ($scope, $stateParams, $state, $timeout, GetTravelByProfileId, GetTravelByTravelId, $window, GetTravelProductByTravelId) {
+  .controller('PostController', ['$scope', '$stateParams', '$state', '$timeout', 'GetTravelByProfileId', 'GetTravelByTravelId', '$window', 'GetTravelProductByTravelId', 
+  function ($scope, $stateParams, $state, $timeout, GetTravelByProfileId, GetTravelByTravelId, $window, GetTravelProductByTravelId) {
     $scope.profile = $stateParams.profile;
     $scope.userId = $window.sessionStorage.getItem("id");
     

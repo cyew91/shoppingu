@@ -132,6 +132,7 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
                 productDescription: $scope.productDescription,
                 productImage: $scope.productImages
             });
+            $scope.productImages = []; // To avoid page destroy remove the image from uploads folder
             $scope.productObj = $scope.travelObj;
             $scope.productObj.productList = $scope.productList;
             $state.go('postreview', { productObj: $scope.productObj });

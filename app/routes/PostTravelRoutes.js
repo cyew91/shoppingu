@@ -10,6 +10,8 @@ module.exports = function (app) {
     .put(postTravel.updatePostTravel);
     app.param('postTravelId', postTravel.getPostTravelById);
 
+    // // Get travel by profile id in Account - My Trips
+    app.param('profileId', postTravel.getPostTravelByProfileId);
     app.route('/posttravel/profileid/:profileId')
     .get(postTravel.show);
 
@@ -21,8 +23,6 @@ module.exports = function (app) {
     app.route('/posttravelcountry/:postCountryId')
     .get(postTravel.show);
     app.param('postCountryId', postTravel.getPostRequestTravelByCountryId);
-
-    app.param('profileId', postTravel.getPostTravelByProfileId);
 
     //Get country list in post travel page
     app.get('/country', postTravel.all);

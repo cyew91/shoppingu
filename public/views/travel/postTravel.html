@@ -1,5 +1,5 @@
 <script src="lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<div class="content" ng-controller="TravelController">
+<div class="content margin-top-1x" ng-controller="TravelController">
     <div class="checkout-steps" style="width: 700px; margin: 0 auto; padding: 50px 0px;">
         <a class="progress-steps" href="#">3. Review</a>
         <a class="progress-steps" href="#">
@@ -15,7 +15,7 @@
     <div class="alert alert-danger alert-dismissible fade show text-center margin-bottom-1x" role="alert" ng-show="response === false">
         {{errorMsg}}
     </div>
-    <div class="d-flex justify-content-center" name="myForm" ng-form ng-init="init()">
+    <div class="d-flex justify-content-center margin-top-1x margin-bottom-1x" name="myForm" ng-form ng-init="init()">
         <div angucomplete-alt id="autocomplete" maxlength="50" placeholder="Enter country" pause="100" selected-object="selectedCountry"
         local-data="countryList" search-fields="countryName" title-field="countryName" minlength="1" input-class="form-control form-control-small"
         initial-value="countryList" match-class="highlight" field-required="true" style="width: 450px; float: left; margin-right: 3px;" input-name="countryList" 
@@ -30,15 +30,8 @@
     </div>
     
     <div style="display:inline-block ; width: 100%; text-align: right;">
-            <!-- <button id="btnBack" class="btn btn-primary btn-form" ng-click="back(productObj.count = productObj.count - 1)" ng-show="productObj.count > 1 && response == true"
-                ui-sref-active="active" style="margin: 0px !important;">
-                Back
-            </button> -->
-        
             <button id="btnContinue" class="btn btn-primary btn-form" ng-click="continue()">
                 Continue
-                <!-- <span ng-show="productObj.count <= 2">Continue</span>
-                <span ng-show="productObj.count >= 3">Save</span> -->
             </button>
         </div>
 </div>

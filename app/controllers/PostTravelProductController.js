@@ -201,7 +201,7 @@ exports.uploadProductImage = function (req, res) {
 /**
  * Get posted product in Account - My Trips
  */
-exports.getPostTravelProductByTravelId = function (req, res, next) {
+exports.getPostTravelProductByTravelId = function (req, res) {
     db.post_travel_product.findAll({
         where: { 
             post_travel_id: req.params.postTravelId 
@@ -209,12 +209,11 @@ exports.getPostTravelProductByTravelId = function (req, res, next) {
         include: [{
             model: db.post_travel_product_document
         }]
-    }).then(function (product) {
-        if (!product) {
-            return res.jsonp(new Error('Failed to load postTraveProductlId ' + product.id));
+    }).then(function (post) {
+        if (!post) {
+            return res.jsonp(new Error('Failed to load postTraveProductlId '));
         } else {
-            req.product = product;
-            return next();
+            return res.jsonp(post);
         }
     }).catch(function (err) {
         return res.jsonp(err);

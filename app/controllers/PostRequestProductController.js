@@ -47,28 +47,34 @@ exports.createPostRequestProduct = function (req, res) {
 
     var productSave = db.post_request_product.build(postRequestProduct);
     req.body.post_request_product_id = productSave.id;
-    productSave.save();//.then(function () {
+    productSave.save().then(function () {
+        // If success
+        for (var j=0; j<req.body.productList[0].productImage.length; j++){
+            var postRequestProductDocument = {
+                imageName: req.body.productList[0].productImage[j].imageName,
+                imagePath: req.body.productList[0].productImage[j].imagePath,
+                createdDate: Date.now(),
+                post_request_product_id: req.body.post_request_product_id
+            };
 
-    for (var j=0; j<req.body.productList[0].productImage.length; j++){
-        var postRequestProductDocument = {
-            imageName: req.body.productList[0].productImage[j].imageName,
-            imagePath: req.body.productList[0].productImage[j].imagePath,
-            createdDate: Date.now(),
-            post_request_product_id: req.body.post_request_product_id
-        };
-
-        var productDocumentSave = db.post_request_product_document.build(postRequestProductDocument);
-        productDocumentSave.save().then(function () {
-            return res.jsonp({
-                "result": "success"
+            var productDocumentSave = db.post_request_product_document.build(postRequestProductDocument);
+            productDocumentSave.save().then(function () {
+                return res.jsonp({
+                    "result": "success"
+                });
+            }).catch(function (err) { // If save post_request_product_document failed
+                res.send({
+                    status: 'Exception',
+                    message: err
+                })
             });
-        }).catch(function (err) {
-            res.send({
-                status: 'Exception',
-                message: err
-            })
-        });
-    };
+        };
+    }).catch(function () { // If save post_request_product failed
+        res.send({
+            status: 'Exception',
+            message: err
+        })
+    });
 };
 
 
@@ -79,5 +85,27 @@ exports.uploadProductImage = function (req, res) {
     return res.render('201', {
         Success: 'Yeah',
         status: 201
+    });
+};
+
+/**
+ * Get posted request product in Account - My Requests
+ */
+exports.getPostRequestProductByProfileId = function (req, res) {
+    db.post_request_product.findAll({
+        where: { 
+            profile_id: req.params.requestprofileId 
+        },
+        include: [{
+            model: db.post_request_product_document
+        }]
+    }).then(function (request) {
+        if (!request) {
+            return res.jsonp(new Error('Failed to load postRequestProfileId '));
+        } else {
+            return res.jsonp(request);
+        }
+    }).catch(function (err) {
+        return res.jsonp(err);
     });
 };

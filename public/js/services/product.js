@@ -82,3 +82,8 @@ angular.module('mean.articles').service('CreateSellerRate', ['$resource', functi
 angular.module('mean.articles').service('CreateProductOrder', ['$resource', function($resource){
     return $resource('/productorder');
 }]);
+
+// Get user request product in Account - My Requests
+angular.module('mean.articles').service('GetRequestProductByProfileId', ['$resource', function ($resource) {
+    return $resource('/postrequestproduct/myrequest/:requestprofileId');
+}]);

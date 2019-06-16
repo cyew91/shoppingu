@@ -456,3 +456,46 @@ textarea:focus,
 }
 
 /* End User Profile Image account page */
+
+/* Start Account - My Request */
+
+.product-item{
+    display: table;
+    width: 100%;
+    min-width: 150px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.product-item .product-thumbs{
+    width: 130px;
+    padding-right: 20px;
+    vertical-align: top;
+    display: table-cell !important;
+}
+
+.product-item .product-thumb>img{
+    display: block;
+    width: 100%;
+}
+
+.product-item .product-info{
+    display: table-cell;
+    vertical-align: top;
+}
+
+.product-item .product-title{
+    margin-bottom: 6px;
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.product-item .product-title>a {
+    transition: color .3s;
+    color: #374250;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+/* End Account - My Request */

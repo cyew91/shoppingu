@@ -3,6 +3,8 @@
 angular.module('mean').controller('ReviewController', ['$scope', '$state', '$stateParams', '$rootScope', 'CreatePost', 'CreateRequest',
     function ($scope, $state, $stateParams, $rootScope, CreatePost, CreateRequest) {
     $scope.productObj = $stateParams.productObj;
+    
+    //var productImageObj = $stateParams.productObj.productList[0].productImage;
     var hasTravel = $rootScope.hasTravel;
     var buyer = $scope.productObj.buyer;
 
@@ -13,8 +15,14 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
         }
     };
 
-    if (buyer){
-        $scope.savePostTravel = function(){
+    if(buyer){
+        localStorage.setItem("imageObj", JSON.stringify($scope.productObj.productList[0].productImage));
+    }
+
+    $scope.savePostTravel = function(){
+        if (buyer){
+            // Fix the bug which Image will disappear after click confirm button
+            $scope.productObj.productList[0].productImage = JSON.parse(localStorage.getItem("imageObj"))
             var createRequest = new CreateRequest({
                 // Create Request
                 countryID: $scope.productObj.id,
@@ -22,21 +30,29 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
 
                 // Create Product
                 productList: $scope.productObj.productList,
+                // productList: JSON.parse(localStorage.getItem("imageObj")),
             });
 
             createRequest.$save(function (response) {
-                //if (response.result === 'success') {
-                    
-                //}
+                // if (response.result === 'success') {
+                //     $('#myModal').modal('show');
+                //     $('#myModal').on('hidden.bs.modal', function (e) {
+                //         $state.go('userprofile');
+                //     });
+                // }
+                // else{
+                //     $('#myModal').modal('show');
+                //     $('#myModal').on('hidden.bs.modal', function (e) {
+                //         $state.go('userprofile');
+                //     });
+                // }
             });
             $('#myModal').modal('show');
             $('#myModal').on('hidden.bs.modal', function (e) {
                 $state.go('userprofile');
             });
-        };
-    }
-    else{
-        $scope.savePostTravel = function(){   
+        }
+        else {
             var createPost = new CreatePost({
                 // Create Travel
                 countryID: $scope.productObj.id,
@@ -60,7 +76,8 @@ angular.module('mean').controller('ReviewController', ['$scope', '$state', '$sta
             $('#myModal').on('hidden.bs.modal', function (e) {
                 $state.go('userprofile');
             });
-        };
-    }
+        }
+        
+    };
 
 }]);

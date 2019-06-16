@@ -125,8 +125,8 @@ exports.createPostTravelProduct = function (req, res, next) {
         var productSave = db.post_travel_product.build(postTravelProduct);
         req.body.post_travel_product_id = productSave.id;
         
-        productSave.save();//.then(function () {
-
+        productSave.save().then(function () {
+            // If success
             for (var j=0; j<req.body.productList[i].productImage.length; j++){
                 var postTravelProductDocument = {
                     imageName: req.body.productList[i].productImage[j].imageName,
@@ -141,7 +141,7 @@ exports.createPostTravelProduct = function (req, res, next) {
                     return res.jsonp({
                         "result": "success"
                     });
-                }).catch(function (err) {
+                }).catch(function (err) { // If save post_travel_product_document failed
                     res.send({
                         status: 'Exception',
                         message: err
@@ -149,9 +149,12 @@ exports.createPostTravelProduct = function (req, res, next) {
                 });
             };
             
-        // }).catch(function (err) {
-        //     res.send({ status: 'Exception', message: err })
-        // });
+        }).catch(function (err) { // If save post_travel_product failed
+            res.send({ 
+                status: 'Exception',
+                message: err 
+            })
+        });
     };
 };
 

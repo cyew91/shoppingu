@@ -21,10 +21,9 @@
                 </div>
             </aside>
             <nav class="list-group">
-                <a class="list-group-item with-badge" ng-click="goToMyOrder()">
+                <!-- <a class="list-group-item with-badge" ng-click="goToMyOrder()">
                     <i class="icon-bag"></i>My Orders
-                    <!-- <span class="badge badge-primary badge-pill">6</span> -->
-                </a>
+                </a> -->
                 <a class="list-group-item" ng-click="goToMyProfile()">
                     <i class="icon-head"></i>Profile
                 </a>
@@ -44,7 +43,44 @@
                 </a>
             </nav>
         </div>
-        
+        <div class="col-lg-8">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+            <div class="table-responsive" ng-init="initMyRequests()">
+                <table class="table table-hover margin-bottom-none">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in request | orderBy:'-created_date'">
+                            <td>
+                                <div class="product-item">
+                                    <a class="product-thumbs">
+                                        <img src="uploads\{{item.post_request_product_documents[0].imageName}}" alt="Product">
+                                    </a>
+                                    <div class="product-info">
+                                        <h4 class="product-title">
+                                            <a>{{item.productName}}</a>
+                                        </h4>
+                                        <div class="text-lg text-medium text-muted">RM {{item.amount}}</div>
+                                        <div>Availability:
+                                            <div class="d-inline text-success">In Stock</div>
+                                        </div>
+                                        <div>Country:</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <a class="btn btn-danger btn-sm" ng-click="deletePost($index)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
     </div>
 </div>
 

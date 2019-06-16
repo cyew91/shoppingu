@@ -25,7 +25,8 @@
     "angular-animate": "1.6.6",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
-    "angular-messages": "^1.7.8"
+    "angular-messages": "^1.7.8",
+    "owl.carousel": "^2.3.4"
   },
   "resolutions": {
     "angular": "1.6.6",

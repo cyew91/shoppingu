@@ -1,6 +1,6 @@
 'use strict';
 
-
+// Get travel by profile id in Account - My Trips
 angular.module('mean.articles').service("GetTravelByProfileId", ['$resource', function($resource) {
     return $resource('/posttravel/profileid/:profileId', {profileId: '@profileId'});
 }]);
