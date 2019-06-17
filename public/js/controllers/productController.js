@@ -86,6 +86,16 @@ angular.module('mean').controller('ProductController', ['$scope', '$state', '$st
         }
     });
 
+    // Triggered when refresh the page
+    $scope.$on('onBeforeUnload', function (e, confirmation) {
+        // Remove image from folder
+        for(var i=0;i<$scope.productImages.length;i++){
+            Dropzone.forElement("div#dropzoneProductImage").removeFile($scope.productImages[i]);
+        }
+        // confirmation.message = "All data willl be lost.";
+        // e.preventDefault();
+    });
+
     $scope.addToProductList = function () {
         var valid = validation().result;
         var msg = validation().msg;

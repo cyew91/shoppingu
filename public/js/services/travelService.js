@@ -20,3 +20,25 @@ angular.module('mean.articles').service("GetTravelByTravelId", ['$resource', fun
 angular.module('mean.articles').service("GetTravelByCountryId", ['$resource', function($resource) {
     return $resource('/posttravelcountry/:postCountryId', {postCountryId: '@postCountryId'});
 }]);
+
+// Trigger when page refresh
+angular.module('mean.auth')
+.factory('beforeUnload', function ($rootScope, $window) {
+    // Events are broadcast outside the Scope Lifecycle
+    
+    $window.onbeforeunload = function (e) {
+        var confirmation = {};
+        var event = $rootScope.$broadcast('onBeforeUnload', confirmation);
+        if (event.defaultPrevented) {
+            return confirmation.message;
+        }
+    };
+    
+    $window.onunload = function () {
+        $rootScope.$broadcast('onUnload');
+    };
+    return {};
+})
+.run(function (beforeUnload) {
+    // Must invoke the service at least once
+});
