@@ -7,13 +7,16 @@ angular.module('mean.articles').service("GetTravelByProfileId", ['$resource', fu
 
 // Retrieve All Post Travel Information By postTravelId
 angular.module('mean.articles').service("GetTravelByTravelId", ['$resource', function($resource) {
-    return $resource('/posttravel/:postTravelId', {
-        postTravelId: '@postTravelId'
-    }, {
+    return $resource('/posttravel/:getAllPostTravelByTravelId', 
+    {
+        getAllPostTravelByTravelId: "@getAllPostTravelByTravelId"
+    }, 
+    {
         update: {
-            method: 'PUT'
+            method: 'PUT',
         }
-    });
+    },
+    );
 }]);
 
 // Retrieve All Post Travel Information By postCountryId

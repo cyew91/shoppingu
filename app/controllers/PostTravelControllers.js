@@ -46,6 +46,9 @@ exports.getPostTravelByProfileId = function (req, res, next) {
                     $ne: 'Cancelled'
                 }
             },
+            order: [
+                ['created_date', 'DESC']
+            ],
             include: [{
                 model: db.country
             }]
@@ -94,13 +97,19 @@ exports.updatePostTravel = function (req, res) {
 
     // create a new variable to hold the article that was placed on the req object.
     var postTravel = req.postTravel;
+    var travelStatus = "Cancelled";
 
     postTravel.updateAttributes({
-        travelStatus: req.body.travelStatus
-    }).then(function (a) {
-        return res.jsonp(a);
+        travelStatus: travelStatus
+    }).then(function () {
+        return res.jsonp({
+            "result": "success"
+        });
     }).catch(function (err) {
-        return res.send({ status: 'Exception', message: err });
+        return res.send({ 
+            status: 'Exception',
+            message: err 
+        });
     });
 };
 

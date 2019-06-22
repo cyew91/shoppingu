@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.system')
-.controller('RequestController', ['$scope', 'Global', '$stateParams', '$state', '$window', 'GetRequestProductByProfileId',
-function($scope, Global, $stateParams, $state, $window, GetRequestProductByProfileId){
+.controller('RequestController', ['$scope', '$timeout', 'Global', '$stateParams', '$state', '$window', 'GetRequestProductByProfileId', 'UpdateGetRequestProductByProfileId',
+function($scope, $timeout, Global, $stateParams, $state, $window, GetRequestProductByProfileId, UpdateGetRequestProductByProfileId){
     // $scope.global = Global;
     $scope.profile = $stateParams.profile;
     $scope.userId = $window.sessionStorage.getItem("id");
@@ -19,6 +19,27 @@ function($scope, Global, $stateParams, $state, $window, GetRequestProductByProfi
                 // $scope.imageName = 
             });
         };
+    }
+
+    $scope.deleteRequest = function (index) {
+        var postRequest = $scope.request[index];
+        postRequest.postRequestId = postRequest.id;
+
+        if (!postRequest.updated) {
+            postRequest.updated = [];
+        }
+
+        postRequest.updated.push(new Date().getTime());
+
+        UpdateGetRequestProductByProfileId.update({
+            updaterequestprofileId: postRequest.postRequestId
+        }, function (result) {
+            $scope.msg = result;
+        });
+
+        $timeout( function(){
+            $scope.initMyRequests();
+        }, 500);
     }
     
     $scope.goToMyOrder = function () {

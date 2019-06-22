@@ -18,6 +18,10 @@ module.exports = function (sequelize, DataTypes) {
         },
         amount: {
             type: DataTypes.DECIMAL(10, 3)
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            field: 'is_active'
         }
     }, {
         timestamps: true,

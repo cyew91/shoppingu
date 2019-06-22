@@ -36,7 +36,7 @@ exports.createPostRequestProduct = function (req, res) {
         description: req.body.productList[0].productDescription,
         amount: req.body.productList[0].amount,
         // PostType: 1,
-        // IsActive: 1,
+        isActive: 1,
         createdDate: Date.now(),
         //post_travel_id: req.body.post_travel_id,
         product_category_id: req.body.productList[0].productCategoryId,
@@ -94,11 +94,21 @@ exports.uploadProductImage = function (req, res) {
 exports.getPostRequestProductByProfileId = function (req, res) {
     db.post_request_product.findAll({
         where: { 
-            profile_id: req.params.requestprofileId 
+            profile_id: req.params.requestprofileId ,
+            is_active: {
+                $ne: 0
+            }
         },
+        order: [
+            ['created_date', 'DESC']
+        ],
         include: [{
             model: db.post_request_product_document
-        }]
+        },
+        {
+            model: db.country
+        }
+        ]
     }).then(function (request) {
         if (!request) {
             return res.jsonp(new Error('Failed to load postRequestProfileId '));
@@ -107,5 +117,50 @@ exports.getPostRequestProductByProfileId = function (req, res) {
         }
     }).catch(function (err) {
         return res.jsonp(err);
+    });
+};
+
+/**
+ *  Update Status Get posted request product in Account - My Requests
+ */
+exports.updatePostRequest = function (req, res) {
+
+    // create a new variable to hold the article that was placed on the req object.
+    var postRequest = req.postRequest;
+    var requestStatus = false;
+
+    postRequest.updateAttributes({
+        isActive: requestStatus
+    }).then(function (a) {
+        return res.jsonp({
+            "result": "success"
+        });
+    }).catch(function (err) {
+        return res.send({ 
+            status: 'Exception',
+            message: err 
+        });
+    });
+};
+
+//Retrieve All Post Request Information By postTravelId
+exports.getPostRequestById = function (req, res, next, id) {
+    //console.log('id => ' + id);
+    db.post_request_product.find({
+        where: {
+            id: id
+        },
+        include: [{
+            model: db.country
+        }]
+    }).then(function (postRequest) {
+        if (!postRequest) {
+            return next(new Error('Failed to load postTravelId ' + id));
+        } else {
+            req.postRequest = postRequest;
+            return next();
+        }
+    }).catch(function (err) {
+        return next(err);
     });
 };

@@ -54,7 +54,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in request | orderBy:'-created_date'">
+                        <tr ng-repeat="item in request">
                             <td>
                                 <div class="product-item">
                                     <a class="product-thumbs">
@@ -65,15 +65,15 @@
                                             <a>{{item.productName}}</a>
                                         </h4>
                                         <div class="text-lg text-medium text-muted">RM {{item.amount}}</div>
-                                        <div>Availability:
-                                            <div class="d-inline text-success">In Stock</div>
+                                        <div>Posted Date:
+                                            <div class="d-inline text-primary">{{item.created_date | date: "MMMM dd, yyyy"}}</div>
                                         </div>
-                                        <div>Country:</div>
+                                        <div>Country: {{item.country.countryName}}</div>
                                     </div>
                                 </div>
                             </td>
                             <td style="vertical-align: middle">
-                                <a class="btn btn-danger btn-sm" ng-click="deletePost($index)">Delete</a>
+                                <a class="btn btn-danger btn-sm" ng-click="deleteRequest($index)">Delete</a>
                             </td>
                         </tr>
                     </tbody>

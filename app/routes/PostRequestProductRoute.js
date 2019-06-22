@@ -24,9 +24,16 @@ module.exports = function (app) {
     .post(postRequestProduct.createPostRequestProduct);
 
     // Get posted request product in Account - My Requests
-    app.param('requestprofileId', postRequestProduct.getPostRequestProductByProfileId);
     app.route('/postrequestproduct/myrequest/:requestprofileId')
+    .get(postRequestProduct.show);
+    // .put(postRequestProduct.updatePostRequest);
+    app.param('requestprofileId', postRequestProduct.getPostRequestProductByProfileId);
+
+    // Update Status Get posted request product in Account - My Requests
+    app.route('/postrequestproduct/myrequest/updatestatus/:updaterequestprofileId')
     .get(postRequestProduct.show)
+    .put(postRequestProduct.updatePostRequest);
+    app.param('updaterequestprofileId', postRequestProduct.getPostRequestById);
 
     //Dropzone: Upload product image
     // app.post('/uploadProductImage', product.uploadProductImage);

@@ -63,9 +63,9 @@ angular.module('mean').controller('ProductDetailsController', ['$scope', '$state
 	// Get country name
 	$scope.initCountryName = function() {
 		GetTravelByTravelId.get({
-				postTravelId: $window.localStorage.getItem("post_travel_id")
+			getAllPostTravelByTravelId: $window.localStorage.getItem("post_travel_id")
 		}, function(result){
-				$scope.countryName = result.country.countryName;
+			$scope.countryName = result.country.countryName;
 		});
 	};
 

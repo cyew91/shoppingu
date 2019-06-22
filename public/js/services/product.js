@@ -17,7 +17,10 @@
 
 //Use in search result page (travel)
 angular.module('mean.articles').service("GetProductID", ['$resource', function($resource) {
-    return $resource('/productdetail/productdetailname/:productdetailname', {productdetailname: '@productdetailname'},{
+    return $resource('/productdetail/productdetailname/:productdetailname', {
+        productdetailname: '@productdetailname'
+    },
+    {
         query: {isArray: false}
     });
 }]);
@@ -86,4 +89,19 @@ angular.module('mean.articles').service('CreateProductOrder', ['$resource', func
 // Get user request product in Account - My Requests
 angular.module('mean.articles').service('GetRequestProductByProfileId', ['$resource', function ($resource) {
     return $resource('/postrequestproduct/myrequest/:requestprofileId');
+}]);
+
+// Get user request product in Account - My Requests
+angular.module('mean.articles').service('UpdateGetRequestProductByProfileId', ['$resource', function ($resource) {
+    return $resource('/postrequestproduct/myrequest/updatestatus/:updaterequestprofileId',
+    {
+        updaterequestprofileId: "@updaterequestprofileId"
+    }, 
+    {
+        update: {
+            method: 'PUT',
+            // isArray: true
+        }        
+    },
+    );
 }]);

@@ -140,7 +140,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in travel | orderBy:'-created_date'">
+                        <tr ng-repeat="item in travel">
                             <td>
                                 <a class="text-medium navi-link" ng-click="getTravelProduct($index)" href="#" data-toggle="modal" data-target="#orderDetails">{{item.country.countryName}}</a>
                             </td>
