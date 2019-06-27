@@ -33,8 +33,9 @@ angular.module('mean')
             id: userId
         }, function(result) {
             $scope.loginId = result.loginId;
-            $scope.imageName = result.imageName;
-            $scope.checkImageName = $window.localStorage.getItem("checkImageName");
+            //$scope.imageName = result.imageName;
+            $window.localStorage.setItem("checkChatImageName", 0);
+            $scope.checkChatImageName = $window.localStorage.getItem("checkChatImageName");
             socket.getSocket().removeListener("returnFriendList");
             socket.getSocket().removeListener("inbox_id2Header");
             socket.getSocket().removeListener("inbox_id");
@@ -136,9 +137,23 @@ angular.module('mean')
         $scope.messages = [];
         $scope.offerPrice = $scope.users[index].offer_price;
         $scope.indexFromUserList = index;
+        $scope.isSold = $scope.users[index].is_sold;
 
         // Inactive send button
         $('#send_btn').removeAttr('disabled');
+
+        // Get friend's user profile image
+        socket.emit('get_friend_profile_image', name);
+
+        // Return friend's user profile image
+        socket.on('return_friend_profile_image', function (friendImage) {
+            $scope.imageName = friendImage;
+            
+            if($scope.imageName !== ""){
+                $window.localStorage.setItem("checkChatImageName", 1);
+            }
+            $scope.checkChatImageName = $window.localStorage.getItem("checkChatImageName");
+        });
 
         // Pass inbox_id to db
         socket.emit("get_messages", {inbox_id: $window.localStorage.getItem("inbox_id")});

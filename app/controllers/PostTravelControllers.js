@@ -123,12 +123,12 @@ exports.createPostTravelProduct = function (req, res, next) {
             productName: req.body.productList[i].productName,
             description: req.body.productList[i].productDescription,
             amount: req.body.productList[i].amount,
-            // PostType: 1,
-            // IsActive: 1,
             createdDate: Date.now(),
             post_travel_id: req.body.post_travel_id,
             product_category_id: req.body.productList[i].productCategoryId,
-            product_sub_category_id: req.body.productList[i].productSubCategoryId
+            product_sub_category_id: req.body.productList[i].productSubCategoryId,
+            isSold: 0,
+            isActive: 1
         };
 
         var productSave = db.post_travel_product.build(postTravelProduct);
@@ -157,7 +157,6 @@ exports.createPostTravelProduct = function (req, res, next) {
                     })
                 });
             };
-            
         }).catch(function (err) { // If save post_travel_product failed
             res.send({ 
                 status: 'Exception',

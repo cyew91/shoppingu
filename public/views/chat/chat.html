@@ -12,9 +12,11 @@
                     <!-- <div class="user" ng-repeat="(key, value) in users" ng-click="clickOnUserList(key, value)"> -->
                     <div class="user" ng-repeat="user in users" ng-click="clickOnUserList(user.user_2, user.inbox_id, $index)" ng-class="{active_chat : $index === indexFromUserList}">
                         <div class="avatar">
-                            <img src="uploads\{{user.product_image_name}}" alt="User">
+                            <!-- <div class="chat-avatar"> -->
+                                <img src="uploads\{{user.product_image_name}}" alt="User">
+                            <!-- </div> -->
                         </div>  
-                        <span class="avatar"></span>
+                        <!-- <span class="avatar"></span> -->
                         <div>
                             <div class="nickname">{{user.user_2}}</div>
                             <div class="productname">{{user.post_travel_product.productName}}
@@ -32,12 +34,12 @@
                         <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;">
                             <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0"
                                 style="color: rgba(96, 125, 139,1.0);">
-                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="img/account/default-avatar.png" ng-if="checkImageName == 0"/>
-                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="profile-image/{{imageName}}" ng-if="checkImageName == 1"/>
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="img/account/default-avatar.png" ng-if="checkChatImageName == 0"/>
+                                <img class="rounded float-left" style="width: 10%; height: 70px;" src="profile-image/{{imageName}}" ng-if="checkChatImageName == 1"/>
                                 <h6 class="float-left" style="margin: 0px; margin-left: 10px;"> {{friendName}} <i class="fa fa-check text-primary" aria-hidden="true"></i> </br><small> 
                                     </small></h6>
                                 <div class="d-flex float-right">
-                                    <div class="make-offer row">
+                                    <div class="make-offer row" ng-if="!isSold">
                                         <div class="col-md-1 p-3">
                                             <label class="col-form-label">RM</label>
                                         </div>

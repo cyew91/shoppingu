@@ -169,7 +169,8 @@ exports.inbox_id = function(data, socket){
                     product_id: data.post_travel_product_id, 
                     post_travel_product: data.post_travel_product,
                     offer_price: data.offer_price,
-                    product_image_name: data.post_travel_product.post_travel_product_documents[0].imageName
+                    product_image_name: data.post_travel_product.post_travel_product_documents[0].imageName,
+                    is_sold: data.post_travel_product.isSold,
                 });
             }
             else{
@@ -338,6 +339,22 @@ exports.editOfferPrice = function(data){
     }).then(function(data){
         if(data.count > 0){
             // return success
+        }
+    });
+
+};
+
+exports.getFriendProfileImage = function(data, socket){
+    var friend_name = data;
+
+    db.profile.find({
+        where: { 
+            login_id: friend_name
+        },
+        attributes: ['image_name']
+    }).then(function(data){
+        if(data.dataValues){
+            socket.emit('return_friend_profile_image', data.dataValues.image_name);
         }
     });
 

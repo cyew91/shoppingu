@@ -147,7 +147,7 @@ angular.module('mean.system')
 
             //Get all users inbox id
             angular.forEach($scope.users_temps, function(value, key){
-                console.log("value: " + value + "key: " + key);
+                // console.log("value: " + value + "key: " + key);
                 if (value.user_2 == $window.localStorage.getItem("usernameHeader")){
                     value.user_2 = value.user_1;
                 }

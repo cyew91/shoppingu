@@ -18,6 +18,14 @@ module.exports = function (sequelize, DataTypes) {
         },
         amount: {
             type: DataTypes.DECIMAL(10, 2)
+        },
+        isSold: {
+            type: DataTypes.BOOLEAN,
+            field: 'is_sold'
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            field: 'is_active'
         }
     }, {
         timestamps: true,

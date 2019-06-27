@@ -104,6 +104,11 @@ io.on('connection',function(socket){
         user_controller.editOfferPrice(data, socket);
     });
 
+    // Get friend's user profile image
+    socket.on('get_friend_profile_image', function(data){
+        user_controller.getFriendProfileImage(data, socket);
+    });
+
     // socket.on('disconnect', function (data) { 
     //     console.log('Socket ${socket.id} disconnected.');
     // });

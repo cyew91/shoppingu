@@ -39,7 +39,7 @@ exports.signup = function (req, res) {
  * Logout
  */
 exports.signout = function (req, res) {
-    console.log("Logout: { profileId: " + req.ProfileID + ", loginId: " + req.LoginID + " }");
+    // console.log("Logout: { profileId: " + req.ProfileID + ", loginId: " + req.LoginID + " }");
     req.logout();
     return res.send({
         status: "success",
