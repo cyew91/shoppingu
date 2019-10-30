@@ -58,7 +58,7 @@
     "request": "^2.88.0",
     "requirejs": "^2.1.0",
     "rxjs": "^5.5.0",
-    "sequelize": "^3.34.0",
+    "sequelize": "^5.15.1",
     "serve-favicon": "^2.4.5",
     "slick-carousel": "^1.8.1",
     "socket.io": "^2.2.0",
